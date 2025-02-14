@@ -7,6 +7,173 @@
     <script src="../data/js/member_data.js" defer></script>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-top">
+                <ul class="link-list">
+                    <li><a href="#"><span class="icon login"></span>로그인</a></li>
+                    <li><a href="#"><span class="icon join"></span>회원가입</a></li>
+                </ul>
+            </div>
+            <div class="inner-header">
+                <h1 class="logo"><img src="" alt="로고"></h1>
+                <div class="gnb-wrap">
+                    <nav class="gnb">
+                        <ul class="gnb-list">
+                            <li class="dep1">
+                                <a href="#">자료검색</a>
+                                <ul class="dep2">
+                                    <li><a href="#">통합검색</a></li>
+                                    <li><a href="#">베스트셀러</a></li>
+                                    <li><a href="#">신착도서</a></li>
+                                </ul>
+                            </li>
+                            <li class="dep1">
+                                <a href="#">예약/대출</a>
+                                <ul class="dep2">
+                                    <li><a href="#">도서대출</a></li>
+                                    <li><a href="#">도서예약</a></li>
+                                </ul>
+                            </li>
+                            <li class="dep1">
+                                <a href="#">이달의 도서</a>
+                            </li>
+                            <li class="dep1">
+                                <a href="#">열린공간</a>
+                                <ul class="dep2">
+                                    <li><a href="#">공지사항</a></li>
+                                    <li><a href="#">자유게시판</a></li>
+                                </ul>
+                            </li>
+                            <li class="dep1">
+                                <a href="#">이벤트</a>
+                                <ul class="dep2">
+                                    <li><a href="#">작가 강연 예약</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header-util">
+                    <button type="button" class="total-search-btn"><span class="blind">통합검색 버튼</span></button>
+                    <button type="button" class="search-close-btn"><span class="blind">통합검색 닫기 버튼</span></button>
+                    <button type="button" class="menu-btn"><span class="blind">메뉴 버튼</span></button>
+                </div>
+            </div>
+            <div class="search-wrap">
+                <div class="search-form">
+                    <form action="search.php">
+                        <fieldset>
+                            <legend class="blind">도서 통합검색 폼</legend>
+                            <input type="text" id="mainSearchText" name="searchTxt" title="검색어" placeholder="찾으시는 도서가 있나요?">
+                            <button type="button" class="total-search-btn"></button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <main class="main-container" id="main">
+            <section class="section intro">
+                <div class="inner">
+                    <h2 class="intro-tit">당신의 취향을 발견하는 공간, <strong>칙칙폭폭</strong>입니다.</h2>
+                    <div class="main-search-wrap">
+                        <div class="quick-search-form">
+                            <form action="abc.php">
+                                <fieldset>
+                                    <legend class="blind">도서 통합검색 폼</legend>
+                                    <input type="text" id="mainSearchText" name="searchTxt" title="검색어" placeholder="찾으시는 도서가 있나요?">
+                                    <button type="button" class="search-btn"><span class="blind">빠른 검색 버튼</span></button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="link-box-wrap">
+                        <a href="#" class="link-box">
+                            <p>대출하기</p>
+                            <img src="" alt="" class="link-box-bg">
+                        </a>
+                        <a href="#" class="link-box">
+                            <p>예약하기</p>
+                            <img src="" alt="" class="link-box-bg">
+                        </a>
+                        <a href="#" class="link-box">
+                            <p>추천도서</p>
+                            <img src="" alt="" class="link-box-bg">
+                        </a>
+                        <a href="#" class="link-box">
+                            <p>열린공간</p>
+                            <img src="" alt="" class="link-box-bg">
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="section board">
+                <div class="inner">
+                    <div class="board-wrap">
+                        <ul class="board-tab">
+                            <li class="notice on">
+                                <button type="button" id="notice">공지사항</button>
+                            </li>
+                            <li class="free">
+                                <button type="button" id="free">자유게시판</button>
+                            </li>
+                        </ul>
+                        <div class="board-box">
+                            <ul class="board-content on" id="notice">
+                                <li>
+                                    <a href="#" class="item">
+                                        <div class="list-tit">
+                                            <span class="label">공지</span>
+                                            <p>이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. </p>
+                                        </div>
+                                        <span class="date">2025-02-14</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="item">
+                                        <div class="list-tit">
+                                            <span class="label">공지</span>
+                                            <p>해피 밸런타인데이!</p>
+                                        </div>
+                                        <span class="date">2025-02-14</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="board-content" id="free">
+                                <ul class="board-content on" id="notice">
+                                    <li>
+                                        <a href="#" class="item">
+                                            <div class="list-tit">
+                                                <p>이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. 이곳에는 공지사항 내용이 들어갑니다. </p>
+                                            </div>
+                                            <span class="date">2025-02-14</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item">
+                                            <div class="list-tit">
+                                                <p>해피 밸런타인데이!</p>
+                                            </div>
+                                            <span class="date">2025-02-14</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section monthly">
+                <div class="inner">
+                    <h3>이달의 추천 도서</h3>
+                    <div class="monthly-book-wrap">
+                        
+                    </div>
+                </div>
+            </section>
+            <section class="section book"></section>
+        </main>
+        <footer class="footer"></footer>
+    </div>
 </body>
 </html>
