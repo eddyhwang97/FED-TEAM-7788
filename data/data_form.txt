@@ -21,3 +21,11 @@
 - 비밀번호 PW 
 - 대출목록 BData(borrowData) : ISBN 배열로 넣을거임
 
+3. 커뮤니티데이터
+ - 공지사항 : 
+    idx : idx
+    제목 : title
+    작성자 : user
+    내용 : contant
+
+
