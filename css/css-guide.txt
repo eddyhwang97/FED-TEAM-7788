@@ -1,0 +1,30 @@
+! CSS 폴더 내 폴더 분류 고민 중
+
+layout 관련 -> layout 폴더
+component 관련 -> 컴포넌트 폴더
+공통 -> common 폴더
+
+고민 중이니 의견 주세요
+
+common
+__________________________________
+
+_font.scss -> 필요한 폰트 연결
+_mixins.scss -> 공통으로 사용하는 스타일 믹스인 (미디어쿼리, flex 등)
+_variables.scss -> scss 변수 (색상, 아이콘 크기 및 border-width 등)
+common.scss 메인, 서브페이지 공통으로 사용되는 css 모음
+reset.scss -> css 스타일 초기화 모음
+main.scss -> 공통 스타일 import 파일
+base.scss -> 서브페이지 공통
+
+component
+___________________________________
+
+각자 맡은 페이지.scss
+
+layout
+___________________________________
+
+header.scss -> 헤더 관련 CSS
+footer.scss -> 푸터 관련 CSS
+sub-layout.scss -> 서브 레이아웃 CSS
