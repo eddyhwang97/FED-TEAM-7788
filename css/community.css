@@ -1,1 +1,14 @@
-/*# sourceMappingURL=community.css.map */
+.board-section .tabs {
+  display: flex;
+  gap: 20px;
+}
+.board-section .tabs .tab {
+  padding: 0px 20px;
+  background-color: antiquewhite;
+}
+.board-section .content .table {
+  display: none;
+}
+.board-section .content .table.active {
+  display: inline-block;
+}/*# sourceMappingURL=community.css.map */
