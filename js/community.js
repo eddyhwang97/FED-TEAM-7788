@@ -1,14 +1,40 @@
 // community JS - community.js
+import communityData from '../data/community_data.json' with {type:'json'};
+import CommunityFn from "./function/community_Fn.js";
+// console.log(communityData);
+// set communityData in LocalStorage
+localStorage.setItem("community_data", JSON.stringify(communityData));
 
-const tabs = document.querySelectorAll("[data-tab-target]");
-const tabcon = document.querySelectorAll("[data-tab-content]");
+// set communityFn
+const cmFn = new CommunityFn();
 
-tabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const target = document.querySelector(tab.dataset.tabTarget);
-    tabcon.forEach((tabc_all) => {
-      tabc_all.classList.remove("active");
-    });
-    target.classList.add("active");
-  });
-});
+// tab-content map
+const targetTab = document.querySelectorAll(".table>table>tbody");
+const tabContent = `
+    ${communityData
+      .map((v) =>
+        `
+      <tr>
+        <td>${v.idx}</td>
+        <td>
+          <a href="">${v.title}</a>
+        </td>
+        <td>${v.date}</td>
+        <td>${v.user}</td>
+      </tr>
+      `
+      )
+      .join("")}
+  `;
+
+console.log(targetTab)
+targetTab.forEach((TT)=>{
+TT.innerHTML = tabContent;
+})
+
+
+
+// start Fn
+window.onload = () => {
+  cmFn.ChangeTabContent();
+};

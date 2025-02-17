@@ -1,31 +1,88 @@
 // 커뮤니티 SCSS -
+@import "./variables";
+@import "./mixins";
 
 // community s
-#community{
-    @include responsive(1024px);
-    margin: 0 auto;
+#community {
+  text-align: center;
 }
 // community e
 
-// board-section s
-.board-section {
-  thead {
-    background-color: $lightblue;
-  }
+// tab-section s
+.tab-section {
+  position: relative;
+  width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
   .tabs {
     display: flex;
-    gap: 20px;
+    justify-content: center;
     .tab {
-      padding: 0px 20px;
-      background-color: $lightblue;
+      padding: 20px;
+    }
+    .tab.active {
+      padding: 20px;
+      border-bottom: 3px solid $mint;
     }
   }
-  .content {
+  .search {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+// board-section s
+.board-section {
+  width: 1024px;
+  display: block;
+  margin: 0 auto;
+
+  .tab-content {
     .table {
       display: none;
     }
     .table.active {
       display: inline-block;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    width: 1024px;
+
+    thead {
+      background-color: $color-board-thead;
+      th {
+        padding: 20px;
+      }
+    }
+    tbody {
+      tr {
+        border-spacing: 2px;
+      }
+      tr:nth-child(even) {
+        background-color: $color-board-even;
+      }
+      tr:hover{
+        background-color: #939393;
+      }
+      td:nth-child(1) {
+        border-radius: 10px 0 0 10px;
+      }
+      td:nth-child(2) {
+        text-align: left;
+      }
+      td:nth-child(4) {
+        border-radius: 0 10px 10px 0;
+      }
+      td {
+        padding: 10px 20px;
+        a{
+          text-decoration: none;
+          color: black;
+        }
+      }
     }
   }
 }

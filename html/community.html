@@ -10,14 +10,19 @@
     <link rel="stylesheet" href="../css/common.scss" />
     <link rel="stylesheet" href="../css/community.css" />
     <!-- js -->
-     <script type="module" src="../js/community.js"></script>
+    <script type="module" src="../js/community.js"></script>
   </head>
   <body>
     <!-- 상단 -->
     <!-- 메인 -->
     <div class="community" id="community">
-      <div class="contant">
-        <section class="search-section">
+      <div class="content">
+        <section class="tab-section">
+          <div class="tabs">
+            <div data-tab-target="#announcement-tab" class="tab announcement-tab-button active">공지사항</div>
+            <div data-tab-target="#faq-tab" class="tab faq-tab-button">FAQ</div>
+            <div data-tab-target="#freeboard-tab" class="tab freeboard-tab-button">자유게시판</div>
+          </div>
           <div class="search">
             <button><i class="fa-regular fa-calendar"></i></button>
             <select name="option" id="search-option">
@@ -30,13 +35,8 @@
           </div>
         </section>
         <section class="board-section">
-          <div class="tabs">
-            <div data-tab-target="#announcement-table" class="tab announcement-tab">공지사항</div>
-            <div data-tab-target="#faq-table" class="tab faq-tab">FAQ</div>
-            <div data-tab-target="#bulletin-board-table" class="tab bulletin-board-tab">자유게시판</div>
-          </div>
-          <div class="content">
-            <div id="announcement-table" data-tab-content class="table active">
+          <div class="tab-content">
+            <div id="announcement-tab" data-tab-content class="table active">
               <table>
                 <thead>
                   <tr>
@@ -46,15 +46,10 @@
                     <th>작성자</th>
                   </tr>
                 </thead>
-                <tr>
-                  <td>1</td>
-                  <td><a href="">공지사항</a></td>
-                  <td>2018.12.24</td>
-                  <td>칙칙북북</td>
-                </tr>
+                <tbody></tbody>
               </table>
             </div>
-            <div id="faq-table" data-tab-content class="table">
+            <div id="faq-tab" data-tab-content class="table">
               <table>
                 <thead>
                   <tr>
@@ -64,15 +59,10 @@
                     <th>작성자</th>
                   </tr>
                 </thead>
-                <tr>
-                  <td>1</td>
-                  <td><a href="">faq</a></td>
-                  <td>2018.12.24</td>
-                  <td>칙칙북북</td>
-                </tr>
+                <tbody></tbody>
               </table>
             </div>
-            <div id="bulletin-board-table" data-tab-content class="table">
+            <div id="freeboard-tab" data-tab-content class="table">
               <table>
                 <thead>
                   <tr>
@@ -82,12 +72,7 @@
                     <th>작성자</th>
                   </tr>
                 </thead>
-                <tr>
-                  <td>1</td>
-                  <td><a href="">자유게시판</a></td>
-                  <td>2018.12.24</td>
-                  <td>칙칙북북</td>
-                </tr>
+                <tbody></tbody>
               </table>
             </div>
           </div>
