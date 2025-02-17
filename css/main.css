@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Pretendard";
   src: url("../font/Pretendard-Regular.woff") format("woff");
@@ -95,6 +96,7 @@ iframe {
 body {
   font-size: 14px;
   letter-spacing: -1px;
+  line-height: 1.4;
 }
 body.on {
   overflow: hidden;
@@ -210,4 +212,5 @@ table {
   table {
     font-size: 18px;
   }
-}/*# sourceMappingURL=main.css.map */
+}
+/** 메인 컨텐츠 css **//*# sourceMappingURL=main.css.map */
