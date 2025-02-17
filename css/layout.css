@@ -1,0 +1,115 @@
+/** header **/
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid #e9e9e9;
+  background-color: #fff;
+}
+
+.header-top {
+  display: none;
+}
+
+.inner-header {
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inner-header .logo img {
+  height: 24px;
+}
+.inner-header .header-util, .inner-header .gnb-top .gnb-util, .gnb-top .inner-header .gnb-util {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.inner-header .header-util button, .inner-header .gnb-top .gnb-util button, .gnb-top .inner-header .gnb-util button {
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.inner-header .header-util .total-search-btn, .inner-header .gnb-top .gnb-util .total-search-btn, .gnb-top .inner-header .gnb-util .total-search-btn {
+  background-image: url("../img/common/icon-search.svg");
+}
+.inner-header .header-util .menu-btn, .inner-header .gnb-top .gnb-util .menu-btn, .gnb-top .inner-header .gnb-util .menu-btn {
+  background-image: url("../img/common/icon-menu.svg");
+}
+.inner-header .header-util .search-close-btn, .inner-header .gnb-top .gnb-util .search-close-btn, .gnb-top .inner-header .gnb-util .search-close-btn {
+  display: none;
+}
+
+.gnb-wrap {
+  position: fixed;
+  right: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: right 0.3s;
+}
+.gnb-wrap.open {
+  right: 0;
+}
+
+.gnb-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 60px;
+  padding: 0 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #e9e9e9;
+}
+.gnb-top .gnb-util .menu-close-btn {
+  background-image: url("../img/common/icon-close.svg");
+}
+
+.gnb {
+  background: linear-gradient(90deg, #f9f9f9 140px, #ffffff 140px);
+  height: calc(100% - 60px);
+  font-size: 18px;
+}
+.gnb .dep1 {
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+  color: #999;
+}
+.gnb .dep1 > a {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+.gnb .dep1.on > a {
+  color: #00A791;
+  font-weight: 700;
+}
+.gnb .dep2 {
+  display: none;
+  width: calc(100% - 140px);
+  position: absolute;
+  top: 60px;
+  left: 140px;
+  color: #666;
+}
+.gnb .dep2 a {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+.gnb .dep2.show {
+  display: block !important;
+}
+
+.search-wrap {
+  display: none;
+}/*# sourceMappingURL=layout.css.map */

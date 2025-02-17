@@ -160,7 +160,7 @@ body.on {
 }
 
 .wrapper {
-  min-width: 280px;
+  min-width: 320px;
   height: 100%;
   display: flex;
   flex-direction: column;
