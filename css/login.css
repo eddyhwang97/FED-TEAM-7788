@@ -244,7 +244,8 @@ main .login-wrap .input-box {
   padding: 14px 18px;
   height: 50px;
 }
-main .login-wrap .login-btn, main .login-wrap .join-btn {
+main .login-wrap .login-btn,
+main .login-wrap .join-btn {
   width: 100%;
   height: 50px;
   padding: 10px;
@@ -254,4 +255,10 @@ main .login-wrap .login-btn, main .login-wrap .join-btn {
   cursor: pointer;
   color: #fff;
   background-color: #00A791;
+}
+main .login-wrap .divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
 }/*# sourceMappingURL=login.css.map */
