@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>칙칙북북 - 당신의 취향을 배달해 드립니다</title>
-    <script src="../data/js/member_data.js" type="module"></script>
+    <!-- css s -->
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- css e -->
+    <!-- 리액트 전환 전 제이쿼리 및 스와이퍼 임시 연결-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- js s -->
+    <script src="../js/layout.js"></script>
+    <!-- js e -->
 </head>
 <body>
     <!-- wrapper s -->
     <div class="wrapper">
+        <div class="dimm"></div>
         <!-- header s -->
         <header class="header">
             <div class="header-top">
@@ -18,8 +29,14 @@
                 </ul>
             </div>
             <div class="inner-header">
-                <h1 class="logo"><img src="" alt="로고"></h1>
+                <h1 class="logo"><img src="../img/common/logo-temp.svg" alt="로고"></h1>
                 <div class="gnb-wrap">
+                    <div class="gnb-top">
+                        <div class="gnb-util">
+                            <button class="account-btn"><span class="blind">나의공간</span></button>
+                            <button class="menu-close-btn"><span class="blind">메뉴닫기</span></button>
+                        </div>
+                    </div>
                     <nav class="gnb">
                         <ul class="gnb-list">
                             <li class="dep1">
@@ -39,6 +56,9 @@
                             </li>
                             <li class="dep1">
                                 <a href="#">이달의 도서</a>
+                                <ul class="dep2">
+                                    <li><a href="#">편집장 추천 도서</a></li>
+                                </ul>
                             </li>
                             <li class="dep1">
                                 <a href="#">열린공간</a>
@@ -60,6 +80,10 @@
                     <button type="button" class="total-search-btn"><span class="blind">통합검색 버튼</span></button>
                     <button type="button" class="search-close-btn"><span class="blind">통합검색 닫기 버튼</span></button>
                     <button type="button" class="menu-btn"><span class="blind">메뉴 버튼</span></button>
+                </div>
+                <div class="pc-header-util">
+                    <button type="button" class="total-search-btn"></button>
+                    <button type="button" class="search-close-btn"></button>
                 </div>
             </div>
             <div class="search-wrap">
@@ -94,19 +118,19 @@
                     <div class="link-box-wrap">
                         <a href="#" class="link-box">
                             <p>대출하기</p>
-                            <img src="" alt="" class="link-box-bg">
+                            <span class="link-box-bg bg01"></span>
                         </a>
                         <a href="#" class="link-box">
                             <p>예약하기</p>
-                            <img src="" alt="" class="link-box-bg">
+                            <span class="link-box-bg bg02"></span>
                         </a>
                         <a href="#" class="link-box">
                             <p>추천도서</p>
-                            <img src="" alt="" class="link-box-bg">
+                            <span class="link-box-bg bg03"></span>
                         </a>
                         <a href="#" class="link-box">
                             <p>열린공간</p>
-                            <img src="" alt="" class="link-box-bg">
+                            <span class="link-box-bg bg04"></span>
                         </a>
                     </div>
                 </div>
@@ -229,31 +253,35 @@
         <!-- main e -->
         <!-- footer s -->
         <footer class="footer">
-            <div class="footer-inner">
-                <div class="left">
-                    <ul class="footer-link">
-                        <li><a href="#">개인정보처리방침</a></li>
-                        <li><a href="#">저작권보호정책</a></li>
-                        <li><a href="#">이메일무단수집거부</a></li>
-                        <li><a href="#">자주묻는질문</a></li>
-                    </ul>
-                    <div class="footer-logo">
-                        <img src="" alt="">
+            <div class="inner">
+                <div class="footer-inner">
+                    <div class="left">
+                        <ul class="footer-link">
+                            <li><a href="#">개인정보처리방침</a></li>
+                            <li><a href="#">저작권보호정책</a></li>
+                            <li><a href="#">이메일무단수집거부</a></li>
+                            <li><a href="#">자주묻는질문</a></li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <div class="family-site">
+                            <button type="button" class="">유관기관 바로가기<span class="blind">열림</span></button>
+                            <ul class="site-list">
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>   
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="right">
-                    <button type="button" class="active">유관기관 바로가기<span class="blind">열림</span></button>
-                    <ul class="site-list">
-                        <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                        <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                        <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                        <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                        <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>   
-                    </ul>
+                <div class="footer-btm">
+                    <div class="footer-logo">
+                        <img src="../img/common/logo-temp.svg" alt="하단 로고">
+                    </div>
+                    <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
                 </div>
-            </div>
-            <div class="footer-btm">
-                <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
             </div>
         </footer>
         <!-- footer e -->
