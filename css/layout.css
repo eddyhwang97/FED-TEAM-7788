@@ -255,10 +255,12 @@
     font-weight: 700;
   }
   .gnb-wrap .gnb .gnb-list .dep2 {
+    display: none;
     width: 100%;
     top: 87px;
     left: 0;
     transition: opacity 0.2s;
+    padding-top: 1rem;
   }
   .gnb-wrap .gnb .gnb-list .dep2 a {
     padding-left: 0;
@@ -294,6 +296,7 @@
     display: block;
   }
   .header.open .gnb-wrap .gnb .gnb-list .dep2 {
+    display: block;
     opacity: 1;
   }
 }

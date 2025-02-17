@@ -92,7 +92,6 @@ $(() => {
         $dimm.removeClass("on");
         $gnbWrap.removeClass("open");
         $body.removeClass("on");
-        $linkWrap.removeClass("on");
       }
     }
 
@@ -258,7 +257,7 @@ $(() => {
 
   $(window).on("resize", function () {
     if (window.innerWidth < 1024) {
-      $innerHeaderWrap.removeAttr("style");
+      $innerHeader.removeAttr("style");
     }
   });
 
@@ -267,7 +266,7 @@ $(() => {
     $dimm.removeClass("on");
     $searchClose.removeClass("on");
     $body.removeClass("on");
-    $innerHeaderWrap.removeClass("on");
+    $innerHeader.removeClass("on");
     $totalSearchBtn.css("right", "");
     setTimeout(function () {
       $header.removeClass("on");
