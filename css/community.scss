@@ -1,1 +1,32 @@
-// 커뮤니티 SCSS - 
+// 커뮤니티 SCSS -
+
+// community s
+#community{
+    @include responsive(1024px);
+    margin: 0 auto;
+}
+// community e
+
+// board-section s
+.board-section {
+  thead {
+    background-color: $lightblue;
+  }
+  .tabs {
+    display: flex;
+    gap: 20px;
+    .tab {
+      padding: 0px 20px;
+      background-color: $lightblue;
+    }
+  }
+  .content {
+    .table {
+      display: none;
+    }
+    .table.active {
+      display: inline-block;
+    }
+  }
+}
+// board-section e

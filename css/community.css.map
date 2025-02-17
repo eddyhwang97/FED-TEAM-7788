@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"community.css"}
+{"version":3,"sources":["community.scss","community.css"],"names":[],"mappings":"AAII;EACI,aAAA;EACA,SAAA;ACHR;ADIQ;EACI,iBAAA;EACA,8BAAA;ACFZ;ADMQ;EACI,aAAA;ACJZ;ADMQ;EACI,qBAAA;ACJZ","file":"community.css"}
