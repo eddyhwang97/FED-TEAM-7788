@@ -82,6 +82,7 @@ fieldset {
 
 html {
   font-family: "Pretendard", sans-serif;
+  font-weight: 400;
 }
 
 iframe {
@@ -93,7 +94,7 @@ iframe {
 
 body {
   font-size: 14px;
-  letter-spacing: -0.7px;
+  letter-spacing: -1px;
 }
 body.on {
   overflow: hidden;
@@ -176,13 +177,36 @@ body.on {
   color: #fff;
 }
 
+input,
+select,
+textarea,
+button,
+table {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #666;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+}
+
 @media screen and (min-width: 768px) {
-  body {
+  body,
+  input,
+  select,
+  textarea,
+  button,
+  table {
     font-size: 16px;
   }
 }
 @media screen and (min-width: 1024px) {
-  body {
+  body,
+  input,
+  select,
+  textarea,
+  button,
+  table {
     font-size: 18px;
   }
 }/*# sourceMappingURL=main.css.map */
