@@ -1,10 +1,13 @@
 // 커뮤니티 SCSS -
 @import "./variables";
 @import "./mixins";
+@import "./font";
+@import "./common.scss";
 
 // community s
 #community {
   text-align: center;
+  font-family: "woff";
 }
 // community e
 
@@ -14,22 +17,64 @@
   width: 1024px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
+  align-items: flex-end;
+  margin: 10px auto;
   .tabs {
     display: flex;
     justify-content: center;
     .tab {
-      padding: 20px;
+      padding: 5px 20px;
+      font-size: 1.5em;
     }
     .tab.active {
-      padding: 20px;
-      border-bottom: 3px solid $mint;
+      padding: 5px 20px;
+      border-bottom: 4px solid $darkmint;
     }
   }
+
   .search {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    width: 650px;
+    height: 70px;
+    background-color: $darkmint;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    .date-wrap {
+      position: relative;
+      i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        translate: 0 -50%;
+      }
+      input {
+        width: 250px;
+      }
+    }
+    i {
+      font-size: 24px;
+    }
+    input {
+      height: 40px;
+      width: 200px;
+      border-radius: 5px;
+      border: 0;
+      text-align: center;
+      background-color: #fff;
+    }
+    select {
+      width: 100px;
+      height: 40px;
+      border-radius: 5px;
+      background-color: #fff;
+      text-align: center;
+    }
+    button {
+      background-color: transparent;
+      border: 0;
+    }
   }
 }
 
@@ -46,27 +91,41 @@
     .table.active {
       display: inline-block;
     }
+    #freeboard-tab{
+      span{
+        border: 1px solid $black;
+        padding: 5px;
+        background-color: #efefef;
+      }
+    }
   }
   table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 10px;
     width: 1024px;
 
     thead {
-      background-color: $color-board-thead;
+      box-shadow:  0 0 2px inset;
+      background-color: $darkmint;
+      color: #fff;
       th {
         padding: 20px;
       }
     }
     tbody {
       tr {
-        border-spacing: 2px;
+        box-shadow: 0 0 1px #000;
+        border-radius: 10px;
+        height: 20px;
+        &:nth-child(even) {
+          background-color: $color-board-even;
+        }
+        &:hover {
+          background-color: #c1c1c1;
+          transition: 0.2s;
+        }
       }
-      tr:nth-child(even) {
-        background-color: $color-board-even;
-      }
-      tr:hover{
-        background-color: #939393;
-      }
+
       td:nth-child(1) {
         border-radius: 10px 0 0 10px;
       }
@@ -77,8 +136,9 @@
         border-radius: 0 10px 10px 0;
       }
       td {
+        height: 40px;
         padding: 10px 20px;
-        a{
+        a {
           text-decoration: none;
           color: black;
         }

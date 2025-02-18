@@ -7,7 +7,6 @@
     <!-- link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css -->
-    <link rel="stylesheet" href="../css/common.scss" />
     <link rel="stylesheet" href="../css/community.css" />
     <!-- js -->
     <script type="module" src="../js/community.js"></script>
@@ -24,14 +23,17 @@
             <div data-tab-target="#freeboard-tab" class="tab freeboard-tab-button">자유게시판</div>
           </div>
           <div class="search">
-            <button><i class="fa-regular fa-calendar"></i></button>
+            <div class="date-wrap">
+              <input type="text" name="datefilter" value="" title="시작일 입력 ~ 종료일 입력 / 입력양식 2023-1-1 ~ 2023-1-31 입력해주세요." placeholder="시작일 입력 ~ 종료일 입력" />
+              <i class="fa-regular fa-calendar" style="color: #000"></i>
+            </div>
             <select name="option" id="search-option">
               <option value="제목">제목</option>
               <option value="작성자">작성자</option>
               <option value="내용">내용</option>
             </select>
             <input type="text" />
-            <button class="search-button">검색</button>
+            <button class="search-button"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i></button>
           </div>
         </section>
         <section class="board-section">
@@ -74,6 +76,7 @@
                 </thead>
                 <tbody></tbody>
               </table>
+              <span>글쓰기</span>
             </div>
           </div>
         </section>

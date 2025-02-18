@@ -12,10 +12,10 @@ const cmFn = new CommunityFn();
 const targetTab = document.querySelectorAll(".table>table>tbody");
 const tabContent = `
     ${communityData
-      .map((v) =>
+      .map((v,i) =>
         `
       <tr>
-        <td>${v.idx}</td>
+        <td>${i+1}</td>
         <td>
           <a href="">${v.title}</a>
         </td>
@@ -31,6 +31,14 @@ console.log(targetTab)
 targetTab.forEach((TT)=>{
 TT.innerHTML = tabContent;
 })
+
+function boardFn(){
+  let Data = [];
+  cosnt
+}
+
+
+
 
 
 
