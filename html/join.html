@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <!-- css -->
+    <link rel="stylesheet" href="../css/join.css" />
+    <!-- js -->
+     <script type="module" src="../js/join.js"></script>
+  </head>
+  <body>
+    <!-- header -->
+    <!-- join -->
+    <main class="join-container" id="join">
+      <section class="join-wrap">
+        <div class="tit-wrap">
+          <h2>회원가입🚂</h2>
+        </div>
+        <div class="input-wrap">
+          <input
+            type="text"
+            class="input-box"
+            placeholder="휴대폰번호를 입력해주세요."
+          />
+          <input
+            type="text"
+            class="input-box"
+            placeholder="이름을 입력해주세요."
+          />
+          <div class="password-wrap">
+            <input
+              type="password"
+              id="password"
+              class="input-box"
+              placeholder="비밀번호를 입력해주세요."
+            />
+            <span class="toggle-password">
+              👁️
+            </span>
+          </div>
+        </div>
+        <div class="validation-wrap">
+          <div class="password-strength">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <ul class="password-checklist">
+            <li>✔ 영문, 숫자, 특수문자 포함 8자리 이상</li>
+            <li>✔ 공백 및 3자 이상의 연속/중복 문자 사용 불가</li>
+          </ul>
+        </div>
+        <input type="password" class="input-box" placeholder="비밀번호확인" />
+        <button class="join-btn">회원가입</button>
+      </section>
+    </main>
+  </body>
+</html>

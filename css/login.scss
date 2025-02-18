@@ -1,0 +1,58 @@
+// login.scss
+@import "./font"; // font.scss
+@import "./mixins"; // mixin.scss
+@import "./variables"; // variables.scss
+@import "./reset"; // reset.scss
+@import "./common"; // common.scss
+
+/** 로그인 컨텐츠 css **/
+
+main {
+  font-family: $pretendard;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px auto;
+  .login-wrap {
+    display: flex;
+    flex-direction: column;
+    .input-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .input-box {
+        width: 350px;
+        border: 1px solid $black;
+        border-radius: 2px;
+        padding: 14px 18px;
+        height: 50px;
+      }
+    }
+    .input-box {
+      border: 1px solid $black;
+      border-radius: 2px;
+      height: 30px;
+      padding: 14px 18px;
+      height: 50px;
+      opacity: 0.5;
+    }
+    .login-btn,
+    .join-btn {
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      color: $white;
+      background-color: $mint;
+    }
+    .divider {
+      width: 100%;
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 10px 0;
+    }
+  }
+}
