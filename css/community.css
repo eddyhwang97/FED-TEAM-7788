@@ -1,5 +1,146 @@
+@font-face {
+  font-family: "Pretendard";
+  src: url("../font/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("../font/Pretendard-Medium.woff") format("woff");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("../font/Pretendard-Bold.woff") format("woff");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Pretendard";
+  src: url("../font/Pretendard-Bold.woff") format("woff");
+  font-weight: 700;
+}
+body {
+  font-size: 14px;
+  letter-spacing: -1px;
+  line-height: 1.4;
+}
+body.on {
+  overflow: hidden;
+}
+
+.dimm {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  width: 100%;
+  height: 0;
+  background: rgba(17, 17, 17, 0.8);
+  transition: opacity 0.3s;
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+}
+.dimm.on {
+  opacity: 1;
+  height: 100vh;
+  z-index: 20;
+}
+
+.blind {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0, 0, 0, 0);
+  margin: -1px;
+}
+
+.skip {
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+}
+.skip a {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  text-indent: -9999px;
+}
+.skip a:focus, .skip a:active {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  padding: 10px 0;
+  font-size: 15px;
+  line-height: 14px;
+  text-indent: 0;
+  text-align: center;
+  color: #fff;
+  background: #444;
+}
+.skip a:focus-visible {
+  outline: 3px dashed #000;
+  outline-offset: -3px;
+}
+
+.wrapper {
+  min-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+::-moz-selection {
+  background-color: #000;
+  color: #fff;
+}
+
+::selection {
+  background-color: #000;
+  color: #fff;
+}
+
+input,
+select,
+textarea,
+button,
+table {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #666;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+@media screen and (min-width: 768px) {
+  body,
+  input,
+  select,
+  textarea,
+  button,
+  table {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  body,
+  input,
+  select,
+  textarea,
+  button,
+  table {
+    font-size: 18px;
+  }
+}
 #community {
   text-align: center;
+  font-family: "woff";
 }
 
 .tab-section {
@@ -7,23 +148,64 @@
   width: 1024px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
+  align-items: flex-end;
+  margin: 10px auto;
 }
 .tab-section .tabs {
   display: flex;
   justify-content: center;
 }
 .tab-section .tabs .tab {
-  padding: 20px;
+  padding: 5px 20px;
+  font-size: 1.5em;
 }
 .tab-section .tabs .tab.active {
-  padding: 20px;
-  border-bottom: 3px solid #00A791;
+  padding: 5px 20px;
+  border-bottom: 4px solid #004D5D;
 }
 .tab-section .search {
+  width: 650px;
+  height: 70px;
+  background-color: #004D5D;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.tab-section .search .date-wrap {
+  position: relative;
+}
+.tab-section .search .date-wrap i {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 10px;
+  top: 50%;
+  translate: 0 -50%;
+}
+.tab-section .search .date-wrap input {
+  width: 250px;
+}
+.tab-section .search i {
+  font-size: 24px;
+}
+.tab-section .search input {
+  height: 40px;
+  width: 200px;
+  border-radius: 5px;
+  border: 0;
+  text-align: center;
+  background-color: #fff;
+}
+.tab-section .search select {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+.tab-section .search button {
+  background-color: transparent;
+  border: 0;
 }
 
 .board-section {
@@ -37,24 +219,35 @@
 .board-section .tab-content .table.active {
   display: inline-block;
 }
+.board-section .tab-content #freeboard-tab span {
+  border: 1px solid #111;
+  padding: 5px;
+  background-color: #efefef;
+}
 .board-section table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 10px;
   width: 1024px;
 }
 .board-section table thead {
-  background-color: #d9d9d9;
+  box-shadow: 0 0 2px inset;
+  background-color: #004D5D;
+  color: #fff;
 }
 .board-section table thead th {
   padding: 20px;
 }
 .board-section table tbody tr {
-  border-spacing: 2px;
+  box-shadow: 0 0 1px #000;
+  border-radius: 10px;
+  height: 20px;
 }
 .board-section table tbody tr:nth-child(even) {
   background-color: #f4f4f4;
 }
 .board-section table tbody tr:hover {
-  background-color: #939393;
+  background-color: #c1c1c1;
+  transition: 0.2s;
 }
 .board-section table tbody td:nth-child(1) {
   border-radius: 10px 0 0 10px;
@@ -66,6 +259,7 @@
   border-radius: 0 10px 10px 0;
 }
 .board-section table tbody td {
+  height: 40px;
   padding: 10px 20px;
 }
 .board-section table tbody td a {
