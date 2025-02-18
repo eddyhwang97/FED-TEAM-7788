@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지</title>
     <!-- css -->
-     <link rel="stylesheet" href="../css/mypage.scss">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/mypage.scss" />
+  </head>
+  <body>
     <!-- header -->
     <!-- mypage -->
-     <main class="mypage-container" id="mypage">
+    <main class="mypage-container" id="mypage">
         <section class="mypage-wrap">
-            <div class="tit-wrap">
-                <h2>마이페이지</h2>
+        <div class="tit-wrap">
+            <h2>마이페이지</h2>
+        </div>
+        <div class="profile-wrap">
+            <div class="user-info">
+          <a href="#" class="profile-image-box">
+            <img src="" alt="" />
+          </a>
+          <strong>00000000(임시)</strong>
+          <span>Lv.10</span>
+          <a href="#" class="level-icon-box">
+            <img src="" alt="" />
+          </a>
+        </div>
+          <span class="toggle-setting">⚙</span>
+        </div>
+        <!-- setting click menu -->
+         <ul class="setting-menu-wrap">
+            <li>이름변경</li>
+            <li>비밀번호변경</li>
+            <li>회원탈퇴</li>
+         </ul>
+      </section>
+      <!-- My Pick -->
+      <section class="mypick-wrap">
+        <div class="sub-tit-wrap">
+            <h3>My Pick</h3>
+            <div class="sort-container">
+                <label for="sort">정렬</label>
+                <select id="sort" class="sort-select">
+                    <option value="loan-days">남은 대출일</option>
+                    <option value="alphabetical">가나다순</option>
+                </select>
             </div>
-            <div class="profile-wrap">
-                <a href="#" class="image-box">
-                    <img src="" alt="">
-                </a>
-                <strong>00000000(임시)</strong>
-                
-            </div>
-        </section>
-     </main>
-</body>
+        </div>
+        <ul class="loan-list-wrap">
+            <li class="loan-list"></li>
+        </ul>
+      </section>
+    </main>
+  </body>
 </html>
