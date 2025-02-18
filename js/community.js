@@ -32,6 +32,14 @@ targetTab.forEach((TT)=>{
 TT.innerHTML = tabContent;
 })
 
+function boardFn(){
+  let Data = [];
+  cosnt
+}
+
+
+
+
 
 
 // start Fn
