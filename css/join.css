@@ -227,6 +227,7 @@ main .join-wrap {
 }
 main .join-wrap h2 {
   font-weight: 600;
+  font-size: 30px;
 }
 main .join-wrap .input-wrap {
   display: flex;
@@ -246,7 +247,6 @@ main .join-wrap .input-box {
   height: 30px;
   padding: 14px 18px;
   height: 50px;
-  opacity: 0.5;
 }
 main .join-wrap .validation-wrap {
   margin-top: 10px;
@@ -267,6 +267,7 @@ main .join-wrap .validation-wrap .bar {
 }
 main .join-wrap .validation-wrap .password-checklist li {
   color: #999;
+  font-size: 14px;
 }
 main .join-wrap .join-btn {
   width: 100%;
@@ -279,4 +280,5 @@ main .join-wrap .join-btn {
   color: #fff;
   background-color: #00A791;
   font-weight: 600;
+  font-size: 18px;
 }/*# sourceMappingURL=join.css.map */
