@@ -31,6 +31,15 @@ main {
         padding: 14px 18px;
         height: 50px;
       }
+      .password-wrap{
+        position: relative;
+        display: flex;
+        align-items: center;
+      justify-content: flex-end;
+      .toggle-password{
+        position: absolute;
+      }
+      }
     }
     .input-box {
       border: 1px solid $black;
@@ -41,6 +50,7 @@ main {
     }
     .validation-wrap {
       margin-top: 10px;
+      margin-bottom: 10px; 
       display: flex;
       flex-direction: column;
       .password-strength {

@@ -241,6 +241,15 @@ main .join-wrap .input-wrap .input-box {
   padding: 14px 18px;
   height: 50px;
 }
+main .join-wrap .input-wrap .password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+main .join-wrap .input-wrap .password-wrap .toggle-password {
+  position: absolute;
+}
 main .join-wrap .input-box {
   border: 1px solid #111;
   border-radius: 2px;
@@ -250,6 +259,7 @@ main .join-wrap .input-box {
 }
 main .join-wrap .validation-wrap {
   margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
 }

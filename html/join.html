@@ -13,7 +13,6 @@
       <section class="join-wrap">
         <div class="tit-wrap">
           <h2>회원가입🚂</h2>
-          <!-- <img src="../img/img-9961234799.png" alt="임시이미지"> -->
         </div>
         <div class="input-wrap">
           <input
@@ -26,11 +25,16 @@
             class="input-box"
             placeholder="이름을 입력해주세요."
           />
-          <input
-            type="password"
-            class="input-box"
-            placeholder="비밀번호를 입력해주세요."
-          />
+          <div class="password-wrap">
+            <input
+              type="password"
+              class="input-box"
+              placeholder="비밀번호를 입력해주세요."
+            />
+            <span class="toggle-password" onclick="togglePassword('password')">
+              👁️
+            </span>
+          </div>
         </div>
         <div class="validation-wrap">
           <div class="password-strength">
@@ -43,11 +47,7 @@
             <li>✔ 공백 및 3자 이상의 연속/중복 문자 사용 불가</li>
           </ul>
         </div>
-        <input
-        type="password"
-        class="input-box"
-        placeholder="비밀번호확인"
-      />
+        <input type="password" class="input-box" placeholder="비밀번호확인" />
         <button class="join-btn">회원가입</button>
       </section>
     </main>
