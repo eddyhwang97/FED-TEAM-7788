@@ -1,13 +1,9 @@
-// 일부수정예정
-// 수정예정기능 - 검색창에러
 $(() => {
-  //header
   const $body = $("body"),
     $dimm = $(".dimm"),
     $header = $(".header"),
     $innerHeader = $(".inner-header"),
     $headerUtil = $(".header-util"),
-    $pcHeaderUtil = $(".pc-header-util"),
     $menuBtn = $(".menu-btn"),
     $gnbWrap = $(".gnb-wrap"),
     $gnb = $(".gnb"),
@@ -16,7 +12,6 @@ $(() => {
     $dep2A = $gnb.find(".dep2>ul>li>a");
 
   const $totalSearchBtn = $(".total-search-btn"),
-    $totalSearchBtnOn = $(".total-search-btn.on"),
     $searchWrap = $(".search-wrap"),
     $searchClose = $(".search-close-btn");
 
@@ -28,65 +23,36 @@ $(() => {
       $body.removeClass("on");
       $gnbWrap.removeClass("open");
       $dimm.removeClass("on");
-      $dimm.removeAttr("style");
-      $headerUtil.removeClass("on");
-      $headerUtil.css('display','block');
-      $searchWrap.css('z-index', '20');
+      $headerUtil.removeClass("on").css("display", "block");
+      $searchWrap.css("z-index", "20");
     }
 
-    $menuBtn.on({
-      click: function () {
-        $body.addClass("on");
-        $gnbWrap.addClass("open");
-        $dimm.addClass("on");
-        $headerUtil.addClass("on");
-        $searchWrap.removeClass("on");
-        $searchWrap.removeAttr("style");
-        $totalSearchBtn.css("right", "");
-        $totalSearchBtn
-          .removeClass("on")
-          .removeAttr("onclick", "totalSearch()");
-        $searchClose.removeClass("on");
-        $dimm.removeClass("on");
-        $headerUtil.css('display','none');
-      },
+    $menuBtn.on("click", function () {
+      $body.addClass("on");
+      $gnbWrap.addClass("open");
+      $dimm.addClass("on");
+      $headerUtil.addClass("on").css("display", "none");
+      $searchWrap.removeClass("on").removeAttr("style");
     });
 
-    $(".menu-close-btn, .dimm").on("click", function () {
-      reset();
-    });
+    $(".menu-close-btn, .dimm").on("click", reset);
 
-    $dep1.on({
-      click: function (e) {
-        let $currentDep2 = $(this).siblings($dep2A);
-        if ($currentDep2.length > 0) e.preventDefault();
-        if (window.innerWidth < 1024) {
-          $dep2.removeClass("show");
-          if (!$(this).parent().hasClass("on")) {
-            $(this)
-              .parent()
-              .addClass("on")
-              .siblings()
-              .removeClass("on");
-            $currentDep2.addClass("show");
-          } else {
-            $(this).parent().removeClass("on");
-            $dep2A.removeClass("show");
-          }
-        }
-      },
+    $dep1.on("click", function (e) {
+      let $currentDep2 = $(this).siblings(".dep2");
+      if ($currentDep2.length > 0) e.preventDefault();
+      if (window.innerWidth < 1024) {
+        $dep2.removeClass("show");
+        $(this).parent().toggleClass("on").siblings().removeClass("on");
+        $currentDep2.toggleClass("show");
+      }
     });
   }
 
   function webGnb() {
-
     function reset() {
       if (window.innerWidth >= 1024) {
         $dep2.removeClass("show");
-        $dep2.removeAttr("style");
-        $dep1.removeClass("on");
-        $dep2A.removeClass("active");
-        $dep2A.parent().removeClass("active");
+        $dep1.removeClass("on active");
         $innerHeader.removeClass("open");
         $header.removeClass("active");
         $dimm.removeClass("on");
@@ -95,76 +61,60 @@ $(() => {
       }
     }
 
-    $(window).on("resize", function () {
-      reset();
-    });
+    $(window).on("resize", reset);
 
-    $dep1.on({
-      mouseenter: function () {
-        if (window.innerWidth >= 1024) {
-          $dimm.addClass("on");
-          $dep1.removeClass("active").siblings().removeClass("active");
-          $(this).addClass("active").siblings().addClass("active");
-          $header.addClass("open");
-        }
-
-        if($searchWrap.hasClass('on')){
-            $searchWrap.css('z-index','-1')
-        }
-      },
-      focusin: function () {
-        if (window.innerWidth >= 1024) {
-          $dimm.addClass("on");
-          $dep1.removeClass("active").siblings().removeClass("active");
-          $(this).addClass("active").siblings().addClass("active");
-          $header.addClass("open");
-        }
-
-        if($searchWrap.hasClass('on')){
-            $searchWrap.css('z-index','-1')
-        }
-      },
-    });
-
-    $(".dep1:nth-child(5) .dep2>ul>li:last-child>a").on(
-      "keydown",
-      function (e) {
-        let keyCode = e.keyCode || e.which;
-        if (keyCode === 9 && !e.shiftKey) {
-          e.preventDefault();
-          $header.removeClass("open");
-          $dimm.removeClass("on");
-          $dimm.css("z-index", "1");
-          $totalSearchBtn.focus();
-        }
+    $dep1.on("mouseenter focusin", function () {
+      if (window.innerWidth >= 1024) {
+        $dimm.addClass("on");
+        $(this).addClass("active").siblings().removeClass("active");
+        $header.addClass("open");
       }
-    );
-
-    $dep2A.on({
-      mouseenter: function () {
-        if (window.innerWidth >= 1024) {
-          $dep1.removeClass("active").siblings().removeClass("active");
-          $(this).addClass("active").siblings().addClass("active");
-          $(this).parents().find($dep2).addClass("active");
-          $(this).parents().siblings().find($dep2).removeClass("active");
-          $(this).parents().find($dep1).addClass("active");
-          $(this).parents().siblings().find($dep1).removeClass("active");
-        }
-      },
+      if ($searchWrap.hasClass("on")) {
+        $searchWrap.css("z-index", "-1");
+      }
     });
 
-    $header.on({
-      mouseleave: function () {
-        if (window.innerWidth >= 1024) {
-            $header.removeClass("open");
-          $dimm.removeClass("on");
-          $dimm.css("z-index", "1");
-          $searchWrap.css('z-index', '20');
-        }
-        $dep1.removeClass("active").siblings().removeClass("active");
-      },
+    $header.on("mouseleave", function () {
+      if (window.innerWidth >= 1024) {
+        $header.removeClass("open");
+        $dimm.removeClass("on");
+        $searchWrap.css("z-index", "20");
+      }
+      $dep1.removeClass("active");
     });
   }
+
+  $totalSearchBtn.on("click", function () {
+    $(this).toggleClass("on");
+    $body.toggleClass("on");
+    $searchWrap.stop(true, false).slideToggle(200).toggleClass("on");
+    $searchClose.addClass("on");
+    $dimm.addClass("on");
+    if ($(this).hasClass("on")) {
+      $("#mainSearchText").focus();
+    }
+  });
+
+  $searchClose.on("click", function () {
+    $(this).removeClass("on");
+    $totalSearchBtn.removeClass("on");
+    $dimm.removeClass("on");
+    $body.removeClass("on");
+    $searchWrap.stop(true, false).slideUp(200).removeClass("on");
+  });
+
+  $(document).mouseup(function (e) {
+    if (!$(e.target).closest(".site-list, .family-site>button").length) {
+      $(".site-list").slideUp();
+      $(".family-site>button").removeClass("active").find("span").text("닫힘");
+    }
+  });
+
+  $(window).on("resize", function () {
+    if (window.innerWidth < 1024) {
+      $innerHeader.removeAttr("style");
+    }
+  });
 
   //footer
   const $btnSite = $(".family-site>button"),
@@ -208,69 +158,5 @@ $(() => {
       $siteList.slideUp();
       $btnSite.removeClass("active").find("span").text("닫힘");
     }
-  });
-
-  // search-bar pop up
-  $totalSearchBtn.on("click", function () {
-    if (!$(this).hasClass("on")) {
-      $(this).addClass("on").attr("onclick", "totalSearch()");
-      $body.addClass("on");
-      $searchClose.addClass("on");
-      $header.addClass("on");
-      $innerHeader
-        .addClass("on")
-        .removeClass("open")
-      $searchWrap.slideDown(200).addClass("on");
-      $dimm.addClass("on");
-      $("#mainSearchText").focus();
-    }
-  });
-
-  $totalSearchBtnOn.on("keydown", function (e) {
-    let keyCode = e.keyCode || e.which;
-    if (keyCode === 9 && !e.shiftKey) {
-      e.preventDefault();
-      $searchClose.focus();
-    }
-  });
-
-  $searchClose.on("click", function () {
-    $totalSearchBtn.removeClass("on").removeAttr("onclick", "totalSearch()");
-    $dimm.removeClass("on");
-    $searchClose.removeClass("on");
-    $body.removeClass("on");
-    $innerHeader.removeClass("on");
-    $totalSearchBtn.css("right", "");
-    setTimeout(function () {
-      $header.removeClass("on");
-    }, 700);
-    $searchWrap.slideUp(200).removeClass("on");
-  });
-
-  // top-btn
-  const $topBtn = $(".btn-top");
-
-  $topBtn.on("click", function (e) {
-    e.preventDefault();
-    $("html,body").animate({ scrollTop: 0 }, 500);
-  });
-
-  $(window).on("resize", function () {
-    if (window.innerWidth < 1024) {
-      $innerHeader.removeAttr("style");
-    }
-  });
-
-  $dimm.on("click", function () {
-    $totalSearchBtn.removeClass("on").removeAttr("onclick", "totalSearch()");
-    $dimm.removeClass("on");
-    $searchClose.removeClass("on");
-    $body.removeClass("on");
-    $innerHeader.removeClass("on");
-    $totalSearchBtn.css("right", "");
-    setTimeout(function () {
-      $header.removeClass("on");
-    }, 700);
-    $searchWrap.slideUp().removeClass("on");
   });
 });
