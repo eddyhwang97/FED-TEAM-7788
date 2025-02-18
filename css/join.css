@@ -213,7 +213,7 @@ table {
     font-size: 18px;
   }
 }
-/** 로그인 컨텐츠 css **/
+/** 회원가입 컨텐츠 css **/
 main {
   font-family: "Pretendard", sans-serif;
   display: flex;
@@ -221,23 +221,26 @@ main {
   align-items: center;
   margin: 0px auto;
 }
-main .login-wrap {
+main .join-wrap {
   display: flex;
   flex-direction: column;
 }
-main .login-wrap .input-wrap {
+main .join-wrap h2 {
+  font-weight: 600;
+}
+main .join-wrap .input-wrap {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-main .login-wrap .input-wrap .input-box {
+main .join-wrap .input-wrap .input-box {
   width: 350px;
   border: 1px solid #111;
   border-radius: 2px;
   padding: 14px 18px;
   height: 50px;
 }
-main .login-wrap .input-box {
+main .join-wrap .input-box {
   border: 1px solid #111;
   border-radius: 2px;
   height: 30px;
@@ -245,8 +248,27 @@ main .login-wrap .input-box {
   height: 50px;
   opacity: 0.5;
 }
-main .login-wrap .login-btn,
-main .login-wrap .join-btn {
+main .join-wrap .validation-wrap {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+main .join-wrap .validation-wrap .password-strength {
+  display: flex;
+  margin-bottom: 5px;
+  gap: 5px;
+  justify-content: center;
+}
+main .join-wrap .validation-wrap .bar {
+  width: 112px;
+  height: 5px;
+  background-color: #999;
+  border-radius: 5px;
+}
+main .join-wrap .validation-wrap .password-checklist li {
+  color: #999;
+}
+main .join-wrap .join-btn {
   width: 100%;
   height: 50px;
   padding: 10px;
@@ -256,10 +278,5 @@ main .login-wrap .join-btn {
   cursor: pointer;
   color: #fff;
   background-color: #00A791;
-}
-main .login-wrap .divider {
-  width: 100%;
-  border: none;
-  border-top: 1px solid #ddd;
-  margin: 10px 0;
-}/*# sourceMappingURL=login.css.map */
+  font-weight: 600;
+}/*# sourceMappingURL=join.css.map */

@@ -1,11 +1,11 @@
-// login.scss
+// join.scss
 @import "./font"; // font.scss
 @import "./mixins"; // mixin.scss
 @import "./variables"; // variables.scss
 @import "./reset"; // reset.scss
 @import "./common"; // common.scss
 
-/** 로그인 컨텐츠 css **/
+/** 회원가입 컨텐츠 css **/
 
 main {
   font-family: $pretendard;
@@ -13,9 +13,12 @@ main {
   justify-content: center;
   align-items: center;
   margin: 0px auto;
-  .login-wrap {
+  .join-wrap {
     display: flex;
     flex-direction: column;
+    h2{
+        font-weight: 600;
+    }
     .input-wrap {
       display: flex;
       flex-direction: column;
@@ -36,7 +39,28 @@ main {
       height: 50px;
       opacity: 0.5;
     }
-    .login-btn,
+    .validation-wrap {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      .password-strength {
+        display: flex;
+        margin-bottom: 5px;
+        gap: 5px;
+        justify-content: center;
+      }
+      .bar {
+        width: 112px;
+        height: 5px;
+        background-color: $gray;
+        border-radius: 5px;
+      }
+      .password-checklist {
+        li {
+          color: $gray;
+        }
+      }
+    }
     .join-btn {
       width: 100%;
       height: 50px;
@@ -47,12 +71,7 @@ main {
       cursor: pointer;
       color: $white;
       background-color: $mint;
-    }
-    .divider {
-      width: 100%;
-      border: none;
-      border-top: 1px solid #ddd;
-      margin: 10px 0;
+      font-weight: 600;
     }
   }
 }
