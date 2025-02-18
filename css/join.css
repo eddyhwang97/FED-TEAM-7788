@@ -249,6 +249,7 @@ main .join-wrap .input-wrap .password-wrap {
 }
 main .join-wrap .input-wrap .password-wrap .toggle-password {
   position: absolute;
+  padding-right: 10px;
 }
 main .join-wrap .input-box {
   border: 1px solid #111;

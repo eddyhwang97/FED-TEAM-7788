@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
+    <!-- css -->
     <link rel="stylesheet" href="../css/join.css" />
+    <!-- js -->
+     <script type="module" src="../js/join.js"></script>
   </head>
   <body>
     <!-- header -->
@@ -28,10 +31,11 @@
           <div class="password-wrap">
             <input
               type="password"
+              id="password"
               class="input-box"
               placeholder="비밀번호를 입력해주세요."
             />
-            <span class="toggle-password" onclick="togglePassword('password')">
+            <span class="toggle-password">
               👁️
             </span>
           </div>
