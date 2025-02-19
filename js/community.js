@@ -8,8 +8,10 @@ localStorage.setItem("community_data", JSON.stringify(communityData));
 // set communityFn
 const cmFn = new CommunityFn();
 
+// 대상
+const searchBtn = document.querySelector(".search-button")
 // tab-content map
-const targetTab = document.querySelectorAll(".table>table>tbody");
+const targetTab = document.querySelectorAll(".table>table");
 const tabContent = `
     ${communityData
       .map((v,i) =>
@@ -45,4 +47,5 @@ function boardFn(){
 // start Fn
 window.onload = () => {
   cmFn.ChangeTabContent();
+  cmFn.ParentToggleActiveFn(searchBtn);
 };

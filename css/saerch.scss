@@ -1,0 +1,15 @@
+// search SCSS 
+@import "./font";
+@import "./mixins";
+@import "./variables";
+@import "./reset";
+@import "./common";
+@import "./layout";
+
+
+#search{
+    margin-top: 15%;
+}
+.content{
+    padding: 20px 50px;
+}

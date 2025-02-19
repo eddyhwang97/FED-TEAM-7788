@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>커뮤니티</title>
+    <title>검색</title>
     <!-- link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css -->
-    <link rel="stylesheet" href="../css/community.css" />
+    <link rel="stylesheet" href="../css/saerch.css" />
     <!-- js -->
-    <script type="module" src="../js/community.js"></script>
+    <script type="module" src="../js/search.js"></script>
   </head>
   <body>
     <!-- 상단 -->
@@ -97,72 +97,29 @@
           </div>
         </div>
       </header>
-      <!-- community s -->
-      <div class="community" id="community">
+      <!-- search s -->
+      <div class="search" id="search">
         <div class="content">
           <div class="page-title-area">
-            <h1 class="page-title">커뮤니티</h1>
-            <div class="search">
-              <select name="option" id="search-option">
-                <option value="제목">제목</option>
-                <option value="작성자">작성자</option>
-                <option value="내용">내용</option>
-              </select>
-              <input type="text" />
-              <button class="search-button"><i class="fa-solid fa-magnifying-glass" style="color: #000"></i></button>
+            <h1 class="page-title">검색</h1>
+          </div>
+          <div class="search-area">
+            <div class="search-wrap">
+              <form action="search.php">
+                <fieldset>
+                  <legend class="blind">도서 검색 ��</legend>
+                  <input type="text" id="searchText" name="searchTxt" title="��색어" placeholder="도서명, 저자, ISBN, 출��사, 출��년도" />
+                  <button type="submit" class="search-btn"><span class="blind">��색</span></button>
+                </fieldset>
+              </form>
             </div>
           </div>
-          <div class="tab-section">
-            <div class="tabs">
-              <div data-tab-target="#announcement-tab" class="tab announcement-tab-button active">공지사항</div>
-              <div data-tab-target="#faq-tab" class="tab faq-tab-button">FAQ</div>
-              <div data-tab-target="#freeboard-tab" class="tab freeboard-tab-button">자유게시판</div>
-            </div>
-          </div>
-          <div class="board-section">
-            <div class="tab-content">
-              <div id="announcement-tab" data-tab-content class="table active">
-                <table></table>
-              </div>
-              <div id="faq-tab" data-tab-content class="table">
-                <table></table>
-              </div>
-              <div id="freeboard-tab" data-tab-content class="table">
-                <table></table>
-              </div>
-            </div>
-          </div>
-          <div class="pagenate-section">
-            <button><i class="fa-solid fa-angle-left"></i></button>
-            <a href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <button><i class="fa-solid fa-angle-right"></i></button>
-            <span>글쓰기</span>
-          </div>
-          <div class="write-board">
-            <form action="write_process.php" method="post" enctype="multipart/form-data">
-              <div class="write-form">
-                <div class="form-group title">
-                  <input type="text" id="title" name="title" value="" placeholder="제목" required />
-                </div>
-                <div class="form-group text-content">
-                  <textarea id="text-content" name="content" placeholder="내용을 입력하세요." required></textarea>
-                </div>
-                <div class="button-wrap">
-                  <div class="form-group submit-btn">
-                    <button type="submit">등록</button>
-                  </div>
-                  <div class="form-group close-btn">
-                    <button type="submit">닫기</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+          <div class="list-area">
+
           </div>
         </div>
       </div>
-      <!-- community e -->
+      <!-- search e -->
     </div>
   </body>
 </html>

@@ -20,5 +20,18 @@ export default function CommunityFn() {
   };
   //  ChangeTabContent e
 
-  
+  // ActiveOnFn s
+  this.ToggleActiveFn = function(target){
+    target.addEventListener("click",()=>{
+      target.classList.toggle("active");
+    })
+  }
+  // ActiveOnFn s
+  this.ParentToggleActiveFn = function(target){
+    target.addEventListener("click",()=>{
+      target.parentElement.classList.toggle("active");
+    })
+  }
 }
+
+
