@@ -687,6 +687,7 @@ table {
   justify-content: center;
   align-items: center;
   gap: 2px;
+  background-color: #fff;
 }
 
 .book-img-list > li {
@@ -776,11 +777,11 @@ table {
   border-radius: 10px 20px 20px 10px;
   box-shadow: 0 10px 16px 0px rgba(171, 190, 209, 0.3);
   aspect-ratio: 154/203;
-  transform: translateY(0);
-  transition: 0.3s;
+  translate: 0 0;
+  transition: translate 0.3s;
 }
 .book-contents .book-tab-cont .book-slide > li:hover {
-  transform: translateY(-20px);
+  translate: 0 -20px;
 }
 .book-contents .book-tab-cont .book-slide > li > img {
   width: 100%;
@@ -797,6 +798,7 @@ table {
 @media screen and (min-width: 1200px) {
   .book-tab {
     margin-bottom: 60px;
+    gap: 2rem;
   }
   .book-tab > li.on::after {
     height: 10px;
