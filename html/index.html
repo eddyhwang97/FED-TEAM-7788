@@ -13,7 +13,9 @@
     <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- js s -->
-    <script src="../js/layout.js"></script>
+    <!-- <script src="../js/layout.js"></script> -->
+    <script src="../js/function/main_Fn.js"></script>
+    <!-- 스크립트 오류로 재작성 예정 -->
     <!-- js e -->
 </head>
 <body>
@@ -217,49 +219,96 @@
                         <h3>이달의 추천 도서</h3>
                         <!-- swiper 2개 연결 예정 -->
                         <div class="monthly-slide">
-                            <div class="book-info">
-                                <div class="book-title">
-                                    <p>괴담에 떨어져도 출근을 해야 하는구나</p>
-                                    <a href="#" class="more-btn"><span class="blind">추천도서 더보기</span></a>
+                            <div class="book-info-wrap">
+                                <div class="book-info">
+                                    <div class="book-title">
+                                        <p>괴담에 떨어져도 출근을 해야 하는구나</p>
+                                        <a href="#" class="more-btn"><span class="blind">추천도서 더보기</span></a>
+                                    </div>
+                                    <ul class="book-info-list">
+                                        <li>
+                                            <em>작가</em>
+                                            <span>백덕수</span>
+                                        </li>
+                                        <li>
+                                            <em>출판사</em>
+                                            <span>카카오페이지</span>
+                                        </li>
+                                        <li>
+                                            <em>카테고리</em>
+                                            <span>인문사회과학</span>
+                                        </li>
+                                        <li>
+                                            <em>발행일</em>
+                                            <span>2025-02-19</span>
+                                        </li>
+                                        <li>
+                                            <em>페이지</em>
+                                            <span>666p</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="book-info-list">
-                                    <li>
-                                        <em>작가</em>
-                                        <span>7788</span>
-                                    </li>
-                                    <li>
-                                        <em>출판사</em>
-                                        <span>7788</span>
-                                    </li>
-                                    <li>
-                                        <em>카테고리</em>
-                                        <span>인문사회과학</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="slide-control">
-                                <button></button>
-                                <span class="num"></span>
-                                <button></button>
+                                <div class="slide-control">
+                                    <div class="btn-prev"></div>
+                                    <div class="swiper-pagination"></div>
+                                    <div class="btn-next"></div>
+                                </div>
                             </div>
                             <div class="book-image">
                                 <div class="swiper monthlySwiper">
                                     <ul class="book-img-list swiper-wrapper">
-                                        <li class="swiper-slide"><img src="" alt=""></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="inner">
                     <div class="book-wrap">
                         <ul class="book-tab">
-                            <li class="on">베스트도서</li>
-                            <li class="">신착도서</li>
+                            <li class="on"><button type="button">신착도서</button></li>
+                            <li class=""><button type="button">베스트도서</button></li>
                         </ul>
-                        <div class="book-cont">
-                            <ul class="book-slide">
-                                <!-- swiper 연결 예정 -->
-                            </ul>
+                        <div class="book-contents">
+                            <div class="book-tab-cont on">
+                                <div class="newBookSwiper">
+                                    <ul class="book-slide swiper-wrapper">
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/main/img-test.jpg" alt="도서 이미지"></li>
+                                    </ul>
+                                </div>
+                                <div class="button-control slide1"></div>
+                            </div>
+                            <div class="book-tab-cont">
+                                <div class="bestBookSwiper">
+                                    <ul class="book-slide swiper-wrapper">
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                        <li class="swiper-slide"><img src="../img/img-9966098525.png" alt="도서 이미지"></li>
+                                    </ul>
+                                </div>
+                                <div class="button-control slide2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

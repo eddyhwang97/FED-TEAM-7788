@@ -16,6 +16,7 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 30px 20px;
+    overflow: hidden;
   }
 }
 .section:first-child {
@@ -122,6 +123,7 @@
         top: auto;
         background: $lightblue;
         border-radius: 50% 50% 0 0;
+        transition: all 0.4s cubic-bezier(0.42, 0, 0.09, 1.25);
       }
       &.bg04 {
         width: 100%;
@@ -138,21 +140,16 @@
     font-size: 42px;
     letter-spacing: -3px;
   }
-}
 
-@include responsive(1024px) {
-  .intro-tit {
-    font-size: 56px;
-  }
   .link-box-wrap {
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 16px;
     .link-box {
-      border-radius: 50px;
+      border-radius: 30px;
       padding: 30px;
       max-width: 332px;
       p {
-        font-size: 42px;
+        font-size: min(3vw, 42px);
       }
     }
     .link-box:hover {
@@ -170,6 +167,21 @@
         translate: -1% -1%;
         scale: 1.05;
       }
+    }
+  }
+}
+
+@include responsive(1024px) {
+  .intro-tit {
+    font-size: 56px;
+  }
+}
+
+@include responsive(1200px) {
+  .link-box-wrap {
+    gap: 24px;
+    .link-box {
+      border-radius: 50px;
     }
   }
 }
@@ -198,8 +210,13 @@
   align-items: center;
   background: #f3f4f7 url("../img/common/icon-arrow.svg") center no-repeat;
   border-radius: 7px;
-  transform: rotate(180deg);
   display: block;
+  transition: all 0.3s;
+  &:hover,
+  &:focus {
+    background: $point-color url("../img/common/icon-arrow-white.svg") center
+      no-repeat;
+  }
 }
 
 .board-tab {
@@ -369,15 +386,25 @@
     }
   }
 }
+
+.book-info-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
 .book-info {
+  width: 100%;
   padding: 30px 24px;
   background-color: #fff;
   border-radius: 20px;
-  box-shadow: 0 8px 16px 0px rgb(171 190 218 / 10%);
+  box-shadow: 0 8px 16px 0px rgba(171, 190, 209, 0.1);
 }
 
 .book-title {
   display: flex;
+  align-items: center;
   gap: 10px;
   margin-bottom: 1rem;
   p {
@@ -389,7 +416,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
-    width: calc(100% - 40px);
+    width: calc(100% - 50px);
   }
 }
 
@@ -437,5 +464,212 @@
   }
   100% {
     transform: translateX(-3455px);
+  }
+}
+
+@include responsive(768px) {
+  .scroll-text {
+    span {
+      img {
+        height: 10vh;
+      }
+    }
+  }
+}
+
+@include responsive(1024px) {
+  .section.book {
+    h3 {
+      font-size: 48px;
+      &::before {
+        width: 90px;
+        height: 36px;
+        background-size: 90px 36px;
+      }
+    }
+  }
+}
+
+// 이달의 도서 슬라이드
+.slide-control {
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 152px;
+
+  .btn-next,
+  .btn-prev {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px 0px rgba(171, 190, 209, 0.3);
+    background-color: $white;
+    cursor: pointer;
+    &::after {
+      content: "";
+      display: block;
+      background: url("../img/common/icon-arrow.svg") center no-repeat;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .btn-prev::after {
+    transform: rotate(180deg);
+  }
+  .swiper-pagination {
+    width: 60px;
+    height: 40px;
+    padding: 10px 15px;
+    position: static;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px 0px rgba(171, 190, 209, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+  }
+}
+
+.book-img-list {
+  > li {
+    overflow: hidden;
+    border-radius: 15px 40px 40px 15px;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@include responsive(1024px) {
+  .book-info-wrap {
+    gap: 2rem;
+    width: calc(30% - 15px);
+    margin-bottom: 0;
+    justify-content: flex-end;
+  }
+
+  .book-info {
+    padding: 60px 40px;
+  }
+
+  .book-title {
+    p {
+      font-size: 24px;
+    }
+  }
+
+  .monthly-slide {
+    display: flex;
+    gap: 30px;
+    .book-image {
+      width: calc(70% - 15px);
+    }
+  }
+
+  .slide-control {
+    width: 230px;
+    .btn-next,
+    .btn-prev {
+      width: 60px;
+      height: 60px;
+    }
+    .swiper-pagination {
+      width: 90px;
+      height: 60px;
+      border-radius: 90px;
+    }
+  }
+}
+
+// 베스트 / 신착도서
+.book-tab {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 30px;
+  > li {
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 4px;
+      background-color: $pink;
+      transition: width .3s;
+    }
+    &:nth-child(2)::after {
+      background-color: $mint;
+    }
+    &.on::after {
+      width: 100%;
+    }
+    button {
+      font-size: 18px;
+      font-weight: 700;
+      color: $black;
+    }
+  }
+}
+
+.book-contents {
+  .book-tab-cont {
+    display: none;
+    &.on {
+      display: block;
+    }
+
+    .book-slide {
+      > li {
+        overflow: hidden;
+        border-radius: 10px 20px 20px 10px;
+        box-shadow: 0 10px 16px 0px rgba(171, 190, 209, 0.3);
+        aspect-ratio: 154 / 203;
+        transform: translateY(0);
+        transition: .3s;
+        &:hover {
+          transform: translateY(-20px);
+        }
+        > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+@include responsive(768px) {
+  .book-tab {
+    > li {
+      button {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@include responsive(1200px) {
+  .book-tab {
+    margin-bottom: 60px;
+    > li {
+      &.on::after {
+        height: 10px;
+        bottom: -10px;
+      }
+      button {
+        font-size: 42px;
+      }
+    }
   }
 }
