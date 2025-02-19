@@ -35,9 +35,13 @@ body {
       width: 50px;
       border-radius: 50%;
     }
+    span > img{
+      width: 20px;
+    }
   }
   .setting-menu-wrap {
-    display: none;
+    // display: none;
+    margin-left: 10px;
   }
   .mypick-wrap {
     margin-top: 60px;
@@ -55,14 +59,16 @@ body {
       font-size: 25px;
       font-weight: $font-weight-bold;
     }
-    .move-loan-list {
-      margin-top: 10px;
+    .move-loan-wrap{
       display: flex;
       justify-content: flex-end;
-      padding-right: 5px;
+      .move-loan-list {
+        margin-top: 10px;
+        padding-right: 5px;
+      }
     }
     hr {
-      margin-top: 10px;
+      margin-top: 20px;
       margin-bottom: 20px;
     }
   }

@@ -29,14 +29,16 @@
               <img src="" alt="" />
             </a>
           </div>
-          <span class="toggle-setting">⚙</span>
+          <span class="toggle-setting">
+            <img src="../img/login,member,mypage/img-settings.svg" alt="setting icon">
+          </span>
+          <!-- setting click menu -->
+          <ul class="setting-menu-wrap">
+            <li>이름변경</li>
+            <li>비밀번호변경</li>
+            <li>회원탈퇴</li>
+          </ul>
         </div>
-        <!-- setting click menu -->
-        <ul class="setting-menu-wrap">
-          <li>이름변경</li>
-          <li>비밀번호변경</li>
-          <li>회원탈퇴</li>
-        </ul>
       </section>
       <!-- My Pick -->
       <section class="mypick-wrap">
@@ -45,8 +47,8 @@
           <div class="sort-container">
             <label for="sort">정렬</label>
             <select id="sort" class="sort-select">
-              <option value="loan-days">대여종료일</option>
-              <option value="alphabetical">가나다순</option>
+              <option value="loan-days">대출종료일</option>
+              <option value="alphabetical">가나다</option>
             </select>
           </div>
         </div>
@@ -61,7 +63,9 @@
             </article>
           </li>
         </ul>
+        <div class="move-loan-wrap">
         <a href="#" class="move-loan-list">대출목록 바로가기</a>
+      </div>
         <hr />
       </section>
       <!-- badge -->

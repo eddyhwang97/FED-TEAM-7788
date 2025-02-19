@@ -244,8 +244,11 @@ body .profile-wrap img {
   width: 50px;
   border-radius: 50%;
 }
+body .profile-wrap span > img {
+  width: 20px;
+}
 body .setting-menu-wrap {
-  display: none;
+  margin-left: 10px;
 }
 body .mypick-wrap {
   margin-top: 60px;
@@ -264,14 +267,16 @@ body .mypick-wrap h3 {
   font-size: 25px;
   font-weight: 700;
 }
-body .mypick-wrap .move-loan-list {
-  margin-top: 10px;
+body .mypick-wrap .move-loan-wrap {
   display: flex;
   justify-content: flex-end;
+}
+body .mypick-wrap .move-loan-wrap .move-loan-list {
+  margin-top: 10px;
   padding-right: 5px;
 }
 body .mypick-wrap hr {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 body .badge-grid {
