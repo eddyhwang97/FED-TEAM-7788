@@ -5,51 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지</title>
     <!-- css -->
-    <link rel="stylesheet" href="../css/mypage.scss" />
+    <link rel="stylesheet" href="../css/mypage.css" />
   </head>
   <body>
     <!-- header -->
     <!-- mypage -->
     <main class="mypage-container" id="mypage">
-        <section class="mypage-wrap">
+      <section class="mypage-wrap">
         <div class="tit-wrap">
-            <h2>마이페이지</h2>
+          <h2>마이페이지</h2>
         </div>
         <div class="profile-wrap">
-            <div class="user-info">
-          <a href="#" class="profile-image-box">
-            <img src="" alt="" />
-          </a>
-          <strong>00000000(임시)</strong>
-          <span>Lv.10</span>
-          <a href="#" class="level-icon-box">
-            <img src="" alt="" />
-          </a>
-        </div>
+          <div class="user-info">
+            <a href="#" class="profile-image-box">
+              <img
+                src="../img/login,member,mypage/img-profile-temp.jpg"
+                alt="임시프로필"
+              />
+            </a>
+            <strong>00000000(임시)</strong>
+            <span>Lv.10</span>
+            <a href="#" class="level-icon-box">
+              <img src="" alt="" />
+            </a>
+          </div>
           <span class="toggle-setting">⚙</span>
         </div>
         <!-- setting click menu -->
-         <ul class="setting-menu-wrap">
-            <li>이름변경</li>
-            <li>비밀번호변경</li>
-            <li>회원탈퇴</li>
-         </ul>
+        <ul class="setting-menu-wrap">
+          <li>이름변경</li>
+          <li>비밀번호변경</li>
+          <li>회원탈퇴</li>
+        </ul>
       </section>
       <!-- My Pick -->
       <section class="mypick-wrap">
         <div class="sub-tit-wrap">
-            <h3>My Pick</h3>
-            <div class="sort-container">
-                <label for="sort">정렬</label>
-                <select id="sort" class="sort-select">
-                    <option value="loan-days">남은 대출일</option>
-                    <option value="alphabetical">가나다순</option>
-                </select>
-            </div>
+          <h3>My Pick</h3>
+          <div class="sort-container">
+            <label for="sort">정렬</label>
+            <select id="sort" class="sort-select">
+              <option value="loan-days">대여종료일</option>
+              <option value="alphabetical">가나다순</option>
+            </select>
+          </div>
         </div>
         <ul class="loan-list-wrap">
-            <li class="loan-list"></li>
+          <li class="loan-list">
+            <article class="loan-item">
+              <span class="book-title">(책 제목)</span>
+              <!-- 대출일 계산기능 추가필요 , 회원 마감 임박 대출목록 5개추출해서 출력하는 기능 -->
+              <time class="due-date" datetime="2025-03-01"
+                >~2025.03.01(토)</time
+              >
+            </article>
+          </li>
         </ul>
+        <a href="#" class="move-loan-list">대출목록 바로가기</a>
+        <hr />
+      </section>
+      <!-- badge -->
+      <section class="badge-wrap">
+        <div class="badge-grid">
+          <!-- grid : 4 * 4 (초기버전 총 16개 예정) -->
+          <div class="badge">
+            <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="뱃지1" />
+            <span></span>
+          </div>
+          <div class="badge">
+            <img src="../img/login,member,mypage/img-badge-temp.svg" alt="뱃지2" />
+            <span></span>
+          </div>
+          <div class="badge">
+            <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="뱃지3" />
+            <span></span>
+          </div>
+          <div class="badge">
+            <img src="" alt="뱃지1" />
+            <span></span>
+          </div>
+          <div class="badge">
+            <img src="" alt="뱃지1" />
+            <span></span>
+          </div>
+        </div>
       </section>
     </main>
   </body>

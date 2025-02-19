@@ -213,4 +213,82 @@ table {
     font-size: 18px;
   }
 }
-/** 마이페이지 컨텐츠 css **//*# sourceMappingURL=mypage.css.map */
+/** 마이페이지 컨텐츠 css **/
+body {
+  display: flex;
+  justify-content: center;
+}
+body .mypage-container {
+  width: 600px;
+  margin-top: 30px;
+}
+body h2 {
+  font-size: 32px;
+  font-weight: 700;
+}
+body .profile-wrap {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+body .profile-wrap .user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 18px;
+}
+body .profile-wrap .toggle-setting {
+  font-size: 20px;
+}
+body .profile-wrap img {
+  width: 50px;
+  border-radius: 50%;
+}
+body .setting-menu-wrap {
+  display: none;
+}
+body .mypick-wrap {
+  margin-top: 60px;
+}
+body .mypick-wrap .sub-tit-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+body .mypick-wrap .loan-item {
+  display: flex;
+  justify-content: space-between;
+}
+body .mypick-wrap h3 {
+  font-size: 25px;
+  font-weight: 700;
+}
+body .mypick-wrap .move-loan-list {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5px;
+}
+body .mypick-wrap hr {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+body .badge-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열 */
+  grid-template-rows: repeat(10, auto); /* 10행 */
+  gap: 15px;
+}
+body .badge-grid .badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body .badge-grid .badge img {
+  width: 130px; /* 뱃지 크기 조정 */
+  height: 130px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 15px;
+}/*# sourceMappingURL=mypage.css.map */
