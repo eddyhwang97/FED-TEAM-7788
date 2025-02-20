@@ -225,9 +225,18 @@ main .join-wrap {
   display: flex;
   flex-direction: column;
 }
-main .join-wrap h2 {
+main .join-wrap .tit-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+main .join-wrap .tit-wrap h2 {
   font-weight: 600;
   font-size: 30px;
+}
+main .join-wrap .tit-wrap img {
+  width: 100px;
 }
 main .join-wrap .input-wrap {
   display: flex;
