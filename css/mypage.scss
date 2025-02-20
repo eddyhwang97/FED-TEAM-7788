@@ -6,3 +6,87 @@
 @import "./common"; // common.scss
 
 /** 마이페이지 컨텐츠 css **/
+
+body {
+  display: flex;
+  justify-content: center;
+  .mypage-container {
+    width: 600px;
+    margin-top: 30px;
+  }
+  h2 {
+    font-size: 32px;
+    font-weight: $font-weight-bold;
+  }
+  .profile-wrap {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 18px;
+    }
+    .toggle-setting {
+      font-size: 20px;
+    }
+    img {
+      width: 50px;
+      border-radius: 50%;
+    }
+    span > img{
+      width: 20px;
+    }
+  }
+  .setting-menu-wrap {
+    // display: none;
+    margin-left: 10px;
+  }
+  .mypick-wrap {
+    margin-top: 60px;
+    .sub-tit-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .loan-item {
+      display: flex;
+      justify-content: space-between;
+    }
+    h3 {
+      font-size: 25px;
+      font-weight: $font-weight-bold;
+    }
+    .move-loan-wrap{
+      display: flex;
+      justify-content: flex-end;
+      .move-loan-list {
+        margin-top: 10px;
+        padding-right: 5px;
+      }
+    }
+    hr {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+  .badge-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4열 */
+    grid-template-rows: repeat(10, auto); /* 10행 */
+    gap: 15px;
+    .badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .badge img {
+      width: 130px; /* 뱃지 크기 조정 */
+      height: 130px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+  }
+}
