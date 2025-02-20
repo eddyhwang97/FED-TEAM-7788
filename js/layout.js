@@ -1,162 +1,120 @@
 $(() => {
+  // variables
   const $body = $("body"),
     $dimm = $(".dimm"),
-    $header = $(".header"),
-    $innerHeader = $(".inner-header"),
-    $headerUtil = $(".header-util"),
+    $searchDimm = $(".search-dimm"),
+    $innerHeaderWrap = $(".inner-header-wrap"),
     $menuBtn = $(".menu-btn"),
+    $menuClose = $(".menu-close-btn"),
     $gnbWrap = $(".gnb-wrap"),
     $gnb = $(".gnb"),
     $dep1 = $gnb.find(".dep1>a"),
     $dep2 = $(".dep2"),
-    $dep2A = $gnb.find(".dep2>ul>li>a");
-
-  const $totalSearchBtn = $(".total-search-btn"),
-    $searchWrap = $(".search-wrap"),
-    $searchClose = $(".search-close-btn");
+    $totalSearchBtn = $(".total-search-btn"),
+    $searchCloseBtn = $(".search-close-btn"),
+    $searchWrap = $(".search-wrap");
 
   mobGnb();
   webGnb();
 
+  // mobile gnb
   function mobGnb() {
     function reset() {
       $body.removeClass("on");
-      $gnbWrap.removeClass("open");
       $dimm.removeClass("on");
-      $headerUtil.removeClass("on").css("display", "block");
-      $searchWrap.css("z-index", "20");
+      $innerHeaderWrap.removeClass("open");
+      $gnbWrap.removeClass("open");
+      $dep1.parent().removeClass("on");
+      $dep2.removeClass("show");
+      searchClose();
     }
 
     $menuBtn.on("click", function () {
       $body.addClass("on");
       $gnbWrap.addClass("open");
-      $dimm.addClass("on");
-      $headerUtil.addClass("on").css("display", "none");
-      $searchWrap.removeClass("on").removeAttr("style");
+      $(".gnb-list>li:first-child").addClass("on");
+      $(".gnb-list>li:first-child").find($dep2).addClass("show");
+      searchClose();
     });
 
-    $(".menu-close-btn, .dimm").on("click", reset);
+    $menuClose.on("click", reset);
 
-    $dep1.on("click", function (e) {
-      let $currentDep2 = $(this).siblings(".dep2");
-      if ($currentDep2.length > 0) e.preventDefault();
-      if (window.innerWidth < 1024) {
+    $dep1.on("click", function () {
+      if (!$(this).parent().hasClass("on")) {
+        $(this).parent().addClass("on").siblings().removeClass("on");
         $dep2.removeClass("show");
-        $(this).parent().toggleClass("on").siblings().removeClass("on");
-        $currentDep2.toggleClass("show");
+        $(this).next($dep2).addClass("show");
+      } else {
+        $(this).parent().removeClass("on");
+        $dep2.removeClass("show");
       }
     });
   }
 
+  // web gnb
   function webGnb() {
     function reset() {
       if (window.innerWidth >= 1024) {
-        $dep2.removeClass("show");
-        $dep1.removeClass("on active");
-        $innerHeader.removeClass("open");
-        $header.removeClass("active");
-        $dimm.removeClass("on");
+        $innerHeaderWrap.removeClass("open");
         $gnbWrap.removeClass("open");
+        $dimm.removeClass("on");
         $body.removeClass("on");
+        $dep1.parent().removeClass("on");
       }
     }
 
-    $(window).on("resize", reset);
+    $(window).on("resize", function () {
+      reset();
+    });
 
     $dep1.on("mouseenter focusin", function () {
       if (window.innerWidth >= 1024) {
+        $innerHeaderWrap.addClass("open");
         $dimm.addClass("on");
-        $(this).addClass("active").siblings().removeClass("active");
-        $header.addClass("open");
-      }
-      if ($searchWrap.hasClass("on")) {
-        $searchWrap.css("z-index", "-1");
+        if ($searchWrap.hasClass("on")) {
+          searchClose();
+        }
       }
     });
 
-    $header.on("mouseleave", function () {
+    $innerHeaderWrap.on("mouseleave", function () {
       if (window.innerWidth >= 1024) {
-        $header.removeClass("open");
+        $innerHeaderWrap.removeClass("open");
         $dimm.removeClass("on");
-        $searchWrap.css("z-index", "20");
       }
-      $dep1.removeClass("active");
     });
   }
 
-  $totalSearchBtn.on("click", function () {
-    $(this).toggleClass("on");
-    $body.toggleClass("on");
-    $searchWrap.stop(true, false).slideToggle(200).toggleClass("on");
-    $searchClose.addClass("on");
-    $dimm.addClass("on");
-    if ($(this).hasClass("on")) {
-      $("#mainSearchText").focus();
-    }
-  });
+  // total search
+  searchOpen();
 
-  $searchClose.on("click", function () {
-    $(this).removeClass("on");
+  function searchClose(){
+    $searchDimm.removeClass("on");
+    $searchWrap.removeClass("on");
+    $searchWrap.stop().slideUp();
     $totalSearchBtn.removeClass("on");
-    $dimm.removeClass("on");
-    $body.removeClass("on");
-    $searchWrap.stop(true, false).slideUp(200).removeClass("on");
-  });
+    $searchCloseBtn.removeClass("on");
+  }
 
-  $(document).mouseup(function (e) {
-    if (!$(e.target).closest(".site-list, .family-site>button").length) {
-      $(".site-list").slideUp();
-      $(".family-site>button").removeClass("active").find("span").text("닫힘");
-    }
-  });
-
-  $(window).on("resize", function () {
-    if (window.innerWidth < 1024) {
-      $innerHeader.removeAttr("style");
-    }
-  });
-
-  //footer
-  const $btnSite = $(".family-site>button"),
-    $siteList = $(".site-list");
-
-  $btnSite.on({
-    click: function () {
-      const $familyList = $(this).siblings(".site-list");
-      if (!$(this).hasClass("active")) {
-        $siteList.stop().slideUp();
-        $btnSite.removeClass("active").find("span").text("닫힘");
-
-        $(this).addClass("active").find("span").text("열림");
-        $familyList.stop().slideDown();
-      } else {
-        $(this).removeClass("active").find("span").text("닫힘");
-        $familyList.stop().slideUp();
+  function searchOpen() {
+    $totalSearchBtn.on("click", function () {
+      $(this).addClass("on");
+      $searchWrap.addClass("on");
+      $searchWrap.stop().slideDown();
+      $searchCloseBtn.addClass("on");
+      $dimm.removeClass("on");
+      $searchDimm.addClass("on");
+      if ($innerHeaderWrap.hasClass("open")) {
+        $innerHeaderWrap.removeClass("open");
       }
-    },
-  });
-  $(".site-list>li:last-child>a").on("keydown", function (e) {
-    let keyCode = e.keyCode || e.which;
-    if (keyCode === 9 && !e.shiftKey) {
-      e.preventDefault();
-      $(this)
-        .parents(".site-list")
-        .stop()
-        .slideUp()
-        .siblings()
-        .removeClass("active")
-        .find("span")
-        .text("닫힘");
-    }
-  });
+    });
 
-  $(document).mouseup(function (e) {
-    if (
-      $siteList.has(e.target).length === 0 &&
-      !$(e.target).is(".family-site>button")
-    ) {
-      $siteList.slideUp();
-      $btnSite.removeClass("active").find("span").text("닫힘");
-    }
-  });
+    $searchCloseBtn.on("click", function () {
+      searchClose();
+    });
+
+    $searchDimm.on("click", function () {
+      searchClose();
+    });
+  }
 });
