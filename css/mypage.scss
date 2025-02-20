@@ -1,6 +1,6 @@
 // mypage.scss
-@import "./font"; // font.scss
 @import "./mixins"; // mixin.scss
+@import "./font"; // font.scss
 @import "./variables"; // variables.scss
 @import "./reset"; // reset.scss
 @import "./common"; // common.scss
@@ -11,8 +11,14 @@ body {
   display: flex;
   justify-content: center;
   .mypage-container {
-    width: 600px;
+    width: 400px;
     margin-top: 30px;
+  }
+  // 전체 container 미디어쿼리
+  @include responsive(768px) {
+    .mypage-container{
+      width: 600px;
+    }
   }
   h2 {
     font-size: 32px;
@@ -88,7 +94,7 @@ body {
 
   .badge-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4열 */
+    grid-template-columns: repeat(2, 1fr); /* 4열 */
     grid-template-rows: repeat(2, auto); /* 10행 */
     gap: 15px;
       .badge {
@@ -103,12 +109,12 @@ body {
       border-radius: 15px;
     }
   }
-}
-
   // 미디어 쿼리 //
   @include responsive(768px) {
     .badge-grid{
-     grid-template-columns: repeat(2, 1fr); /* 2열 */
+     grid-template-columns: repeat(4, 1fr); /* 2열 */
     }
   }
+}
+
 

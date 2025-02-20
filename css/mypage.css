@@ -219,8 +219,13 @@ body {
   justify-content: center;
 }
 body .mypage-container {
-  width: 600px;
+  width: 400px;
   margin-top: 30px;
+}
+@media screen and (min-width: 768px) {
+  body .mypage-container {
+    width: 600px;
+  }
 }
 body h2 {
   font-size: 32px;
@@ -292,7 +297,7 @@ body .mypick-wrap hr {
 }
 body .badge-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4열 */
+  grid-template-columns: repeat(2, 1fr); /* 4열 */
   grid-template-rows: repeat(2, auto); /* 10행 */
   gap: 15px;
 }
@@ -308,9 +313,8 @@ body .badge-grid .badge img {
      object-fit: cover;
   border-radius: 15px;
 }
-
 @media screen and (min-width: 768px) {
-  .badge-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2열 */
+  body .badge-grid {
+    grid-template-columns: repeat(4, 1fr); /* 2열 */
   }
 }
