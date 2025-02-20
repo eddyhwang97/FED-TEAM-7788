@@ -28,7 +28,7 @@
 @include responsive(768px) {
   .section {
     .inner {
-      padding: 50px 20px;
+      padding: 50px 25px;
     }
   }
   .section:first-child {
@@ -45,12 +45,20 @@
 
   .section {
     .inner {
-      padding: 70px 20px;
+      padding: 70px 30px;
     }
   }
   .section:first-child {
     .inner {
       padding-top: 140px;
+    }
+  }
+}
+
+@include responsive(1200px) {
+  .section {
+    .inner {
+      padding: 70px 40px;
     }
   }
 }
@@ -130,6 +138,9 @@
         height: 100%;
         background: url("../img//main/icon-main-bg04.svg") center no-repeat;
         background-size: cover;
+        scale: 1.1;
+        translate: 5% 5%;
+        transition: all 0.3s ease-in-out;
       }
     }
   }
@@ -164,8 +175,7 @@
         height: 40%;
       }
       .bg04 {
-        translate: -1% -1%;
-        scale: 1.05;
+        translate: -5% -5%;
       }
     }
   }
@@ -547,7 +557,18 @@
       object-fit: cover;
     }
   }
+
+  .swiper-slide {
+    scale: 0.8;
+    opacity: 0.5;
+  }
+
+  .swiper-slide-active {
+    scale: 1;
+    opacity: 1;
+  }
 }
+
 
 @include responsive(1024px) {
   .book-info-wrap {
@@ -594,7 +615,6 @@
 .book-tab {
   display: flex;
   gap: 1rem;
-  margin-bottom: 30px;
   > li {
     position: relative;
     &::after {
@@ -606,7 +626,7 @@
       width: 0;
       height: 4px;
       background-color: $pink;
-      transition: width .3s;
+      transition: width 0.3s;
     }
     &:nth-child(2)::after {
       background-color: $mint;
@@ -625,6 +645,8 @@
 .book-contents {
   .book-tab-cont {
     display: none;
+    overflow: hidden;
+    padding-top: 30px;
     &.on {
       display: block;
     }
@@ -636,7 +658,7 @@
         box-shadow: 0 10px 16px 0px rgba(171, 190, 209, 0.3);
         aspect-ratio: 154 / 203;
         translate: 0 0;
-        transition: translate .3s;
+        transition: translate 0.3s;
         &:hover {
           translate: 0 -20px;
         }
@@ -662,7 +684,6 @@
 
 @include responsive(1200px) {
   .book-tab {
-    margin-bottom: 60px;
     gap: 2rem;
     > li {
       &.on::after {
@@ -672,6 +693,12 @@
       button {
         font-size: 42px;
       }
+    }
+  }
+
+  .book-contents {
+    .book-tab-cont {
+      padding-top: 60px;
     }
   }
 }
