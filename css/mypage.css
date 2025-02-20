@@ -259,6 +259,7 @@ body .setting-menu-wrap {
   transition: opacity 0.3s ease-in-out;
   pointer-events: none; /* 기본적으로 비활성화 */
   margin-left: 10px;
+  /* 오른쪽 정렬? 왼쪽 정렬? 고민중*/
 }
 body .mypick-wrap {
   margin-top: 60px;
@@ -283,7 +284,7 @@ body .mypick-wrap .move-loan-wrap {
 }
 body .mypick-wrap .move-loan-wrap .move-loan-list {
   margin-top: 10px;
-  padding-right: 5px;
+  font-size: 14px;
 }
 body .mypick-wrap hr {
   margin-top: 20px;
@@ -292,7 +293,7 @@ body .mypick-wrap hr {
 body .badge-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4열 */
-  grid-template-rows: repeat(10, auto); /* 10행 */
+  grid-template-rows: repeat(2, auto); /* 10행 */
   gap: 15px;
 }
 body .badge-grid .badge {
@@ -306,4 +307,10 @@ body .badge-grid .badge img {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .badge-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2열 */
+  }
 }
