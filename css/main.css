@@ -248,6 +248,11 @@ table {
     padding-top: 140px;
   }
 }
+@media screen and (min-width: 1200px) {
+  .section .inner {
+    padding: 70px 40px;
+  }
+}
 .intro-tit {
   font-size: 32px;
   font-weight: 500;
@@ -702,6 +707,14 @@ table {
   -o-object-fit: cover;
      object-fit: cover;
 }
+.book-img-list .swiper-slide {
+  scale: 0.8;
+  opacity: 0.5;
+}
+.book-img-list .swiper-slide-active {
+  scale: 1;
+  opacity: 1;
+}
 
 @media screen and (min-width: 1024px) {
   .book-info-wrap {
@@ -740,7 +753,6 @@ table {
 .book-tab {
   display: flex;
   gap: 1rem;
-  margin-bottom: 30px;
 }
 .book-tab > li {
   position: relative;
@@ -770,6 +782,8 @@ table {
 
 .book-contents .book-tab-cont {
   display: none;
+  overflow: hidden;
+  padding-top: 30px;
 }
 .book-contents .book-tab-cont.on {
   display: block;
@@ -799,7 +813,6 @@ table {
 }
 @media screen and (min-width: 1200px) {
   .book-tab {
-    margin-bottom: 60px;
     gap: 2rem;
   }
   .book-tab > li.on::after {
@@ -808,5 +821,8 @@ table {
   }
   .book-tab > li button {
     font-size: 42px;
+  }
+  .book-contents .book-tab-cont {
+    padding-top: 60px;
   }
 }/*# sourceMappingURL=main.css.map */

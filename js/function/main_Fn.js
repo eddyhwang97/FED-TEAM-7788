@@ -36,6 +36,7 @@ $(() => {
       },
       768: {
         slidesPerView: 3,
+        spaceBetween: 15,
       },
       1024: {
         slidesPerView: 4,
@@ -56,9 +57,11 @@ $(() => {
       },
       768: {
         slidesPerView: 3,
+        spaceBetween: 15,
       },
       1024: {
         slidesPerView: 4,
+        spaceBetween: 25,
       },
     },
   });

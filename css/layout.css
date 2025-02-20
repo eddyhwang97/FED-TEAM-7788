@@ -322,6 +322,9 @@
   .pc-header-util .search-close-btn.on {
     display: block;
   }
+  .inner-header-wrap.open .inner-header {
+    border-bottom: 1px solid #e9e9e9;
+  }
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
     display: block;
     opacity: 1;
@@ -409,6 +412,7 @@
 }
 /** footer **/
 .footer {
+  margin-top: auto;
   border-top: 1px solid #e9e9e9;
 }
 .footer .inner {
@@ -523,5 +527,10 @@
   }
   .footer-btm .copyright {
     font-size: 18px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .footer .inner {
+    padding: 42px 40px;
   }
 }/*# sourceMappingURL=layout.css.map */

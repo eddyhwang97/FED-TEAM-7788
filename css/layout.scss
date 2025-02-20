@@ -371,6 +371,12 @@
     }
   }
 
+  .inner-header-wrap.open {
+    .inner-header {
+      border-bottom: 1px solid $lightgray;
+    }
+  }
+
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
     display: block;
     opacity: 1;
@@ -469,6 +475,7 @@
 
 /** footer **/
 .footer {
+  margin-top: auto;
   border-top: 1px solid $lightgray;
 
   .inner {
@@ -601,6 +608,14 @@
 
     .copyright {
       font-size: 18px;
+    }
+  }
+}
+
+@include responsive(1200px) {
+  .footer {
+    .inner {
+      padding: 42px 40px;
     }
   }
 }
