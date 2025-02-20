@@ -103,13 +103,15 @@
           <div class="page-title-area">
             <h1 class="page-title">커뮤니티</h1>
             <div class="search">
-              <select name="option" id="search-option">
-                <option value="제목">제목</option>
-                <option value="작성자">작성자</option>
-                <option value="내용">내용</option>
-              </select>
-              <input type="text" />
-              <button class="search-button"><i class="fa-solid fa-magnifying-glass" style="color: #000"></i></button>
+              <fieldset>
+                <select name="option" id="search-option">
+                  <option value="제목">제목</option>
+                  <option value="작성자">작성자</option>
+                  <option value="내용">내용</option>
+                </select>
+                <input type="text" />
+                <button class="search-button"><i class="fa-solid fa-magnifying-glass" style="color: #000"></i></button>
+              </fieldset>
             </div>
           </div>
           <div class="tab-section">
@@ -122,13 +124,38 @@
           <div class="board-section">
             <div class="tab-content">
               <div id="announcement-tab" data-tab-content class="table active">
-                <table></table>
+                <ul></ul>
               </div>
               <div id="faq-tab" data-tab-content class="table">
-                <table></table>
+                <ul></ul>
               </div>
               <div id="freeboard-tab" data-tab-content class="table">
-                <table></table>
+                <ul></ul>
+                <div class="post-section">
+                  <div class="write-btn">
+                    <button type="button">글쓰기</button>
+                  </div>
+                  <div class="write-board">
+                    <form action="write_process.php" method="post" enctype="multipart/form-data">
+                      <div class="write-form">
+                        <div class="form-group title">
+                          <input type="text" id="title" name="title" value="" placeholder="제목" required />
+                        </div>
+                        <div class="form-group text-content">
+                          <textarea id="text-content" name="content" placeholder="내용을 입력하세요." required></textarea>
+                        </div>
+                        <div class="button-wrap">
+                          <div class="form-group submit-btn">
+                            <button type="submit">등록</button>
+                          </div>
+                          <div class="form-group close-btn">
+                            <button type="submit">닫기</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -138,27 +165,6 @@
             <a href="">2</a>
             <a href="">3</a>
             <button><i class="fa-solid fa-angle-right"></i></button>
-            <span>글쓰기</span>
-          </div>
-          <div class="write-board">
-            <form action="write_process.php" method="post" enctype="multipart/form-data">
-              <div class="write-form">
-                <div class="form-group title">
-                  <input type="text" id="title" name="title" value="" placeholder="제목" required />
-                </div>
-                <div class="form-group text-content">
-                  <textarea id="text-content" name="content" placeholder="내용을 입력하세요." required></textarea>
-                </div>
-                <div class="button-wrap">
-                  <div class="form-group submit-btn">
-                    <button type="submit">등록</button>
-                  </div>
-                  <div class="form-group close-btn">
-                    <button type="submit">닫기</button>
-                  </div>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </div>

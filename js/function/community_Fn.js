@@ -20,13 +20,23 @@ export default function CommunityFn() {
   };
   //  ChangeTabContent e
 
-  // ActiveOnFn s
+  // ToggleActiveFn s
   this.ToggleActiveFn = function(target){
-    target.addEventListener("click",()=>{
+    if(target.length ===1){
+      target.addEventListener("click",()=>{
       target.classList.toggle("active");
     })
+    }
+    else if(target.length >1){
+      target.forEach((t)=>{
+        t.addEventListener("click",()=>{
+        t.classList.toggle("active");
+      })
+      })
+    }
+    
   }
-  // ActiveOnFn s
+  // ParentToggleActiveFn s
   this.ParentToggleActiveFn = function(target){
     target.addEventListener("click",()=>{
       target.parentElement.classList.toggle("active");
