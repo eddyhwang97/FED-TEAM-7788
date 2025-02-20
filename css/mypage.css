@@ -230,6 +230,7 @@ body .profile-wrap {
   margin-top: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 body .profile-wrap .user-info {
   display: flex;
@@ -237,8 +238,13 @@ body .profile-wrap .user-info {
   gap: 15px;
   font-size: 18px;
 }
-body .profile-wrap .toggle-setting {
+body .profile-wrap .toggle-setting-wrap {
+  display: flex;
+  align-items: center;
+}
+body .profile-wrap .toggle-setting-wrap .toggle-setting {
   font-size: 20px;
+  cursor: pointer;
 }
 body .profile-wrap img {
   width: 50px;
@@ -248,6 +254,10 @@ body .profile-wrap span > img {
   width: 20px;
 }
 body .setting-menu-wrap {
+  line-height: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none; /* 기본적으로 비활성화 */
   margin-left: 10px;
 }
 body .mypick-wrap {
