@@ -11,10 +11,12 @@ const targetTab1 = document.querySelector("#announcement-tab>ul");
 const targetTab2 = document.querySelector("#faq-tab>ul");
 const targetTab3 = document.querySelector("#freeboard-tab>ul");
 
+const announcementList = communityData.filter((x) => x.type === "announcement").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1));
+const faqList = communityData.filter((x) => x.type === "faq").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1));
+const freeBoardList = communityData.filter((x) => x.type === "freeboard").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1));
+
 const tabContent1 = `
-  ${communityData
-    .filter((x) => x.type === "announcement")
-    .sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))
+  ${announcementList
     .map(
       (v, i) =>
         `
@@ -35,9 +37,7 @@ const tabContent1 = `
     .join("")}
   `;
 const tabContent2 = `
-  ${communityData
-    .filter((x) => x.type === "faq")
-    .sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))
+  ${faqList
     .map(
       (v, i) =>
         `
@@ -58,23 +58,19 @@ const tabContent2 = `
     .join("")}
   `;
 const tabContent3 = `
-  ${communityData
-    .filter((x) => x.type === "freeboard")
-    .sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))
+  ${freeBoardList
     .map(
       (v, i) =>
         `
     <li class="list">
+    <a href="#">
       <div class="list-header">
         <p class="list-num">${i + 1}</p>
         <p class="list-title">${v.title}</p>
         <p class="list-date">${v.date}</p>
         <p class="list-user">${v.user}</p>
-        <i class="fa-solid fa-chevron-up fa-flip-vertical"></i>
       </div>
-      <div class="list-info">
-        <strong>${v.content}</strong>
-      </div>
+      </a>
     </li>
     `
     )
@@ -91,5 +87,4 @@ window.onload = () => {
 
   ChangeTabContent();
   ToggleActiveFn(list);
-  ParentToggleActiveFn(writeBtn);
 };

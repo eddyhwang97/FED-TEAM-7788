@@ -688,6 +688,11 @@ table {
   text-align: center;
   margin-top: 15%;
 }
+#community .underilne {
+  height: 1px;
+  background-color: #ededed;
+  margin: 20px 0;
+}
 
 .content {
   padding: 20px 50px;
@@ -778,6 +783,10 @@ table {
 .content .board-section .tab-content .table ul .list:hover {
   background-color: #e3e3e3;
 }
+.content .board-section .tab-content .table ul .list a {
+  text-decoration: none;
+  color: #111;
+}
 .content .board-section .tab-content .table ul .list .list-header {
   display: flex;
   justify-content: space-between;
@@ -809,6 +818,103 @@ table {
 .content .board-section .tab-content .table.active {
   display: inline-block;
 }
+.content .article-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 40px 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+.content .article-section::before {
+  content: "";
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: #111;
+  position: absolute;
+  top: 0;
+}
+.content .article-section .article-header {
+  position: relative;
+}
+.content .article-section .article-header .article-title {
+  text-align: left;
+}
+.content .article-section .article-header .article-title h3 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+.content .article-section .article-header::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  display: block;
+  background-color: #ededed;
+  position: absolute;
+  bottom: 0;
+}
+.content .article-section .writer-info {
+  display: flex;
+  justify-content: space-between;
+}
+.content .article-section .article-content {
+  margin: 40px 0;
+  font-size: 1rem;
+  text-align: left;
+}
+.content .article-section .comment {
+  position: relative;
+  padding: 0 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+.content .article-section .comment .comment-list .comment-item {
+  border: 1px solid #5f5f5f;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: left;
+}
+.content .article-section .comment .comment-list .comment-item:nth-of-type(1) {
+  background-color: #f3f2d7;
+}
+.content .article-section .comment .comment-list .comment-item:nth-of-type(2) {
+  background-color: #d7f3dd;
+}
+.content .article-section .comment .comment-list .comment-item div {
+  margin: 0;
+}
+.content .article-section .comment .comment-list .comment-item .comment-writer {
+  font-weight: bold;
+}
+.content .article-section .comment .comment-list .comment-item .comment-content p {
+  margin: 3px 0;
+  font-size: 1rem;
+}
+.content .article-section .comment .comment-list .comment-item .comment-date {
+  color: rgba(0, 0, 0, 0.5607843137);
+  text-align: right;
+}
+.content .article-section .comment .write-comment {
+  display: flex;
+  gap: 5px;
+  margin-top: 20px;
+}
+.content .article-section .comment .write-comment textarea {
+  width: 80%;
+  border: 0.5px solid rgba(0, 0, 0, 0.5607843137);
+  border-radius: 5px;
+}
+.content .article-section .comment .write-comment button {
+  width: 20%;
+  color: #fff;
+  background-color: #111;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .content .post-section .write-btn {
   width: 100%;
   margin: 10px 0;
@@ -824,21 +930,29 @@ table {
   background-color: #5f5f5f;
 }
 .content .post-section .write-board {
-  transition: 0.5s;
+  position: relative;
   width: 100%;
-  height: 0;
-  overflow: hidden;
-  padding: 0;
+  height: 100%;
+  padding: 40px 0;
   box-sizing: border-box;
   border-radius: 5px;
-  background: #999;
+  transition: 0.5s;
+}
+.content .post-section .write-board::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  display: block;
+  background-color: #111;
+  position: absolute;
+  top: 0;
 }
 .content .post-section .write-board .write-form .form-group {
   width: 100%;
   background-color: #fff;
   border-radius: 5px;
   margin-bottom: 10px;
-  border: 1px solid #999;
+  border: 1px solid #111;
 }
 .content .post-section .write-board .write-form #title {
   width: 100%;
@@ -857,19 +971,25 @@ table {
 .content .post-section .write-board .write-form .button-wrap div {
   width: 49%;
 }
-.content .post-section .write-board .write-form .button-wrap .submit-btn {
-  background-color: #111;
+.content .post-section .write-board .write-form .button-wrap button {
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+  cursor: pointer;
 }
 .content .post-section .write-board .write-form .button-wrap .submit-btn button {
-  width: 100%;
+  background-color: #111;
   color: #fff;
+}
+.content .post-section .write-board .write-form .button-wrap .submit-btn button:hover {
+  background-color: #787878;
 }
 .content .post-section .write-board .write-form .button-wrap .close-btn button {
   color: #111;
+  background-color: #fff;
 }
-.content .post-section.active .write-board {
-  height: 300px;
-  padding: 10px;
+.content .post-section .write-board .write-form .button-wrap .close-btn button:hover {
+  background-color: #e3e3e3;
 }
 
 .pagenate-section {
