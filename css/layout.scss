@@ -432,32 +432,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .search {
-    display: flex;
-    width: 50px;
-    height: 50px;
-    transition: 0.4s ease-in-out;
-
-    select,
-    input {
-      display: none;
-    }
-    button > i {
-      font-size: 1.5em;
-    }
-  }
-  .search.active {
-    display: flex;
-    width: 350px;
-    height: 50px;
-    background-color: $lightgray;
-    border-radius: 50px;
-    justify-content: space-evenly;
-    select,
-    input {
-      display: block;
-    }
-  }
+  
+  
 }
 
 /** footer **/
