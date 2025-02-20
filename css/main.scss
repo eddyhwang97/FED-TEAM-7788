@@ -28,7 +28,7 @@
 @include responsive(768px) {
   .section {
     .inner {
-      padding: 50px 20px;
+      padding: 50px 25px;
     }
   }
   .section:first-child {
@@ -45,7 +45,7 @@
 
   .section {
     .inner {
-      padding: 70px 20px;
+      padding: 70px 30px;
     }
   }
   .section:first-child {
@@ -130,6 +130,9 @@
         height: 100%;
         background: url("../img//main/icon-main-bg04.svg") center no-repeat;
         background-size: cover;
+        scale: 1.1;
+        translate: 5% 5%;
+        transition: all .3s ease-in-out;
       }
     }
   }
@@ -164,8 +167,7 @@
         height: 40%;
       }
       .bg04 {
-        translate: -1% -1%;
-        scale: 1.05;
+        translate: -5% -5%;
       }
     }
   }

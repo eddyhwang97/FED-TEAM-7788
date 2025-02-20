@@ -16,17 +16,22 @@ $(() => {
 
   mobGnb();
   webGnb();
+  console.log($totalSearchBtn);
 
   // mobile gnb
   function mobGnb() {
     function reset() {
-      $body.removeClass("on");
-      $dimm.removeClass("on");
-      $innerHeaderWrap.removeClass("open");
-      $gnbWrap.removeClass("open");
-      $dep1.parent().removeClass("on");
-      $dep2.removeClass("show");
-      searchClose();
+      if (window.innerWidth >= 1024) {
+        $innerHeaderWrap.removeClass("open");
+        $gnbWrap.removeClass("open");
+        $dimm.removeClass("on");
+        $body.removeClass("on");
+        $dep1.parent().removeClass("on");
+
+        if (!$searchWrap.hasClass("on")) {
+          searchClose();
+        }
+      }
     }
 
     $menuBtn.on("click", function () {
@@ -88,7 +93,7 @@ $(() => {
   // total search
   searchOpen();
 
-  function searchClose(){
+  function searchClose() {
     $searchDimm.removeClass("on");
     $searchWrap.removeClass("on");
     $searchWrap.stop().slideUp();
@@ -98,7 +103,9 @@ $(() => {
 
   function searchOpen() {
     $totalSearchBtn.on("click", function () {
-      $(this).addClass("on");
+      $totalSearchBtn.each(function () {
+        $(this).addClass("on");
+      });
       $searchWrap.addClass("on");
       $searchWrap.stop().slideDown();
       $searchCloseBtn.addClass("on");
@@ -117,4 +124,49 @@ $(() => {
       searchClose();
     });
   }
+
+  //footer
+  const $btnSite = $(".family-site>button"),
+    $siteList = $(".site-list");
+
+  $btnSite.on({
+    click: function () {
+      const $familyList = $(this).siblings(".site-list");
+      if (!$(this).hasClass("active")) {
+        $siteList.stop().slideUp();
+        $btnSite.removeClass("active").find("span").text("닫힘");
+
+        $(this).addClass("active").find("span").text("열림");
+        $familyList.stop().slideDown();
+      } else {
+        $(this).removeClass("active").find("span").text("닫힘");
+        $familyList.stop().slideUp();
+      }
+    },
+  });
+  
+  $(".site-list>li:last-child>a").on("keydown", function (e) {
+    let keyCode = e.keyCode || e.which;
+    if (keyCode === 9 && !e.shiftKey) {
+      e.preventDefault();
+      $(this)
+        .parents(".site-list")
+        .stop()
+        .slideUp()
+        .siblings()
+        .removeClass("active")
+        .find("span")
+        .text("닫힘");
+    }
+  });
+
+  $(document).mouseup(function (e) {
+    if (
+      $siteList.has(e.target).length === 0 &&
+      !$(e.target).is(".family-site>button")
+    ) {
+      $siteList.slideUp();
+      $btnSite.removeClass("active").find("span").text("닫힘");
+    }
+  });
 });

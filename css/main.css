@@ -231,7 +231,7 @@ table {
 
 @media screen and (min-width: 768px) {
   .section .inner {
-    padding: 50px 20px;
+    padding: 50px 25px;
   }
   .section:first-child .inner {
     padding-top: 100px;
@@ -242,7 +242,7 @@ table {
     margin-top: 135px;
   }
   .section .inner {
-    padding: 70px 20px;
+    padding: 70px 30px;
   }
   .section:first-child .inner {
     padding-top: 140px;
@@ -324,6 +324,9 @@ table {
   height: 100%;
   background: url("../img//main/icon-main-bg04.svg") center no-repeat;
   background-size: cover;
+  scale: 1.1;
+  translate: 5% 5%;
+  transition: all 0.3s ease-in-out;
 }
 
 @media screen and (min-width: 768px) {
@@ -354,8 +357,7 @@ table {
     height: 40%;
   }
   .link-box-wrap .link-box:hover .bg04 {
-    translate: -1% -1%;
-    scale: 1.05;
+    translate: -5% -5%;
   }
 }
 @media screen and (min-width: 1024px) {

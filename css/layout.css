@@ -135,7 +135,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    transition: height 0.2s;
+    transition: height 0.4s;
     z-index: -1;
   }
   .inner-header-wrap.open::after {
@@ -390,6 +390,21 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%);
+    height: 66px;
+  }
+  .search-form form {
+    height: 60px;
+  }
+  .search-form input {
+    height: 56px;
+  }
+  .search-form .total-search-btn {
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    right: 10px;
+    background: url("../img/common/icon-search-point.svg") center no-repeat;
+    background-size: 60%;
   }
 }
 /** footer **/
@@ -450,6 +465,7 @@
 }
 .footer .family-site .site-list {
   position: absolute;
+  z-index: 1;
   display: none;
   bottom: 42px;
   width: 100%;
@@ -495,6 +511,9 @@
   }
 }
 @media screen and (min-width: 1024px) {
+  .footer .inner {
+    padding: 36px 30px;
+  }
   .footer .footer-link {
     flex-direction: row;
     font-size: 18px;

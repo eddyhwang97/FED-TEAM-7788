@@ -80,4 +80,16 @@ $(() => {
       $bookTabCont.eq(idx).addClass("on").siblings().removeClass("on");
     },
   });
+
+  // 게시판 tab
+  $boardTabBtn = $(".board-tab").find("button");
+  $boardContent = $('.board-content');
+
+  $boardTabBtn.on("click", function(){
+    let curIdx = $(this).parent("li").index();
+    $(this).parent().addClass("on").siblings().removeClass("on");
+    $boardContent.removeClass("on");
+    $boardContent.eq(curIdx).addClass("on");
+    
+  });
 });
