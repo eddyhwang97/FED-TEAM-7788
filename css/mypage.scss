@@ -17,25 +17,37 @@ body {
   .mypage-container {
     max-width: 768px;
     width: 100%;
-    background: #faf3e0; /* 백노지 느낌의 미색 */
-    background-blend-mode: multiply;
+    // 1안 //
+    // background: #faf3e0; /* 백노지 느낌의 미색 */
+    // background: rgba(255, 248, 231, 0.9); /* 반투명한 아이보리 배경 */
+    // box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+    // background-blend-mode: multiply;
+
+    // 2안 //
+    border: 1px solid $mint;
+    border-radius: 5px;
     padding: 20px;
-    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 248, 231, 0.9); /* 반투명한 아이보리 배경 */
+    .tit-wrap {
+      display: flex;
+      gap: 10px;
+      img{
+        width: 40px;
+      }
+    }
   }
-  .page-cover::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.07) 0px,
-      rgba(0, 0, 0, 0.03) 2px
-    );
-    opacity: 0.3;
-    pointer-events: none;
-  }
+  // .page-cover::before {
+  //   content: "";
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 100%;
+  //   background: repeating-linear-gradient(
+  //     to bottom,
+  //     rgba(0, 0, 0, 0.07) 0px,
+  //     rgba(0, 0, 0, 0.03) 2px
+  //   );
+  //   opacity: 0.3;
+  //   pointer-events: none;
+  // }
 
   @include responsive(768px) {
     .mypage-container {
@@ -102,7 +114,7 @@ body {
     }
 
     @include responsive(430px) {
-      .user-info{
+      .user-info {
         gap: 15px;
       }
     }
@@ -111,7 +123,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 10px;  
+    padding: 10px;
     .toggle-setting {
       font-size: 20px;
       cursor: pointer;
@@ -136,6 +148,13 @@ body {
       align-items: center;
       justify-content: space-between;
       margin-bottom: 25px;
+      h3 {
+        display: flex;
+        gap: 10px;
+        img{
+          width: 20px;
+        }
+      }
       .sort-container {
         display: flex;
         gap: 20px;
@@ -180,6 +199,11 @@ body {
       font-size: 25px;
       font-weight: $font-weight-bold;
       margin-bottom: 25px;
+      display: flex;
+      gap: 10px;
+      img{
+        width: 20px;
+      }
     }
   }
   .badge-grid {
@@ -204,8 +228,8 @@ body {
     .badge-grid {
       grid-template-columns: repeat(3, 1fr); /* 3열 */
       .badge img {
-        width: 120px;
-        height: 120px;
+        width: 100%;
+        height: 100%;
       }
     }
   }

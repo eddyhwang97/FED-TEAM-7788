@@ -13,7 +13,11 @@ main {
   justify-content: center;
   align-items: center;
   margin: 0px auto;
+  height: 90vh;
   .join-wrap {
+    border: 1px solid $gray;
+    padding: 80px 70px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     .tit-wrap{
@@ -61,7 +65,7 @@ main {
     }
     .validation-wrap {
       margin-top: 10px;
-      margin-bottom: 10px; 
+      margin-bottom: 20px; 
       display: flex;
       flex-direction: column;
       .password-strength {

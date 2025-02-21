@@ -219,11 +219,27 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0px auto;
+  height: 80vh;
 }
 main .login-wrap {
+  border: 1px solid #999;
+  padding: 80px 70px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
+}
+main .login-wrap .tit-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+main .login-wrap .tit-wrap h2 {
+  font-weight: 600;
+  font-size: 30px;
+}
+main .login-wrap .tit-wrap img {
+  width: 100px;
 }
 main .login-wrap .input-wrap {
   display: flex;
