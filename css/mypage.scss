@@ -8,23 +8,20 @@
 /** 마이페이지 컨텐츠 css **/
 
 body {
-  .page-cover{
+  .page-cover {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
   }
   .mypage-container {
     max-width: 768px;
     width: 100%;
-    margin-top: 30px;
-    padding: 15px;
-    background: #FAF3E0; /* 백노지 느낌의 미색 */
+    background: #faf3e0; /* 백노지 느낌의 미색 */
     background-blend-mode: multiply;
     padding: 20px;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2); 
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
     background: rgba(255, 248, 231, 0.9); /* 반투명한 아이보리 배경 */
-  backdrop-filter: blur(2px); /* 부드러운 종이 느낌 */
-  padding: 40px;
   }
   .page-cover::before {
     content: "";
@@ -34,18 +31,19 @@ body {
     background: repeating-linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.07) 0px,
-      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 2px
     );
     opacity: 0.3;
     pointer-events: none;
   }
-  // 전체 container 미디어쿼리
+
   @include responsive(768px) {
     .mypage-container {
       max-width: 800px;
       width: 100%;
     }
   }
+
   h2 {
     font-size: 32px;
     font-weight: $font-weight-bold;
@@ -72,8 +70,9 @@ body {
     .exp-bar-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-left: 10px;
+      
+      flex-direction: column;
+
       .exp-bar {
         width: 120px; /* 경험치 바 너비 */
         height: 10px;
@@ -81,6 +80,7 @@ body {
         border-radius: 5px;
         overflow: hidden;
         position: relative;
+        scale: .7;
         .exp-fill {
           height: 100%;
           background: linear-gradient(
@@ -96,6 +96,14 @@ body {
         font-size: 14px;
         font-weight: bold;
         color: #333;
+      }
+    }
+    
+    @include responsive(430px) {
+      .exp-bar-wrap {
+        flex-direction: row;
+        margin-left: 10px;
+        gap: 10px;
       }
     }
   }
@@ -122,7 +130,7 @@ body {
     }
   }
   .mypick-wrap {
-    margin-top: 60px;
+    margin-top: 25px;
     .sub-tit-wrap {
       display: flex;
       align-items: center;
@@ -135,12 +143,13 @@ body {
         justify-content: flex-end;
         .sort-select {
           position: relative;
-          height: 25px;
+          height: 28px;
           background-color: $white;
           color: $darkgray;
           border: 1px solid $gray;
           border-radius: 10px;
           width: 100%;
+          text-align: right;
         }
       }
     }
@@ -165,7 +174,13 @@ body {
       margin-bottom: 20px;
     }
   }
-
+.badge-wrap{
+  h3{
+    font-size: 25px;
+    font-weight: $font-weight-bold;
+    margin-bottom: 25px;
+  }
+}
   .badge-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 4열 */
@@ -202,5 +217,4 @@ body {
       }
     }
   }
-
 }

@@ -216,22 +216,18 @@ table {
 /** 마이페이지 컨텐츠 css **/
 body .page-cover {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
 }
 body .mypage-container {
   max-width: 768px;
   width: 100%;
-  margin-top: 30px;
-  padding: 15px;
-  background: #FAF3E0; /* 백노지 느낌의 미색 */
+  background: #faf3e0; /* 백노지 느낌의 미색 */
   background-blend-mode: multiply;
   padding: 20px;
   box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
   background: rgba(255, 248, 231, 0.9); /* 반투명한 아이보리 배경 */
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px); /* 부드러운 종이 느낌 */
-  padding: 40px;
 }
 body .page-cover::before {
   content: "";
@@ -274,8 +270,7 @@ body .profile-wrap .level-icon {
 body .profile-wrap .exp-bar-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-left: 10px;
+  flex-direction: column;
 }
 body .profile-wrap .exp-bar-wrap .exp-bar {
   width: 120px; /* 경험치 바 너비 */
@@ -284,6 +279,7 @@ body .profile-wrap .exp-bar-wrap .exp-bar {
   border-radius: 5px;
   overflow: hidden;
   position: relative;
+  scale: 0.7;
 }
 body .profile-wrap .exp-bar-wrap .exp-bar .exp-fill {
   height: 100%;
@@ -295,6 +291,13 @@ body .profile-wrap .exp-bar-wrap .exp-text {
   font-size: 14px;
   font-weight: bold;
   color: #333;
+}
+@media screen and (min-width: 430px) {
+  body .profile-wrap .exp-bar-wrap {
+    flex-direction: row;
+    margin-left: 10px;
+    gap: 10px;
+  }
 }
 body .toggle-setting-wrap {
   margin-top: 15px;
@@ -319,7 +322,7 @@ body .toggle-setting-wrap .setting-menu-wrap {
   margin-left: 10px;
 }
 body .mypick-wrap {
-  margin-top: 60px;
+  margin-top: 25px;
 }
 body .mypick-wrap .sub-tit-wrap {
   display: flex;
@@ -335,12 +338,13 @@ body .mypick-wrap .sub-tit-wrap .sort-container {
 }
 body .mypick-wrap .sub-tit-wrap .sort-container .sort-select {
   position: relative;
-  height: 25px;
+  height: 28px;
   background-color: #fff;
   color: #666;
   border: 1px solid #999;
   border-radius: 10px;
   width: 100%;
+  text-align: right;
 }
 body .mypick-wrap .loan-item {
   display: flex;
@@ -361,6 +365,11 @@ body .mypick-wrap .move-loan-wrap .move-loan-list {
 body .mypick-wrap hr {
   margin-top: 5px;
   margin-bottom: 20px;
+}
+body .badge-wrap h3 {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 body .badge-grid {
   display: grid;
