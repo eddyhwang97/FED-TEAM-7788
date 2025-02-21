@@ -43,9 +43,12 @@ body {
         cursor: pointer;
       }
     }
-    img {
+    .profile-image {
       width: 50px;
       border-radius: 50%;
+    }
+    .level-icon{
+      width: 50px;
     }
     span > img {
       width: 20px;
@@ -113,6 +116,10 @@ body {
   @include responsive(768px) {
     .badge-grid{
      grid-template-columns: repeat(4, 1fr); /* 2열 */
+     .book-image{
+      width: 160px;
+      height: 160px;
+     }
     }
   }
 }

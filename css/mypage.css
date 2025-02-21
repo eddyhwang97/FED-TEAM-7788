@@ -251,9 +251,12 @@ body .profile-wrap .toggle-setting-wrap .toggle-setting {
   font-size: 20px;
   cursor: pointer;
 }
-body .profile-wrap img {
+body .profile-wrap .profile-image {
   width: 50px;
   border-radius: 50%;
+}
+body .profile-wrap .level-icon {
+  width: 50px;
 }
 body .profile-wrap span > img {
   width: 20px;
@@ -316,5 +319,9 @@ body .badge-grid .badge img {
 @media screen and (min-width: 768px) {
   body .badge-grid {
     grid-template-columns: repeat(4, 1fr); /* 2열 */
+  }
+  body .badge-grid .book-image {
+    width: 160px;
+    height: 160px;
   }
 }
