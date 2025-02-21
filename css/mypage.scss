@@ -11,13 +11,16 @@ body {
   display: flex;
   justify-content: center;
   .mypage-container {
-    width: 400px;
+    max-width: 768px;
+    width: 100%;
     margin-top: 30px;
+    padding: 15px;
   }
   // 전체 container 미디어쿼리
   @include responsive(768px) {
-    .mypage-container{
-      width: 600px;
+    .mypage-container {
+      max-width: 800px;
+      width: 100%;
     }
   }
   h2 {
@@ -35,35 +38,65 @@ body {
       gap: 15px;
       font-size: 18px;
     }
-    .toggle-setting-wrap {
-      display: flex;
-      align-items: center;
-      .toggle-setting {
-        font-size: 20px;
-        cursor: pointer;
-      }
-    }
+
     .profile-image {
       width: 50px;
       border-radius: 50%;
     }
-    .level-icon{
+    .level-icon {
       width: 50px;
     }
-    span > img {
-      width: 20px;
+    .exp-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 10px;
+      .exp-bar {
+        width: 120px; /* 경험치 바 너비 */
+        height: 10px;
+        background-color: #ddd; /* 배경 색상 */
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        .exp-fill {
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            #ffcc00,
+            #ff6600
+          ); /* 색상 그라데이션 */
+          border-radius: 5px;
+          width: 33%; /* 현재 경험치 */
+        }
+      }
+      .exp-text {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
     }
   }
-  .setting-menu-wrap {
-    line-height: 30px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none; /* 기본적으로 비활성화 */
-    margin-left: 10px;
-    /* 오른쪽 정렬? 왼쪽 정렬? 고민중*/
-    // display: flex;
-    // flex-direction: column;
-    // align-items: flex-end;
+  .toggle-setting-wrap {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    .toggle-setting {
+      font-size: 20px;
+      cursor: pointer;
+      > img {
+        width: 16px;
+      }
+    }
+    .setting-menu-wrap {
+      font-size: 15px;
+      display: flex;
+      gap: 30px;
+      line-height: 30px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      margin-left: 10px;
+    }
   }
   .mypick-wrap {
     margin-top: 60px;
@@ -71,7 +104,22 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
+      .sort-container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: flex-end;
+        .sort-select {
+          position: relative;
+          height: 25px;
+          background-color: $white;
+          color: $darkgray;
+          border: 1px solid $gray;
+          border-radius: 10px;
+          width: 100%;
+        }
+      }
     }
     .loan-item {
       display: flex;
@@ -85,12 +133,12 @@ body {
       display: flex;
       justify-content: flex-end;
       .move-loan-list {
-        margin-top: 10px;
+        margin-top: 25px;
         font-size: 14px;
       }
     }
     hr {
-      margin-top: 20px;
+      margin-top: 5px;
       margin-bottom: 20px;
     }
   }
@@ -100,7 +148,7 @@ body {
     grid-template-columns: repeat(2, 1fr); /* 4열 */
     grid-template-rows: repeat(2, auto); /* 10행 */
     gap: 15px;
-      .badge {
+    .badge {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -113,15 +161,23 @@ body {
     }
   }
   // 미디어 쿼리 //
-  @include responsive(768px) {
-    .badge-grid{
-     grid-template-columns: repeat(4, 1fr); /* 2열 */
-     .book-image{
-      width: 160px;
-      height: 160px;
-     }
+  @include responsive(400px) {
+    .badge-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3열 */
+      .badge img {
+        width: 120px;
+        height: 120px;
+      }
     }
   }
+  @include responsive(768px) {
+    .badge-grid {
+      grid-template-columns: repeat(4, 1fr); /* 4열 */
+      .badge img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+
 }
-
-

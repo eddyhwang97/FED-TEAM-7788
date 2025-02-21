@@ -219,12 +219,15 @@ body {
   justify-content: center;
 }
 body .mypage-container {
-  width: 400px;
+  max-width: 768px;
+  width: 100%;
   margin-top: 30px;
+  padding: 15px;
 }
 @media screen and (min-width: 768px) {
   body .mypage-container {
-    width: 600px;
+    max-width: 800px;
+    width: 100%;
   }
 }
 body h2 {
@@ -243,14 +246,6 @@ body .profile-wrap .user-info {
   gap: 15px;
   font-size: 18px;
 }
-body .profile-wrap .toggle-setting-wrap {
-  display: flex;
-  align-items: center;
-}
-body .profile-wrap .toggle-setting-wrap .toggle-setting {
-  font-size: 20px;
-  cursor: pointer;
-}
 body .profile-wrap .profile-image {
   width: 50px;
   border-radius: 50%;
@@ -258,16 +253,52 @@ body .profile-wrap .profile-image {
 body .profile-wrap .level-icon {
   width: 50px;
 }
-body .profile-wrap span > img {
-  width: 20px;
+body .profile-wrap .exp-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
 }
-body .setting-menu-wrap {
+body .profile-wrap .exp-bar-wrap .exp-bar {
+  width: 120px; /* 경험치 바 너비 */
+  height: 10px;
+  background-color: #ddd; /* 배경 색상 */
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+body .profile-wrap .exp-bar-wrap .exp-bar .exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffcc00, #ff6600); /* 색상 그라데이션 */
+  border-radius: 5px;
+  width: 33%; /* 현재 경험치 */
+}
+body .profile-wrap .exp-bar-wrap .exp-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+body .toggle-setting-wrap {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+body .toggle-setting-wrap .toggle-setting {
+  font-size: 20px;
+  cursor: pointer;
+}
+body .toggle-setting-wrap .toggle-setting > img {
+  width: 16px;
+}
+body .toggle-setting-wrap .setting-menu-wrap {
+  font-size: 15px;
+  display: flex;
+  gap: 30px;
   line-height: 30px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  pointer-events: none; /* 기본적으로 비활성화 */
   margin-left: 10px;
-  /* 오른쪽 정렬? 왼쪽 정렬? 고민중*/
 }
 body .mypick-wrap {
   margin-top: 60px;
@@ -276,7 +307,22 @@ body .mypick-wrap .sub-tit-wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+body .mypick-wrap .sub-tit-wrap .sort-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+body .mypick-wrap .sub-tit-wrap .sort-container .sort-select {
+  position: relative;
+  height: 25px;
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #999;
+  border-radius: 10px;
+  width: 100%;
 }
 body .mypick-wrap .loan-item {
   display: flex;
@@ -291,11 +337,11 @@ body .mypick-wrap .move-loan-wrap {
   justify-content: flex-end;
 }
 body .mypick-wrap .move-loan-wrap .move-loan-list {
-  margin-top: 10px;
+  margin-top: 25px;
   font-size: 14px;
 }
 body .mypick-wrap hr {
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 body .badge-grid {
@@ -316,12 +362,21 @@ body .badge-grid .badge img {
      object-fit: cover;
   border-radius: 15px;
 }
+@media screen and (min-width: 400px) {
+  body .badge-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3열 */
+  }
+  body .badge-grid .badge img {
+    width: 120px;
+    height: 120px;
+  }
+}
 @media screen and (min-width: 768px) {
   body .badge-grid {
-    grid-template-columns: repeat(4, 1fr); /* 2열 */
+    grid-template-columns: repeat(4, 1fr); /* 4열 */
   }
-  body .badge-grid .book-image {
-    width: 160px;
-    height: 160px;
+  body .badge-grid .badge img {
+    width: 150px;
+    height: 150px;
   }
 }

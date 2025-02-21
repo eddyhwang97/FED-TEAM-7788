@@ -12,25 +12,35 @@
   <body>
     <!-- header -->
     <!-- mypage -->
-    <main class="mypage-container" id="mypage">
-      <section class="mypage-wrap">
-        <div class="tit-wrap">
-          <h2>마이페이지</h2>
-        </div>
-        <div class="profile-wrap">
-          <div class="user-info">
-            <a href="#" class="profile-image-box">
-              <img
-                class="profile-image"
-                src="../img/login,member,mypage/img-profile-temp.jpg"
-                alt="임시프로필"
-              />
-            </a>
-            <strong>00000000</strong>
-            <a href="#" class="level-icon-box">
-              <img class="level-icon" 
-              src="../img/login,member,mypage/img-level1.svg" alt="level1" />
-            </a>
+    <div class="page-cover">
+      <main class="mypage-container" id="mypage">
+        <section class="mypage-wrap">
+          <div class="tit-wrap">
+            <h2>마이페이지</h2>
+          </div>
+          <div class="profile-wrap">
+            <div class="user-info">
+              <a href="#" class="profile-image-box">
+                <img
+                  class="profile-image"
+                  src="../img/login,member,mypage/img-profile-temp.jpg"
+                  alt="임시프로필"
+                />
+              </a>
+              <strong>00000000</strong>
+              <a href="#" class="level-icon-box">
+                <img class="level-icon"
+                src="../img/login,member,mypage/img-level1.svg" alt="level1" />
+              </a>
+              <!-- exp bar -->
+              <div class="exp-bar-wrap">
+                <div class="exp-bar">
+                  <div class="exp-fill"></div> <!-- 현재 경험치 값 (50% 예시) -->
+                </div>
+                <span class="exp-text">1 / 3</span>
+              </div>
+              <!-- setting button -->
+            </div>
           </div>
           <div class="toggle-setting-wrap">
           <span class="toggle-setting">
@@ -43,62 +53,62 @@
             <li>회원탈퇴</li>
           </ul>
         </div>
+        </section>
+        <!-- My Pick -->
+        <section class="mypick-wrap">
+          <div class="sub-tit-wrap">
+            <h3>My Pick</h3>
+            <div class="sort-container">
+              <label for="sort">정렬</label>
+              <select id="sort" class="sort-select">
+                <option value="loan-days">대출종료일</option>
+                <option value="alphabetical">가나다</option>
+              </select>
+            </div>
+          </div>
+          <ul class="loan-list-wrap">
+            <li class="loan-list">
+              <article class="loan-item">
+                <span class="book-title">(책 제목)</span>
+                <!-- 대출일 계산기능 추가필요 , 회원 마감 임박 대출목록 5개추출해서 출력하는 기능 -->
+                <time class="due-date" datetime="2025-03-01"
+                  >~2025.03.01(토)</time
+                >
+              </article>
+            </li>
+          </ul>
+          <div class="move-loan-wrap">
+          <button href="#" class="move-loan-list">대출목록 바로가기</button>
         </div>
-      </section>
-      <!-- My Pick -->
-      <section class="mypick-wrap">
-        <div class="sub-tit-wrap">
-          <h3>My Pick</h3>
-          <div class="sort-container">
-            <label for="sort">정렬</label>
-            <select id="sort" class="sort-select">
-              <option value="loan-days">대출종료일</option>
-              <option value="alphabetical">가나다</option>
-            </select>
+          <hr />
+        </section>
+        <!-- badge -->
+        <section class="badge-wrap">
+          <div class="badge-grid">
+            <!-- grid : 4 * 2 (초기버전은 총 5개 예정) -->
+            <div class="badge">
+              <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="뱃지1" />
+              <span></span>
+            </div>
+            <div class="badge">
+              <img src="../img/login,member,mypage/img-badge-temp.svg" alt="뱃지2" />
+              <span></span>
+            </div>
+            <div class="badge">
+              <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="뱃지3" />
+              <span></span>
+            </div>
+            <div class="badge">
+              <img src="../img/login,member,mypage/img-badge-temp3.svg" alt="뱃지4" />
+              <span></span>
+            </div>
+            <div class="badge">
+              <img src="../img/login,member,mypage/img-badge-temp4.jpg" alt="뱃지5" />
+              <span></span>
+            </div>
           </div>
-        </div>
-        <ul class="loan-list-wrap">
-          <li class="loan-list">
-            <article class="loan-item">
-              <span class="book-title">(책 제목)</span>
-              <!-- 대출일 계산기능 추가필요 , 회원 마감 임박 대출목록 5개추출해서 출력하는 기능 -->
-              <time class="due-date" datetime="2025-03-01"
-                >~2025.03.01(토)</time
-              >
-            </article>
-          </li>
-        </ul>
-        <div class="move-loan-wrap">
-        <button href="#" class="move-loan-list">대출목록 바로가기</button>
-      </div>
-        <hr />
-      </section>
-      <!-- badge -->
-      <section class="badge-wrap">
-        <div class="badge-grid">
-          <!-- grid : 4 * 2 (초기버전은 총 5개 예정) -->
-          <div class="badge">
-            <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="뱃지1" />
-            <span></span>
-          </div>
-          <div class="badge">
-            <img src="../img/login,member,mypage/img-badge-temp.svg" alt="뱃지2" />
-            <span></span>
-          </div>
-          <div class="badge">
-            <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="뱃지3" />
-            <span></span>
-          </div>
-          <div class="badge">
-            <img src="../img/login,member,mypage/img-badge-temp3.svg" alt="뱃지4" />
-            <span></span>
-          </div>
-          <div class="badge">
-            <img src="../img/login,member,mypage/img-badge-temp4.jpg" alt="뱃지5" />
-            <span></span>
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
