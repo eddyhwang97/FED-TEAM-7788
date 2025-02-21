@@ -10,7 +10,7 @@
 body {
   .page-cover {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
   }
@@ -56,8 +56,11 @@ body {
     .user-info {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 3px;
       font-size: 18px;
+      border: 1px solid $gray;
+      padding: 14px;
+      border-radius: 5px;
     }
 
     .profile-image {
@@ -70,7 +73,6 @@ body {
     .exp-bar-wrap {
       display: flex;
       align-items: center;
-      
       flex-direction: column;
 
       .exp-bar {
@@ -80,7 +82,7 @@ body {
         border-radius: 5px;
         overflow: hidden;
         position: relative;
-        scale: .7;
+        scale: 0.7;
         .exp-fill {
           height: 100%;
           background: linear-gradient(
@@ -98,20 +100,18 @@ body {
         color: #333;
       }
     }
-    
+
     @include responsive(430px) {
-      .exp-bar-wrap {
-        flex-direction: row;
-        margin-left: 10px;
-        gap: 10px;
+      .user-info{
+        gap: 15px;
       }
     }
   }
   .toggle-setting-wrap {
-    margin-top: 15px;
     display: flex;
     align-items: center;
     gap: 15px;
+    padding: 10px;  
     .toggle-setting {
       font-size: 20px;
       cursor: pointer;
@@ -148,7 +148,7 @@ body {
           color: $darkgray;
           border: 1px solid $gray;
           border-radius: 10px;
-          width: 100%;
+          width: 70%;
           text-align: right;
         }
       }
@@ -156,6 +156,7 @@ body {
     .loan-item {
       display: flex;
       justify-content: space-between;
+      line-height: 35px;
     }
     h3 {
       font-size: 25px;
@@ -174,13 +175,13 @@ body {
       margin-bottom: 20px;
     }
   }
-.badge-wrap{
-  h3{
-    font-size: 25px;
-    font-weight: $font-weight-bold;
-    margin-bottom: 25px;
+  .badge-wrap {
+    h3 {
+      font-size: 25px;
+      font-weight: $font-weight-bold;
+      margin-bottom: 25px;
+    }
   }
-}
   .badge-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 4열 */

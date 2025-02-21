@@ -216,7 +216,7 @@ table {
 /** 마이페이지 컨텐츠 css **/
 body .page-cover {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
 }
@@ -257,8 +257,11 @@ body .profile-wrap {
 body .profile-wrap .user-info {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 3px;
   font-size: 18px;
+  border: 1px solid #999;
+  padding: 14px;
+  border-radius: 5px;
 }
 body .profile-wrap .profile-image {
   width: 50px;
@@ -293,17 +296,15 @@ body .profile-wrap .exp-bar-wrap .exp-text {
   color: #333;
 }
 @media screen and (min-width: 430px) {
-  body .profile-wrap .exp-bar-wrap {
-    flex-direction: row;
-    margin-left: 10px;
-    gap: 10px;
+  body .profile-wrap .user-info {
+    gap: 15px;
   }
 }
 body .toggle-setting-wrap {
-  margin-top: 15px;
   display: flex;
   align-items: center;
   gap: 15px;
+  padding: 10px;
 }
 body .toggle-setting-wrap .toggle-setting {
   font-size: 20px;
@@ -343,12 +344,13 @@ body .mypick-wrap .sub-tit-wrap .sort-container .sort-select {
   color: #666;
   border: 1px solid #999;
   border-radius: 10px;
-  width: 100%;
+  width: 70%;
   text-align: right;
 }
 body .mypick-wrap .loan-item {
   display: flex;
   justify-content: space-between;
+  line-height: 35px;
 }
 body .mypick-wrap h3 {
   font-size: 25px;
