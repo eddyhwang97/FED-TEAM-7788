@@ -30,7 +30,7 @@ body {
     .tit-wrap {
       display: flex;
       gap: 10px;
-      img{
+      img {
         width: 40px;
       }
     }
@@ -57,20 +57,20 @@ body {
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 42px;
     font-weight: $font-weight-bold;
   }
   .profile-wrap {
     margin-top: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     .user-info {
       display: flex;
       align-items: center;
       gap: 3px;
       font-size: 18px;
-      border : 2px solid #439f6e;
+      border: 2px solid #439f6e;
       padding: 14px;
       border-radius: 5px;
     }
@@ -78,6 +78,9 @@ body {
     .profile-image {
       width: 50px;
       border-radius: 50%;
+      strong{
+        padding-left: 5px;
+      }
     }
     .level-icon {
       width: 50px;
@@ -110,6 +113,7 @@ body {
         font-size: 12px;
         font-weight: bold;
         color: #333;
+        letter-spacing: 0.2px;
       }
     }
 
@@ -119,6 +123,12 @@ body {
       }
     }
   }
+  @include responsive(400px) {
+    .profile-wrap{
+      justify-content: space-between;
+    }
+  }
+
   .toggle-setting-wrap {
     display: flex;
     align-items: center;
@@ -151,7 +161,7 @@ body {
       h3 {
         display: flex;
         gap: 10px;
-        img{
+        img {
           width: 20px;
         }
       }
@@ -172,10 +182,18 @@ body {
         }
       }
     }
-    .loan-item {
-      display: flex;
-      justify-content: space-between;
-      line-height: 35px;
+    .loan-list-wrap {
+      margin-top: 10px;
+      border-top: 3px double;
+      border-bottom: 3px double;
+      li:nth-child(-n + 4) {
+        border-bottom: 1px solid $gray;
+      }
+      article {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+      }
     }
     h3 {
       font-size: 25px;
@@ -185,8 +203,13 @@ body {
       display: flex;
       justify-content: flex-end;
       .move-loan-list {
-        margin-top: 25px;
+        margin-top: 5px;
+        margin-bottom: 50px;
         font-size: 14px;
+        transition: 0.4s;
+        &:hover {
+          color: #00a791;
+        }
       }
     }
     hr {
@@ -196,14 +219,12 @@ body {
   }
   .badge-wrap {
     background: linear-gradient(135deg, #f9f5f0 0%, #f3ece4 100%);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.1),
-      0 2px 5px rgba(0, 0, 0, 0.05),
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.05),
       inset 0 0 10px rgba(0, 0, 0, 0.02);
     border-radius: 10px;
     padding: 20px;
     position: relative;
-  
+
     &::before {
       content: "";
       position: absolute;
@@ -221,7 +242,7 @@ body {
       margin-bottom: 25px;
       display: flex;
       gap: 10px;
-      img{
+      img {
         width: 20px;
       }
     }
@@ -231,7 +252,7 @@ body {
     grid-template-columns: repeat(2, 1fr); /* 4열 */
     grid-template-rows: repeat(2, auto); /* 10행 */
     gap: 15px;
-    
+
     .badge {
       display: flex;
       flex-direction: column;

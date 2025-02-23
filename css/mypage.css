@@ -241,14 +241,14 @@ body .mypage-container .tit-wrap img {
   }
 }
 body h2 {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
 }
 body .profile-wrap {
   margin-top: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 body .profile-wrap .user-info {
   display: flex;
@@ -262,6 +262,9 @@ body .profile-wrap .user-info {
 body .profile-wrap .profile-image {
   width: 50px;
   border-radius: 50%;
+}
+body .profile-wrap .profile-image strong {
+  padding-left: 5px;
 }
 body .profile-wrap .level-icon {
   width: 50px;
@@ -290,10 +293,16 @@ body .profile-wrap .exp-bar-wrap .exp-text {
   font-size: 12px;
   font-weight: bold;
   color: #333;
+  letter-spacing: 0.2px;
 }
 @media screen and (min-width: 430px) {
   body .profile-wrap .user-info {
     gap: 15px;
+  }
+}
+@media screen and (min-width: 400px) {
+  body .profile-wrap {
+    justify-content: space-between;
   }
 }
 body .toggle-setting-wrap {
@@ -350,10 +359,18 @@ body .mypick-wrap .sub-tit-wrap .sort-container .sort-select {
   width: 70%;
   text-align: right;
 }
-body .mypick-wrap .loan-item {
+body .mypick-wrap .loan-list-wrap {
+  margin-top: 10px;
+  border-top: 3px double;
+  border-bottom: 3px double;
+}
+body .mypick-wrap .loan-list-wrap li:nth-child(-n+4) {
+  border-bottom: 1px solid #999;
+}
+body .mypick-wrap .loan-list-wrap article {
+  padding: 20px;
   display: flex;
   justify-content: space-between;
-  line-height: 35px;
 }
 body .mypick-wrap h3 {
   font-size: 25px;
@@ -364,8 +381,13 @@ body .mypick-wrap .move-loan-wrap {
   justify-content: flex-end;
 }
 body .mypick-wrap .move-loan-wrap .move-loan-list {
-  margin-top: 25px;
+  margin-top: 5px;
+  margin-bottom: 50px;
   font-size: 14px;
+  transition: 0.4s;
+}
+body .mypick-wrap .move-loan-wrap .move-loan-list:hover {
+  color: #00a791;
 }
 body .mypick-wrap hr {
   margin-top: 5px;
