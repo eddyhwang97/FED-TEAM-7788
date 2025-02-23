@@ -51,7 +51,7 @@ body {
 
   @include responsive(768px) {
     .mypage-container {
-      max-width: 800px;
+      max-width: 1440px;
       width: 100%;
     }
   }
@@ -70,7 +70,7 @@ body {
       align-items: center;
       gap: 3px;
       font-size: 18px;
-      border: 1px solid $gray;
+      border : 2px solid #439f6e;
       padding: 14px;
       border-radius: 5px;
     }
@@ -107,7 +107,7 @@ body {
         }
       }
       .exp-text {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: bold;
         color: #333;
       }
@@ -195,6 +195,26 @@ body {
     }
   }
   .badge-wrap {
+    background: linear-gradient(135deg, #f9f5f0 0%, #f3ece4 100%);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.1),
+      0 2px 5px rgba(0, 0, 0, 0.05),
+      inset 0 0 10px rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+  
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../img/noise-texture.png") repeat;
+      opacity: 0.1;
+      pointer-events: none;
+    }
     h3 {
       font-size: 25px;
       font-weight: $font-weight-bold;
@@ -211,14 +231,15 @@ body {
     grid-template-columns: repeat(2, 1fr); /* 4열 */
     grid-template-rows: repeat(2, auto); /* 10행 */
     gap: 15px;
+    
     .badge {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .badge img {
-      width: 130px; /* 뱃지 크기 조정 */
-      height: 130px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 15px;
     }
@@ -237,8 +258,10 @@ body {
     .badge-grid {
       grid-template-columns: repeat(4, 1fr); /* 4열 */
       .badge img {
-        width: 150px;
-        height: 150px;
+        // width: 150px;
+        // height: 150px;
+        max-width: 220px;
+        width: 100%;
       }
     }
   }

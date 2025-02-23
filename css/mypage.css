@@ -236,7 +236,7 @@ body .mypage-container .tit-wrap img {
 }
 @media screen and (min-width: 768px) {
   body .mypage-container {
-    max-width: 800px;
+    max-width: 1440px;
     width: 100%;
   }
 }
@@ -255,7 +255,7 @@ body .profile-wrap .user-info {
   align-items: center;
   gap: 3px;
   font-size: 18px;
-  border: 1px solid #999;
+  border: 2px solid #439f6e;
   padding: 14px;
   border-radius: 5px;
 }
@@ -287,7 +287,7 @@ body .profile-wrap .exp-bar-wrap .exp-bar .exp-fill {
   width: 33%; /* 현재 경험치 */
 }
 body .profile-wrap .exp-bar-wrap .exp-text {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   color: #333;
 }
@@ -371,6 +371,24 @@ body .mypick-wrap hr {
   margin-top: 5px;
   margin-bottom: 20px;
 }
+body .badge-wrap {
+  background: linear-gradient(135deg, #f9f5f0 0%, #f3ece4 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+body .badge-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../img/noise-texture.png") repeat;
+  opacity: 0.1;
+  pointer-events: none;
+}
 body .badge-wrap h3 {
   font-size: 25px;
   font-weight: 700;
@@ -393,8 +411,8 @@ body .badge-grid .badge {
   align-items: center;
 }
 body .badge-grid .badge img {
-  width: 130px; /* 뱃지 크기 조정 */
-  height: 130px;
+  width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 15px;
@@ -413,7 +431,7 @@ body .badge-grid .badge img {
     grid-template-columns: repeat(4, 1fr); /* 4열 */
   }
   body .badge-grid .badge img {
-    width: 150px;
-    height: 150px;
+    max-width: 220px;
+    width: 100%;
   }
 }
