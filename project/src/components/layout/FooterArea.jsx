@@ -4,11 +4,11 @@ import React from "react";
 
 export default function FooterArea(props) {
   return (
-    <footer class="footer">
-      <div class="inner">
-        <div class="footer-inner">
-          <div class="left">
-            <ul class="footer-link">
+    <footer className="footer">
+      <div className="inner">
+        <div className="footer-inner">
+          <div className="left">
+            <ul className="footer-link">
               <li>
                 <a href="#">개인정보처리방침</a>
               </li>
@@ -23,12 +23,12 @@ export default function FooterArea(props) {
               </li>
             </ul>
           </div>
-          <div class="right">
-            <div class="family-site">
-              <button type="button" class="family-site-btn">
-                유관기관 바로가기<span class="blind">열림</span>
+          <div className="right">
+            <div className="family-site">
+              <button type="button" className="family-site-btn">
+                유관기관 바로가기<span className="blind">열림</span>
               </button>
-              <ul class="site-list">
+              <ul className="site-list">
                 <li>
                   <a href="#" target="_blank" title="새창열림">
                     아무사이트나넣기
@@ -58,11 +58,11 @@ export default function FooterArea(props) {
             </div>
           </div>
         </div>
-        <div class="footer-btm">
-          <div class="footer-logo">
+        <div className="footer-btm">
+          <div className="footer-logo">
             <img src="../img/common/logo-temp.svg" alt="하단 로고" />
           </div>
-          <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
+          <p className="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
         </div>
       </div>
     </footer>
