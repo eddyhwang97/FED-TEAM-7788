@@ -7,8 +7,11 @@ import Community from "../page/Community";
 export default function MainArea(){
 
     return (
-        <main className="main-container" id="main">
+        <main className="sub-container" id="main">
             <Outlet />
+            <SubTop/>
+            <Community/>
+            
         </main>
     );
 

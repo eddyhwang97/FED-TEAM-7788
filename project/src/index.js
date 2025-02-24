@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 
 // 전체 JS
+import "./css/common/_core.scss";
 import Main from "./components/page/Main";
 import Community from "./components/page/Join";
 import Join from "./components/page/Join";
-import Error from "./components/page/error";
-import Login from "./components/page/login";
+
 import Mypage from "./components/page/Mypage";
 
 export default function MainComponent() {
