@@ -1,8 +1,8 @@
-/// MainArea 컴포넌트 : MainArea.jsx /////
+// SubArea 컴포넌트 - SubArea.jsx 
 
 import { Outlet } from "react-router-dom";
 import SubTop from "../module/SubTop";
-import Community from "../page/Community";
+
 
 export default function MainArea(){
 
@@ -10,7 +10,7 @@ export default function MainArea(){
         <main className="sub-container" id="main">
             <Outlet />
             <SubTop/>
-            <Community/>
+          
             
         </main>
     );

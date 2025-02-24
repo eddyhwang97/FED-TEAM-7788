@@ -1,0 +1,27 @@
+<!-- 뱃지 임시 svg -->
+<!-- 독립서적 신간 5권 완독 뱃지 -->
+<svg
+  width="120"
+  height="120"
+  viewBox="0 0 120 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- 원형 배경 -->
+  <circle cx="60" cy="60" r="55" fill="#4CAF50" stroke="#2E7D32" stroke-width="5" />
+
+  <!-- 책 모양 -->
+  <rect x="30" y="40" width="60" height="40" rx="5" fill="beige" />
+  <rect x="35" y="45" width="50" height="30" rx="3" fill="#FFD700" />
+
+  <!-- 책갈피 -->
+  <polygon points="70,40 75,20 80,40" fill="#FF6F00" />
+
+  <!-- 별 (리워드 느낌 강조) -->
+  <polygon points="60,15 65,25 75,27 67,35 69,45 60,40 51,45 53,35 45,27 55,25" fill="white" />
+
+  <!-- "5" 숫자 (신간 5권) -->
+  <text x="60" y="85" font-size="22" fill="black" font-weight="bold" text-anchor="middle">
+    5
+  </text>
+</svg>

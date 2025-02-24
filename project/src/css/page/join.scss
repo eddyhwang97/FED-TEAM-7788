@@ -1,10 +1,5 @@
 // join.scss
-@import "./font"; // font.scss
-@import "./mixins"; // mixin.scss
-@import "./variables"; // variables.scss
-@import "./reset"; // reset.scss
-@import "./common"; // common.scss
-
+@import "../common/core";
 /** 회원가입 컨텐츠 css **/
 
 main {
