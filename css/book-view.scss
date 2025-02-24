@@ -1,6 +1,7 @@
 @import "./mixins"; // mixin.scss
 @import "./variables"; // variables.scss
 
+// book-view
 .book-view {
   display: flex;
   flex-direction: column;
@@ -79,9 +80,13 @@
     gap: 30px;
     .img-box {
       width: calc(40% - 15px);
+      img {
+        width: 100%;
+      }
     }
     .info-box {
       width: calc(60% - 15px);
+      padding: 1.5rem 0;
     }
     .book-tit {
       p {
@@ -89,15 +94,126 @@
       }
     }
     .book-info {
-        li {
-            em {
-                min-width: 80px;
-            }
+      li {
+        em {
+          min-width: 80px;
         }
+      }
+    }
+  }
+}
+
+// comment-wrap
+.comment-wrap {
+  margin-top: 60px;
+
+  .comment-tit {
+    font-weight: 700;
+    font-size: 20px;
+    padding-bottom: 1rem;
+  }
+  .noti {
+    display: block;
+    padding: 40px 0 20px;
+    text-align: center;
+    color: $darkgray;
+  }
+
+  .comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li {
+      display: flex;
+    }
+    .comment {
+      width: fit-content;
+      max-width: 980px;
+      .name {
+        display: block;
+        margin-bottom: 4px;
+      }
+      p {
+        width: 100%;
+        background-color: $lightgray;
+        padding: 10px 12px;
+        border-radius: 5px 15px 15px 15px;
+      }
+    }
+    .my-comment {
+      justify-content: flex-start;
+      flex-direction: row-reverse;
+      align-items: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      .name {
+        text-align: right;
+      }
+      p {
+        border-radius: 15px 15px 5px 15px;
+        background-color: #ffdd78;
+      }
+    }
+    .comment-util {
+      button {
+        font-size: 13px;
+      }
     }
   }
 
-  .btn-wrap {
-    flex-wrap: nowrap;
+  .reply-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid $lightgray;
+      border-radius: 10px;
+      resize: none;
+      padding: 10px;
+    }
+
+    .reply-btn {
+      background-color: $point-color;
+      border-radius: 10px;
+      color: $white;
+      min-height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+@include responsive(768px) {
+  .comment-wrap {
+    .comment-tit {
+      padding-bottom: 2rem;
+      font-size: 28px;
+    }
+    .comment-list {
+      gap: 20px;
+      .comment {
+        p {
+          padding: 10px 20px;
+        }
+      }
+    }
+    .noti {
+      padding: 60px 0 20px;
+      text-align: left;
+    }
+    .reply-wrap {
+      flex-direction: row;
+      textarea {
+        width: calc(100% - 160px);
+      }
+      .reply-btn {
+        width: 140px;
+      }
+    }
   }
 }
