@@ -1,3 +1,21 @@
+@charset "UTF-8";
+.inner-section {
+  margin-top: 40px;
+}
+.inner-section:first-child {
+  margin-top: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .inner-section {
+    margin-top: 60px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .inner-section {
+    margin-top: 80px;
+  }
+}
 .profile-wrap {
   display: flex;
   flex-direction: column;
@@ -25,6 +43,33 @@
   font-size: 20px;
   font-weight: 700;
   padding-bottom: 8px;
+}
+
+.next-level {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-top: 10px;
+}
+.next-level .progress {
+  margin: 5px 0;
+  width: 200px;
+  height: 8px;
+  border-radius: 10px;
+  background-color: #e9e9e9;
+  position: relative;
+}
+.next-level .progress .bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 33.33%; /* 임시 - 진행률 따라서 수정 */
+  height: 8px;
+  background-color: #00A791;
+  border-radius: 10px;
+}
+.next-level .left {
+  color: #666;
 }
 
 .level-box {
@@ -88,9 +133,6 @@
   background-color: #5562FF;
 }
 
-.my-book-info {
-  margin-top: 40px;
-}
 .my-book-info > li {
   border: 1px solid #e9e9e9;
   padding: 24px;
@@ -191,5 +233,38 @@
   }
   .my-book-info .borrow-list li .date {
     max-width: 120px;
+  }
+}
+.badge-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.badge-list .img-box {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.badge-list .text-box {
+  margin-top: 1em;
+  text-align: center;
+}
+.badge-list .text-box p {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+@media screen and (min-width: 768px) {
+  .badge-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .badge-list {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 45px;
   }
 }

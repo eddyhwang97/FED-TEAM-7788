@@ -137,7 +137,7 @@
             <!-- contents s -->
             <div class="contents">
                 <div class="mypage-wrap">
-                    <div class="profile-wrap">
+                    <div class="inner-section profile-wrap">
                         <div class="profile-box">
                             <div class="profile-image">
                                 <img src="../img/login,member,mypage/img-profile-temp.jpg" alt="임시 프로필 이미지">
@@ -145,6 +145,13 @@
                             <div class="user-info">
                                 <p class="user-name">양현석</p>
                                 <span class="user-id">010252233669</span>
+                                <div class="next-level">
+                                    <p>다음 레벨까지</p>
+                                    <div class="progress">
+                                        <span class="bar"></span>
+                                    </div>
+                                    <p class="left"><span class="current">1</span> / <span class="total">3</span></p>
+                                </div>
                             </div>
                         </div>
                         <div class="right">
@@ -174,59 +181,109 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <ul class="my-book-info">
-                        <li class="borrow">
-                            <p class="section-tit">대출 중이에요</p>
-                            <ul class="borrow-list">
-                                <li>
-                                    <em class="book-name">거부기의 저주</em>
-                                    <span class="date">~2025.02.24</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주</em>
-                                    <span class="date">~2025.02.24</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주 거부기의 저주 거부기의 저주</em>
-                                    <span class="date">~2025.02.24</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주 거부기의 저주 거부기의 저주</em>
-                                    <span class="date">~2025.02.24</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주 거부기의 저주 거부기의 저주</em>
-                                    <span class="date">~2025.02.24</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="pick">
-                            <p class="section-tit">마음에 들어요</p>
-                            <ul class="pick-list">
-                                <li>
-                                    <em class="book-name">거부기의 저주</em>
-                                    <span class="label">인문사회</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주</em>
-                                    <span class="label">문학</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주</em>
-                                    <span class="label">문학</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주</em>
-                                    <span class="label">문학</span>
-                                </li>
-                                <li>
-                                    <em class="book-name">거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주</em>
-                                    <span class="label">문학</span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div class="inner-section my-book-info-wrap">
+                        <ul class="my-book-info">
+                            <li class="borrow">
+                                <p class="section-tit">대출 중이에요</p>
+                                <ul class="borrow-list">
+                                    <li>
+                                        <em class="book-name">거부기의 저주</em>
+                                        <span class="date">~2025.02.24</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주</em>
+                                        <span class="date">~2025.02.24</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주 거부기의 저주 거부기의 저주</em>
+                                        <span class="date">~2025.02.24</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주 거부기의 저주 거부기의 저주</em>
+                                        <span class="date">~2025.02.24</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주 거부기의 저주 거부기의 저주</em>
+                                        <span class="date">~2025.02.24</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="pick">
+                                <p class="section-tit">마음에 들어요</p>
+                                <ul class="pick-list">
+                                    <li>
+                                        <em class="book-name">거부기의 저주</em>
+                                        <span class="label">인문사회</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주</em>
+                                        <span class="label">문학</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주</em>
+                                        <span class="label">문학</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주</em>
+                                        <span class="label">문학</span>
+                                    </li>
+                                    <li>
+                                        <em class="book-name">거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주거부기의 저주</em>
+                                        <span class="label">문학</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="inner-section badge-wrap">
+                        <ul class="badge-list">
+                            <li>
+                                <div class="img-box">
+                                    <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="배지">
+                                </div>
+                                <div class="text-box">
+                                    <p>인문학 입문학?</p>
+                                    <span>인문사회과학 카테고리 도서 5권 대출하기</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <img src="../img/login,member,mypage/img-badge-temp.svg" alt="배지">
+                                </div>
+                                <div class="text-box">
+                                    <p>인문학 입문학?</p>
+                                    <span>인문사회과학 카테고리 도서 5권 대출하기</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="배지">
+                                </div>
+                                <div class="text-box">
+                                    <p>인문학 입문학?</p>
+                                    <span>인문사회과학 카테고리 도서 5권 대출하기</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <img src="../img/login,member,mypage/img-badge-temp3.svg" alt="배지">
+                                </div>
+                                <div class="text-box">
+                                    <p>인문학 입문학?</p>
+                                    <span>인문사회과학 카테고리 도서 5권 대출하기</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-box">
+                                    <img src="../img/login,member,mypage/img-badge-temp4.jpg" alt="배지">
+                                </div>
+                                <div class="text-box">
+                                    <p>인문학 입문학?</p>
+                                    <span>인문사회과학 카테고리 도서 5권 대출하기</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- contents e -->

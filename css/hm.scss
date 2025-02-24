@@ -1,6 +1,24 @@
 @import "./mixins"; // mixin.scss
 @import "./variables"; // variables.scss
 
+.inner-section {
+  margin-top: 40px;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+@include responsive(768px){
+  .inner-section {
+    margin-top: 60px;
+  }
+}
+@include responsive(1024px){
+  .inner-section {
+    margin-top: 80px;
+  }
+}
+
 .profile-wrap {
   display: flex;
   flex-direction: column;
@@ -27,6 +45,33 @@
     font-size: 20px;
     font-weight: 700;
     padding-bottom: 8px;
+  }
+}
+
+.next-level {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-top: 10px;
+  .progress {
+    margin: 5px 0;
+    width: 200px;
+    height: 8px;
+    border-radius: 10px;
+    background-color: $lightgray;
+    position: relative;
+    .bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 33.33%; /* 임시 - 진행률 따라서 수정 */
+      height: 8px;
+      background-color: $point-color;
+      border-radius: 10px;
+    }
+  }
+  .left {
+    color: $darkgray;
   }
 }
 
@@ -96,7 +141,6 @@
 }
 
 .my-book-info {
-  margin-top: 40px;
   > li {
     border: 1px solid $lightgray;
     padding: 24px;
@@ -209,5 +253,43 @@
             }
         }
     }
+  }
+}
+
+// 배지
+.badge-list {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+
+  .img-box {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .text-box {
+    margin-top: 1em;
+    text-align: center;
+    p {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  }
+}
+
+@include responsive(768px) {
+  .badge-list {
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+  }
+}
+
+@include responsive(1024px) {
+  .badge-list {
+    grid-template-columns: repeat(5,1fr);
+    gap: 45px;
   }
 }
