@@ -2,6 +2,12 @@
 
 import { Outlet } from "react-router-dom";
 import SubTop from "../module/SubTop";
+import Community from "../page/Community";
+import Book from "../page/Book";
+import Join from "../page/Join";
+import Login from "../page/Login";
+import Mypage from "../page/Mypage";
+import Error from "../page/Error";
 
 
 export default function MainArea(){
@@ -10,6 +16,12 @@ export default function MainArea(){
         <main className="sub-container" id="main">
             <Outlet />
             <SubTop/>
+            <Book/>
+            <Community/>
+            <Join/>
+            <Login/>
+            <Mypage/>
+            <Error/>
           
             
         </main>

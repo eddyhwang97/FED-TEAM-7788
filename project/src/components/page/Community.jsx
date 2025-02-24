@@ -2,7 +2,9 @@
 
 function Community (){
     return(
-        <></>
+        <>
+        <h1>열린공간</h1>
+        </>
     )
 }
 
