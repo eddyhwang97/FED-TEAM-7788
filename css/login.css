@@ -222,9 +222,9 @@ main {
   height: 80vh;
 }
 main .login-wrap {
-  border: 1px solid #999;
-  padding: 80px 70px;
-  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  border: none;
   display: flex;
   flex-direction: column;
 }
@@ -278,4 +278,12 @@ main .login-wrap .divider {
   border: none;
   border-top: 1px solid #ddd;
   margin: 10px 0;
+}
+
+@media screen and (min-width: 400px) {
+  .login-wrap {
+    border: 1px solid #999;
+    padding: 80px 70px;
+    border-radius: 5px;
+  }
 }

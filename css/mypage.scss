@@ -17,14 +17,7 @@ body {
   .mypage-container {
     max-width: 768px;
     width: 100%;
-    // 1안 //
-    // background: #faf3e0; /* 백노지 느낌의 미색 */
-    // background: rgba(255, 248, 231, 0.9); /* 반투명한 아이보리 배경 */
-    // box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
-    // background-blend-mode: multiply;
-
-    // 2안 //
-    border: 1px solid $mint;
+    // border: 1px solid $mint;
     border-radius: 5px;
     padding: 20px;
     .tit-wrap {
@@ -35,24 +28,22 @@ body {
       }
     }
   }
-  // .page-cover::before {
-  //   content: "";
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 100%;
-  //   background: repeating-linear-gradient(
-  //     to bottom,
-  //     rgba(0, 0, 0, 0.07) 0px,
-  //     rgba(0, 0, 0, 0.03) 2px
-  //   );
-  //   opacity: 0.3;
-  //   pointer-events: none;
-  // }
 
   @include responsive(768px) {
     .mypage-container {
-      max-width: 1440px;
+      max-width: 100%;
       width: 100%;
+      .layout-wrap{
+        display: flex;
+        justify-content: space-between;
+        .mypick-wrap{
+          width: 50%;
+        }
+        .badge-wrap{
+          width: 45%;
+        }
+
+      }
     }
   }
 
@@ -170,15 +161,56 @@ body {
         gap: 20px;
         align-items: center;
         justify-content: flex-end;
-        .sort-select {
-          position: relative;
-          height: 28px;
-          background-color: $white;
-          color: $darkgray;
-          border: 1px solid $gray;
-          border-radius: 10px;
-          width: 70%;
-          text-align: right;
+      }
+    }
+    // footer button 사용 // 
+    .family-site { 
+      position: relative;
+      height: 40px;
+      background-color: $white;
+      color: $darkgray;
+      border: 1px solid $gray;
+      border-radius: 10px;
+  
+      button {
+        width: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 16px;
+        &::after {
+          content: "";
+          width: 24px;
+          height: 24px;
+          display: inline-block;
+          background: url("../img/common/icon-down-gray.svg");
+        }
+        &.active::after {
+          transform: rotate(180deg);
+        }
+      }
+  
+      .site-list {
+        position: absolute;
+        z-index: 1;
+        display: none;
+        bottom: 42px;
+        width: 100%;
+        background-color: $white;
+        border: 1px solid $gray;
+        color: $darkgray;
+        border-radius: 10px;
+        padding: 5px 0;
+        > li {
+          padding: 5px 16px;
+          > a {
+            transition: 0.3s;
+            display: block;
+            height: 100%;
+            &:hover {
+              color: $black;
+            }
+          }
         }
       }
     }
@@ -232,22 +264,26 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background: url("../img/noise-texture.png") repeat;
+      // background: url("../img/noise-texture.png") repeat;
       opacity: 0.1;
       pointer-events: none;
     }
     h3 {
       font-size: 25px;
       font-weight: $font-weight-bold;
-      margin-bottom: 25px;
       display: flex;
       gap: 10px;
       img {
         width: 20px;
       }
     }
+    span{
+      color: dimgrey;
+      font-size: 14px;
+    }
   }
   .badge-grid {
+    margin-top: 25px;
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 4열 */
     grid-template-rows: repeat(2, auto); /* 10행 */
