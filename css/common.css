@@ -16,7 +16,7 @@
   -moz-text-size-adjust: 100%;
        text-size-adjust: 100%;
   cursor: default;
-  line-height: 1.5;
+  line-height: 1.4;
   overflow-wrap: break-word;
   word-break: break-word;
   -moz-tab-size: 4;
@@ -76,6 +76,7 @@ body {
   font-size: 14px;
   letter-spacing: -1px;
   line-height: 1.4;
+  color: #111;
 }
 body.on {
   overflow: hidden;
@@ -158,6 +159,18 @@ body.on {
   color: #fff;
 }
 
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
 input,
 select,
 textarea,
@@ -191,4 +204,7 @@ table {
   table {
     font-size: 18px;
   }
+}
+.point-color {
+  color: #00A791 !important;
 }

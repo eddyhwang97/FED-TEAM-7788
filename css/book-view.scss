@@ -1,0 +1,103 @@
+@import "./mixins"; // mixin.scss
+@import "./variables"; // variables.scss
+
+.book-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .img-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  .info-box {
+    border-top: 2px solid $black;
+    padding: 1rem 0;
+  }
+
+  .book-tit {
+    margin-bottom: 1rem;
+
+    p {
+      font-size: 16px;
+      font-weight: 700;
+      width: 100%;
+    }
+    span {
+      color: $darkgray;
+    }
+  }
+
+  .book-info {
+    li {
+      display: flex;
+      gap: 10px;
+      em {
+        font-weight: 500;
+        min-width: 50px;
+      }
+      span {
+        color: $darkgray;
+      }
+      &:not(:last-child) {
+        padding-bottom: 5px;
+      }
+    }
+  }
+  .book-text {
+    padding: 1rem 0;
+  }
+
+  .util-box {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .interest {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f8f8f8;
+  }
+}
+
+@include responsive(768px) {
+  .book-view {
+    .book-tit {
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@include responsive(1024px) {
+  .book-view {
+    flex-direction: row;
+    gap: 30px;
+    .img-box {
+      width: calc(40% - 15px);
+    }
+    .info-box {
+      width: calc(60% - 15px);
+    }
+    .book-tit {
+      p {
+        font-size: 24px;
+      }
+    }
+    .book-info {
+        li {
+            em {
+                min-width: 80px;
+            }
+        }
+    }
+  }
+
+  .btn-wrap {
+    flex-wrap: nowrap;
+  }
+}
