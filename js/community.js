@@ -26,10 +26,6 @@ const tabContent1 = `
         <p class="list-title">${v.title}</p>
         <p class="list-date">${v.date}</p>
         <p class="list-user">${v.user}</p>
-        <i class="fa-solid fa-chevron-up fa-flip-vertical"></i>
-      </div>
-      <div class="list-info">
-        <strong>${v.content}</strong>
       </div>
     </li>
     `
@@ -82,7 +78,7 @@ window.onload = () => {
   targetTab1.innerHTML = tabContent1;
   targetTab2.innerHTML = tabContent2;
   targetTab3.innerHTML = tabContent3;
-  const list = document.querySelectorAll(".list");
+  const list = document.querySelectorAll("#faq-tab>ul>li");
   const writeBtn = document.querySelector(".write-btn");
 
   ChangeTabContent();
