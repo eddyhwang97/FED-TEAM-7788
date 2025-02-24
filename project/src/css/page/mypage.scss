@@ -1,0 +1,285 @@
+// mypage.scss
+@import "../common/core";
+
+/** 마이페이지 컨텐츠 css **/
+
+body {
+  .page-cover {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .mypage-container {
+    max-width: 768px;
+    width: 100%;
+    // 1안 //
+    // background: #faf3e0; /* 백노지 느낌의 미색 */
+    // background: rgba(255, 248, 231, 0.9); /* 반투명한 아이보리 배경 */
+    // box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+    // background-blend-mode: multiply;
+
+    // 2안 //
+    border: 1px solid $mint;
+    border-radius: 5px;
+    padding: 20px;
+    .tit-wrap {
+      display: flex;
+      gap: 10px;
+      img {
+        width: 40px;
+      }
+    }
+  }
+  // .page-cover::before {
+  //   content: "";
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 100%;
+  //   background: repeating-linear-gradient(
+  //     to bottom,
+  //     rgba(0, 0, 0, 0.07) 0px,
+  //     rgba(0, 0, 0, 0.03) 2px
+  //   );
+  //   opacity: 0.3;
+  //   pointer-events: none;
+  // }
+
+  @include responsive(768px) {
+    .mypage-container {
+      max-width: 1440px;
+      width: 100%;
+    }
+  }
+
+  h2 {
+    font-size: 42px;
+    font-weight: $font-weight-bold;
+  }
+  .profile-wrap {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 18px;
+      border: 2px solid #439f6e;
+      padding: 14px;
+      border-radius: 5px;
+    }
+
+    .profile-image {
+      width: 50px;
+      border-radius: 50%;
+      strong{
+        padding-left: 5px;
+      }
+    }
+    .level-icon {
+      width: 50px;
+    }
+    .exp-bar-wrap {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .exp-bar {
+        width: 120px; /* 경험치 바 너비 */
+        height: 10px;
+        background-color: #ddd; /* 배경 색상 */
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        scale: 0.7;
+        .exp-fill {
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            #ffcc00,
+            #ff6600
+          ); /* 색상 그라데이션 */
+          border-radius: 5px;
+          width: 33%; /* 현재 경험치 */
+        }
+      }
+      .exp-text {
+        font-size: 12px;
+        font-weight: bold;
+        color: #333;
+        letter-spacing: 0.2px;
+      }
+    }
+
+    @include responsive(430px) {
+      .user-info {
+        gap: 15px;
+      }
+    }
+  }
+  @include responsive(400px) {
+    .profile-wrap{
+      justify-content: space-between;
+    }
+  }
+
+  .toggle-setting-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    .toggle-setting {
+      font-size: 20px;
+      cursor: pointer;
+      > img {
+        width: 16px;
+      }
+    }
+    .setting-menu-wrap {
+      font-size: 15px;
+      display: flex;
+      gap: 30px;
+      line-height: 30px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      margin-left: 10px;
+    }
+  }
+  .mypick-wrap {
+    margin-top: 25px;
+    .sub-tit-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      h3 {
+        display: flex;
+        gap: 10px;
+        img {
+          width: 20px;
+        }
+      }
+      .sort-container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: flex-end;
+        .sort-select {
+          position: relative;
+          height: 28px;
+          background-color: $white;
+          color: $darkgray;
+          border: 1px solid $gray;
+          border-radius: 10px;
+          width: 70%;
+          text-align: right;
+        }
+      }
+    }
+    .loan-list-wrap {
+      margin-top: 10px;
+      border-top: 3px double;
+      border-bottom: 3px double;
+      li:nth-child(-n + 4) {
+        border-bottom: 1px solid $gray;
+      }
+      article {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    h3 {
+      font-size: 25px;
+      font-weight: $font-weight-bold;
+    }
+    .move-loan-wrap {
+      display: flex;
+      justify-content: flex-end;
+      .move-loan-list {
+        margin-top: 5px;
+        margin-bottom: 50px;
+        font-size: 14px;
+        transition: 0.4s;
+        &:hover {
+          color: #00a791;
+        }
+      }
+    }
+    hr {
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+  }
+  .badge-wrap {
+    background: linear-gradient(135deg, #f9f5f0 0%, #f3ece4 100%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.05),
+      inset 0 0 10px rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../img/noise-texture.png") repeat;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    h3 {
+      font-size: 25px;
+      font-weight: $font-weight-bold;
+      margin-bottom: 25px;
+      display: flex;
+      gap: 10px;
+      img {
+        width: 20px;
+      }
+    }
+  }
+  .badge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 4열 */
+    grid-template-rows: repeat(2, auto); /* 10행 */
+    gap: 15px;
+
+    .badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+  }
+  // 미디어 쿼리 //
+  @include responsive(400px) {
+    .badge-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3열 */
+      .badge img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  @include responsive(768px) {
+    .badge-grid {
+      grid-template-columns: repeat(4, 1fr); /* 4열 */
+      .badge img {
+        // width: 150px;
+        // height: 150px;
+        max-width: 220px;
+        width: 100%;
+      }
+    }
+  }
+}

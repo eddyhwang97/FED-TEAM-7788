@@ -796,24 +796,24 @@ table {
 .content .page-title-area h1 {
   font-size: 2rem;
 }
-.content .page-title-area .search {
+.content .page-title-area .categry-search {
   position: relative;
   height: auto;
   height: 50px;
 }
-.content .page-title-area .search fieldset {
+.content .page-title-area .categry-search fieldset {
   border: none;
 }
-.content .page-title-area .search fieldset:focus {
+.content .page-title-area .categry-search fieldset:focus {
   outline: none;
 }
-.content .page-title-area .search input {
+.content .page-title-area .categry-search input {
   height: 100%;
 }
-.content .page-title-area .search input:focus {
+.content .page-title-area .categry-search input:focus {
   outline: none;
 }
-.content .page-title-area .search::after {
+.content .page-title-area .categry-search::after {
   content: "";
   width: 100%;
   height: 2px;
@@ -882,13 +882,14 @@ table {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .content .board-section .tab-content .table ul .list .list-header .list-title {
   width: 600px;
   text-align: left;
 }
 .content .board-section .tab-content .table ul .list .list-header .list-date {
-  width: 100px;
+  width: 120px;
 }
 .content .board-section .tab-content .table ul .list .list-header .list-user {
   width: 100px;
