@@ -1,10 +1,10 @@
-// 커뮤니티 SCSS -
-@import "./variables";
-@import "./mixins";
-@import "./font";
-@import "./common";
-@import "./layout.scss";
+@import "./mixins"; // mixin.scss
+@import "./variables"; // variables.scss
 
+// 커뮤니티 SCSS -
+.search-box-wrap {
+    margin-bottom: 40px;
+}
 // tab
 .tabs {
     display: flex;
@@ -36,7 +36,6 @@
             display: block;
             border-top: 2px solid $black;
         }
-
         .table-top {
             display: none;
         }
@@ -49,7 +48,14 @@
         }
 
         .list-header>p:not(:first-child) {
-            padding-top: 10px;
+            padding-top: 5px;
+        }
+
+
+        .list-date, .list-user {
+            display: inline-block;
+            padding-right: 10px;
+            color: $darkgray;
         }
 
         
@@ -67,6 +73,7 @@
         margin-bottom: 80px;
     }
 
+
     .tab-content {
         .table {
             .table-top {
@@ -82,6 +89,11 @@
 
             .list-header>p:not(:first-child) {
                 padding-top: 0;
+            }
+
+            .list-date, .list-user {
+                padding-right: 0;
+                color: $black;
             }
         }
 

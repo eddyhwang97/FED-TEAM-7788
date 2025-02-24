@@ -113,6 +113,8 @@ table {
   font-family: "Pretendard", sans-serif;
   font-weight: 400;
   letter-spacing: -1px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 // 반응형 스타일 적용
@@ -142,3 +144,9 @@ table {
 .point-color {
   color: $point-color !important;
 }
+
+// select 
+select {
+  background: $white url("../img/common/icon-down-gray.svg")  right 8px center/16px no-repeat;
+}
+

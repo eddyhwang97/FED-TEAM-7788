@@ -203,6 +203,9 @@ table {
   font-family: "Pretendard", sans-serif;
   font-weight: 400;
   letter-spacing: -1px;
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -229,6 +232,10 @@ table {
   color: #00A791 !important;
 }
 
+select {
+  background: #fff url("../img/common/icon-down-gray.svg") right 8px center/16px no-repeat;
+}
+
 #main {
   margin-top: 60px;
 }
@@ -239,7 +246,7 @@ table {
   }
 }
 .sub-top {
-  max-width: 1400px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 30px 20px;
   display: flex;
@@ -345,7 +352,7 @@ table {
 }
 
 .contents {
-  max-width: 1400px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 36px 20px 60px;
 }
@@ -418,10 +425,9 @@ table {
 .search-box {
   padding: 15px;
   background-color: #f8f8f8;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .search-box select {
-  background: #fff;
   border: 1px solid #999;
   border-radius: 5px;
   padding: 0 20px 0 8px;

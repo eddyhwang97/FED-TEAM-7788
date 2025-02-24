@@ -183,6 +183,9 @@ table {
   font-family: "Pretendard", sans-serif;
   font-weight: 400;
   letter-spacing: -1px;
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -207,4 +210,8 @@ table {
 }
 .point-color {
   color: #00A791 !important;
+}
+
+select {
+  background: #fff url("../img/common/icon-down-gray.svg") right 8px center/16px no-repeat;
 }

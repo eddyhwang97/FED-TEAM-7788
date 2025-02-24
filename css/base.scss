@@ -16,7 +16,7 @@
 }
 
 .sub-top {
-  max-width: 1400px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 30px 20px;
   display: flex;
@@ -126,7 +126,7 @@
 
 // sub-contents
 .contents {
-  max-width: 1400px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 36px 20px 60px;
 }
@@ -217,10 +217,9 @@
 .search-box {
   padding: 15px;
   background-color: #f8f8f8;
-  border-radius: 20px;
+  border-radius: 10px;
 
   select {
-    background: $white;
     border: 1px solid $gray;
     border-radius: 5px;
     padding: 0 20px 0 8px;
