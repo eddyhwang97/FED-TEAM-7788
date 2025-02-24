@@ -2,7 +2,6 @@
 @import "./font"; // font.scss
 @import "./mixins"; // mixin.scss
 @import "./variables"; // variables.scss
-@import "./reset"; // reset.scss
 @import "./common"; // common.scss
 
 // sub-layout
@@ -24,7 +23,6 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  border-bottom: 1px solid $lightgray;
 }
 
 .breadcrumb {
@@ -46,6 +44,7 @@
     a {
       display: block;
       line-height: 20px;
+      color: $darkgray;
     }
     .icon.home {
       width: 1rem;
@@ -157,20 +156,24 @@
 
   .sub-link {
     .url-copy {
-        transform: translateX(0);
-        left: auto;
-        right: 10px;
-        padding: 10px 20px;
-    
-        button {
-          width: 60px;
-          font-size: 16px;
-        }
-    
-        input {
-          width: calc(100% - 80px);
-        }
+      transform: translateX(0);
+      left: auto;
+      right: 10px;
+      padding: 10px 20px;
+
+      button {
+        width: 60px;
+        font-size: 16px;
       }
+
+      input {
+        width: calc(100% - 80px);
+      }
+    }
+  }
+
+  .contents {
+    padding: 60px 30px;
   }
 }
 

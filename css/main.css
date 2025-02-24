@@ -783,7 +783,7 @@ table {
 .book-contents .book-tab-cont {
   display: none;
   overflow: hidden;
-  padding-top: 30px;
+  padding: 30px 0;
 }
 .book-contents .book-tab-cont.on {
   display: block;
@@ -823,6 +823,6 @@ table {
     font-size: 42px;
   }
   .book-contents .book-tab-cont {
-    padding-top: 60px;
+    padding: 60px 0;
   }
 }

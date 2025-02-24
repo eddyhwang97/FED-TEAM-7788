@@ -2,7 +2,6 @@
 @import "./font"; // font.scss
 @import "./mixins"; // mixin.scss
 @import "./variables"; // variables.scss
-@import "./reset"; // reset.scss
 @import "./common"; // common.scss
 
 /** 메인 컨텐츠 css **/
@@ -646,7 +645,7 @@
   .book-tab-cont {
     display: none;
     overflow: hidden;
-    padding-top: 30px;
+    padding: 30px 0;
     &.on {
       display: block;
     }
@@ -698,7 +697,7 @@
 
   .book-contents {
     .book-tab-cont {
-      padding-top: 60px;
+      padding: 60px 0;
     }
   }
 }
