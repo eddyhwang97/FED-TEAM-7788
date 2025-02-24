@@ -301,7 +301,7 @@ body {
       border-radius: 15px;
     }
   }
-  // 미디어 쿼리 //
+  
   @include responsive(400px) {
     .badge-grid {
       grid-template-columns: repeat(3, 1fr); /* 3열 */
