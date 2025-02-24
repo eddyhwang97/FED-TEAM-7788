@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>칙칙북북 - 당신의 취향을 배달해 드립니다</title>
+    <!-- 리액트 전환 전 제이쿼리 및 스와이퍼 임시 연결-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- css s -->
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/community-hm.css" />
+    <!-- css e -->
+    <!-- js s -->
+    <script src="../js/base.js"></script>
+    <script src="../js/layout.js"></script>
+    <script type="module" src="../js/community.js"></script>
+    <!-- js e -->
+  </head>
+  <body>
+    <!-- wrapper s -->
+    <div class="wrapper">
+      <div class="dimm"></div>
+      <div class="search-dimm"></div>
+      <!-- header s -->
+      <header class="header">
+        <div class="header-top">
+          <ul class="link-list">
+            <li>
+              <a href="#"><span class="icon login"></span>로그인</a>
+            </li>
+            <li>
+              <a href="#"><span class="icon join"></span>회원가입</a>
+            </li>
+          </ul>
+        </div>
+        <div class="inner-header-wrap">
+          <div class="inner-header">
+            <h1 class="logo">
+              <img src="../img/common/logo-temp.svg" alt="로고" />
+            </h1>
+            <div class="gnb-wrap">
+              <div class="gnb-top">
+                <div class="gnb-util">
+                  <button class="account-btn">
+                    <span class="blind">나의공간</span>
+                  </button>
+                  <button class="menu-close-btn">
+                    <span class="blind">메뉴닫기</span>
+                  </button>
+                </div>
+              </div>
+              <nav class="gnb">
+                <ul class="gnb-list">
+                  <li class="dep1">
+                    <a href="#">자료검색</a>
+                    <ul class="dep2">
+                      <li><a href="#">통합검색</a></li>
+                      <li><a href="#">베스트셀러</a></li>
+                      <li><a href="#">신착도서</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">예약/대출</a>
+                    <ul class="dep2">
+                      <li><a href="#">도서대출</a></li>
+                      <li><a href="#">도서예약</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">이달의 도서</a>
+                    <ul class="dep2">
+                      <li><a href="#">편집장 추천 도서</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">열린공간</a>
+                    <ul class="dep2">
+                      <li><a href="#">공지사항</a></li>
+                      <li><a href="#">자유게시판</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">이벤트</a>
+                    <ul class="dep2">
+                      <li><a href="#">작가 강연 예약</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-util">
+              <button type="button" class="total-search-btn">
+                <span class="blind">통합검색 버튼</span>
+              </button>
+              <button type="button" class="search-close-btn">
+                <span class="blind">통합검색 닫기 버튼</span>
+              </button>
+              <button type="button" class="menu-btn">
+                <span class="blind">메뉴 버튼</span>
+              </button>
+            </div>
+            <div class="pc-header-util">
+              <button type="button" class="total-search-btn"></button>
+              <button type="button" class="search-close-btn"></button>
+            </div>
+          </div>
+        </div>
+        <div class="search-wrap">
+          <div class="search-form">
+            <form action="search.php">
+              <fieldset>
+                <legend class="blind">도서 통합검색 폼</legend>
+                <input
+                  type="text"
+                  id="mainSearchText"
+                  name="searchTxt"
+                  title="검색어"
+                  placeholder="찾으시는 도서가 있나요?"
+                />
+                <button type="button" class="total-search-btn"></button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </header>
+      <!-- header e -->
+      <!-- sub-container s -->
+      <div class="sub-container" id="main">
+        <!-- sub-top s -->
+        <div class="sub-top">
+          <ul class="breadcrumb">
+            <li class="home">
+              <a href="/"><span class="icon home"></span></a>
+            </li>
+            <li class="1depth"><a href="#">열린공간</a></li>
+            <li class="2depth"><a href="#">공지사항</a></li>
+          </ul>
+          <div class="title-box">
+            <h3 class="sub-title">공지사항</h3>
+            <ul class="sub-link">
+              <li class="link-copy">
+                <button type="button">
+                  <img src="../img/common/icon-link.svg" alt="링크 공유 버튼" />
+                </button>
+                <div class="url-copy">
+                  <input type="text" id="urlCopy" value="" />
+                  <label for="urlCopy"></label>
+                  <button type="button" onclick="fn_copyUrl();">복사</button>
+                </div>
+              </li>
+              <li class="link-print">
+                <button type="button" onclick="fn_print()">
+                  <img
+                    src="../img/common/icon-print.svg"
+                    alt="페이지 프린트 버튼"
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- sub-top e -->
+        <!-- contents s -->
+        <div class="contents">
+          <div class="content">
+            <!-- search-box s -->
+            <div class="search-box-wrap">
+              <div class="search-box input-type">
+                <select name="option" id="search-option">
+                  <option value="제목">제목</option>
+                  <option value="작성자">작성자</option>
+                  <option value="내용">내용</option>
+                </select>
+                <input type="text" />
+                <button class="search-button"></button>
+              </div>
+            </div>
+            <!-- search-box e -->
+            <!-- tab-section s -->
+            <div class="tab-section">
+              <div class="tabs">
+                <div
+                  data-tab-target="#announcement-tab"
+                  class="tab announcement-tab-button active"
+                >
+                  공지사항
+                </div>
+                <div data-tab-target="#faq-tab" class="tab faq-tab-button">
+                  FAQ
+                </div>
+                <div
+                  data-tab-target="#freeboard-tab"
+                  class="tab freeboard-tab-button"
+                >
+                  자유게시판
+                </div>
+              </div>
+            </div>
+            <!-- tab-section e -->
+            <!-- board-section s -->
+            <div class="board-section">
+              <div class="tab-content">
+                <div
+                  id="announcement-tab"
+                  data-tab-content
+                  class="table active"
+                >
+                    <div class="table-top">
+                        <ul>
+                            <li class="list-num">번호</li>
+                            <li class="list-title">제목</li>
+                            <li class="list-date">날짜</li>
+                            <li class="list-user">작성자</li>
+                        </ul>
+                    </div>
+                    <ul></ul>
+                </div>
+                <div id="faq-tab" data-tab-content class="table">
+                    <div class="table-top">
+                        <ul>
+                            <li class="list-num">번호</li>
+                            <li class="list-title">제목</li>
+                            <li class="list-date">날짜</li>
+                            <li class="list-user">작성자</li>
+                        </ul>
+                    </div>
+                  <ul></ul>
+                </div>
+                <div id="freeboard-tab" data-tab-content class="table">
+                    <div class="table-top">
+                        <ul>
+                            <li class="list-num">번호</li>
+                            <li class="list-title">제목</li>
+                            <li class="list-date">날짜</li>
+                            <li class="list-user">작성자</li>
+                        </ul>
+                    </div>
+                  <ul></ul>
+                </div>
+              </div>
+            </div>
+            <!-- board-section e -->
+            <!-- pagenate-section s -->
+            <div class="pagenate-section">
+              <button><i class="fa-solid fa-angle-left"></i></button>
+              <a href="">1</a>
+              <a href="">2</a>
+              <a href="">3</a>
+              <button><i class="fa-solid fa-angle-right"></i></button>
+            </div>
+            <!-- pagnat-section e -->
+            <!-- article-section s -->
+            <div class="article-section">
+              <div class="article-header">
+                <div class="article-title">
+                  <h3>책에 대한 리뷰는 어디서 보시나요?</h3>
+                </div>
+                <div class="writer-info">
+                  <div class="profile">한상화</div>
+                  <div class="date">2023-01-18</div>
+                </div>
+              </div>
+              <div class="article-content">
+                <p>책을 구매하기 전에 리뷰를 꼭 찾아보는 편인데,</p>
+                <p>어디에서 가장 신뢰할 만한 리뷰를 볼 수 있을까요?</p>
+                <p>저는 주로 서점 사이트나 블로그에서 찾는 편이에요.</p>
+                <p>여러분은 책 리뷰를 어디서 확인하시나요?</p>
+                <p>추천할 만한 사이트나 채널이 있다면 알려주세요!</p>
+              </div>
+              <div class="underilne"></div>
+              <div class="comment">
+                <h4>댓글</h4>
+                <div class="comment-list">
+                  <div class="comment-item">
+                    <div class="comment-writer">나오미</div>
+                    <div class="comment-content">
+                      <p>아주 좋은 정보 감사합니다!</p>
+                    </div>
+                    <div class="comment-date">2023-01-19</div>
+                  </div>
+                  <div class="comment-item">
+                    <div class="comment-writer">이순신</div>
+                    <div class="comment-content">
+                      <p>저는 움파룸파입니다!</p>
+                    </div>
+                    <div class="comment-date">2023-01-20</div>
+                  </div>
+                </div>
+                <div class="form-group write-comment">
+                  <textarea
+                    id="text-comment"
+                    name="content"
+                    placeholder="댓글을 남겨봐유~!"
+                    required
+                  ></textarea>
+                  <button>등록</button>
+                </div>
+              </div>
+            </div>
+            <!-- article-section e -->
+            <!-- post-section s -->
+            <div class="post-section">
+              <div class="write-btn">
+                <button type="button">글쓰기</button>
+              </div>
+              <div class="write-board">
+                <form
+                  action="write_process.php"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <div class="write-form">
+                    <div class="form-group title">
+                      <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value=""
+                        placeholder="제목"
+                        required
+                      />
+                    </div>
+                    <div class="form-group text-content">
+                      <textarea
+                        id="text-content"
+                        name="content"
+                        placeholder="내용을 입력하세요."
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="button-wrap">
+                      <div class="form-group submit-btn">
+                        <button type="submit">등록</button>
+                      </div>
+                      <div class="form-group close-btn">
+                        <button type="submit">닫기</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- post-section e -->
+          </div>
+        </div>
+        <!-- contents e -->
+      </div>
+      <!-- sub-container e -->
+      <!-- footer s -->
+      <footer class="footer">
+        <div class="inner">
+          <div class="footer-inner">
+            <div class="left">
+              <ul class="footer-link">
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">저작권보호정책</a></li>
+                <li><a href="#">이메일무단수집거부</a></li>
+                <li><a href="#">자주묻는질문</a></li>
+              </ul>
+            </div>
+            <div class="right">
+              <div class="family-site">
+                <button type="button" class="family-site-btn">
+                  유관기관 바로가기<span class="blind">열림</span>
+                </button>
+                <ul class="site-list">
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-btm">
+            <div class="footer-logo">
+              <img src="../img/common/logo-temp.svg" alt="하단 로고" />
+            </div>
+            <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- footer e -->
+    </div>
+    <!-- wrapper e -->
+  </body>
+</html>

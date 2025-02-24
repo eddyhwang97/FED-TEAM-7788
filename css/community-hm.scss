@@ -1,0 +1,168 @@
+// 커뮤니티 SCSS -
+@import "./variables";
+@import "./mixins";
+@import "./font";
+@import "./common";
+@import "./layout.scss";
+
+// tab
+.tabs {
+    display: flex;
+    margin-bottom: 40px;
+    .tab {
+        width: 33.33%;
+        padding: 15px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+        border: 1px solid $border-underline;
+        &+.tab {
+            border-left: none;
+        }
+        &.active {
+            border-color: $point-color;
+            color: $point-color;
+            box-shadow: 0 0 0 2px $point-color inset;
+            font-weight: 500;
+        }
+    }
+}
+
+.tab-content {
+    .table {
+        display: none;
+        &.active {
+            display: block;
+            border-top: 2px solid $black;
+        }
+
+        .table-top {
+            display: none;
+        }
+
+        >ul {
+            li {
+                padding: 16px 0;
+                border-bottom: 1px solid $border-underline;
+            }
+        }
+
+        .list-header>p:not(:first-child) {
+            padding-top: 10px;
+        }
+
+        
+    }
+}
+
+@include responsive(768px){
+    .tabs {
+        margin-bottom: 60px;
+    }
+}
+
+@include responsive(1024px){
+    .tabs {
+        margin-bottom: 80px;
+    }
+
+    .tab-content {
+        .table {
+            .table-top {
+                display: block;
+                > ul {
+                    display: flex;
+                    background: #f8f8f8;
+                    padding: 16px 0;
+                    border-bottom: 1px solid $black;
+                    text-align: center;
+                }
+            }
+
+            .list-header>p:not(:first-child) {
+                padding-top: 0;
+            }
+        }
+
+        .list-header {
+            display: flex;
+            text-align: center;
+            .list-title {
+                text-align: left;
+            }
+        }
+
+        .list-num {
+            width: 10%;
+        }
+        .list-title {
+            width: 60%;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .list-date {
+            width: 20%;
+        }
+        .list-user {
+            width: 10%;
+        }
+    }
+}
+
+#faq-tab {
+    .list-header {
+        p {
+            display: none;
+            &.list-title {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                &:hover {
+                    text-decoration: none;
+                }
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 1em;
+                    height: 1em;
+                    background: url("../img/common/icon-down-gray.svg") center / 100% no-repeat;
+                }
+            }
+        }
+    }
+
+    .list {
+        padding: 16px;
+        transition: all .3s;
+        &:hover {
+            background-color: #f8f8f8;
+        }
+    }
+
+    .table-top {
+        display: none;
+    }
+
+    .list-info {
+        max-height: 0;
+        overflow: hidden;
+        transition: .3s;
+    }
+
+    .list.active {
+        background: #f8f8f8;
+        .list-title {
+            font-weight: 600;
+        }
+        .list-title::after {
+            rotate: 180deg;
+        }
+        .list-info {
+            max-height: 200px;
+            padding-top: 1em;
+        }
+    }
+}
