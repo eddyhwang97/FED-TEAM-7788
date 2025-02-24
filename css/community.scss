@@ -26,7 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .search {
+    .categry-search {
       position: relative;
       height: auto;
       height: 50px;
@@ -115,12 +115,13 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
+              gap: 20px;
               .list-title {
                 width: 600px;
                 text-align: left;
               }
               .list-date {
-                width: 100px;
+                width: 120px;
               }
               .list-user {
                 width: 100px;
