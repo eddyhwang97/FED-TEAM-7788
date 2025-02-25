@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD's Pick</title>
+
+    <!-- CSS -->
+     <link rel="stylesheet" href="../css/md.css">
+
+     <!-- JS -->
+     <script type="module" src="../js/md.js"></script>
+     <!-- 리액트 전환 전 제이쿼리 및 스와이퍼 임시 연결-->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
 </head>
 <body>
-    
+    <div class="my-carousel bg-darker">
+        <div class="swiper my-carousel__swiper">
+            <h2>이달의 추천 도서</h2>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><div class="swiper-card swiper-card--1"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--2"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--3"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--4"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--5"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--6"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--7"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--8"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--9"><img src="../img/img-9961234799.png"><div></div></div></div>
+            <div class="swiper-slide"><div class="swiper-card swiper-card--10"><img src="../img/img-9961234799.png"><div></div></div></div>
+          </div>
+        </div>
+      
+        <div class="my-carousel__actions">
+          <button class="btn btn--subtle my-carousel__control my-carousel__control--prev">Prev</button>
+          <button class="btn btn--subtle my-carousel__control my-carousel__control--next">Next</button>
+        </div>
+      </div>
+      
 </body>
 </html>
