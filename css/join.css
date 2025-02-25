@@ -223,8 +223,10 @@ main {
   height: 90vh;
 }
 main .join-wrap {
-  border: 1px solid #999;
-  padding: 80px 70px;
+  max-width: 450px;
+  width: 100%;
+  border: none;
+  padding: 10px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -248,7 +250,7 @@ main .join-wrap .input-wrap {
   gap: 10px;
 }
 main .join-wrap .input-wrap .input-box {
-  width: 350px;
+  width: 100%;
   border: 1px solid #111;
   border-radius: 2px;
   padding: 14px 18px;
@@ -284,7 +286,7 @@ main .join-wrap .validation-wrap .password-strength {
   justify-content: center;
 }
 main .join-wrap .validation-wrap .bar {
-  width: 112px;
+  width: 30%;
   height: 5px;
   background-color: #999;
   border-radius: 5px;
@@ -305,4 +307,10 @@ main .join-wrap .join-btn {
   background-color: #00A791;
   font-weight: 600;
   font-size: 18px;
+}
+@media screen and (min-width: 400px) {
+  main .join-wrap {
+    border: 1px solid #999;
+    padding: 30px 50px;
+  }
 }

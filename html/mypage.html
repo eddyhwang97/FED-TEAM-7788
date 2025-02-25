@@ -7,7 +7,9 @@
     <!-- css -->
     <link rel="stylesheet" href="../css/mypage.css" />
     <!-- js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      <script src="../js/mypage.js"></script>
+     <script src="../js/layout.js"></script>
   </head>
   <body>
     <!-- header -->
@@ -55,94 +57,96 @@
           </ul>
         </div>
         </section>
-        <!-- My Pick -->
-         <!-- <hr> -->
-        <section class="mypick-wrap">
-          <div class="sub-tit-wrap">
-            <h3><img src="../img/main/icon-section-tit.svg" alt="section icon">My Pick</h3>
-            <div class="sort-container">
-              <label for="sort">정렬</label>
-              <select id="sort" class="sort-select">
-                <option value="loan-days">대출종료일</option>
-                <option value="alphabetical">가나다</option>
-              </select>
+        <div class="layout-wrap">
+          <!-- My Pick -->
+          <section class="mypick-wrap">
+            <div class="sub-tit-wrap">
+              <h3><img src="../img/main/icon-section-tit.svg" alt="section icon">My Pick</h3>
+              <div class="right">
+                <div class="family-site">
+                    <button type="button" class="family-site-btn">정렬<span class="blind">열림</span></button>
+                    <ul class="site-list">
+                        <li><a href="#" target="_blank" title="새창열림">남은 대출일</a></li>
+                        <li><a href="#" target="_blank" title="새창열림">가나다</a></li>
+                    </ul>
+                </div>
             </div>
+            </div>
+            <ul class="loan-list-wrap">
+              <li class="loan-list">
+                <article class="loan-item">
+                  <span class="book-title">(책 제목)</span>
+                  <time class="due-date" datetime="2025-03-01"
+                    >~ 2025. 03. 01 (토)</time
+                  >
+                </article>
+              </li>
+              <li class="loan-list">
+                <article class="loan-item">
+                  <span class="book-title">(책 제목)</span>
+                  <time class="due-date" datetime="2025-03-02"
+                    >~ 2025. 03. 02 (일)</time
+                  >
+                </article>
+              </li>
+              <li class="loan-list">
+                <article class="loan-item">
+                  <span class="book-title">(책 제목)</span>
+                  <time class="due-date" datetime="2025-03-03"
+                    >~ 2025. 03. 03 (월)</time
+                  >
+                </article>
+              </li>
+              <li class="loan-list">
+                <article class="loan-item">
+                  <span class="book-title">(책 제목)</span>
+                  <time class="due-date" datetime="2025-03-04"
+                    >~ 2025. 03. 04 (화)</time
+                  >
+                </article>
+              </li>
+              <li class="loan-list">
+                <article class="loan-item">
+                  <span class="book-title">(책 제목)</span>
+                  <time class="due-date" datetime="2025-03-05"
+                    >~ 2025. 03. 05 (수)</time
+                  >
+                </article>
+              </li>
+            </ul>
+            <div class="move-loan-wrap">
+            <button href="#" class="move-loan-list">대출목록 바로가기</button>
           </div>
-          <ul class="loan-list-wrap">
-            <li class="loan-list">
-              <article class="loan-item">
-                <span class="book-title">(책 제목)</span>
-                <!-- 대출일 계산기능 추가필요 , 회원 마감 임박 대출목록 5개추출해서 출력하는 기능 -->
-                <time class="due-date" datetime="2025-03-01"
-                  >~ 2025. 03. 01 (토)</time
-                >
-              </article>
-            </li>
-            <li class="loan-list">
-              <article class="loan-item">
-                <span class="book-title">(책 제목)</span>
-                <time class="due-date" datetime="2025-03-02"
-                  >~ 2025. 03. 02 (일)</time
-                >
-              </article>
-            </li>
-            <li class="loan-list">
-              <article class="loan-item">
-                <span class="book-title">(책 제목)</span>
-                <time class="due-date" datetime="2025-03-03"
-                  >~ 2025. 03. 03 (월)</time
-                >
-              </article>
-            </li>
-            <li class="loan-list">
-              <article class="loan-item">
-                <span class="book-title">(책 제목)</span>
-                <time class="due-date" datetime="2025-03-04"
-                  >~ 2025. 03. 04 (화)</time
-                >
-              </article>
-            </li>
-            <li class="loan-list">
-              <article class="loan-item">
-                <span class="book-title">(책 제목)</span>
-                <time class="due-date" datetime="2025-03-05"
-                  >~ 2025. 03. 05 (수)</time
-                >
-              </article>
-            </li>
-          </ul>
-          <div class="move-loan-wrap">
-          <button href="#" class="move-loan-list">대출목록 바로가기</button>
+          </section>
+          <!-- badge -->
+          <section class="badge-wrap">
+            <h3><img src="../img/main/icon-section-tit.svg" alt="section icon">나의 스탬프</h3>
+            <span>나만의 여정을 완성해보세요!</span>
+            <div class="badge-grid">
+              <!-- grid : 4 * 2 (초기버전은 총 5개 예정) -->
+              <div class="badge">
+                <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="뱃지1" />
+                <span></span>
+              </div>
+              <div class="badge">
+                <img src="../img/login,member,mypage/img-badge-temp.svg" alt="뱃지2" />
+                <span></span>
+              </div>
+              <div class="badge">
+                <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="뱃지3" />
+                <span></span>
+              </div>
+              <div class="badge">
+                <img src="../img/login,member,mypage/img-badge-temp3.svg" alt="뱃지4" />
+                <span></span>
+              </div>
+              <div class="badge">
+                <img src="../img/login,member,mypage/img-badge-temp4.jpg" alt="뱃지5" />
+                <span></span>
+              </div>
+            </div>
+          </section>
         </div>
-          <!-- <hr /> -->
-        </section>
-        <!-- badge -->
-        <section class="badge-wrap">
-          <h3><img src="../img/main/icon-section-tit.svg" alt="section icon">나의 스탬프</h3>
-          <div class="badge-grid">
-            <!-- grid : 4 * 2 (초기버전은 총 5개 예정) -->
-            <div class="badge">
-              <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="뱃지1" />
-              <span></span>
-            </div>
-            <div class="badge">
-              <img src="../img/login,member,mypage/img-badge-temp.svg" alt="뱃지2" />
-              <span></span>
-            </div>
-            <div class="badge">
-              <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="뱃지3" />
-              <span></span>
-            </div>
-            <div class="badge">
-              <img src="../img/login,member,mypage/img-badge-temp3.svg" alt="뱃지4" />
-              <span></span>
-            </div>
-            <div class="badge">
-              <img src="../img/login,member,mypage/img-badge-temp4.jpg" alt="뱃지5" />
-              <span></span>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
   </body>
