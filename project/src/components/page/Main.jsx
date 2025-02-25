@@ -1,14 +1,16 @@
 //  Main 컴포넌트 - Main.jsx
-
+import { useRef } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/pagination";
 
 import "../../css/page/main.scss";
 import "../../js/function/main.js";
 
 function Main() {
+  const paginationRef = useRef(null);
   return (
     <>
       <section className="section intro">
@@ -189,7 +191,10 @@ function Main() {
                 </div>
                 <div className="slide-control">
                   <div className="btn-prev"></div>
-                  <div className="swiper-pagination"></div>
+                  <div ref={paginationRef} class="swiper-pagination">
+                    <span class="swiper-pagination-current"></span> /{" "}
+                    <span class="swiper-pagination-total"></span>
+                  </div>
                   <div className="btn-next"></div>
                 </div>
               </div>
@@ -201,14 +206,24 @@ function Main() {
                   breakpoints={{
                     500: { slidesPerView: 1.5, centeredSlides: true },
                     768: { slidesPerView: 3, centeredSlides: true },
-                    1024: { centeredSlides: false },
+                    1024: { slidesPerView: 3, centeredSlides: false },
                   }}
-                  pagination={{ el: ".slide-control .swiper-pagination" }}
+                  pagination={{
+                    el: ".book-index",
+                    type: "fraction",
+                  }}
                   navigation={{
                     nextEl: ".slide-control .btn-next",
                     prevEl: ".slide-control .btn-prev",
                   }}
                   className="monthlySwiper book-img-list"
+                  onSwiper={(swiper) => {
+                    if (paginationRef.current) {
+                      swiper.params.pagination.el = paginationRef.current;
+                      swiper.pagination.init();
+                      swiper.pagination.update();
+                    }
+                  }}
                 >
                   {[...Array(5)].map((_, index) => (
                     <SwiperSlide key={index} className="item">
@@ -275,7 +290,10 @@ function Main() {
                 >
                   {[...Array(10)].map((_, index) => (
                     <SwiperSlide key={index} className="item">
-                      <img src="../img/book/img-996133762.jpg" alt="도서 이미지" />
+                      <img
+                        src="../img/book/img-996133762.jpg"
+                        alt="도서 이미지"
+                      />
                     </SwiperSlide>
                   ))}
                 </Swiper>

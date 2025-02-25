@@ -296,6 +296,7 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
+        line-clamp: 1;
         width: calc(100% - 60px);
         color: $black;
         transition: 0.3s;
@@ -426,6 +427,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     width: calc(100% - 50px);
   }
 }
