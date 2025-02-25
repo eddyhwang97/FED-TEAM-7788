@@ -5,7 +5,7 @@ import "../../css/common/_core.scss";
 import { Link } from "react-router-dom";
 import Gnb from "../module/Gnb";
 import { menu2 } from "../../js/data/gnb_data";
-// import * as layoutFn from "../../js/function/layout";
+import * as layoutFn from "../../js/function/layout.js";
 
 export default function TopArea() {
   return (

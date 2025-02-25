@@ -17,29 +17,20 @@ function ChangeTabContent() {
       tab.classList.add("active");
     });
   });
-}
+};
 //  ChangeTabContent e
 
 // ToggleActiveFn s
-function ToggleActiveFn(target) {
-  if (target.length === 1) {
-    target.addEventListener("click", () => {
-      target.classList.toggle("active");
-    });
-  } else if (target.length > 1) {
-    target.forEach((t) => {
-      t.addEventListener("click", () => {
-        t.classList.toggle("active");
-      });
-    });
-  }
-}
+const ToggleActiveFn = (target) => {
+  target.addEventListener("click", () => {
+    target.classList.toggle("active");
+  });
+};
 // ParentToggleActiveFn s
 function ParentToggleActiveFn(target) {
   target.addEventListener("click", () => {
     target.parentElement.classList.toggle("active");
   });
 }
-
 
 export { ChangeTabContent, ToggleActiveFn, ParentToggleActiveFn };
