@@ -211,36 +211,36 @@
                   data-tab-content
                   class="table active"
                 >
-                    <div class="table-top">
-                        <ul>
-                            <li class="list-num">번호</li>
-                            <li class="list-title">제목</li>
-                            <li class="list-date">날짜</li>
-                            <li class="list-user">작성자</li>
-                        </ul>
-                    </div>
-                    <ul></ul>
+                  <div class="table-top">
+                    <ul>
+                      <li class="list-num">번호</li>
+                      <li class="list-title">제목</li>
+                      <li class="list-date">날짜</li>
+                      <li class="list-user">작성자</li>
+                    </ul>
+                  </div>
+                  <ul></ul>
                 </div>
                 <div id="faq-tab" data-tab-content class="table">
-                    <div class="table-top">
-                        <ul>
-                            <li class="list-num">번호</li>
-                            <li class="list-title">제목</li>
-                            <li class="list-date">날짜</li>
-                            <li class="list-user">작성자</li>
-                        </ul>
-                    </div>
+                  <div class="table-top">
+                    <ul>
+                      <li class="list-num">번호</li>
+                      <li class="list-title">제목</li>
+                      <li class="list-date">날짜</li>
+                      <li class="list-user">작성자</li>
+                    </ul>
+                  </div>
                   <ul></ul>
                 </div>
                 <div id="freeboard-tab" data-tab-content class="table">
-                    <div class="table-top">
-                        <ul>
-                            <li class="list-num">번호</li>
-                            <li class="list-title">제목</li>
-                            <li class="list-date">날짜</li>
-                            <li class="list-user">작성자</li>
-                        </ul>
-                    </div>
+                  <div class="table-top">
+                    <ul>
+                      <li class="list-num">번호</li>
+                      <li class="list-title">제목</li>
+                      <li class="list-date">날짜</li>
+                      <li class="list-user">작성자</li>
+                    </ul>
+                  </div>
                   <ul></ul>
                 </div>
               </div>
@@ -248,11 +248,11 @@
             <!-- board-section e -->
             <!-- pagenate-section s -->
             <div class="pagenate-section">
-              <button><i class="fa-solid fa-angle-left"></i></button>
-              <a href="">1</a>
-              <a href="">2</a>
-              <a href="">3</a>
-              <button><i class="fa-solid fa-angle-right"></i></button>
+              <button type="button" class="btn-prev"></button>
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+              <button type="button" class="btn-next"></button>
             </div>
             <!-- pagnat-section e -->
             <!-- article-section s -->
@@ -267,31 +267,45 @@
                 </div>
               </div>
               <div class="article-content">
+                <img src="../img/img-9962318222.png" alt="테스트 이미지" />
                 <p>책을 구매하기 전에 리뷰를 꼭 찾아보는 편인데,</p>
                 <p>어디에서 가장 신뢰할 만한 리뷰를 볼 수 있을까요?</p>
                 <p>저는 주로 서점 사이트나 블로그에서 찾는 편이에요.</p>
                 <p>여러분은 책 리뷰를 어디서 확인하시나요?</p>
                 <p>추천할 만한 사이트나 채널이 있다면 알려주세요!</p>
               </div>
-              <div class="underilne"></div>
+              <div class="underline"></div>
               <div class="comment">
                 <h4>댓글</h4>
-                <div class="comment-list">
-                  <div class="comment-item">
-                    <div class="comment-writer">나오미</div>
+                <ul class="comment-list">
+                  <li class="comment-item">
+                    <div class="comment-top">
+                      <p class="comment-writer">나오미</p>
+                      <span class="comment-date">2023-01-19</span>
+                    </div>
                     <div class="comment-content">
                       <p>아주 좋은 정보 감사합니다!</p>
                     </div>
-                    <div class="comment-date">2023-01-19</div>
-                  </div>
-                  <div class="comment-item">
-                    <div class="comment-writer">이순신</div>
-                    <div class="comment-content">
-                      <p>저는 움파룸파입니다!</p>
+                  </li>
+                  <li class="comment-item">
+                    <div class="comment-top">
+                      <p class="comment-writer">나오미</p>
+                      <span class="comment-date">2023-01-19</span>
                     </div>
-                    <div class="comment-date">2023-01-20</div>
-                  </div>
-                </div>
+                    <div class="comment-content">
+                      <p>아주 좋은 정보 감사합니다!</p>
+                    </div>
+                  </li>
+                  <li class="comment-item">
+                    <div class="comment-top">
+                      <p class="comment-writer">나오미</p>
+                      <span class="comment-date">2023-01-19</span>
+                    </div>
+                    <div class="comment-content">
+                      <p>아주 좋은 정보 감사합니다!</p>
+                    </div>
+                  </li>
+                </ul>
                 <div class="form-group write-comment">
                   <textarea
                     id="text-comment"
@@ -299,16 +313,14 @@
                     placeholder="댓글을 남겨봐유~!"
                     required
                   ></textarea>
-                  <button>등록</button>
+                  <button type="button" class="register-btn">등록</button>
                 </div>
               </div>
             </div>
             <!-- article-section e -->
             <!-- post-section s -->
             <div class="post-section">
-              <div class="write-btn">
-                <button type="button">글쓰기</button>
-              </div>
+              <button type="button" class="write-btn">글쓰기</button>
               <div class="write-board">
                 <form
                   action="write_process.php"
@@ -334,13 +346,9 @@
                         required
                       ></textarea>
                     </div>
-                    <div class="button-wrap">
-                      <div class="form-group submit-btn">
-                        <button type="submit">등록</button>
-                      </div>
-                      <div class="form-group close-btn">
-                        <button type="submit">닫기</button>
-                      </div>
+                    <div class="btn-wrap">
+                      <button type="submit" class="submit-btn">등록</button>
+                      <button type="button" class="close-btn">닫기</button>
                     </div>
                   </div>
                 </form>
