@@ -1,7 +1,7 @@
 //  Community 컴포넌트 - Community.jsx
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
-import { ChangeTabContent, ToggleActiveFn, ParentToggleActiveFn } from "../../js/function/Community_Fn.jsx";
+import { ChangeTabContent, ToggleActiveFn, SearchFn } from "../../js/function/Community_Fn.jsx";
 
 function Community() {
   // set communityData in LocalStorage
@@ -11,9 +11,11 @@ function Community() {
   const faqList = communityData.filter((x) => x.type === "faq").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1));
   const freeBoardList = communityData.filter((x) => x.type === "freeboard").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1));
 
+  const [option,setOption] = useState("제목")
   // 의존성 x , 랜더링 후 매번 실행
   useEffect(()=>{
     ChangeTabContent();
+    SearchFn();
   });
   // 의존성 o 
   useEffect(()=>{
@@ -71,7 +73,7 @@ function Community() {
           {/* <!-- search-box s --> */}
           <div className="search-box-wrap">
             <div className="search-box input-type">
-              <select name="option" id="search-option">
+              <select name="option" id="search-option" >
                 <option value="제목">제목</option>
                 <option value="작성자">작성자</option>
                 <option value="내용">내용</option>
@@ -178,6 +180,9 @@ function Community() {
             <a href="#">2</a>
             <a href="#">3</a>
             <button type="button" className="btn-next"></button>
+            <button type="button" className="write-btn">
+              글쓰기
+            </button>
           </div>
           {/* <!-- pagnat-section e --> */}
           {/* <!-- article-section s --> */}
@@ -192,7 +197,7 @@ function Community() {
               </div>
             </div>
             <div className="article-content">
-              <img src="../img/img-9962318222.png" alt="테스트 이미지" />
+              <img src="../img/book/img-9962318222.jpg" alt="테스트 이미지" />
               <p>책을 구매하기 전에 리뷰를 꼭 찾아보는 편인데,</p>
               <p>어디에서 가장 신뢰할 만한 리뷰를 볼 수 있을까요?</p>
               <p>저는 주로 서점 사이트나 블로그에서 찾는 편이에요.</p>
@@ -242,9 +247,7 @@ function Community() {
           {/* <!-- article-section e --> */}
           {/* <!-- post-section s --> */}
           <div className="post-section">
-            <button type="button" className="write-btn">
-              글쓰기
-            </button>
+            
             <div className="write-board">
               <form action="write_process.php" method="post" encType="multipart/form-data">
                 <div className="write-form">

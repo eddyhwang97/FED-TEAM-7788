@@ -180,7 +180,8 @@
 
 // pagenation
 .pagenate-section {
-  padding-top: 20px;
+  position: relative;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,6 +201,18 @@
       transform: rotate(-180deg);
     }
   }
+  .write-btn {
+    position: absolute;
+    right: 0;
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $darkmint;
+    color: $white;
+}
 }
 
 // article
@@ -302,16 +315,7 @@
 
 // post
 
-.write-btn {
-    width: 130px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $darkmint;
-    color: $white;
-}
+
 
 .write-board {
   border-top: 2px solid $black;

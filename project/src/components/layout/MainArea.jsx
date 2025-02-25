@@ -8,7 +8,7 @@ export default function MainArea(){
 
     return (
         <main className="main-container" id="main">
-            <Outlet element={<Main/>}/>
+            <Outlet/>
         </main>
     );
 

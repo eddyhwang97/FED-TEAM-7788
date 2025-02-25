@@ -1,4 +1,4 @@
-// community_fn JS
+// community_fn.jsx
 
 // ChangeTabContent s
 function ChangeTabContent() {
@@ -40,7 +40,16 @@ function ChangeTabContent() {
       target.parentElement.classList.toggle("active");
     });
   }
+  const SearchFn = ()=>{
+    const list = document.querySelectorAll(".list");
+    const searchTxt = document.querySelector(".search-box-wrap .search-box input");
+    const option = document.querySelector("#search-option").value;
+
+    
+
+    console.log(list,searchTxt,option);
+  }
   
   
-  export { ChangeTabContent, ToggleActiveFn, ParentToggleActiveFn };
+  export { ChangeTabContent, ToggleActiveFn, ParentToggleActiveFn, SearchFn };
   

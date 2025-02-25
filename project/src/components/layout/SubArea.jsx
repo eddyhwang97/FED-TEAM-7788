@@ -9,17 +9,9 @@ import Login from "../page/Login";
 import Mypage from "../page/Mypage";
 import Error from "../page/Error";
 
-export default function MainArea() {
+export default function SubArea() {
   return (
     <main className="sub-container" id="main">
-      <Outlet />
-      <SubTop />
-      <Book />
-      <Community />
-      <Join />
-      <Login />
-      <Mypage />
-      <Error />
     </main>
   );
 } //////////// MainArea 컴포넌트 ///////////

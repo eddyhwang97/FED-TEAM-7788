@@ -21,7 +21,7 @@ function Gnb(props) {
         <ul className="gnb-list">
           {menu.map((v, i) => (
             <li className="dep1" key={i}>
-              <Link to={v.link}>{v.txt}</Link>
+              <Link to={v.sub[0].link}>{v.txt}</Link>
               <ul className="dep2">
                 {v.sub.map((v, i) => (
                   <li key={i}>

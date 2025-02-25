@@ -13,7 +13,6 @@ export default function Layout() {
     <>
       <TopArea />
       <MainArea />
-      <SubArea />
       <FooterArea />
     </>
   );
