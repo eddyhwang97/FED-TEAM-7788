@@ -37,7 +37,81 @@
   -moz-text-size-adjust: 100%;
        text-size-adjust: 100%;
   cursor: default;
-  line-height: 1.5;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  -moz-tab-size: 4;
+    -o-tab-size: 4;
+       tab-size: 4;
+}
+
+html, body {
+  height: 100%;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+address, em {
+  font-style: normal;
+}
+
+fieldset {
+  border: 0;
+}
+
+html {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+}
+
+iframe {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+:root {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+       text-size-adjust: 100%;
+  cursor: default;
+  line-height: 1.4;
   overflow-wrap: break-word;
   word-break: break-word;
   -moz-tab-size: 4;
@@ -97,6 +171,7 @@ body {
   font-size: 14px;
   letter-spacing: -1px;
   line-height: 1.4;
+  color: #111;
 }
 body.on {
   overflow: hidden;
@@ -179,6 +254,18 @@ body.on {
   color: #fff;
 }
 
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
 input,
 select,
 textarea,
@@ -213,6 +300,10 @@ table {
     font-size: 18px;
   }
 }
+.point-color {
+  color: #00A791 !important;
+}
+
 /** 회원가입 컨텐츠 css **/
 main {
   font-family: "Pretendard", sans-serif;
@@ -223,8 +314,10 @@ main {
   height: 90vh;
 }
 main .join-wrap {
-  border: 1px solid #999;
-  padding: 80px 70px;
+  max-width: 450px;
+  width: 100%;
+  border: none;
+  padding: 10px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -248,7 +341,7 @@ main .join-wrap .input-wrap {
   gap: 10px;
 }
 main .join-wrap .input-wrap .input-box {
-  width: 350px;
+  width: 100%;
   border: 1px solid #111;
   border-radius: 2px;
   padding: 14px 18px;
@@ -284,7 +377,7 @@ main .join-wrap .validation-wrap .password-strength {
   justify-content: center;
 }
 main .join-wrap .validation-wrap .bar {
-  width: 112px;
+  width: 30%;
   height: 5px;
   background-color: #999;
   border-radius: 5px;
@@ -305,4 +398,10 @@ main .join-wrap .join-btn {
   background-color: #00A791;
   font-weight: 600;
   font-size: 18px;
+}
+@media screen and (min-width: 400px) {
+  main .join-wrap {
+    border: 1px solid #999;
+    padding: 30px 50px;
+  }
 }

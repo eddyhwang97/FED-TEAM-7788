@@ -371,10 +371,8 @@
     }
   }
 
-  .inner-header-wrap.open {
-    .inner-header {
-      border-bottom: 1px solid $lightgray;
-    }
+  .header.active::before {
+    bottom: 275px;
   }
 
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
@@ -519,7 +517,7 @@
     }
   }
 
-  .family-site {
+  .family-site { 
     position: relative;
     height: 40px;
     background-color: $white;

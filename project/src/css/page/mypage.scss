@@ -1,9 +1,5 @@
 // mypage.scss
-@import "./mixins"; // mixin.scss
-@import "./font"; // font.scss
-@import "./variables"; // variables.scss
-@import "./reset"; // reset.scss
-@import "./common"; // common.scss
+@import "../common/core";
 
 /** 마이페이지 컨텐츠 css **/
 

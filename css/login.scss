@@ -14,17 +14,19 @@ main {
   align-items: center;
   height: 80vh;
   .login-wrap {
-    border: 1px solid $gray;
-    padding: 80px 70px;
-    border-radius: 5px;
+    max-width: 350px;
+    width: 100%;
     display: flex;
+    padding: 10px;
+    border: none;
     flex-direction: column;
     .tit-wrap{
+      max-width: 350px;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
-    
     h2{
         font-weight: 600;
         font-size: 30px
@@ -38,23 +40,17 @@ main {
       flex-direction: column;
       gap: 10px;
       .input-box {
-        width: 350px;
+        max-width: 350px;
+        width: 100%;
         border: 1px solid $black;
         border-radius: 2px;
         padding: 14px 18px;
         height: 50px;
       }
     }
-    .input-box {
-      border: 1px solid $black;
-      border-radius: 2px;
-      height: 30px;
-      padding: 14px 18px;
-      height: 50px;
-      opacity: 0.5;
-    }
     .login-btn,
     .join-btn {
+      max-width: 350px;
       width: 100%;
       height: 50px;
       padding: 10px;
@@ -66,10 +62,20 @@ main {
       background-color: $mint;
     }
     .divider {
+      max-width: 350px;
       width: 100%;
       border: none;
       border-top: 1px solid #ddd;
       margin: 10px 0;
     }
+  }
+  
+  @include responsive(400px) {
+   .login-wrap{
+  
+    border: 1px solid $gray;
+    padding: 15px 20px 25px 20px;
+    border-radius: 5px;
+   }
   }
 }

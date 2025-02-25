@@ -37,7 +37,81 @@
   -moz-text-size-adjust: 100%;
        text-size-adjust: 100%;
   cursor: default;
-  line-height: 1.5;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  -moz-tab-size: 4;
+    -o-tab-size: 4;
+       tab-size: 4;
+}
+
+html, body {
+  height: 100%;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+address, em {
+  font-style: normal;
+}
+
+fieldset {
+  border: 0;
+}
+
+html {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+}
+
+iframe {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+:root {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+       text-size-adjust: 100%;
+  cursor: default;
+  line-height: 1.4;
   overflow-wrap: break-word;
   word-break: break-word;
   -moz-tab-size: 4;
@@ -97,6 +171,7 @@ body {
   font-size: 14px;
   letter-spacing: -1px;
   line-height: 1.4;
+  color: #111;
 }
 body.on {
   overflow: hidden;
@@ -179,6 +254,18 @@ body.on {
   color: #fff;
 }
 
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
 input,
 select,
 textarea,
@@ -213,6 +300,10 @@ table {
     font-size: 18px;
   }
 }
+.point-color {
+  color: #00A791 !important;
+}
+
 /** 마이페이지 컨텐츠 css **/
 body .page-cover {
   width: 100%;
@@ -223,7 +314,6 @@ body .page-cover {
 body .mypage-container {
   max-width: 768px;
   width: 100%;
-  border: 1px solid #00A791;
   border-radius: 5px;
   padding: 20px;
 }
@@ -236,8 +326,18 @@ body .mypage-container .tit-wrap img {
 }
 @media screen and (min-width: 768px) {
   body .mypage-container {
-    max-width: 1440px;
+    max-width: 100%;
     width: 100%;
+  }
+  body .mypage-container .layout-wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+  body .mypage-container .layout-wrap .mypick-wrap {
+    width: 50%;
+  }
+  body .mypage-container .layout-wrap .badge-wrap {
+    width: 45%;
   }
 }
 body h2 {
@@ -349,15 +449,53 @@ body .mypick-wrap .sub-tit-wrap .sort-container {
   align-items: center;
   justify-content: flex-end;
 }
-body .mypick-wrap .sub-tit-wrap .sort-container .sort-select {
+body .mypick-wrap .family-site {
   position: relative;
-  height: 28px;
+  height: 40px;
   background-color: #fff;
   color: #666;
   border: 1px solid #999;
   border-radius: 10px;
-  width: 70%;
-  text-align: right;
+}
+body .mypick-wrap .family-site button {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+body .mypick-wrap .family-site button::after {
+  content: "";
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: url("../img/common/icon-down-gray.svg");
+}
+body .mypick-wrap .family-site button.active::after {
+  transform: rotate(180deg);
+}
+body .mypick-wrap .family-site .site-list {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  bottom: 42px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #999;
+  color: #666;
+  border-radius: 10px;
+  padding: 5px 0;
+}
+body .mypick-wrap .family-site .site-list > li {
+  padding: 5px 16px;
+}
+body .mypick-wrap .family-site .site-list > li > a {
+  transition: 0.3s;
+  display: block;
+  height: 100%;
+}
+body .mypick-wrap .family-site .site-list > li > a:hover {
+  color: #111;
 }
 body .mypick-wrap .loan-list-wrap {
   margin-top: 10px;
@@ -407,21 +545,24 @@ body .badge-wrap::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("../img/noise-texture.png") repeat;
   opacity: 0.1;
   pointer-events: none;
 }
 body .badge-wrap h3 {
   font-size: 25px;
   font-weight: 700;
-  margin-bottom: 25px;
   display: flex;
   gap: 10px;
 }
 body .badge-wrap h3 img {
   width: 20px;
 }
+body .badge-wrap span {
+  color: dimgrey;
+  font-size: 14px;
+}
 body .badge-grid {
+  margin-top: 25px;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 4열 */
   grid-template-rows: repeat(2, auto); /* 10행 */

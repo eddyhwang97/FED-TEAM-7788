@@ -1,11 +1,13 @@
 @import "./mixins"; // mixin.scss
 @import "./variables"; // variables.scss
+@import "./reset"; // reset.scss
 
 // common.css
 body {
   font-size: 14px; // 수정예정
   letter-spacing: -1px;
   line-height: 1.4;
+  color: $black;
 
   &.on {
     overflow: hidden;
@@ -93,6 +95,11 @@ body {
   color: #fff;
 }
 
+// 폰트 굵기 스타일
+.medium {font-weight: 500;}
+.semibold {font-weight: 600;}
+.bold {font-weight: 700;}
+
 // 인풋 등 스타일
 input,
 select,
@@ -106,6 +113,8 @@ table {
   font-family: "Pretendard", sans-serif;
   font-weight: 400;
   letter-spacing: -1px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 // 반응형 스타일 적용
@@ -130,3 +139,14 @@ table {
     font-size: 18px;
   }
 }
+
+// 색상 스타일
+.point-color {
+  color: $point-color !important;
+}
+
+// select 
+select {
+  background: $white url("../img/common/icon-down-gray.svg")  right 8px center/16px no-repeat;
+}
+

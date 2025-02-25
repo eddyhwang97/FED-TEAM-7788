@@ -4,12 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 
 // 전체 JS
+import "./css/common/_core.scss"
 import Main from "./components/page/Main";
-import Community from "./components/page/Join";
+import Book from "./components/page/Book";
+import Community from "./components/page/Community";
+import Error from "./components/page/Error";
 import Join from "./components/page/Join";
-import Error from "./components/page/error";
-import Login from "./components/page/login";
 import Mypage from "./components/page/Mypage";
+import Login from "./components/page/Login";
 
 export default function MainComponent() {
   return (
@@ -17,6 +19,7 @@ export default function MainComponent() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
+          <Route path="book" element={<Book />} />
           <Route path="community" element={<Community />} />
           <Route path="error" element={<Error />} />
           <Route path="join" element={<Join />} />
