@@ -1,5 +1,7 @@
 // Layout 컴포넌트 - Layout.jsx
 
+import "../../css/page/main.scss";
+
 import FooterArea from "./FooterArea";
 import MainArea from "./MainArea";
 import SubArea from "./SubArea";

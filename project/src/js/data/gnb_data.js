@@ -59,16 +59,24 @@ export const menu = [
       },
     ],
   },
+  
+];
+export const menu2 =[
   {
     txt: "로그인",
+    class:"login",
     link: "/login",
   },
   {
     txt: "회원가입",
+    class:"join",
     link: "/join",
   },
   {
     txt: "마이페이지",
+    class:"mypage",
     link: "/mypage",
   },
-];
+]
+
+

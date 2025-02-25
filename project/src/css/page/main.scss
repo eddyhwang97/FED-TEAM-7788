@@ -220,7 +220,8 @@
   transition: all 0.3s;
   &:hover,
   &:focus {
-    background: $point-color url("../../../public/img/common/icon-arrow-white.svg") center no-repeat;
+    background: $point-color url("../../../public/img/common/icon-arrow-white.svg") center
+      no-repeat;
   }
 }
 
@@ -563,6 +564,7 @@
     opacity: 1;
   }
 }
+
 
 @include responsive(1024px) {
   .book-info-wrap {

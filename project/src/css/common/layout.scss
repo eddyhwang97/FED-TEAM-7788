@@ -219,12 +219,7 @@
   }
 
   .gnb {
-    background: linear-gradient(
-      90deg,
-      #f9f9f9 140px,
-      $lightgray 141px,
-      $white 140px
-    );
+    background: linear-gradient(90deg, #f9f9f9 140px, $lightgray 141px, $white 140px);
     height: calc(100% - 60px);
     font-size: 18px;
 
@@ -467,7 +462,7 @@
       height: 56px;
       position: absolute;
       right: 10px;
-      background: url('../img/common/icon-search-point.svg') center no-repeat;
+      background: url("../img/common/icon-search-point.svg") center no-repeat;
       background-size: 60%;
     }
   }
@@ -480,8 +475,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  
 }
 
 /** footer **/

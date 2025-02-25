@@ -1,6 +1,7 @@
 // MainArea 컴포넌트 - MainArea.jsx 
 
 import { Outlet } from "react-router-dom";
+
 import Main from "../page/Main"
 
 export default function MainArea(){

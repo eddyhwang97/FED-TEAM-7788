@@ -1,102 +1,39 @@
 // TopArea 컴포넌트 - TopArea.jsx
-
+// css
+import "../../css/common/_core.scss";
+// data & Fn
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
+import Gnb from "../module/Gnb";
+import { menu2 } from "../../js/data/gnb_data";
+import * as layoutFn from "../../js/function/layout";
 
 export default function TopArea() {
   return (
-    <Fragment>
+    <>
       <div className="dimm"></div>
       <div className="search-dimm"></div>
       {/* <!-- header s --> */}
       <header className="header">
         <div className="header-top">
           <ul className="link-list">
-            <li>
-              <a href="#">
-                <span className="icon login"></span>로그인
-              </a>
+            {menu2.map((v,i)=>(
+
+            <li key={i}>
+              <Link to={v.link}>
+                <span className={"icon"+v.class}>{v.txt}</span>
+              </Link>
             </li>
-            <li>
-              <a href="#">
-                <span className="icon join"></span>회원가입
-              </a>
-            </li>
+            ))}
           </ul>
         </div>
         <div className="inner-header-wrap">
           <div className="inner-header">
             <h1 className="logo">
-              <img src="../img/common/logo-temp.svg" alt="로고" />
+              <Link to="/">
+                <img src="../img/common/logo-temp.svg" alt="로고" />
+              </Link>
             </h1>
-            <div className="gnb-wrap">
-              <div className="gnb-top">
-                <div className="gnb-util">
-                  <button className="account-btn">
-                    <span className="blind">나의공간</span>
-                  </button>
-                  <button className="menu-close-btn">
-                    <span className="blind">메뉴닫기</span>
-                  </button>
-                </div>
-              </div>
-              <nav className="gnb">
-                <ul className="gnb-list">
-                  <li className="dep1">
-                    <a href="#">자료검색</a>
-                    <ul className="dep2">
-                      <li>
-                        <a href="#">통합검색</a>
-                      </li>
-                      <li>
-                        <a href="#">베스트셀러</a>
-                      </li>
-                      <li>
-                        <a href="#">신착도서</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="dep1">
-                    <a href="#">예약/대출</a>
-                    <ul className="dep2">
-                      <li>
-                        <a href="#">도서대출</a>
-                      </li>
-                      <li>
-                        <a href="#">도서예약</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="dep1">
-                    <a href="#">이달의 도서</a>
-                    <ul className="dep2">
-                      <li>
-                        <a href="#">편집장 추천 도서</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="dep1">
-                    <a href="#">열린공간</a>
-                    <ul className="dep2">
-                      <li>
-                        <a href="#">공지사항</a>
-                      </li>
-                      <li>
-                        <a href="#">자유게시판</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="dep1">
-                    <a href="#">이벤트</a>
-                    <ul className="dep2">
-                      <li>
-                        <a href="#">작가 강연 예약</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+            <Gnb />
             <div className="header-util">
               <button type="button" className="total-search-btn">
                 <span className="blind">통합검색 버튼</span>
@@ -126,6 +63,6 @@ export default function TopArea() {
           </div>
         </div>
       </header>
-    </Fragment>
+    </>
   );
 }
