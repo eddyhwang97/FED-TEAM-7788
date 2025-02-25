@@ -110,7 +110,8 @@
       &.bg01 {
         width: 100%;
         height: 100%;
-        background: url("../../../public/img/main/icon-main-bg01.svg") center no-repeat;
+        background: url("../../../public/img/main/icon-main-bg01.svg") center
+          no-repeat;
         background-size: cover;
         scale: 1.2;
       }
@@ -132,7 +133,8 @@
       &.bg04 {
         width: 100%;
         height: 100%;
-        background: url("../../../public/img/main/icon-main-bg04.svg") center no-repeat;
+        background: url("../../../public/img/main/icon-main-bg04.svg") center
+          no-repeat;
         background-size: cover;
         scale: 1.1;
         translate: 5% 5%;
@@ -214,14 +216,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f3f4f7 url("../../../public/img/common/icon-arrow.svg") center no-repeat;
+  background: #f3f4f7 url("../../../public/img/common/icon-arrow.svg") center
+    no-repeat;
   border-radius: 7px;
   display: block;
   transition: all 0.3s;
   &:hover,
   &:focus {
-    background: $point-color url("../../../public/img/common/icon-arrow-white.svg") center
-      no-repeat;
+    background: $point-color
+      url("../../../public/img/common/icon-arrow-white.svg") center no-repeat;
   }
 }
 
@@ -388,7 +391,8 @@
       display: block;
       width: 50px;
       height: 20px;
-      background: url("../../../public/img/main/icon-section-tit.svg") center no-repeat;
+      background: url("../../../public/img/main/icon-section-tit.svg") center
+        no-repeat;
     }
   }
 }
@@ -519,7 +523,8 @@
     &::after {
       content: "";
       display: block;
-      background: url("../../../public/img/common/icon-arrow.svg") center no-repeat;
+      background: url("../../../public/img/common/icon-arrow.svg") center
+        no-repeat;
       width: 16px;
       height: 16px;
     }
@@ -544,7 +549,7 @@
 }
 
 .book-img-list {
-  > li {
+  .item {
     overflow: hidden;
     border-radius: 15px 40px 40px 15px;
     > img {
@@ -553,18 +558,31 @@
       object-fit: cover;
     }
   }
+}
 
-  .swiper-slide {
-    scale: 0.8;
-    opacity: 0.5;
-  }
+@include responsive(500px) {
+  .book-img-list {
+    .swiper-slide {
+      opacity: 0.5;
+    }
 
-  .swiper-slide-active {
-    scale: 1;
-    opacity: 1;
+    .swiper-slide-active {
+      opacity: 1;
+    }
   }
 }
 
+@include responsive(768px) {
+  .book-img-list {
+    .swiper-slide {
+      scale: 0.8;
+    }
+
+    .swiper-slide-active {
+      scale: 1;
+    }
+  }
+}
 
 @include responsive(1024px) {
   .book-info-wrap {
@@ -642,13 +660,13 @@
   .book-tab-cont {
     display: none;
     overflow: hidden;
-    padding-top: 30px;
     &.on {
       display: block;
     }
 
     .book-slide {
-      > li {
+      padding: 30px 0;
+      .item {
         overflow: hidden;
         border-radius: 10px 20px 20px 10px;
         box-shadow: 0 10px 16px 0px rgba(171, 190, 209, 0.3);
@@ -694,7 +712,9 @@
 
   .book-contents {
     .book-tab-cont {
-      padding-top: 60px;
+      .book-slide {
+        padding: 60px 0;
+      }
     }
   }
 }
