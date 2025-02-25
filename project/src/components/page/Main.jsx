@@ -1,4 +1,5 @@
 //  Main 컴포넌트 - Main.jsx
+import "../../css/page/main.scss";
 
 export default function Main() {
   return (
