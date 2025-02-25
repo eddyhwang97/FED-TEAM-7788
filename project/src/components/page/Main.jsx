@@ -1,6 +1,5 @@
 //  Main 컴포넌트 - Main.jsx
 
-
 function Main() {
   return (
     <>
@@ -9,4 +8,4 @@ function Main() {
   );
 }
 
-export default Main
+export default Main;
