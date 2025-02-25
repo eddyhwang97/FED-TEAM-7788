@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>칙칙북북 - 당신의 취향을 배달해 드립니다</title>
+    <!-- 리액트 전환 전 제이쿼리 및 스와이퍼 임시 연결-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- css s -->
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/book-view.css">
+    <!-- css e -->
+    <!-- js s -->
+    <script src="../js/base.js"></script>
+    <script src="../js/layout.js"></script>
+    <!-- js e -->
+</head>
+<body>
+    <!-- wrapper s -->
+    <div class="wrapper">
+        <div class="dimm"></div>
+        <div class="search-dimm"></div>
+         <!-- header s -->
+         <header class="header">
+            <div class="header-top">
+                <ul class="link-list">
+                    <li><a href="#"><span class="icon login"></span>로그인</a></li>
+                    <li><a href="#"><span class="icon join"></span>회원가입</a></li>
+                </ul>
+            </div>
+            <div class="inner-header-wrap">
+                <div class="inner-header">
+                    <h1 class="logo"><img src="../img/common/logo-temp.svg" alt="로고"></h1>
+                    <div class="gnb-wrap">
+                        <div class="gnb-top">
+                            <div class="gnb-util">
+                                <button class="account-btn"><span class="blind">나의공간</span></button>
+                                <button class="menu-close-btn"><span class="blind">메뉴닫기</span></button>
+                            </div>
+                        </div>
+                        <nav class="gnb">
+                            <ul class="gnb-list">
+                                <li class="dep1">
+                                    <a href="#">자료검색</a>
+                                    <ul class="dep2">
+                                        <li><a href="#">통합검색</a></li>
+                                        <li><a href="#">베스트셀러</a></li>
+                                        <li><a href="#">신착도서</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dep1">
+                                    <a href="#">예약/대출</a>
+                                    <ul class="dep2">
+                                        <li><a href="#">도서대출</a></li>
+                                        <li><a href="#">도서예약</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dep1">
+                                    <a href="#">이달의 도서</a>
+                                    <ul class="dep2">
+                                        <li><a href="#">편집장 추천 도서</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dep1">
+                                    <a href="#">열린공간</a>
+                                    <ul class="dep2">
+                                        <li><a href="#">공지사항</a></li>
+                                        <li><a href="#">자유게시판</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dep1">
+                                    <a href="#">이벤트</a>
+                                    <ul class="dep2">
+                                        <li><a href="#">작가 강연 예약</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="header-util">
+                        <button type="button" class="total-search-btn"><span class="blind">통합검색 버튼</span></button>
+                        <button type="button" class="search-close-btn"><span class="blind">통합검색 닫기 버튼</span></button>
+                        <button type="button" class="menu-btn"><span class="blind">메뉴 버튼</span></button>
+                    </div>
+                    <div class="pc-header-util">
+                        <button type="button" class="total-search-btn"></button>
+                        <button type="button" class="search-close-btn"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="search-wrap">
+                <div class="search-form">
+                    <form action="search.php">
+                        <fieldset>
+                            <legend class="blind">도서 통합검색 폼</legend>
+                            <input type="text" id="mainSearchText" name="searchTxt" title="검색어" placeholder="찾으시는 도서가 있나요?">
+                            <button type="button" class="total-search-btn"></button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <!-- header e -->
+        <!-- sub-container s -->
+        <div class="sub-container" id="main">
+            <!-- sub-top s -->
+            <div class="sub-top">
+                <ul class="breadcrumb">
+                    <li class="home"><a href="/"><span class="icon home"></span></a></li>
+                    <li class="1depth"><a href="#">도서검색</a></li>
+                    <li class="2depth"><a href="#">통합검색</a></li>
+                </ul>
+                <div class="title-box">
+                    <h3 class="sub-title">도서 상세정보</h3>
+                    <ul class="sub-link">
+                        <li class="link-copy">
+                            <button type="button">
+                                <img src="../img/common/icon-link.svg" alt="링크 공유 버튼">
+                            </button>
+                            <div class="url-copy">
+                                <input type="text" id="urlCopy" value="">
+                                <label for="urlCopy"></label>
+                                <button type="button" onclick="fn_copyUrl();">복사</button>
+                            </div>
+                        </li>
+                        <li class="link-print">
+                            <button type="button" onclick="fn_print()">
+                                <img src="../img/common/icon-print.svg" alt="페이지 프린트 버튼">
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- sub-top e -->
+            <!-- contents s -->
+            <div class="contents">
+                <!-- book-view-wrap s -->
+                 <div class="book-view-wrap">
+                    <!-- book-view s -->
+                    <div class="book-view">
+                        <div class="img-box">
+                            <img src="../img/img-9961234799.png" alt="도서이미지">
+                        </div>
+                        <div class="info-box">
+                            <div class="book-tit">
+                                <p>거부기의 저주</p>
+                                <span>이 사건을 아는 사람: 너무 무서워</span>
+                            </div>
+                            <ul class="book-info">
+                                <li><em>제목</em><span class="title">먼지에겐 별거 아냐</span></li>
+                                <li><em>작가</em><span class="author">김마토</span></li>
+                                <li><em>출판사</em><span class="publisher">김마토</span></li>
+                                <li><em>ISBN</em><span class="isbn">9968957386</span></li>
+                                <li><em>발행일</em><span class="date">2024-11-28</span></li>
+                                <li><em>페이지</em><span class="page">34p</span></li>
+                                <li><em>카테고리</em><span class="genre">문학</span></li>
+                            </ul>
+                            <p class="book-text">우주에서 멀리 떨어진 별의 눈으로 보면 아무리 걱정많은 사람의 걱정도 먼지만해집니다. 먼지만해진 걱정에 용감함이 생긴 사람이 힘차게 나아가는 모습을 그려봤습니다.</p>
+                            <div class="util-box">
+                                <div class="btn-wrap">
+                                    <button type="button" class="btn-state loan">대출하기</button>
+                                    <button type="button" class="btn-state no">대출불가</button>
+                                    <button type="button" class="btn-state ing">대출중</button>
+                                    <button type="button" class="btn-state reserve">예약하기</button>
+                                </div>
+                                <button type="button" class="interest">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- book-view e -->
+                 </div>
+                <!-- book-view-wrap e -->
+                <!-- comment-wrap s -->
+                <div class="comment-wrap">
+                    <h4 class="comment-tit">한줄코멘트</h4>
+                    <ul class="comment-list">
+                        <li>
+                            <div class="comment">
+                                <span class="name">장원영</span>
+                                <p>깊은 어둠 속 빛나는 별처럼 우린 어디서든 서로를 알아볼 수 있어</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="comment">
+                                <span class="name">제니</span>
+                                <p>This that pretty girl mantra This that flaunt ya Just touched down in LA Pretty girls don't do drama Less we wanna</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="comment">
+                                <span class="name">차은우</span>
+                                <p>이곳에는 댓글이 들어갑니다. 이곳에는 댓글이 들어갑니다. 이곳에는 댓글이 들어갑니다. 이곳에는 댓글이 들어갑니다. 이곳에는 댓글이 들어갑니다. 이곳에는 댓글이 들어갑니다.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="comment">
+                                <span class="name">관리자</span>
+                                <p>장난으로 댓글 작성하지 마세요.</p>
+                            </div>
+                        </li>
+                        <li class="my-comment">
+                            <div class="comment">
+                                <span class="name">토마토</span>
+                                <p>둥글둥글 멋진 몸매에 빨간 옷을 입고 새콤달콤 향기 풍기는 멋쟁이 토마토 토마토</p>
+                            </div>
+                            <!-- 나의 댓글에서만 노출 -->
+                            <div class="comment-util">
+                                <button class="btn-edit">수정</button>
+                                <button class="btn-delete">삭제</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <strong class="noti">광고, 비방, 근거 없는 악성댓글, 욕설 등은 임의로 삭제될 수 있어요</strong>
+                    <div class="reply-wrap">
+                        <textarea name="reply" id="reply"></textarea>
+                        <button type="button" class="reply-btn">등록하기</button>
+                    </div>
+                </div>
+                <!-- comment-wrap e -->
+            </div>
+            <!-- contents e -->
+        </div>
+        <!-- sub-container e -->
+        <!-- footer s -->
+        <footer class="footer">
+            <div class="inner">
+                <div class="footer-inner">
+                    <div class="left">
+                        <ul class="footer-link">
+                            <li><a href="#">개인정보처리방침</a></li>
+                            <li><a href="#">저작권보호정책</a></li>
+                            <li><a href="#">이메일무단수집거부</a></li>
+                            <li><a href="#">자주묻는질문</a></li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <div class="family-site">
+                            <button type="button" class="family-site-btn">유관기관 바로가기<span class="blind">열림</span></button>
+                            <ul class="site-list">
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
+                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>   
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-btm">
+                    <div class="footer-logo">
+                        <img src="../img/common/logo-temp.svg" alt="하단 로고">
+                    </div>
+                    <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        <!-- footer e -->
+    </div>
+    <!-- wrapper e -->
+</body>
+</html>

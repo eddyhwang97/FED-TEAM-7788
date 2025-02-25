@@ -37,7 +37,7 @@
   -moz-text-size-adjust: 100%;
        text-size-adjust: 100%;
   cursor: default;
-  line-height: 1.5;
+  line-height: 1.4;
   overflow-wrap: break-word;
   word-break: break-word;
   -moz-tab-size: 4;
@@ -97,6 +97,7 @@ body {
   font-size: 14px;
   letter-spacing: -1px;
   line-height: 1.4;
+  color: #111;
 }
 body.on {
   overflow: hidden;
@@ -179,6 +180,18 @@ body.on {
   color: #fff;
 }
 
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
 input,
 select,
 textarea,
@@ -213,6 +226,10 @@ table {
     font-size: 18px;
   }
 }
+.point-color {
+  color: #00A791 !important;
+}
+
 /** 메인 컨텐츠 css **/
 #main {
   margin-top: 60px;
@@ -783,7 +800,7 @@ table {
 .book-contents .book-tab-cont {
   display: none;
   overflow: hidden;
-  padding-top: 30px;
+  padding: 30px 0;
 }
 .book-contents .book-tab-cont.on {
   display: block;
@@ -823,6 +840,6 @@ table {
     font-size: 42px;
   }
   .book-contents .book-tab-cont {
-    padding-top: 60px;
+    padding: 60px 0;
   }
 }

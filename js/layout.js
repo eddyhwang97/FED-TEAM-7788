@@ -3,6 +3,7 @@ $(() => {
   const $body = $("body"),
     $dimm = $(".dimm"),
     $searchDimm = $(".search-dimm"),
+    $header = $(".header"),
     $innerHeaderWrap = $(".inner-header-wrap"),
     $menuBtn = $(".menu-btn"),
     $menuClose = $(".menu-close-btn"),
@@ -59,6 +60,7 @@ $(() => {
   function webGnb() {
     function reset() {
       if (window.innerWidth >= 1024) {
+        $header.removeClass("active");
         $innerHeaderWrap.removeClass("open");
         $gnbWrap.removeClass("open");
         $dimm.removeClass("on");
@@ -73,6 +75,7 @@ $(() => {
 
     $dep1.on("mouseenter focusin", function () {
       if (window.innerWidth >= 1024) {
+        $header.addClass("active");
         $innerHeaderWrap.addClass("open");
         $dimm.addClass("on");
         if ($searchWrap.hasClass("on")) {
@@ -83,6 +86,7 @@ $(() => {
 
     $innerHeaderWrap.on("mouseleave", function () {
       if (window.innerWidth >= 1024) {
+        $header.removeClass("active");
         $innerHeaderWrap.removeClass("open");
         $dimm.removeClass("on");
       }
