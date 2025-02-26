@@ -9,6 +9,7 @@ import SubArea from "./SubArea";
 import TopArea from "./TopArea";
 
 export default function Layout() {
+  
   return (
     <>
       <TopArea />
