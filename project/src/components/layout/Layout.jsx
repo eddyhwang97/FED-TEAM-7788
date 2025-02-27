@@ -18,7 +18,7 @@ export default function Layout() {
   return (
     <>
       <TopArea />
-      {isMainPage ? <MainArea /> : <SubArea />} 
+      <MainArea/>
       <FooterArea />
     </>
   );
