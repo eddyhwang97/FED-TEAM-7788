@@ -1,18 +1,20 @@
 // join.scss
-@import "./font"; // font.scss
-@import "./mixins"; // mixin.scss
-@import "./variables"; // variables.scss
-@import "./reset"; // reset.scss
-@import "./common"; // common.scss
+@import './font'; // font.scss
+@import './mixins'; // mixin.scss
+@import './variables'; // variables.scss
+@import './reset'; // reset.scss
+@import './common'; // common.scss
 
 /** 회원가입 컨텐츠 css **/
 
-main {
+.join-container {
   font-family: $pretendard;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0px auto;
+  margin-left: 20px;
+  margin-right: 20px;
   height: 90vh;
   .join-wrap {
     max-width: 450px;
@@ -22,20 +24,20 @@ main {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    .tit-wrap{
+    .tit-wrap {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
-    
-    h2{
+
+      h2 {
         font-weight: 600;
-        font-size: 30px
+        font-size: 30px;
+      }
+      img {
+        width: 100px;
+      }
     }
-    img{
-      width: 100px;
-    } 
-  }
     .input-wrap {
       display: flex;
       flex-direction: column;
@@ -47,15 +49,15 @@ main {
         padding: 14px 18px;
         height: 50px;
       }
-      .password-wrap{
+      .password-wrap {
         position: relative;
         display: flex;
         align-items: center;
-      justify-content: flex-end;
-      .toggle-password{
-        position: absolute;
-        padding-right : 10px; 
-      }
+        justify-content: flex-end;
+        .toggle-password {
+          position: absolute;
+          padding-right: 10px;
+        }
       }
     }
     .input-box {
@@ -67,7 +69,7 @@ main {
     }
     .validation-wrap {
       margin-top: 10px;
-      margin-bottom: 20px; 
+      margin-bottom: 20px;
       display: flex;
       flex-direction: column;
       .password-strength {
@@ -85,7 +87,7 @@ main {
       .password-checklist {
         li {
           color: $gray;
-          font-size:  $font-size-mobile;
+          font-size: $font-size-mobile;
         }
       }
     }
@@ -104,7 +106,7 @@ main {
     }
   }
   @include responsive(400px) {
-    .join-wrap{
+    .join-wrap {
       border: 1px solid $gray;
       padding: 30px 50px;
     }
