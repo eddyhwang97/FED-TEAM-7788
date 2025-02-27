@@ -1,11 +1,12 @@
 import { useState } from "react";
 import booksData from "../../js/data/book_data.json";
 import "../../css/page/book-list.scss";
+import { getCategory } from "../../js/function/sort-books";
 
 function BookList() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchOption, setSearchOption] = useState("제목");
-  const [filteredBooks, setFilteredBooks] = useState(booksData);
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [searchOption, setSearchOption] = useState("제목");
+  const [filteredBooks, /*setFilteredBooks*/] = useState(booksData);
 
   // 검색 기능
 //   const handleSearch = () => {
@@ -29,7 +30,7 @@ function BookList() {
                 <div className="text-box">
                   <div className="book-tit">
                     <p>{book.title}</p>
-                    <span className="label">{book.category}</span>
+                    <span className="label">{getCategory(book.ISBN)}</span>
                   </div>
                   <ul className="book-info">
                     <li><em>저자</em><span className="writer">{book.author}</span></li>

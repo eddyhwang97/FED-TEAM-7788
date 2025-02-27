@@ -14,3 +14,15 @@ export const sortByBest = (books) => {
     .sort((a, b) => b.bNum - a.bNum)
     .slice(0, 10); // 상위 10개만 가져오기
 };
+
+// 도서 카테고리 분류
+export const getCategory = (isbn) => {
+  const prefix = isbn.substring(0, 3);
+  const categories = {
+    "996": "문학",
+    "997": "인문사회",
+    "998": "예술",
+    "999": "매거진",
+  };
+  return categories[prefix] || "기타";
+};
