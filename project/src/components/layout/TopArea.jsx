@@ -7,7 +7,7 @@ import Gnb from "../module/Gnb";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
 
-export default function TopArea() {
+export default function TopArea({ gnb, setGnb, setSubTop }) {
   return (
     <>
       <div className="dimm"></div>
@@ -16,13 +16,12 @@ export default function TopArea() {
       <header className="header">
         <div className="header-top">
           <ul className="link-list">
-            {menu2.map((v,i)=>(
-
-            <li key={i}>
-              <Link to={v.link}>
-                <span className={"icon"+v.class}>{v.txt}</span>
-              </Link>
-            </li>
+            {menu2.map((v, i) => (
+              <li key={i}>
+                <Link to={v.link}>
+                  <span className={"icon" + v.class}>{v.txt}</span>
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -33,7 +32,7 @@ export default function TopArea() {
                 <img src="../img/common/logo-temp.svg" alt="로고" />
               </Link>
             </h1>
-            <Gnb />
+            <Gnb gnb={gnb} setGnb={setGnb} setSubTop={setSubTop}/>
             <div className="header-util">
               <button type="button" className="total-search-btn">
                 <span className="blind">통합검색 버튼</span>

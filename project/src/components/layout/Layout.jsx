@@ -7,6 +7,7 @@ import FooterArea from "./FooterArea";
 import MainArea from "./MainArea";
 import SubArea from "./SubArea";
 import TopArea from "./TopArea";
+import { useState } from "react";
 
 export default function Layout() {
   const location = useLocation(); // 현재 경로 가져오기
