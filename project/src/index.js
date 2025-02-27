@@ -15,6 +15,7 @@ import Login from "./components/page/Login";
 import Search from "./components/page/Search";
 import Monthly from "./components/page/Monthly";
 import BookList from "./components/page/BookList";
+import BookDetail from "./components/page/BookDetail";
 import Gnb from "./components/module/Gnb";
 
 export default function MainComponent() {
@@ -35,6 +36,7 @@ export default function MainComponent() {
           <Route path="search/best" element={<BookList gnb1="자료검색" gnb2="베스트셀러"/>}  />
           <Route path="search/new" element={<BookList gnb1="자료검색" gnb2="신착도서"/>}  />
           <Route path="monthly/recommend" element={<Monthly gnb1="이달의도서" gnb2="편집장 추천 도서"/>}  />
+          <Route path="book/:isbn" element={<BookDetail />} /> {/* 책 상세 페이지 */}
         </Route>
       </Routes>
     </BrowserRouter>
