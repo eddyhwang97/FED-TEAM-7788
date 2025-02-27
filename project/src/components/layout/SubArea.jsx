@@ -2,7 +2,7 @@
 
 import { Outlet } from "react-router-dom";
 
-export default function SubArea({ gnb1, gnb2 }) {
+export default function SubArea() {
   return (
     <main className="sub-container" id="main">
       <Outlet />
