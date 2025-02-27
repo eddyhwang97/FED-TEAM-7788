@@ -14,6 +14,7 @@ import Mypage from "./components/page/Mypage";
 import Login from "./components/page/Login";
 import Search from "./components/page/Search";
 import Monthly from "./components/page/Monthly";
+import BookList from "./components/page/BookList";
 
 export default function MainComponent() {
   return (
@@ -31,9 +32,9 @@ export default function MainComponent() {
           <Route path="login" element={<Login />} />
           <Route path="mypage" element={<Mypage />} />
           <Route path="search/totalsearch" element={<Search />} />
-          <Route path="search/best" element={<Search />} />
-          <Route path="search/new" element={<Search />} />
+          <Route path="search/:category" element={<BookList />} />
           <Route path="monthly/recommend" element={<Monthly />} />
+          <Route path="*" element={<Error />} />
         </Route>
       </Routes>
     </BrowserRouter>

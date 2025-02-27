@@ -404,13 +404,13 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
-}
-.book-info {
-  width: 100%;
-  padding: 30px 24px;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px 0px rgba(171, 190, 209, 0.1);
+  .book-info {
+    width: 100%;
+    padding: 30px 24px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px 0px rgba(171, 190, 209, 0.1);
+  }
 }
 
 .book-title {

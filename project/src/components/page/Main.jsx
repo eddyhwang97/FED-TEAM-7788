@@ -12,7 +12,6 @@ import "../../css/page/main.scss";
 import "../../js/function/main.js";
 
 function Main() {
-  const paginationRef = useRef(null);
   return (
     <>
       <IntroSection></IntroSection>
