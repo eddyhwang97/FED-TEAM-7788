@@ -22,13 +22,13 @@ function SubTop(props) {
                <img src="../img/common/icon-link.svg" alt="링크 공유 버튼" />
              </button>
              <div className="url-copy">
-               <input type="text" id="urlCopy" value="" />
-               <label for="urlCopy"></label>
-               <button type="button" onclick="fn_copyUrl();">복사</button>
+               <input type="text" id="urlCopy" defaultValue="" />
+               <label htmlFor="urlCopy"></label>
+               <button type="button">복사</button>
              </div>
            </li>
            <li className="link-print">
-             <button type="button" onclick="fn_print()">
+             <button type="button">
                <img src="../img/common/icon-print.svg" alt="페이지 프린트 버튼" />
              </button>
            </li>
