@@ -1,5 +1,7 @@
 //  Community 컴포넌트 - Community.jsx
-import communityFn from"../../js/function/community.js";
+// import "../../css/common/_core";
+import "../../css/page/community.scss";
+import communityFn from "../../js/function/community.js";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Context } from "../Provider.jsx";
 import { menu } from "../../js/data/gnb_data.js";
@@ -9,7 +11,7 @@ import SearchBox from "../module/SearchBox.jsx";
 import SubTop from "../module/SubTop.jsx";
 // console.log();
 
-function Community({gnb1,gnb2}) {
+function Community({ gnb1, gnb2 }) {
   // set communityData in LocalStorage
   localStorage.setItem("community_data", JSON.stringify(communityData));
   const tabMenu = [{ 공지사항: "notice" }, { FAQ: "faq" }, { 자유게시판: "freeboard" }];
@@ -19,10 +21,10 @@ function Community({gnb1,gnb2}) {
   const freeBoardList = [...communityData.filter((x) => x.type === "freeboard").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))];
   const boardList = [noticeList, faqList, freeBoardList];
   const faqListEl = document.querySelectorAll("#faq-tab .list");
-  console.log(faqListEl)
+  console.log(Location);
 
   // useState
-  
+
   const [searchBox, setSearchBox] = useState(true);
   const [tab, setTab] = useState(1);
   const [activeTab, setActiceTab] = useState(true);
@@ -31,8 +33,7 @@ function Community({gnb1,gnb2}) {
   const [article, setArticle] = useState(false);
   const [post, setPost] = useState(false);
   const [pagenate, setPagenate] = useState(true);
-  
-  
+
   // tab useEffect
   useEffect(() => {
     const tabs = document.querySelectorAll(".tab");
@@ -46,12 +47,10 @@ function Community({gnb1,gnb2}) {
     activeTab.classList.add("active");
   }, [tab, board]);
 
-  
-
   return (
     <>
       {/* <!-- sub-top s --> */}
-      <SubTop gnb1={gnb1} gnb2={gnb2}/>
+      <SubTop gnb1={gnb1} gnb2={gnb2} />
       {/* <!-- sub-top e --> */}
       {/* <!-- contents s --> */}
       <div className="contents">
@@ -70,13 +69,11 @@ function Community({gnb1,gnb2}) {
                     onClick={(e) => {
                       setBoard(i);
                       setTab(i);
-                      
                     }}
                     data-tab-target={(i === 0 ? "notice" : i === 1 ? "faq" : i === 2 ? "freeboard" : "") + "-tab"}
                     className="tab notice-tab-button"
-                    
                   >
-                    <Link to={tabLink[i].link} >{Object.keys(v)} </Link>
+                    <Link to={tabLink[i].link}>{Object.keys(v)} </Link>
                   </div>
                 ))}
               </div>
@@ -242,7 +239,7 @@ function Community({gnb1,gnb2}) {
                   type="button"
                   className="write-btn"
                 >
-                  글쓰기
+                 <Link></Link> 글쓰기
                 </button>
               )}
             </div>
