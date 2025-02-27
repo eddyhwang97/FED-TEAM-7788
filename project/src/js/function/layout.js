@@ -28,6 +28,7 @@ $(() => {
         $dimm.removeClass("on");
         $body.removeClass("on");
         $dep1.parent().removeClass("on");
+        $dep2.removeClass("show");
 
         if (!$searchWrap.hasClass("on")) {
           searchClose();
@@ -38,8 +39,6 @@ $(() => {
     $menuBtn.on("click", function () {
       $body.addClass("on");
       $gnbWrap.addClass("open");
-      $(".gnb-list>li:first-child").addClass("on");
-      $(".gnb-list>li:first-child").find($dep2).addClass("show");
       searchClose();
     });
 
@@ -54,6 +53,10 @@ $(() => {
         $(this).parent().removeClass("on");
         $dep2.removeClass("show");
       }
+    });
+
+    $dep2.find("a").on("click", function(){
+      reset();
     });
   }
 
