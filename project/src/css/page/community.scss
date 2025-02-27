@@ -10,12 +10,21 @@
   margin-bottom: 40px;
   .tab {
     width: 33.33%;
-    padding: 15px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
     border: 1px solid $border-underline;
+    cursor: pointer;
+    a{
+
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+
+    }
     & + .tab {
       border-left: none;
     }

@@ -1,10 +1,9 @@
 // Gnb 컴포넌트 - Gnb.jsx
-import React from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
-import {menu} from "../../js/data/gnb_data.js";
+import { menu } from "../../js/data/gnb_data.js";
 
-
-function Gnb(props) {
+function Gnb({}) {
   return (
     <div className="gnb-wrap">
       <div className="gnb-top">
@@ -23,9 +22,9 @@ function Gnb(props) {
             <li className="dep1" key={i}>
               <Link to={v.sub[0].link}>{v.txt}</Link>
               <ul className="dep2">
-                {v.sub.map((v, i) => (
-                  <li key={i}>
-                    <Link to={v.link}>{v.txt}</Link>
+                {v.sub.map((v2, i2) => (
+                  <li key={i2}>
+                    <Link to={v2.link}>{v2.txt}</Link>
                   </li>
                 ))}
               </ul>

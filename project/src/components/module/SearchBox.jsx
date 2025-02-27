@@ -1,8 +1,8 @@
-// CategorySearch 컴포넌트 - CategorySearch.jsx
+// SearchBox 컴포넌트 - SearchBox.jsx
 import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
 
-function CategorySearch({ setNoticeList, setFaqList, setFreeBoardList }) {
+function SearchBox({ }) {
  
 
   return (
@@ -21,4 +21,4 @@ function CategorySearch({ setNoticeList, setFaqList, setFreeBoardList }) {
   );
 }
 
-export default CategorySearch;
+export default SearchBox;

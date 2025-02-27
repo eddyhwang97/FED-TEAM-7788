@@ -7,13 +7,14 @@ import FooterArea from "./FooterArea";
 import MainArea from "./MainArea";
 import SubArea from "./SubArea";
 import TopArea from "./TopArea";
+import { useState } from "react";
 
 export default function Layout() {
-  
+ 
   return (
     <>
       <TopArea />
-      <MainArea />
+      <MainArea  />
       <FooterArea />
     </>
   );

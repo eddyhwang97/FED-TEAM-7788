@@ -12,6 +12,7 @@ import Error from "../page/Error";
 export default function SubArea() {
   return (
     <main className="sub-container" id="main">
+      
     </main>
   );
 } //////////// MainArea 컴포넌트 ///////////
