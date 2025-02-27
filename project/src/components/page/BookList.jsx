@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // 추가
+import { useNavigate } from "react-router-dom";
 import booksData from "../../js/data/book_data.json";
 import "../../css/page/book-list.scss";
 import { getCategory, sortByNewest, sortByBest } from "../../js/function/sort-books";
@@ -8,6 +8,7 @@ import SubTop from "../module/SubTop";
 function BookList({ gnb1, gnb2 }) {
   const [filteredBooks, setFilteredBooks] = useState([]);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (gnb2 === "베스트셀러") {

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import booksData from "../../js/data/book_data.json";
 import { getCategory } from "../../js/function/sort-books";
 import "../../css/page/book-view.scss";
+import BookComment from "../module/BookComment";
 
 function BookDetail() {
   const { isbn } = useParams();
@@ -128,6 +129,7 @@ function BookDetail() {
           </div>
         </div>
       </div>
+      <BookComment></BookComment>
     </div>
   );
 }

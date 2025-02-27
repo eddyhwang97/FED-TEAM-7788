@@ -161,6 +161,8 @@
       }
     }
     .comment-util {
+      display: flex;
+      gap: 4px;
       button {
         font-size: 13px;
       }
