@@ -3,11 +3,10 @@
 import { Outlet } from "react-router-dom";
 import SubTop from "../module/SubTop";
 
-export default function SubArea() {
+export default function SubArea({ gnb1, gnb2 }) {
   return (
     <main className="sub-container" id="main">
-      <SubTop/>
-      <Outlet/>
+      <Outlet />
     </main>
   );
 } //////////// MainArea 컴포넌트 ///////////
