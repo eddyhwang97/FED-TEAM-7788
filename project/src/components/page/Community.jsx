@@ -5,7 +5,7 @@ import communityFn from "../../js/function/community.js";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Context } from "../Provider.jsx";
 import { menu } from "../../js/data/gnb_data.js";
-import { Link } from "react-router-dom";
+import { Link, Links, useLocation } from "react-router-dom";
 import communityData from "../../js/data/community_data.json";
 import SearchBox from "../module/SearchBox.jsx";
 import SubTop from "../module/SubTop.jsx";
@@ -21,12 +21,10 @@ function Community({ gnb1, gnb2 }) {
   const freeBoardList = [...communityData.filter((x) => x.type === "freeboard").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))];
   const boardList = [noticeList, faqList, freeBoardList];
   const faqListEl = document.querySelectorAll("#faq-tab .list");
-  console.log(Location);
 
   // useState
-
   const [searchBox, setSearchBox] = useState(true);
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(0);
   const [activeTab, setActiceTab] = useState(true);
   const [board, setBoard] = useState(tab);
   const [activeBoard, setActiveBoard] = useState(true);
@@ -34,6 +32,8 @@ function Community({ gnb1, gnb2 }) {
   const [post, setPost] = useState(false);
   const [pagenate, setPagenate] = useState(true);
 
+  console.log(useLocation());
+  useEffect(() => {});
   // tab useEffect
   useEffect(() => {
     const tabs = document.querySelectorAll(".tab");
@@ -97,25 +97,24 @@ function Community({ gnb1, gnb2 }) {
                     </div>
                     <ul>
                       {boardList[tab].map((v, i) => (
-                        <li
-                          className="list"
-                          key={i}
-                          onClick={(e) => {
-                            if (tab === 2 || tab === 0) {
-                              setArticle(true);
-                              setSearchBox(false);
-                              setActiceTab(false);
-                              setActiveBoard(false);
-                              setPagenate(false);
-                            }
-                          }}
-                        >
-                          <div className="list-header">
-                            <p className="list-num">{i + 1}</p>
-                            <p className="list-title">{v.title}</p>
-                            <p className="list-date">{v.date}</p>
-                            <p className="list-user">{v.user}</p>
-                          </div>
+                        <li className="list" key={v.idx}>
+                          {tab !== 1 ? (
+                            <Link to={"/community/" + ((tab === 0 && "notice") || (tab === 2 && "freeboard")) + "/:" + v.idx}>
+                              <div className="list-header">
+                                <p className="list-num">{i + 1}</p>
+                                <p className="list-title">{v.title}</p>
+                                <p className="list-date">{v.date}</p>
+                                <p className="list-user">{v.user}</p>
+                              </div>
+                            </Link>
+                          ) : (
+                            <div className="list-header">
+                              <p className="list-num">{i + 1}</p>
+                              <p className="list-title">{v.title}</p>
+                              <p className="list-date">{v.date}</p>
+                              <p className="list-user">{v.user}</p>
+                            </div>
+                          )}
                           {board === 1 && (
                             <div className="list-info">
                               <strong>${v.content}</strong>
@@ -228,18 +227,8 @@ function Community({ gnb1, gnb2 }) {
               <a href="#">3</a>
               <button type="button" className="btn-next"></button>
               {tab === 2 && (
-                <button
-                  onClick={() => {
-                    setPost(true);
-                    setPagenate(false);
-                    setSearchBox(false);
-                    setActiceTab(false);
-                    setActiveBoard(false);
-                  }}
-                  type="button"
-                  className="write-btn"
-                >
-                 <Link></Link> 글쓰기
+                <button type="button" className="write-btn">
+                  <Link to={"/community/freeboard/:"}></Link> 글쓰기
                 </button>
               )}
             </div>
