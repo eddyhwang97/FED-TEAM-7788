@@ -136,7 +136,7 @@ function BookSection() {
                     className="book-slide"
                   >
                     {books.map((book) => (
-                      <SwiperSlide key={book.id} className="item">
+                      <SwiperSlide key={book.ISBN} className="item">
                         <a href="#">
                           <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                         </a>
