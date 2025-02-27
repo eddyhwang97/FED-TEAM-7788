@@ -14,6 +14,7 @@ import Mypage from "./components/page/Mypage";
 import Login from "./components/page/Login";
 import Search from "./components/page/Search";
 import Monthly from "./components/page/Monthly";
+import BookList from "./components/page/BookList";
 import Gnb from "./components/module/Gnb";
 
 export default function MainComponent() {
