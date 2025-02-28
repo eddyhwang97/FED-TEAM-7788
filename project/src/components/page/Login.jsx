@@ -1,5 +1,6 @@
 //  Login 컴포넌트 - Login.jsx
-import { useEffect, useLayoutEffect, useState, createContext } from 'react';
+import { useEffect, useLayoutEffect, useState, createContext} from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import SubTop from '../module/SubTop';
 
 import login from '../../css/page/login.scss';
@@ -8,6 +9,8 @@ import member_data from '../../js/data/member_data.json';
 localStorage.setItem('member_data', JSON.stringify(member_data));
 
 function Login({ gnb1, gnb2 }) {
+  const navigate = useNavigate(); // useNavigate 훅
+
   const [phoneNum, setphoneNum] = useState('');
   const [phoneValid, setphoneValid] = useState(false);
   const [pw, setpw] = useState('');
@@ -47,6 +50,7 @@ function Login({ gnb1, gnb2 }) {
     );
     if (user) {
       alert('로그인에 성공하였습니다.');
+      navigate('/'); // 로그인 성공 후 메인페이지 이동
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
     }
