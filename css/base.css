@@ -246,7 +246,7 @@ select {
   }
 }
 .sub-top {
-  max-width: 1320px;
+  max-width: 1380px;
   margin: 0 auto;
   padding: 30px 20px;
   display: flex;
@@ -397,32 +397,114 @@ select {
 .sub-section:not(:first-child) {
   padding-top: 60px;
 }
+.sub-section .inner-section:not(:last-child) {
+  padding-bottom: 30px;
+}
 
 .section-tit {
   color: #111;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   display: flex;
   align-items: baseline;
   gap: 10px;
   flex-wrap: nowrap;
+  margin-bottom: 0.7em;
 }
 .section-tit::before {
   content: "";
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: url("../img/main/icon-section-tit.svg") center/100% no-repeat;
   display: inline-block;
   position: relative;
-  top: 2px;
+  top: 4px;
 }
 
-.section-tit + ul,
-.section-tit + div {
-  padding-top: 1rem;
-  padding-left: 0.5rem;
+.bullet-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.bullet-list li:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+.bullet-list li > ul {
+  padding-left: 14px;
+  padding-top: 7px;
+  width: 100%;
+}
+.bullet-list li > ul > li {
+  margin-bottom: 0.5em;
+}
+.bullet-list li > ul > li:last-child {
+  margin-bottom: 0;
 }
 
+.bullet {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  gap: 0.5em;
+}
+.bullet.step1 {
+  color: #111;
+  font-weight: 500;
+}
+.bullet.step2, .bullet.step3 {
+  color: #666;
+}
+.bullet::before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+.bullet.type1::before {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 3px solid #00A791;
+  top: 0.05em;
+}
+.bullet.type2::before {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid #00A791;
+  border-bottom: 2px solid #00A791;
+  transform: rotate(-45deg);
+}
+.bullet.type3::before {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #00A791;
+  top: -2px;
+}
+
+@media screen and (min-width: 768px) {
+  .section-tit {
+    font-size: 24px;
+  }
+  .section-tit::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .bullet.type1::before {
+    top: 0;
+  }
+  .bullet.type2::before {
+    top: -2px;
+  }
+  .bullet.type3::before {
+    width: 5px;
+    height: 5px;
+    top: -3px;
+  }
+}
 .search-box {
   padding: 15px;
   background-color: #f8f8f8;
