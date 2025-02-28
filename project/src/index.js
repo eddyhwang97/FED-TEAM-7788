@@ -17,6 +17,7 @@ import Monthly from "./components/page/Monthly";
 import BookList from "./components/page/BookList";
 import BookDetail from "./components/page/BookDetail";
 import Gnb from "./components/module/Gnb";
+import Borrow from "./components/page/Borrow";
 
 export default function MainComponent() {
   return (
@@ -24,7 +25,7 @@ export default function MainComponent() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path="book/borrow" element={<Book gnb1="예약/대출" gnb2="도서대출" />}  />
+          <Route path="book/borrow" element={<Borrow gnb1="예약/대출" gnb2="도서대출" />}  />
           <Route path="book/reserve" element={<Book gnb1="예약/대출" gnb2="도서예약"/>}  />
           <Route path="community/notice" element={<Community gnb1="열린공간" gnb2="공지사항"/>}  />
           <Route path="community/faq" element={<Community gnb1="열린공간" gnb2="FAQ"/>}  />
