@@ -79,3 +79,10 @@ h2{
   }
 }
 
+.book-box {
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  color: #000;
+  padding: 45px 0;
+  position: relative;
+}
