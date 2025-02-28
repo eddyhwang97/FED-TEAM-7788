@@ -13,6 +13,7 @@ function Join({ gnb1, gnb2 }) {
   // 비밀번호 //
   const [pw, setpw] = useState('');
   const [pwValid, setpwValid] = useState(false);
+  const [showPw, setshowPw] = useState(false); // 비밀번호 보이기 토글
   // 비밀번호 확인 //
   const [pwCheck, setpwCheck] = useState('');
   const [pwCheckValid, setpwCheckValid] = useState(false);
@@ -29,7 +30,8 @@ function Join({ gnb1, gnb2 }) {
   };
   // 이름 유효성 검사 //
   const handleName = (e) => {
-    setName(e.target.value);
+    const newName = e.target.value
+    setName(newName); // 상태 업데이트 -> 비동기 처리 보완
     const regex = /^[A-Za-z가-힣]{2,20}$/;
     if (regex.test(name)) {
       setNameValid(true);
@@ -37,6 +39,25 @@ function Join({ gnb1, gnb2 }) {
       setNameValid(false);
     }
   };
+
+  // 비밀번호 유효성 검사 //
+  const handlePw = (e) => {
+    const newPw = e.target.value;
+    setpw(newPw); // 상태 업데이트 -> 비동기 처리 보완
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+    if (regex.test(newPw)) {
+      setpwValid(true);
+    } else {
+      setpwValid(false);
+    }
+  };
+
+ // 비밀번호 보이기/숨기기 처리 함수 //
+ const togglePw = () => {
+  setshowPw(!showPw); // showPassword 상태를 반전시킴
+};
+
 
   return (
     <>
@@ -70,17 +91,21 @@ function Join({ gnb1, gnb2 }) {
             </div>
             <div className='password-wrap'>
               <input
-                type='password'
+                type={showPw ? 'text' : 'password'} // 비밀번호 보이기/숨기기
                 id='password'
                 className='input-box'
                 placeholder='비밀번호를 입력해주세요.'
                 value={pw}
-                onChange={(e) => setpw(e.target.value)}
+                onChange={handlePw}
               />
-              <span className='toggle-password'> 👁️ </span>
+              <span className='toggle-password' onClick={togglePw}>
+                {showPw ? '🙈' : '👁️'} {/* 아이콘으로 비밀번호 보이기/숨기기 상태 표시 */}
+              </span>
             </div>
             <div className='errorMessageWrap'>
-              올바른 형식으로 입력해주세요.
+            {!pwValid && pw.length > 0 && (
+                  <div>올바른 비밀번호를 입력해주세요.</div>
+                )}
             </div>
           </div>
           <div className='validation-wrap'>
@@ -90,8 +115,9 @@ function Join({ gnb1, gnb2 }) {
               <div className='bar'></div>
             </div>
             <ul className='password-checklist'>
-              <li>✔ 영문, 숫자, 특수문자 포함 8자리 이상</li>
-              <li>✔ 공백 및 3자 이상의 연속/중복 문자 사용 불가</li>
+              <li className='eightWords'>✔ 영문, 숫자, 특수문자 포함 8자리 이상</li>
+              <li className='firstUpper'>✔ 대문자 포함</li>
+              <li className='duplicate'>✔ 공백 및 3자 이상의 연속/중복 문자 사용 불가</li>
             </ul>
           </div>
           <input

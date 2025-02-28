@@ -16,20 +16,6 @@
   .join-wrap {
     display: flex;
     flex-direction: column;
-    .tit-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 10px;
-
-      h2 {
-        font-weight: 600;
-        font-size: 30px;
-      }
-      img {
-        width: 100px;
-      }
-    }
     .input-wrap {
       display: flex;
       flex-direction: column;
