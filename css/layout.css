@@ -228,6 +228,7 @@
   left: 140px;
   color: #666;
   font-weight: 400;
+  visibility: hidden;
 }
 .gnb-wrap .gnb .gnb-list .dep2 a {
   height: 56px;
@@ -237,6 +238,7 @@
 }
 .gnb-wrap .gnb .gnb-list .dep2.show {
   opacity: 1;
+  visibility: visible;
 }
 
 @media screen and (min-width: 1024px) {
@@ -282,7 +284,7 @@
     font-weight: 700;
   }
   .gnb-wrap .gnb .gnb-list .dep2 {
-    display: none;
+    visibility: hidden;
     width: 100%;
     top: 87px;
     left: 0;
@@ -326,7 +328,7 @@
     bottom: 275px;
   }
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
-    display: block;
+    visibility: visible;
     opacity: 1;
   }
 }

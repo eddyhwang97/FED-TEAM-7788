@@ -325,7 +325,7 @@
         }
 
         .dep2 {
-          visibility: visible;
+          visibility: hidden;
           width: 100%;
           top: 87px;
           left: 0;
@@ -378,7 +378,7 @@
   }
 
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
-    display: block;
+    visibility: visible;
     opacity: 1;
   }
 }
