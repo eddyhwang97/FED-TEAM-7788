@@ -261,6 +261,7 @@
         left: 140px;
         color: $darkgray;
         font-weight: 400;
+        visibility: hidden;
         a {
           height: 56px;
           display: flex;
@@ -269,6 +270,7 @@
         }
         &.show {
           opacity: 1;
+          visibility: visible;
         }
       }
     }
@@ -323,7 +325,7 @@
         }
 
         .dep2 {
-          display: none;
+          visibility: visible;
           width: 100%;
           top: 87px;
           left: 0;

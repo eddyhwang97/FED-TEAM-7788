@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $ from "jquery";
 window.$ = $;
 $(() => {
   // variables
@@ -28,6 +28,7 @@ $(() => {
         $dimm.removeClass("on");
         $body.removeClass("on");
         $dep1.parent().removeClass("on");
+        $dep2.removeClass("show");
 
         if (!$searchWrap.hasClass("on")) {
           searchClose();
@@ -38,22 +39,26 @@ $(() => {
     $menuBtn.on("click", function () {
       $body.addClass("on");
       $gnbWrap.addClass("open");
-      $(".gnb-list>li:first-child").addClass("on");
-      $(".gnb-list>li:first-child").find($dep2).addClass("show");
       searchClose();
     });
 
     $menuClose.on("click", reset);
 
     $dep1.on("click", function () {
-      if (!$(this).parent().hasClass("on")) {
-        $(this).parent().addClass("on").siblings().removeClass("on");
-        $dep2.removeClass("show");
-        $(this).next($dep2).addClass("show");
-      } else {
-        $(this).parent().removeClass("on");
-        $dep2.removeClass("show");
+      if(window.innerWidth < 1024) {
+        if (!$(this).parent().hasClass("on")) {
+          $(this).parent().addClass("on").siblings().removeClass("on");
+          $dep2.removeClass("show");
+          $(this).next($dep2).addClass("show");
+        } else {
+          $(this).parent().removeClass("on");
+          $dep2.removeClass("show");
+        }
       }
+    });
+
+    $dep2.find("a").on("click", function () {
+      reset();
     });
   }
 
@@ -80,6 +85,12 @@ $(() => {
         if ($searchWrap.hasClass("on")) {
           searchClose();
         }
+      }
+    });
+
+    $dep1.on("click", function (e) {
+      if(window.innerWidth >= 1024){
+        e.preventDefault();
       }
     });
 
@@ -145,7 +156,7 @@ $(() => {
       }
     },
   });
-  
+
   $(".site-list>li:last-child>a").on("keydown", function (e) {
     let keyCode = e.keyCode || e.which;
     if (keyCode === 9 && !e.shiftKey) {
