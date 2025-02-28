@@ -1,316 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>칙칙북북 - 당신의 취향을 배달해 드립니다</title>
     <!-- 리액트 전환 전 제이쿼리 및 스와이퍼 임시 연결-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- css s -->
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/mypage.css">
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/mypage.css" />
     <!-- css e -->
     <!-- js s -->
     <script src="../js/base.js"></script>
     <script src="../js/layout.js"></script>
     <!-- js e -->
-</head>
-<body>
+    <style>
+      .monthly-recommend {
+        overflow: hidden;
+      }
+
+      .book-swiper .swiper-slide {
+        scale: 0.7;
+        opacity: 0.5;
+        border-radius: 10px 20px 20px 10px;
+        overflow: hidden;
+        transition: scale .3s;
+        aspect-ratio: 280 / 360;
+      }
+
+      .book-swiper .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+
+      .book-swiper .swiper-slide-active {
+        scale: 1;
+        opacity: 1;
+      }
+    </style>
+    <script>
+      $(() => {
+        const bookSwiper = new Swiper(".book-swiper", {
+          loop: true,
+          slidesPerView: 1.5,
+          spaceBetween: 10,
+          centeredSlides: true,
+          breakpoints: {
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            },
+          },
+        });
+      });
+    </script>
+  </head>
+  <body>
     <!-- wrapper s -->
     <div class="wrapper">
-        <div class="dimm"></div>
-        <div class="search-dimm"></div>
-         <!-- header s -->
-         <header class="header">
-            <div class="header-top">
-                <ul class="link-list">
-                    <li><a href="#"><span class="icon login"></span>로그인</a></li>
-                    <li><a href="#"><span class="icon join"></span>회원가입</a></li>
-                </ul>
-            </div>
-            <div class="inner-header-wrap">
-                <div class="inner-header">
-                    <h1 class="logo"><img src="../img/common/logo-temp.svg" alt="로고"></h1>
-                    <div class="gnb-wrap">
-                        <div class="gnb-top">
-                            <div class="gnb-util">
-                                <button class="account-btn"><span class="blind">나의공간</span></button>
-                                <button class="menu-close-btn"><span class="blind">메뉴닫기</span></button>
-                            </div>
-                        </div>
-                        <nav class="gnb">
-                            <ul class="gnb-list">
-                                <li class="dep1">
-                                    <a href="#">자료검색</a>
-                                    <ul class="dep2">
-                                        <li><a href="#">통합검색</a></li>
-                                        <li><a href="#">베스트셀러</a></li>
-                                        <li><a href="#">신착도서</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dep1">
-                                    <a href="#">예약/대출</a>
-                                    <ul class="dep2">
-                                        <li><a href="#">도서대출</a></li>
-                                        <li><a href="#">도서예약</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dep1">
-                                    <a href="#">이달의 도서</a>
-                                    <ul class="dep2">
-                                        <li><a href="#">편집장 추천 도서</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dep1">
-                                    <a href="#">열린공간</a>
-                                    <ul class="dep2">
-                                        <li><a href="#">공지사항</a></li>
-                                        <li><a href="#">자유게시판</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dep1">
-                                    <a href="#">이벤트</a>
-                                    <ul class="dep2">
-                                        <li><a href="#">작가 강연 예약</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="header-util">
-                        <button type="button" class="total-search-btn"><span class="blind">통합검색 버튼</span></button>
-                        <button type="button" class="search-close-btn"><span class="blind">통합검색 닫기 버튼</span></button>
-                        <button type="button" class="menu-btn"><span class="blind">메뉴 버튼</span></button>
-                    </div>
-                    <div class="pc-header-util">
-                        <button type="button" class="total-search-btn"></button>
-                        <button type="button" class="search-close-btn"></button>
-                    </div>
-                </div>
-            </div>
-            <div class="search-wrap">
-                <div class="search-form">
-                    <form action="search.php">
-                        <fieldset>
-                            <legend class="blind">도서 통합검색 폼</legend>
-                            <input type="text" id="mainSearchText" name="searchTxt" title="검색어" placeholder="찾으시는 도서가 있나요?">
-                            <button type="button" class="total-search-btn"></button>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </header>
-        <!-- header e -->
-        <!-- sub-container s -->
-        <div class="sub-container" id="main">
-            <!-- sub-top s -->
-            <div class="sub-top">
-                <ul class="breadcrumb">
-                    <li class="home"><a href="/"><span class="icon home"></span></a></li>
-                    <li class="1depth"><a href="#">원뎁스</a></li>
-                    <li class="2depth"><a href="#">투뎁스</a></li>
-                </ul>
-                <div class="title-box">
-                    <h3 class="sub-title">페이지 서브 타이틀이 들어갑니다.</h3>
-                    <ul class="sub-link">
-                        <li class="link-copy">
-                            <button type="button">
-                                <img src="../img/common/icon-link.svg" alt="링크 공유 버튼">
-                            </button>
-                            <div class="url-copy">
-                                <input type="text" id="urlCopy" value="">
-                                <label for="urlCopy"></label>
-                                <button type="button" onclick="fn_copyUrl();">복사</button>
-                            </div>
-                        </li>
-                        <li class="link-print">
-                            <button type="button" onclick="fn_print()">
-                                <img src="../img/common/icon-print.svg" alt="페이지 프린트 버튼">
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- sub-top e -->
-            <!-- contents s -->
-            <div class="contents">
-                <div class="page-cover">
-                    <div class="mypage-container" id="mypage">
-                      <section class="mypage-wrap">
-                        <div class="tit-wrap">
-                          <img src="../img/main/icon-section-tit.svg" alt="section icon">
-                          <h2>마이페이지</h2>
-                        </div>
-                        <div class="profile-wrap">
-                          <div class="user-info">
-                            <a href="#" class="profile-image-box">
-                              <img
-                                class="profile-image"
-                                src="../img/login,member,mypage/img-profile-temp.jpg"
-                                alt="임시프로필"
-                              />
-                            </a>
-                            <strong>00000000</strong>
-                            <a href="#" class="level-icon-box">
-                              <img class="level-icon"
-                              src="../img/login,member,mypage/img-level1.svg" alt="level1" />
-                            </a>
-                            <!-- exp bar -->
-                            <div class="exp-bar-wrap">
-                              <div class="exp-bar">
-                                <div class="exp-fill"></div> <!-- 현재 경험치 값 (50% 예시) -->
-                              </div>
-                              <span class="exp-text">다음목표 : 1 / 3</span>
-                            </div>
-                            <!-- setting button -->
-                          </div>
-                        </div>
-                        <div class="toggle-setting-wrap">
-                        <span class="toggle-setting">
-                          <img src="../img/login,member,mypage/img-settings.svg" alt="setting icon">
-                        </span>
-                        <!-- setting click menu -->
-                        <ul class="setting-menu-wrap">
-                          <li>이름변경</li>
-                          <li>비밀번호변경</li>
-                          <li>회원탈퇴</li>
-                        </ul>
-                      </div>
-                      </section>
-                     <div style="display: flex;">
-                         <!-- My Pick -->
-                       <!-- <hr> -->
-                      <section class="mypick-wrap">
-                        <div class="sub-tit-wrap">
-                          <h3><img src="../img/main/icon-section-tit.svg" alt="section icon">My Pick</h3>
-                          <div class="sort-container">
-                            <label for="sort">정렬</label>
-                            <select id="sort" class="sort-select">
-                              <option value="loan-days">대출종료일</option>
-                              <option value="alphabetical">가나다</option>
-                            </select>
-                          </div>
-                        </div>
-                        <ul class="loan-list-wrap">
-                          <li class="loan-list">
-                            <article class="loan-item">
-                              <span class="book-title">(책 제목)</span>
-                              <!-- 대출일 계산기능 추가필요 , 회원 마감 임박 대출목록 5개추출해서 출력하는 기능 -->
-                              <time class="due-date" datetime="2025-03-01"
-                                >~ 2025. 03. 01 (토)</time
-                              >
-                            </article>
-                          </li>
-                          <li class="loan-list">
-                            <article class="loan-item">
-                              <span class="book-title">(책 제목)</span>
-                              <time class="due-date" datetime="2025-03-02"
-                                >~ 2025. 03. 02 (일)</time
-                              >
-                            </article>
-                          </li>
-                          <li class="loan-list">
-                            <article class="loan-item">
-                              <span class="book-title">(책 제목)</span>
-                              <time class="due-date" datetime="2025-03-03"
-                                >~ 2025. 03. 03 (월)</time
-                              >
-                            </article>
-                          </li>
-                          <li class="loan-list">
-                            <article class="loan-item">
-                              <span class="book-title">(책 제목)</span>
-                              <time class="due-date" datetime="2025-03-04"
-                                >~ 2025. 03. 04 (화)</time
-                              >
-                            </article>
-                          </li>
-                          <li class="loan-list">
-                            <article class="loan-item">
-                              <span class="book-title">(책 제목)</span>
-                              <time class="due-date" datetime="2025-03-05"
-                                >~ 2025. 03. 05 (수)</time
-                              >
-                            </article>
-                          </li>
-                        </ul>
-                        <div class="move-loan-wrap">
-                        <button href="#" class="move-loan-list">대출목록 바로가기</button>
-                      </div>
-                        <!-- <hr /> -->
-                      </section>
-                      <!-- badge -->
-                      <section class="badge-wrap">
-                        <h3><img src="../img/main/icon-section-tit.svg" alt="section icon">나의 스탬프</h3>
-                        <div class="badge-grid">
-                          <!-- grid : 4 * 2 (초기버전은 총 5개 예정) -->
-                          <div class="badge">
-                            <img src="../img/login,member,mypage/img-badge-temp.jpg" alt="뱃지1" />
-                            <span></span>
-                          </div>
-                          <div class="badge">
-                            <img src="../img/login,member,mypage/img-badge-temp.svg" alt="뱃지2" />
-                            <span></span>
-                          </div>
-                          <div class="badge">
-                            <img src="../img/login,member,mypage/img-badge-temp2.svg" alt="뱃지3" />
-                            <span></span>
-                          </div>
-                          <div class="badge">
-                            <img src="../img/login,member,mypage/img-badge-temp3.svg" alt="뱃지4" />
-                            <span></span>
-                          </div>
-                          <div class="badge">
-                            <img src="../img/login,member,mypage/img-badge-temp4.jpg" alt="뱃지5" />
-                            <span></span>
-                          </div>
-                        </div>
-                      </section>
-                     </div>
-                    </div>
-                  </div>
-            </div>
-            <!-- contents e -->
+      <div class="dimm"></div>
+      <div class="search-dimm"></div>
+      <!-- header s -->
+      <header class="header">
+        <div class="header-top">
+          <ul class="link-list">
+            <li>
+              <a href="#"><span class="icon login"></span>로그인</a>
+            </li>
+            <li>
+              <a href="#"><span class="icon join"></span>회원가입</a>
+            </li>
+          </ul>
         </div>
-        <!-- sub-container e -->
-        <!-- footer s -->
-        <footer class="footer">
-            <div class="inner">
-                <div class="footer-inner">
-                    <div class="left">
-                        <ul class="footer-link">
-                            <li><a href="#">개인정보처리방침</a></li>
-                            <li><a href="#">저작권보호정책</a></li>
-                            <li><a href="#">이메일무단수집거부</a></li>
-                            <li><a href="#">자주묻는질문</a></li>
-                        </ul>
-                    </div>
-                    <div class="right">
-                        <div class="family-site">
-                            <button type="button" class="family-site-btn">유관기관 바로가기<span class="blind">열림</span></button>
-                            <ul class="site-list">
-                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>
-                                <li><a href="#" target="_blank" title="새창열림">아무사이트나넣기</a></li>   
-                            </ul>
-                        </div>
-                    </div>
+        <div class="inner-header-wrap">
+          <div class="inner-header">
+            <h1 class="logo">
+              <img src="../img/common/logo-temp.svg" alt="로고" />
+            </h1>
+            <div class="gnb-wrap">
+              <div class="gnb-top">
+                <div class="gnb-util">
+                  <button class="account-btn">
+                    <span class="blind">나의공간</span>
+                  </button>
+                  <button class="menu-close-btn">
+                    <span class="blind">메뉴닫기</span>
+                  </button>
                 </div>
-                <div class="footer-btm">
-                    <div class="footer-logo">
-                        <img src="../img/common/logo-temp.svg" alt="하단 로고">
-                    </div>
-                    <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
-                </div>
+              </div>
+              <nav class="gnb">
+                <ul class="gnb-list">
+                  <li class="dep1">
+                    <a href="#">자료검색</a>
+                    <ul class="dep2">
+                      <li><a href="#">통합검색</a></li>
+                      <li><a href="#">베스트셀러</a></li>
+                      <li><a href="#">신착도서</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">예약/대출</a>
+                    <ul class="dep2">
+                      <li><a href="#">도서대출</a></li>
+                      <li><a href="#">도서예약</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">이달의 도서</a>
+                    <ul class="dep2">
+                      <li><a href="#">편집장 추천 도서</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">열린공간</a>
+                    <ul class="dep2">
+                      <li><a href="#">공지사항</a></li>
+                      <li><a href="#">자유게시판</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">이벤트</a>
+                    <ul class="dep2">
+                      <li><a href="#">작가 강연 예약</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
             </div>
-        </footer>
-        <!-- footer e -->
+            <div class="header-util">
+              <button type="button" class="total-search-btn">
+                <span class="blind">통합검색 버튼</span>
+              </button>
+              <button type="button" class="search-close-btn">
+                <span class="blind">통합검색 닫기 버튼</span>
+              </button>
+              <button type="button" class="menu-btn">
+                <span class="blind">메뉴 버튼</span>
+              </button>
+            </div>
+            <div class="pc-header-util">
+              <button type="button" class="total-search-btn"></button>
+              <button type="button" class="search-close-btn"></button>
+            </div>
+          </div>
+        </div>
+        <div class="search-wrap">
+          <div class="search-form">
+            <form action="search.php">
+              <fieldset>
+                <legend class="blind">도서 통합검색 폼</legend>
+                <input
+                  type="text"
+                  id="mainSearchText"
+                  name="searchTxt"
+                  title="검색어"
+                  placeholder="찾으시는 도서가 있나요?"
+                />
+                <button type="button" class="total-search-btn"></button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </header>
+      <!-- header e -->
+      <!-- sub-container s -->
+      <div class="sub-container" id="main">
+        <!-- sub-top s -->
+        <div class="sub-top">
+          <ul class="breadcrumb">
+            <li class="home">
+              <a href="/"><span class="icon home"></span></a>
+            </li>
+            <li class="1depth"><a href="#">원뎁스</a></li>
+            <li class="2depth"><a href="#">투뎁스</a></li>
+          </ul>
+          <div class="title-box">
+            <h3 class="sub-title">페이지 서브 타이틀이 들어갑니다.</h3>
+            <ul class="sub-link">
+              <li class="link-copy">
+                <button type="button">
+                  <img src="../img/common/icon-link.svg" alt="링크 공유 버튼" />
+                </button>
+                <div class="url-copy">
+                  <input type="text" id="urlCopy" value="" />
+                  <label for="urlCopy"></label>
+                  <button type="button" onclick="fn_copyUrl();">복사</button>
+                </div>
+              </li>
+              <li class="link-print">
+                <button type="button" onclick="fn_print()">
+                  <img
+                    src="../img/common/icon-print.svg"
+                    alt="페이지 프린트 버튼"
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- sub-top e -->
+        <!-- contents s -->
+        <div class="contents">
+          <div class="monthly-recommend">
+            <div class="book-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/img-9962757754.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/login,member,mypage/img-badge-4.png" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+                <div class="swiper-slide">
+                  <img src="../img/main/img-test.jpg" alt="aa" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- contents e -->
+      </div>
+      <!-- sub-container e -->
+      <!-- footer s -->
+      <footer class="footer">
+        <div class="inner">
+          <div class="footer-inner">
+            <div class="left">
+              <ul class="footer-link">
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">저작권보호정책</a></li>
+                <li><a href="#">이메일무단수집거부</a></li>
+                <li><a href="#">자주묻는질문</a></li>
+              </ul>
+            </div>
+            <div class="right">
+              <div class="family-site">
+                <button type="button" class="family-site-btn">
+                  유관기관 바로가기<span class="blind">열림</span>
+                </button>
+                <ul class="site-list">
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-btm">
+            <div class="footer-logo">
+              <img src="../img/common/logo-temp.svg" alt="하단 로고" />
+            </div>
+            <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- footer e -->
     </div>
     <!-- wrapper e -->
-</body>
+  </body>
 </html>

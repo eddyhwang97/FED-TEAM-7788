@@ -126,9 +126,10 @@
 
 // sub-contents
 .contents {
-  max-width: 1320px;
+  max-width: 1380px;
   margin: 0 auto;
   padding: 36px 20px 60px;
+  overflow: hidden;
 }
 
 @include responsive(768px) {

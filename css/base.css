@@ -352,9 +352,10 @@ select {
 }
 
 .contents {
-  max-width: 1320px;
+  max-width: 1380px;
   margin: 0 auto;
   padding: 36px 20px 60px;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
