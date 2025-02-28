@@ -1,20 +1,22 @@
 //  Login 컴포넌트 - Login.jsx
-import { useEffect, useLayoutEffect, useState, createContext} from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useEffect, useLayoutEffect, useState, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SubTop from '../module/SubTop';
-
+// login scss //
 import login from '../../css/page/login.scss';
-
+// 로컬스토리지용 JSON Data //
 import member_data from '../../js/data/member_data.json';
 localStorage.setItem('member_data', JSON.stringify(member_data));
 
 function Login({ gnb1, gnb2 }) {
   const navigate = useNavigate(); // useNavigate 훅
-
+  // 휴대폰 //
   const [phoneNum, setphoneNum] = useState('');
   const [phoneValid, setphoneValid] = useState(false);
+  // 비밀번호 //
   const [pw, setpw] = useState('');
   const [pwValid, setpwValid] = useState(false);
+  //  로그인 버튼 활성화
   const [notAllow, setNotAllow] = useState(true);
 
   // 핸드폰 번호 유효성 검사 //
@@ -44,12 +46,12 @@ function Login({ gnb1, gnb2 }) {
   // 로그인 버튼 클릭시 로컬스토리지 데이터와 비교
   const onClickConfirmButton = () => {
     const cleanPhoneNum = phoneNum.replace(/\D/g, ''); // 숫자만 남기기
-    const member_data = JSON.parse(localStorage.getItem('member_data')) || [];
+    const member_data = JSON.parse(localStorage.getItem('member_data')) || []; // 로컬스토리지 데이터 가져오기
     const user = member_data.find(
       (m) => m.id.replace(/\D/g, '') === cleanPhoneNum && m.pw === pw
     );
     if (user) {
-      alert('로그인에 성공하였습니다.');
+      alert('로그인에 성공🎉');
       navigate('/'); // 로그인 성공 후 메인페이지 이동
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
