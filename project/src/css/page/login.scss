@@ -29,6 +29,16 @@
         padding: 14px 18px;
         height: 50px;
       }
+      .password-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .toggle-password {
+          position: absolute;
+          padding-right: 10px;
+        }
+      }
       .errorMessageWrap{
         color: red;
       }
