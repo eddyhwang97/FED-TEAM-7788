@@ -444,6 +444,10 @@
     background-color: $gray;
     color: $white;
   }
+  &.return {
+    background-color: $darkgray;
+    color: $white;
+  }
   &.ing {
     border: 1px solid $blueviolet;
     color: $blueviolet;
