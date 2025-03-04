@@ -11,9 +11,16 @@ function BookDetail() {
   const [loanStatus, setLoanStatus] = useState("대출 가능");
   const [reserved, setReserved] = useState(false);
   const [loanDate, setLoanDate] = useState(null);
+  const [stock, setStock] = useState(0); // 도서 재고 상태
+  const [showLoanPopup, setShowLoanPopup] = useState(false);
+  const [showReturnPopup, setShowReturnPopup] = useState(false); // 반납 팝업 상태
   const maxLoanLimit = 5;
 
   useEffect(() => {
+    if (book) {
+      setStock(book.stock); // 초기 stock 설정
+    }
+
     const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
     const reservedBooks = JSON.parse(localStorage.getItem("reservedBooks")) || {};
 
@@ -25,7 +32,6 @@ function BookDetail() {
       setReserved(true);
     }
 
-    // 대출 기간 확인 (7일 초과 시 자동 반납)
     if (loanedBooks[isbn]) {
       const loanTime = new Date(loanedBooks[isbn]);
       const now = new Date();
@@ -35,24 +41,39 @@ function BookDetail() {
         handleReturn();
       }
     }
-  }, [isbn]);
+  }, [isbn, book]);
+
+  const confirmLoan = () => {
+    if (stock === 0) {
+      alert("대출이 불가능합니다.");
+      return;
+    }
+    setShowLoanPopup(true);
+  };
 
   const handleLoan = () => {
     const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
 
-    // 현재 대출된 책 개수 확인
     if (Object.keys(loanedBooks).length >= maxLoanLimit) {
       alert("최대 5권까지 대출할 수 있습니다.");
       return;
     }
 
-    if (!loanedBooks[isbn]) {
+    if (!loanedBooks[isbn] && stock > 0) {
       const loanTime = new Date().toISOString();
       loanedBooks[isbn] = loanTime;
       localStorage.setItem("loanedBooks", JSON.stringify(loanedBooks));
       setLoanStatus("대출 중");
       setLoanDate(new Date(loanTime));
+
+      // stock 감소
+      setStock(stock - 1);
     }
+    setShowLoanPopup(false);
+  };
+
+  const confirmReturn = () => {
+    setShowReturnPopup(true); // 반납 팝업 활성화
   };
 
   const handleReturn = () => {
@@ -62,12 +83,10 @@ function BookDetail() {
     setLoanStatus("대출 가능");
     setLoanDate(null);
 
-    const reservedBooks = JSON.parse(localStorage.getItem("reservedBooks")) || {};
-    if (reservedBooks[isbn]) {
-      delete reservedBooks[isbn];
-      localStorage.setItem("reservedBooks", JSON.stringify(reservedBooks));
-      setReserved(false);
-    }
+    // stock 증가
+    setStock(stock + 1);
+
+    setShowReturnPopup(false); // 팝업 닫기
   };
 
   const handleReserve = () => {
@@ -75,6 +94,8 @@ function BookDetail() {
     reservedBooks[isbn] = true;
     localStorage.setItem("reservedBooks", JSON.stringify(reservedBooks));
     setReserved(true);
+
+    alert("예약되었습니다.");
   };
 
   if (!book) {
@@ -99,37 +120,68 @@ function BookDetail() {
               <li><em>출판사</em><span className="publisher">{book.publisher}</span></li>
               <li><em>ISBN</em><span className="isbn">{book.ISBN}</span></li>
               <li><em>발행일</em><span className="date">{book.pDate}</span></li>
-              <li><em>페이지</em><span className="page">{book.pNum}p</span></li>
+              <li><em>페이지</em><span className="page">{book.pNum}</span></li>
               <li><em>카테고리</em><span className="genre">{getCategory(book.ISBN)}</span></li>
+              <li><em>재고</em><span className="stock">{stock}권</span></li>
             </ul>
             <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
+            {loanDate && (
+              <p className="loan-date">반납 기한: {new Date(loanDate.getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
+            )}
             <div className="util-box">
               <div className="btn-wrap">
-                {loanStatus === "대출 가능" ? (
-                  <button type="button" className="btn-state loan" onClick={handleLoan}>
-                    대출하기
-                  </button>
+                {stock > 0 ? (
+                  loanStatus === "대출 가능" ? (
+                    <button type="button" className="btn-state loan" onClick={confirmLoan}>
+                      대출하기
+                    </button>
+                  ) : (
+                    <>
+                      <button type="button" className="btn-state ing">
+                        대출 중
+                      </button>
+                      <button type="button" className="btn-state return" onClick={confirmReturn}>
+                        반납하기
+                      </button>
+                    </>
+                  )
                 ) : (
-                  <button type="button" className="btn-state ing" onClick={handleReturn}>
-                    대출 중 (반납하기)
-                  </button>
-                )}
-                {loanStatus === "대출 중" && !reserved && (
                   <button type="button" className="btn-state reserve" onClick={handleReserve}>
                     예약하기
                   </button>
                 )}
-                {reserved && <p className="reserved-text">예약 완료</p>}
               </div>
               <button type="button" className="interest">♡</button>
             </div>
-            {loanDate && (
-                <p className="loan-date">반납 기한: {new Date(loanDate.getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
-              )}
           </div>
         </div>
       </div>
-      <BookComment></BookComment>
+
+      {showLoanPopup && (
+        <div className="popup-wrap on">
+          <div className="alert-popup">
+            <p className="ment">이 책을 대출하시겠습니까?</p>
+            <div className="popup-btn">
+              <button onClick={handleLoan}>확인</button>
+              <button onClick={() => setShowLoanPopup(false)}>취소</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showReturnPopup && (
+        <div className="popup-wrap on">
+          <div className="alert-popup">
+            <p className="ment">이 책을 반납하시겠습니까?</p>
+            <div className="popup-btn">
+              <button onClick={handleReturn}>확인</button>
+              <button onClick={() => setShowReturnPopup(false)}>취소</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <BookComment />
     </div>
   );
 }
