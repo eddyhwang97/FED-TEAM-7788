@@ -564,24 +564,17 @@
 }
 
 @include responsive(500px) {
+  .book-info-wrap {
+    margin-bottom: 2em;
+  }
   .book-img-list {
     .swiper-slide {
       opacity: 0.5;
-    }
-
-    .swiper-slide-active {
-      opacity: 1;
-    }
-  }
-}
-
-@include responsive(768px) {
-  .book-img-list {
-    .swiper-slide {
       scale: 0.8;
     }
 
     .swiper-slide-active {
+      opacity: 1;
       scale: 1;
     }
   }
@@ -589,7 +582,7 @@
 
 @include responsive(1024px) {
   .book-info-wrap {
-    gap: 2rem;
+    gap: 2em;
     width: calc(30% - 15px);
     margin-bottom: 0;
     justify-content: flex-end;

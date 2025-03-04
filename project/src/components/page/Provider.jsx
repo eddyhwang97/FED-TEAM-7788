@@ -1,3 +1,3 @@
 import { createContext } from "react";
 // global variables
-export const Context = createContext();
+export const MyContext = createContext();

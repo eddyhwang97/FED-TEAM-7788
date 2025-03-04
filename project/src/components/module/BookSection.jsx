@@ -1,5 +1,6 @@
 // 메인페이지 게시판 섹션
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -11,6 +12,7 @@ function BookSection() {
   const paginationRef = useRef(null); // paginationRef 생성
   const [selectedTab, setSelectedTab] = useState("newest");
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 탭 변경 시 데이터 정렬
@@ -137,7 +139,13 @@ function BookSection() {
                   >
                     {books.map((book) => (
                       <SwiperSlide key={book.ISBN} className="item">
-                        <a href="#">
+                         <a 
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault(); // a태그 기본 동작 방지
+                              navigate(`/book/${book.ISBN}`); // 상세 페이지 이동
+                            }}
+                          >
                           <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                         </a>
                       </SwiperSlide>

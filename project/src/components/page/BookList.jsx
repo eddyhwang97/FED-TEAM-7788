@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import booksData from "../../js/data/book_data.json";
 import "../../css/page/book-list.scss";
 import { getCategory, sortByNewest, sortByBest } from "../../js/function/sort-books";
@@ -6,6 +7,8 @@ import SubTop from "../module/SubTop";
 
 function BookList({ gnb1, gnb2 }) {
   const [filteredBooks, setFilteredBooks] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (gnb2 === "베스트셀러") {
@@ -24,7 +27,14 @@ function BookList({ gnb1, gnb2 }) {
           <ul className="book-list">
             {filteredBooks.map((book) => (
               <li key={book.ISBN}>
-                <a href="#" className="item">
+                <a 
+                  href="#" 
+                  className="item" 
+                  onClick={(e) => {
+                    e.preventDefault(); // a태그 기본 동작 방지
+                    navigate(`/book/${book.ISBN}`); // 상세 페이지 이동
+                  }}
+                >
                   <div className="img-box">
                     <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                   </div>

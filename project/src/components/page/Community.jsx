@@ -1,239 +1,255 @@
-//  Community 컴포넌트 - Community.jsx
-// import "../../css/common/_core";
-import "../../css/page/community.scss";
-import communityFn from "../../js/function/community.js";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { Context } from "../Provider.jsx";
-import { menu } from "../../js/data/gnb_data.js";
-import { Link, Links, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Router, useLocation, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+// data
 import communityData from "../../js/data/community_data.json";
-import SearchBox from "../module/SearchBox.jsx";
-import SubTop from "../module/SubTop.jsx";
-// console.log();
 
-function Community({ gnb1, gnb2 }) {
-  // set communityData in LocalStorage
-  localStorage.setItem("community_data", JSON.stringify(communityData));
-  const tabMenu = [{ 공지사항: "notice" }, { FAQ: "faq" }, { 자유게시판: "freeboard" }];
-  const tabLink = menu[3].sub;
-  const noticeList = [...communityData.filter((x) => x.type === "notice").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))];
-  const faqList = [...communityData.filter((x) => x.type === "faq").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))];
-  const freeBoardList = [...communityData.filter((x) => x.type === "freeboard").sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1))];
-  const boardList = [noticeList, faqList, freeBoardList];
-  const faqListEl = document.querySelectorAll("#faq-tab .list");
+// css
+import "../../css/page/community.scss";
+import SubTop from "../module/SubTop";
+import SearchBox from "../module/SearchBox";
 
+function Community({ gnb1, gnb2, data }) {
+  const navigate = useNavigate();
+  // variables
+  const noticeList = communityData.filter((v) => v.type === "notice").sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
+  const faqList = communityData.filter((v) => v.type === "faq").sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
+  const freeboardList = communityData.filter((v) => v.type === "freeboard").sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
+  const searchOption = ["제목", "내용", "작성자"];
   // useState
-  const [searchBox, setSearchBox] = useState(true);
-  const [tab, setTab] = useState(0);
-  const [activeTab, setActiceTab] = useState(true);
-  const [board, setBoard] = useState(tab);
-  const [activeBoard, setActiveBoard] = useState(true);
-  const [article, setArticle] = useState(false);
-  const [post, setPost] = useState(false);
-  const [pagenate, setPagenate] = useState(true);
+  const [activeTab, setActiveTab] = useState(data);
+  const [activeList, setActiveList] = useState(data);
+  const [article, setArticle] = useState(data);
 
-  console.log(useLocation());
-  useEffect(() => {});
-  // tab useEffect
-  useEffect(() => {
-    const tabs = document.querySelectorAll(".tab");
-    const activeTab = document.querySelectorAll(".tab")[tab];
-    console.log(board, tab, activeTab);
-
-    // 탭,보드부분 클래스 동적제어
-    tabs.forEach((e) => {
+  // function
+  const toggleListFn = (e) => {
+    const list = document.querySelectorAll("#faq-tab .list");
+    list.forEach((e) => {
       e.classList.remove("active");
     });
-    activeTab.classList.add("active");
-  }, [tab, board]);
+    e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
+  };
+  const listExtractionFn = (e) => {
+    const list = e.currentTarget;
+    const listType = list.dataset.type;
+    const listIdx = list.dataset.key;
+    let contents = communityData.find((v) => (v.type === listType) & (v.idx === Number(listIdx)));
+    setArticle(contents);
+  };
+  function toTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // 레이아웃 렌더링
+  useEffect(() => {
+    console.log(data);
+    setActiveTab(data);
+    window.scrollTo(0, 0);
+  }, [useLocation()]);
+  useEffect(() => {
+    console.log(article);
+    window.scrollTo(0, 0);
+  }, [listExtractionFn]);
 
   return (
     <>
       {/* <!-- sub-top s --> */}
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       {/* <!-- sub-top e --> */}
+      {/* <!-- search-box s --> */}
+      {/* <!-- search-box e --> */}
       {/* <!-- contents s --> */}
       <div className="contents">
         <div className="content">
-          {/* <!-- search-box s --> */}
-          {searchBox && <SearchBox />}
-          {/* <!-- search-box e --> */}
+          <SearchBox searchOption={searchOption} />
           {/* <!-- tab-section s --> */}
-          {activeTab && (
-            <div className="tab-section">
-              <div className="tabs">
-                {tabMenu.map((v, i) => (
-                  <div
-                    key={i}
-                    tab={i}
-                    onClick={(e) => {
-                      setBoard(i);
-                      setTab(i);
-                    }}
-                    data-tab-target={(i === 0 ? "notice" : i === 1 ? "faq" : i === 2 ? "freeboard" : "") + "-tab"}
-                    className="tab notice-tab-button"
-                  >
-                    <Link to={tabLink[i].link}>{Object.keys(v)} </Link>
-                  </div>
-                ))}
+
+          <div className="tab-section">
+            <div className="tabs">
+              <div
+                id="notice-tab"
+                className={activeTab === "notice" ? "tab notice-tab-button active" : "tab notice-tab-button"}
+                onClick={() => {
+                  setActiveTab("notice");
+                  setActiveList("notice");
+                }}
+              >
+                <Link to={"/community/notice"}>공지사항</Link>
+              </div>
+
+              <div
+                id="faq-tab"
+                className={activeTab === "faq" ? "tab faq-tab-button active" : "tab faq-tab-button"}
+                onClick={() => {
+                  setActiveTab("faq");
+                  setActiveList("faq");
+                }}
+              >
+                <Link to={"/community/faq"}>FAQ</Link>
+              </div>
+              <div
+                id="freeboard-tab"
+                className={activeTab === "freeboard" ? "tab freeboard-tab-button active" : "tab freeboard-tab-button"}
+                onClick={() => {
+                  setActiveTab("freeboard");
+                  setActiveList("freeboard");
+                }}
+              >
+                <Link to={"/community/freeboard"}>자유게시판</Link>
               </div>
             </div>
-          )}
+          </div>
 
           {/* <!-- tab-section e --> */}
           {/* <!-- board-section s --> */}
-          {activeBoard && (
-            <div className="board-section">
-              <div className="tab-content">
-                {board === tab && (
-                  <div key={tab} id={(tab === 0 ? "notice" : tab === 1 ? "faq" : tab === 2 ? "freeboard" : "") + "-tab"} data-tab-content className="table active">
-                    <div className="table-top">
-                      <ul>
-                        <li className="list-num">번호</li>
-                        <li className="list-title">제목</li>
-                        <li className="list-date">날짜</li>
-                        <li className="list-user">작성자</li>
-                      </ul>
-                    </div>
-                    <ul>
-                      {boardList[tab].map((v, i) => (
-                        <li className="list" key={v.idx}>
-                          {tab !== 1 ? (
-                            <Link to={"/community/" + ((tab === 0 && "notice") || (tab === 2 && "freeboard")) + "/:" + v.idx}>
-                              <div className="list-header">
-                                <p className="list-num">{i + 1}</p>
-                                <p className="list-title">{v.title}</p>
-                                <p className="list-date">{v.date}</p>
-                                <p className="list-user">{v.user}</p>
-                              </div>
-                            </Link>
-                          ) : (
-                            <div className="list-header">
-                              <p className="list-num">{i + 1}</p>
-                              <p className="list-title">{v.title}</p>
-                              <p className="list-date">{v.date}</p>
-                              <p className="list-user">{v.user}</p>
-                            </div>
-                          )}
-                          {board === 1 && (
-                            <div className="list-info">
-                              <strong>${v.content}</strong>
-                            </div>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          {/* <!-- board-section e --> */}
 
-          {/* <!-- article-section s --> */}
-          {article && (
-            <div className="article-section">
-              <div className="article-header">
-                <div className="article-title">
-                  <h3>책에 대한 리뷰는 어디서 보시나요?</h3>
+          <div className="board-section">
+            <div className="tab-content">
+              <div id="notice-list" className={activeList === "notice" ? "table active" : "table"}>
+                <div className="table-top">
+                  <ul>
+                    <li className="list-num">번호</li>
+                    <li className="list-title">제목</li>
+                    <li className="list-date">날짜</li>
+                    <li className="list-user">작성자</li>
+                  </ul>
                 </div>
-                <div className="writer-info">
-                  <div className="profile">한상화</div>
-                  <div className="date">2023-01-18</div>
-                </div>
-              </div>
-              <div className="article-content">
-                <img src="../img/book/img-9962318222.jpg" alt="테스트 이미지" />
-                <p>책을 구매하기 전에 리뷰를 꼭 찾아보는 편인데,</p>
-                <p>어디에서 가장 신뢰할 만한 리뷰를 볼 수 있을까요?</p>
-                <p>저는 주로 서점 사이트나 블로그에서 찾는 편이에요.</p>
-                <p>여러분은 책 리뷰를 어디서 확인하시나요?</p>
-                <p>추천할 만한 사이트나 채널이 있다면 알려주세요!</p>
-              </div>
-              <div className="underline"></div>
-              <div className="comment">
-                <h4>댓글</h4>
-                <ul className="comment-list">
-                  <li className="comment-item">
-                    <div className="comment-top">
-                      <p className="comment-writer">나오미</p>
-                      <span className="comment-date">2023-01-19</span>
-                    </div>
-                    <div className="comment-content">
-                      <p>아주 좋은 정보 감사합니다!</p>
-                    </div>
-                  </li>
-                  <li className="comment-item">
-                    <div className="comment-top">
-                      <p className="comment-writer">나오미</p>
-                      <span className="comment-date">2023-01-19</span>
-                    </div>
-                    <div className="comment-content">
-                      <p>아주 좋은 정보 감사합니다!</p>
-                    </div>
-                  </li>
-                  <li className="comment-item">
-                    <div className="comment-top">
-                      <p className="comment-writer">나오미</p>
-                      <span className="comment-date">2023-01-19</span>
-                    </div>
-                    <div className="comment-content">
-                      <p>아주 좋은 정보 감사합니다!</p>
-                    </div>
-                  </li>
+                <ul>
+                  {noticeList.map((v, i) => (
+                    <li
+                      key={v.idx}
+                      className="list"
+                      data-type={v.type}
+                      data-key={v.idx}
+                      onClick={(e) => {
+                        listExtractionFn(e);
+                      }}
+                    >
+                      <div className="list-header">
+                        <p className="list-num">{i + 1}</p>
+                        <p className="list-title">{v.title}</p>
+                        <p className="list-date">{v.date}</p>
+                        <p className="list-user">{v.user}</p>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
-                <div className="form-group write-comment">
-                  <textarea id="text-comment" name="content" placeholder="댓글을 남겨봐유~!" required></textarea>
-                  <button type="button" className="register-btn">
-                    등록
-                  </button>
+              </div>
+              <div id="faq-list" className={activeList === "faq" ? "table active" : "table"}>
+                <div className="table-top">
+                  <ul>
+                    <li className="list-num">번호</li>
+                    <li className="list-title">제목</li>
+                    <li className="list-date">날짜</li>
+                    <li className="list-user">작성자</li>
+                  </ul>
                 </div>
+                <ul>
+                  {faqList.map((v, i) => (
+                    <li
+                      className="list"
+                      key={v.idx}
+                      onClick={(e) => {
+                        toggleListFn(e.currentTarget);
+                      }}
+                    >
+                      <div className="list-header">
+                        <p className="list-num">{i + 1}</p>
+                        <p className="list-title">{v.title}</p>
+                        <p className="list-date">{v.date}</p>
+                        <p className="list-user">{v.user}</p>
+                      </div>
+                      <div className="list-info">
+                        <strong>{v.content}</strong>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div id="freeboard-list" className={activeList === "freeboard" ? "table active" : "table"}>
+                <div className="table-top">
+                  <ul>
+                    <li className="list-num">번호</li>
+                    <li className="list-title">제목</li>
+                    <li className="list-date">날짜</li>
+                    <li className="list-user">작성자</li>
+                  </ul>
+                </div>
+                <ul>
+                  {freeboardList.map((v, i) => (
+                    <li
+                      key={v.idx}
+                      className="list"
+                      data-type={v.type}
+                      data-key={v.idx}
+                      onClick={(e) => {
+                        listExtractionFn(e);
+                      }}
+                    >
+                      <a href="#" onClick={(e)=>{
+                        e.preventDefault();
+                        navigate(`/community/freeboard/${v.idx}`)
+                      }}>
+                        <div className="list-header">
+                          <p className="list-num">{i + 1}</p>
+                          <p className="list-title">{v.title}</p>
+                          <p className="list-date">{v.date}</p>
+                          <p className="list-user">{v.user}</p>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          )}
+          </div>
+
+          {/* <!-- board-section e --> */}
+          {/* <!-- pagenate-section s --> */}
+
+          <div className="pagenate-section">
+            <button type="button" className="btn-prev"></button>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <button type="button" className="btn-next"></button>
+            <button type="button" className="write-btn" onClick={() => {}}>
+              글쓰기
+            </button>
+          </div>
+
+          {/* <!-- pagnat-section e --> */}
+          {/* <!-- article-section s --> */}
+
           {/* <!-- article-section e --> */}
           {/* <!-- post-section s --> */}
-          {post && (
-            <div className="post-section">
-              <div className="write-board">
-                <form action="write_process.php" method="post" encType="multipart/form-data">
-                  <div className="write-form">
-                    <div className="form-group title">
-                      <input type="text" id="title" name="title" placeholder="제목" required />
-                    </div>
-                    <div className="form-group text-content">
-                      <textarea id="text-content" name="content" placeholder="내용을 입력하세요." required></textarea>
-                    </div>
-                    <div className="btn-wrap">
-                      <button type="submit" className="submit-btn">
-                        등록
-                      </button>
-                      <button type="button" className="close-btn">
-                        닫기
-                      </button>
-                    </div>
+
+          <div className="post-section">
+            <div className="write-board">
+              <form action="write_process.php" method="post" encType="multipart/form-data">
+                <div className="write-form">
+                  <div className="form-group title">
+                    <input type="text" id="title" name="title" placeholder="제목" required />
                   </div>
-                </form>
-              </div>
+                  <div className="form-group text-content">
+                    <textarea id="text-content" name="content" placeholder="내용을 입력하세요." required></textarea>
+                  </div>
+                  <div className="btn-wrap">
+                    <button type="submit" className="submit-btn">
+                      등록
+                    </button>
+                    <button type="button" className="close-btn" onClick={() => {}}>
+                      닫기
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-          )}
+          </div>
+
           {/* <!-- post-section e --> */}
-          {/* <!-- pagenate-section s --> */}
-          {pagenate && (
-            <div className="pagenate-section">
-              <button type="button" className="btn-prev"></button>
-              <a href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <button type="button" className="btn-next"></button>
-              {tab === 2 && (
-                <button type="button" className="write-btn">
-                  <Link to={"/community/freeboard/:"}></Link> 글쓰기
-                </button>
-              )}
-            </div>
-          )}
-          {/* <!-- pagnat-section e --> */}
         </div>
       </div>
       {/* <!-- contents e --> */}
