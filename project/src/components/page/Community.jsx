@@ -21,7 +21,8 @@ function Community({ gnb1, gnb2, data }) {
   // useState
   const [activeTab, setActiveTab] = useState(data);
   const [activeList, setActiveList] = useState(data);
-  const [article, setArticle] = useState(data);
+  // 로그인 상태변수
+  const [onUser, userStatus] = useState(false);
 
   // function
   const toggleListFn = (e) => {
@@ -31,28 +32,26 @@ function Community({ gnb1, gnb2, data }) {
     });
     e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
   };
-  const listExtractionFn = (e) => {
-    const list = e.currentTarget;
-    const listType = list.dataset.type;
-    const listIdx = list.dataset.key;
-    let contents = communityData.find((v) => (v.type === listType) & (v.idx === Number(listIdx)));
-    setArticle(contents);
+  const goLogin = () => {
+    if (!onUser) {
+      alert("로그인이 필요합니다.");
+      window.location.href = "/login";
+    }
   };
-  function toTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
   // 레이아웃 렌더링
   useEffect(() => {
     console.log(data);
     setActiveTab(data);
     window.scrollTo(0, 0);
   }, [useLocation()]);
+  // 로그인 상태 확인
   useEffect(() => {
-    console.log(article);
-    window.scrollTo(0, 0);
-  }, [listExtractionFn]);
-
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user) {
+      userStatus(true);
+    } else userStatus(false);
+    console.log(onUser, user);
+  }, [onUser]);
   return (
     <>
       {/* <!-- sub-top s --> */}
@@ -65,7 +64,6 @@ function Community({ gnb1, gnb2, data }) {
         <div className="content">
           <SearchBox searchOption={searchOption} />
           {/* <!-- tab-section s --> */}
-
           <div className="tab-section">
             <div className="tabs">
               <div
@@ -118,21 +116,21 @@ function Community({ gnb1, gnb2, data }) {
                 </div>
                 <ul>
                   {noticeList.map((v, i) => (
-                    <li
-                      key={v.idx}
-                      className="list"
-                      data-type={v.type}
-                      data-key={v.idx}
-                      onClick={(e) => {
-                        listExtractionFn(e);
-                      }}
-                    >
-                      <div className="list-header">
-                        <p className="list-num">{i + 1}</p>
-                        <p className="list-title">{v.title}</p>
-                        <p className="list-date">{v.date}</p>
-                        <p className="list-user">{v.user}</p>
-                      </div>
+                    <li key={v.idx} className="list" data-type={v.type} data-key={v.idx}>
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/community/${data}/${v.idx}`);
+                        }}
+                      >
+                        <div className="list-header">
+                          <p className="list-num">{i + 1}</p>
+                          <p className="list-title">{v.title}</p>
+                          <p className="list-date">{v.date}</p>
+                          <p className="list-user">{v.user}</p>
+                        </div>
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -179,19 +177,14 @@ function Community({ gnb1, gnb2, data }) {
                 </div>
                 <ul>
                   {freeboardList.map((v, i) => (
-                    <li
-                      key={v.idx}
-                      className="list"
-                      data-type={v.type}
-                      data-key={v.idx}
-                      onClick={(e) => {
-                        listExtractionFn(e);
-                      }}
-                    >
-                      <a href="#" onClick={(e)=>{
-                        e.preventDefault();
-                        navigate(`/community/freeboard/${v.idx}`)
-                      }}>
+                    <li key={v.idx} className="list" data-type={v.type} data-key={v.idx}>
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/community/${data}/${v.idx}`);
+                        }}
+                      >
                         <div className="list-header">
                           <p className="list-num">{i + 1}</p>
                           <p className="list-title">{v.title}</p>
@@ -215,7 +208,14 @@ function Community({ gnb1, gnb2, data }) {
             <a href="#">2</a>
             <a href="#">3</a>
             <button type="button" className="btn-next"></button>
-            <button type="button" className="write-btn" onClick={() => {}}>
+            <button
+              type="button"
+              className="write-btn"
+              onClick={() => {
+                if (!onUser) goLogin();
+                else navigate(`/community/freeboard/post`);
+              }}
+            >
               글쓰기
             </button>
           </div>
@@ -225,29 +225,6 @@ function Community({ gnb1, gnb2, data }) {
 
           {/* <!-- article-section e --> */}
           {/* <!-- post-section s --> */}
-
-          <div className="post-section">
-            <div className="write-board">
-              <form action="write_process.php" method="post" encType="multipart/form-data">
-                <div className="write-form">
-                  <div className="form-group title">
-                    <input type="text" id="title" name="title" placeholder="제목" required />
-                  </div>
-                  <div className="form-group text-content">
-                    <textarea id="text-content" name="content" placeholder="내용을 입력하세요." required></textarea>
-                  </div>
-                  <div className="btn-wrap">
-                    <button type="submit" className="submit-btn">
-                      등록
-                    </button>
-                    <button type="button" className="close-btn" onClick={() => {}}>
-                      닫기
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
 
           {/* <!-- post-section e --> */}
         </div>
