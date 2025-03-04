@@ -12,18 +12,24 @@ function Search({ gnb1, gnb2 }) {
   const searchOption = ["도서명", "저자명", "ISBN", "출판사", "장르"];
 
   // useState
-  // 검색 상태변수
+  // 검색 옵션
   const [selectOption, setSelectOption] = useState("도서명");
+  // 검색어 입력값
   const [searchInput, setSearchInput] = useState("");
+  // 북데이터
   const [list, setList] = useState(booksList);
+  const [listState, setListState] = useState(true)
   // 무한스크롤
+  const [page, setPage] = useState(1);
   // ref : 이것은 React의 ref 객체이다. 감지하고자 하는 DOM 요소에 이 ref를 할당해야 한다.
   // inView : 이것은 불리언(boolean) 값이다. 감시하고 있는 요소가 화면에 보일 때 true가 되고, 화면에서 벗어날 때 false가 된다.
   // threshold : 요소의 어느부분이 뷰포트에 들어와야 inView가 true가 될지 결정 - 0~1의값
-  const [ref, inView] = useInView({threshold: 0.5});
+  const [ref, inView, entry] = useInView({ threshold: 0 });
+  const getMoreItems = () => {};
 
   // Fn
   const handleSearchFn = (e) => {
+    // console.log("검색하기!",selectOption,searchInput,booksList)
     if (e === "도서명") {
       setList(booksList.filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase())));
     } else if (e === "저자명") {
@@ -37,54 +43,62 @@ function Search({ gnb1, gnb2 }) {
     } else {
       setList(booksList);
     }
+    
   };
   // useEffect
-  // 검색
-  useEffect(() => {
-    handleSearchFn(selectOption);
-  }, [searchInput]);
+
   // 무한스크롤
   useEffect(() => {
-    if(inView){
+    if (inView) {
       // 화면에 보이는 경우 실행할 로직
-      console.log("로딩~~")
+      setTimeout(() => {
+        setPage(page + 1);
+        console.log("로딩중~~", page);
+      }, 1000);
     }
-  },[inView]);
+  }, [inView]);
 
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       <div className="contents">
         {/* 도서 리스트 */}
-        <SearchBox searchOption={searchOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} />
+        <SearchBox searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
         <div className="book-list-wrap">
+            {listState === true? 
           <ul className="book-list">
-            {list.map((book) => (
-              <li key={book.ISBN} ref={ref}>
-                <a href="#" className="item">
-                  <div className="img-box">
-                    <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
-                  </div>
-                  <div className="text-box">
-                    <div className="book-tit">
-                      <p>{book.title}</p>
-                      <span className="label">{getCategory(book.ISBN)}</span>
-                    </div>
-                    <ul className="book-info">
-                      <li>
-                        <em>저자</em>
-                        <span className="writer">{book.author}</span>
-                      </li>
-                      <li>
-                        <em>출판사</em>
-                        <span className="publisher">{book.publisher}</span>
-                      </li>
-                    </ul>
-                  </div>
-                </a>
-              </li>
-            ))}
+            {list.map(
+              (book, i) =>
+                i < 10 * page && (
+                  <li key={book.ISBN} ref={ref}>
+                    <a href="#" className="item">
+                      <div className="img-box">
+                        <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+                      </div>
+                      <div className="text-box">
+                        <div className="book-tit">
+                          <p>{book.title}</p>
+                          <span className="label">{getCategory(book.ISBN)}</span>
+                        </div>
+                        <ul className="book-info">
+                          <li>
+                            <em>저자</em>
+                            <span className="writer">{book.author}</span>
+                          </li>
+                          <li>
+                            <em>출판사</em>
+                            <span className="publisher">{book.publisher}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </a>
+                  </li>
+                )
+            )}
           </ul>
+            :
+            <ul>검색결과가 없습니다.</ul>
+            }
         </div>
       </div>
     </>

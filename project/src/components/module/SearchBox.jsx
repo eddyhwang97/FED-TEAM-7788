@@ -2,7 +2,11 @@
 import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
 
-function SearchBox({ searchOption, setSelectOption, setSearchInput }) {
+function SearchBox({ searchOption, selectOption, setSelectOption, setSearchInput, handleSearchFn }) {
+  // searchOption : select 아래 option
+  // selectOption : 선택된 option
+  // handleSearchFn : 검색기능
+
   // Fn
   const changeSelectValue = (e) => {
     setSelectOption(e.target.value);
@@ -22,8 +26,23 @@ function SearchBox({ searchOption, setSelectOption, setSearchInput }) {
             </option>
           ))}
         </select>
-        <input type="text" className="search-keywords" placeholder="검색어를 입력하세요." onChange={changeSearchValue} />
-        <button className="search-button" ></button>
+        <input
+          onKeyUp={(e) => {
+            if (e.key === "Enter") {
+              handleSearchFn(selectOption);
+            }
+          }}
+          type="text"
+          className="search-keywords"
+          placeholder="검색어를 입력하세요."
+          onChange={changeSearchValue}
+        />
+        <button
+          className="search-button"
+          onClick={() => {
+            handleSearchFn(selectOption);
+          }}
+        ></button>
       </div>
     </div>
   );
