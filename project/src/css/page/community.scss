@@ -16,14 +16,12 @@
     font-size: 1.2em;
     border: 1px solid $border-underline;
     cursor: pointer;
-    a{
-
-    display: block;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    padding: 15px 0;
-
+    a {
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      padding: 15px 0;
     }
     & + .tab {
       border-left: none;
@@ -130,7 +128,7 @@
   }
 }
 
-#faq-tab {
+#faq-list {
   .list-header {
     p {
       display: none;
@@ -147,8 +145,7 @@
           display: block;
           width: 1em;
           height: 1em;
-          background: url("../../../public/img/common/icon-down-gray.svg") center / 100%
-            no-repeat;
+          background: url("../../../public/img/common/icon-down-gray.svg") center / 100% no-repeat;
         }
       }
     }
@@ -221,7 +218,7 @@
     align-items: center;
     background-color: $darkmint;
     color: $white;
-}
+  }
 }
 
 // article
@@ -258,6 +255,17 @@
   height: 1px;
   background: $border-underline;
   margin: 1em 0;
+}
+.to-list {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  margin-top: 20px;
+  background-color: $black;
+  color: $white;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 // comment
@@ -301,6 +309,7 @@
       background-color: $point-color;
       color: $white;
     }
+    
   }
 }
 
@@ -324,8 +333,6 @@
 
 // post
 
-
-
 .write-board {
   border-top: 2px solid $black;
   padding: 30px 0;
@@ -348,7 +355,7 @@
   }
 
   .text-content {
-    height: 500px;
+    height: 300px;
     textarea {
       height: 100%;
       resize: none;
