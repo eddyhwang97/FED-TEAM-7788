@@ -65,7 +65,7 @@
       }
       .password-checklist {
         li {
-          color: $gray;
+          // color: $gray;
           font-size: $font-size-mobile;
         }
       }
@@ -102,4 +102,9 @@
 
 .errorMessageWrap{
   color: red;
+}
+
+.valid {
+  color: green;
+  font-weight: bold;
 }

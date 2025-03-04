@@ -44,14 +44,58 @@ function Join({ gnb1, gnb2 }) {
   const handlePw = (e) => {
     const newPw = e.target.value;
     setpw(newPw); // 상태 업데이트 -> 비동기 처리 보완
+
+    // 유효성 조건 //
     const regex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-    if (regex.test(newPw)) {
-      setpwValid(true);
-    } else {
-      setpwValid(false);
-    }
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+  const minLength = /.{8,}/;
+  const hasUpper = /[A-Z]/;
+  const hasNoSpaces = !/\s/;
+  const noRepeat = !/(.)\1\1/.test(newPw);
+
+  // 조건 충족여부 상태관리 //
+  const isValidLength = minLength.test(newPw);
+  const isValidUpper = hasUpper.test(newPw);
+  const isValidNoSpaces = hasNoSpaces;
+  const isValidNoRepeat = noRepeat;
+
+  const barStyles = [isValidLength, isValidUpper, isValidNoSpaces, isValidNoRepeat];
+  
+  // 조건 충족 개수를 기반으로 bar 색상 설정
+  const validConditions = [
+    isValidLength,
+    isValidUpper,
+    isValidNoSpaces,
+    isValidNoRepeat
+  ];
+  
+  // 조건 충족시 green
+  const barColors = barStyles.map((valid) => (valid ? 'green' : 'gray'));
+
+  // 상태를 기반으로 스타일 설정
+  setPasswordStrength(barColors);
+
+   // passwordChecks 업데이트 (각 조건 충족 여부)
+   setPasswordChecks({
+    length: isValidLength,
+    upper: isValidUpper,
+    noSpaces: isValidNoSpaces,
+    noRepeat: isValidNoRepeat
+  });
+
+    // pwValid 설정: 모든 조건이 만족되면 true
+    setpwValid(validConditions.every(Boolean));
   };
+
+const [passwordStrength, setPasswordStrength] = useState(['gray', 'gray', 'gray']);
+const [passwordChecks, setPasswordChecks] = useState({
+  length: false,
+  upper: false,
+  noSpaces: false,
+  noRepeat: false
+});
+
+  
 
  // 비밀번호 보이기/숨기기 처리 함수 //
  const togglePw = () => {
@@ -103,21 +147,18 @@ function Join({ gnb1, gnb2 }) {
               </span>
             </div>
             <div className='errorMessageWrap'>
-            {!pwValid && pw.length > 0 && (
-                  <div>올바른 비밀번호를 입력해주세요.</div>
-                )}
             </div>
           </div>
           <div className='validation-wrap'>
             <div className='password-strength'>
-              <div className='bar'></div>
-              <div className='bar'></div>
-              <div className='bar'></div>
+              <div className='bar' style={{ backgroundColor : passwordStrength[0]}}></div>
+              <div className='bar' style={{ backgroundColor : passwordStrength[1]}}></div>
+              <div className='bar' style={{ backgroundColor : passwordStrength[2]}}></div>
             </div>
             <ul className='password-checklist'>
-              <li className='eightWords'>✔ 영문, 숫자, 특수문자 포함 8자리 이상</li>
-              <li className='firstUpper'>✔ 대문자 포함</li>
-              <li className='duplicate'>✔ 공백 및 3자 이상의 연속/중복 문자 사용 불가</li>
+              <li className={passwordChecks.length ? 'valid' : ''}>✔ 영문, 숫자, 특수문자 포함 8자리 이상</li>
+              <li className={passwordChecks.upper ? 'valid' : ''}>✔ 대문자 포함</li>
+              <li className={passwordChecks.noSpaces ? 'valid' : ''}>✔ 공백 및 3자 이상의 연속/중복 문자 사용 불가</li>
             </ul>
           </div>
           <input
