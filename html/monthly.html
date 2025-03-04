@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>칙칙북북 - 당신의 취향을 배달해 드립니다</title>
+    <!-- 리액트 전환 전 제이쿼리 및 스와이퍼 임시 연결-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- css s -->
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/md.css">
+    <!-- css e -->
+    <!-- js s -->
+    <script src="../js/base.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/md.js"></script>
+    <!-- js e -->
+  </head>
+  <body>
+    <!-- wrapper s -->
+    <div class="wrapper">
+      <div class="dimm"></div>
+      <div class="search-dimm"></div>
+      <!-- header s -->
+      <header class="header">
+        <div class="header-top">
+          <ul class="link-list">
+            <li>
+              <a href="#"><span class="icon login"></span>로그인</a>
+            </li>
+            <li>
+              <a href="#"><span class="icon join"></span>회원가입</a>
+            </li>
+          </ul>
+        </div>
+        <div class="inner-header-wrap">
+          <div class="inner-header">
+            <h1 class="logo">
+              <img src="../img/common/logo-temp.svg" alt="로고" />
+            </h1>
+            <div class="gnb-wrap">
+              <div class="gnb-top">
+                <div class="gnb-util">
+                  <button class="account-btn">
+                    <span class="blind">나의공간</span>
+                  </button>
+                  <button class="menu-close-btn">
+                    <span class="blind">메뉴닫기</span>
+                  </button>
+                </div>
+              </div>
+              <nav class="gnb">
+                <ul class="gnb-list">
+                  <li class="dep1">
+                    <a href="#">자료검색</a>
+                    <ul class="dep2">
+                      <li><a href="#">통합검색</a></li>
+                      <li><a href="#">베스트셀러</a></li>
+                      <li><a href="#">신착도서</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">예약/대출</a>
+                    <ul class="dep2">
+                      <li><a href="#">도서대출</a></li>
+                      <li><a href="#">도서예약</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">이달의 도서</a>
+                    <ul class="dep2">
+                      <li><a href="#">편집장 추천 도서</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">열린공간</a>
+                    <ul class="dep2">
+                      <li><a href="#">공지사항</a></li>
+                      <li><a href="#">자유게시판</a></li>
+                    </ul>
+                  </li>
+                  <li class="dep1">
+                    <a href="#">이벤트</a>
+                    <ul class="dep2">
+                      <li><a href="#">작가 강연 예약</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-util">
+              <button type="button" class="total-search-btn">
+                <span class="blind">통합검색 버튼</span>
+              </button>
+              <button type="button" class="search-close-btn">
+                <span class="blind">통합검색 닫기 버튼</span>
+              </button>
+              <button type="button" class="menu-btn">
+                <span class="blind">메뉴 버튼</span>
+              </button>
+            </div>
+            <div class="pc-header-util">
+              <button type="button" class="total-search-btn"></button>
+              <button type="button" class="search-close-btn"></button>
+            </div>
+          </div>
+        </div>
+        <div class="search-wrap">
+          <div class="search-form">
+            <form action="search.php">
+              <fieldset>
+                <legend class="blind">도서 통합검색 폼</legend>
+                <input
+                  type="text"
+                  id="mainSearchText"
+                  name="searchTxt"
+                  title="검색어"
+                  placeholder="찾으시는 도서가 있나요?"
+                />
+                <button type="button" class="total-search-btn"></button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </header>
+      <!-- header e -->
+      <!-- sub-container s -->
+      <div class="sub-container" id="main">
+        <!-- sub-top s -->
+        <div class="sub-top">
+          <ul class="breadcrumb">
+            <li class="home">
+              <a href="/"><span class="icon home"></span></a>
+            </li>
+            <li class="1depth"><a href="#">원뎁스</a></li>
+            <li class="2depth"><a href="#">투뎁스</a></li>
+          </ul>
+          <div class="title-box">
+            <h3 class="sub-title">편집장 추천도서</h3>
+            <ul class="sub-link">
+              <li class="link-copy">
+                <button type="button">
+                  <img src="../img/common/icon-link.svg" alt="링크 공유 버튼" />
+                </button>
+                <div class="url-copy">
+                  <input type="text" id="urlCopy" value="" />
+                  <label for="urlCopy"></label>
+                  <button type="button" onclick="fn_copyUrl();">복사</button>
+                </div>
+              </li>
+              <li class="link-print">
+                <button type="button" onclick="fn_print()">
+                  <img
+                    src="../img/common/icon-print.svg"
+                    alt="페이지 프린트 버튼"
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- sub-top e -->
+        <!-- contents s -->
+        <div class="contents">
+          <div class="monthly-recommend">
+            <div class="book-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../img/monthly/img-997218055.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9968068289.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9968957386.png" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9977582909.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9977381086.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-998349075.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9998411704.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9999300629.jpg" alt="aa" /> </div>
+                <div class="swiper-slide"><img src="../img/monthly/img-9999627840.jpg" alt="aa" /> </div>
+                
+              </div>
+            </div>
+          </div>
+            <div class="book-info">
+              <div class="tit">서울,지하철역에서 나를 만나다</div>
+              <div class="author">김서정,수이빈,온아,이경란,최은수,최훈</div>
+              <div class="sub-info">
+                아홉 개의 노선이 서울의 곳곳을 흐른다. 지하철을 타고 우리의 삶도
+                흐른다. 그리고 역에는 그 흔적이 남았다. 서울에 살았거나 한
+                번이라도 와봤다면, 누구나 지하철에 추억이 쌓인다. 서울
+                지하철역에 추억을 가진 우리는 각자의 이야기를 모아 한 권의
+                책으로 엮었다. 삶과 사랑, 과거와 현재, 그리고 꿈과 미래를 그리는
+                우리의 여섯 이야기를 통해 서울의 지하철역을 추억하길 바란다.
+              </div>
+              <div class="borrow">
+                <ul>
+                  <li>
+                    <a href="#">대여하기</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- contents e -->
+      </div>
+      <!-- sub-container e -->
+      <!-- footer s -->
+      <footer class="footer">
+        <div class="inner">
+          <div class="footer-inner">
+            <div class="left">
+              <ul class="footer-link">
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">저작권보호정책</a></li>
+                <li><a href="#">이메일무단수집거부</a></li>
+                <li><a href="#">자주묻는질문</a></li>
+              </ul>
+            </div>
+            <div class="right">
+              <div class="family-site">
+                <button type="button" class="family-site-btn">
+                  유관기관 바로가기<span class="blind">열림</span>
+                </button>
+                <ul class="site-list">
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" target="_blank" title="새창열림"
+                      >아무사이트나넣기</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-btm">
+            <div class="footer-logo">
+              <img src="../img/common/logo-temp.svg" alt="하단 로고" />
+            </div>
+            <p class="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- footer e -->
+    </div>
+    <!-- wrapper e -->
+  </body>
+</html>
