@@ -25,7 +25,6 @@ function Search({ gnb1, gnb2 }) {
   const [searchInput, setSearchInput] = useState("");
   // 북데이터
   const [list, setList] = useState(booksList);
-  const [listState, setListState] = useState(true);
   // 무한스크롤
   const [page, setPage] = useState(1);
   // ref : 이것은 React의 ref 객체이다. 감지하고자 하는 DOM 요소에 이 ref를 할당해야 한다.
@@ -111,7 +110,7 @@ function Search({ gnb1, gnb2 }) {
             )}
           </ul>
           {list.length === 0 && <span className="null-alert">검색결과가 없습니다.</span>}
-          {list.length > 20 && (
+          {list.length > 10 && (
             <section ref={ref} className="loading-area">
               {inView === true && <FontAwesomeIcon className="icon-spinner" icon={faSpinner} size="2x" spinPulse />}
             </section>
