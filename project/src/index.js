@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 
 // 전체 JS
@@ -23,30 +23,40 @@ import Post from "./components/page/Post";
 export default function MainComponent() {
   return (
     <BrowserRouter>
+    <ScrollTop/>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path="book/borrow" element={<Borrow gnb1="예약/대출" gnb2="도서대출" />}  />
-          <Route path="book/reserve" element={<Book gnb1="예약/대출" gnb2="도서예약"/>}  />
-          <Route path="community/notice" element={<Community gnb1="열린공간" gnb2="공지사항" data="notice"/>}  />
-          <Route path="community/notice/:id" element={<Article gnb1="열린공간" gnb2="공지사항" />}  />
-          <Route path="community/faq" element={<Community gnb1="열린공간" gnb2="FAQ" data="faq"/>}  />
-          <Route path="community/freeboard" element={<Community gnb1="열린공간" gnb2="자유게시판" data="freeboard"/>}  />
-          <Route path="community/freeboard/post" element={<Post gnb1="열린공간" gnb2="자유게시판 글쓰기" data="post"/>}  />
-          <Route path="community/freeboard/:id" element={<Article gnb1="열린공간" gnb2="자유게시판"/>}  />
-          <Route path="join" element={<Join gnb1="회원가입" gnb2=""/>}  />
-          <Route path="login" element={<Login gnb1="로그인" gnb2=""/>}  />
-          <Route path="mypage" element={<Mypage gnb1="마이페이지" gnb2=""/>}  />
-          <Route path="search/totalsearch" element={<Search gnb1="자료검색" gnb2="통합검색"/>}  />
-          <Route path="search/best" element={<BookList gnb1="자료검색" gnb2="베스트셀러"/>}  />
-          <Route path="search/new" element={<BookList gnb1="자료검색" gnb2="신착도서"/>}  />
-          <Route path="monthly/recommend" element={<Monthly gnb1="이달의도서" gnb2="편집장 추천 도서"/>}  />
+          <Route path="book/borrow" element={<Borrow gnb1="예약/대출" gnb2="도서대출" />} />
+          <Route path="book/reserve" element={<Book gnb1="예약/대출" gnb2="도서예약" />} />
+          <Route path="community/notice" element={<Community gnb1="열린공간" gnb2="공지사항" data="notice" />} />
+          <Route path="community/notice/:id" element={<Article gnb1="열린공간" gnb2="공지사항" />} />
+          <Route path="community/faq" element={<Community gnb1="열린공간" gnb2="FAQ" data="faq" />} />
+          <Route path="community/freeboard" element={<Community gnb1="열린공간" gnb2="자유게시판" data="freeboard" />} />
+          <Route path="community/freeboard/post" element={<Post gnb1="열린공간" gnb2="자유게시판 글쓰기" data="post" />} />
+          <Route path="community/freeboard/:id" element={<Article gnb1="열린공간" gnb2="자유게시판" />} />
+          <Route path="join" element={<Join gnb1="회원가입" gnb2="" />} />
+          <Route path="login" element={<Login gnb1="로그인" gnb2="" />} />
+          <Route path="mypage" element={<Mypage gnb1="마이페이지" gnb2="" />} />
+          <Route path="search/totalsearch" element={<Search gnb1="자료검색" gnb2="통합검색" />} />
+          <Route path="search/best" element={<BookList gnb1="자료검색" gnb2="베스트셀러" />} />
+          <Route path="search/new" element={<BookList gnb1="자료검색" gnb2="신착도서" />} />
+          <Route path="monthly/recommend" element={<Monthly gnb1="이달의도서" gnb2="편집장 추천 도서" />} />
           <Route path="book/:isbn" element={<BookDetail />} /> {/* 책 상세 페이지 */}
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+const ScrollTop = () => {
+  const { pathname } = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    console.log("라우터경로:", pathname);
+  }, [pathname]);
+  return null;
+};
 
 const wrapper = ReactDOM.createRoot(document.querySelector(".wrapper"));
 wrapper.render(<MainComponent />);

@@ -2,7 +2,6 @@
 
 import { useLocation } from "react-router-dom"; // 현재 경로 확인
 
-
 import FooterArea from "./FooterArea";
 import MainArea from "./MainArea";
 import SubArea from "./SubArea";

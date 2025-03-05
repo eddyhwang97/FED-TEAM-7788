@@ -2,14 +2,21 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import booksData from "../../js/data/book_data.json";
-import "../../css/page/book-list.scss";
-import { getCategory, sortByNewest, sortByBest } from "../../js/function/sort-books";
+import { getCategory } from "../../js/function/sort-books";
 import SubTop from "../module/SubTop";
 import SearchBox from "../module/SearchBox";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// css
+import "../../css/page/book-list.scss";
+import "../../css/page/search.scss";
+import { useNavigate } from "react-router-dom";
+import { event } from "jquery";
 
 function Search({ gnb1, gnb2 }) {
   const booksList = [...booksData];
   const searchOption = ["도서명", "저자명", "ISBN", "출판사", "장르"];
+  const navigate = useNavigate();
 
   // useState
   // 검색 옵션
@@ -18,14 +25,13 @@ function Search({ gnb1, gnb2 }) {
   const [searchInput, setSearchInput] = useState("");
   // 북데이터
   const [list, setList] = useState(booksList);
-  const [listState, setListState] = useState(true)
+  const [listState, setListState] = useState(true);
   // 무한스크롤
   const [page, setPage] = useState(1);
   // ref : 이것은 React의 ref 객체이다. 감지하고자 하는 DOM 요소에 이 ref를 할당해야 한다.
   // inView : 이것은 불리언(boolean) 값이다. 감시하고 있는 요소가 화면에 보일 때 true가 되고, 화면에서 벗어날 때 false가 된다.
   // threshold : 요소의 어느부분이 뷰포트에 들어와야 inView가 true가 될지 결정 - 0~1의값
-  const [ref, inView, entry] = useInView({ threshold: 0 });
-  const getMoreItems = () => {};
+  const [ref, inView] = useInView({ threshold: 0 });
 
   // Fn
   const handleSearchFn = (e) => {
@@ -41,21 +47,23 @@ function Search({ gnb1, gnb2 }) {
     } else if (e === "장르") {
       setList(booksList.filter((book) => book.genre.toLowerCase().includes(searchInput.toLowerCase())));
     } else {
-      setList(booksList);
+      setList(booksList === null);
     }
-    
+    console.log(list);
   };
-  // useEffect
-
-  // 무한스크롤
-  useEffect(() => {
+  const loadingFn = () => {
     if (inView) {
       // 화면에 보이는 경우 실행할 로직
       setTimeout(() => {
         setPage(page + 1);
         console.log("로딩중~~", page);
-      }, 1000);
+      }, 900);
     }
+  };
+  // useEffect
+  // 무한스크롤
+  useEffect(() => {
+    loadingFn();
   }, [inView]);
 
   return (
@@ -65,13 +73,19 @@ function Search({ gnb1, gnb2 }) {
         {/* 도서 리스트 */}
         <SearchBox searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
         <div className="book-list-wrap">
-            {listState === true? 
           <ul className="book-list">
             {list.map(
               (book, i) =>
                 i < 10 * page && (
-                  <li key={book.ISBN} ref={ref}>
-                    <a href="#" className="item">
+                  <li key={book.ISBN}>
+                    <a
+                      href="#"
+                      className="item"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate(`/book/${book.ISBN}`); // 상세 ��이지 이���
+                      }}
+                    >
                       <div className="img-box">
                         <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                       </div>
@@ -96,9 +110,12 @@ function Search({ gnb1, gnb2 }) {
                 )
             )}
           </ul>
-            :
-            <ul>검색결과가 없습니다.</ul>
-            }
+          {list.length === 0 && <span className="null-alert">검색결과가 없습니다.</span>}
+          {list.length > 20 && (
+            <section ref={ref} className="loading-area">
+              {inView === true && <FontAwesomeIcon className="icon-spinner" icon={faSpinner} size="2x" spinPulse />}
+            </section>
+          )}
         </div>
       </div>
     </>
