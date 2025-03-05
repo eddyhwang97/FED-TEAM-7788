@@ -55,7 +55,7 @@ function Login({ gnb1, gnb2 }) {
     );
     if (user) {
       // 로그인 성공 시 사용자 정보 로컬스토리지에 저장
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      sessionStorage.setItem('loggedInUser', JSON.stringify(user));
 
       alert('로그인 성공🎉');
       navigate('/'); // 로그인 성공 후 메인페이지 이동
