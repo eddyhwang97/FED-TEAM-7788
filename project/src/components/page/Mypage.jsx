@@ -1,9 +1,36 @@
 //  Mypage 컴포넌트 - Mypage.jsx
 import { useEffect, useLayoutEffect, useState, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+// Sub Top //
 import SubTop from '../module/SubTop';
-
+// css //
 import hm from '../../css/page/hm.scss';
+
 function Mypage({ gnb1, gnb2 }) {
+  
+  // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    if(!loggedInUser){
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    }
+  },[navigate]);
+
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // 세션스토리지에서 사용자 정보 로딩
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+
+    if (loggedInUser){
+      // 데이터가 있는 경우 JSON 파싱 후 user 상태로 설정
+      setUser(JSON.parse(loggedInUser));
+    }
+  },[]);
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
@@ -18,8 +45,13 @@ function Mypage({ gnb1, gnb2 }) {
                 />
               </div>
               <div className='user-info'>
-                <p className='user-name'>양현석</p>
-                <span className='user-id'>010252233669</span>
+                {/* user 상태로부터 직접 렌더링 */}
+                {user && (
+                  <>
+                    <p className='user-name'>{user.name}</p>
+                    <span className='user-id'>{user.id}</span>
+                  </>
+                )}
                 <div className='next-level'>
                   <p>다음 레벨까지</p>
                   <div className='progress'>
