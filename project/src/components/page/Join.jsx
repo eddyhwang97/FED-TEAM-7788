@@ -1,9 +1,14 @@
 //  Join 컴포넌트 - Join.jsx
 import { useEffect, useLayoutEffect, useState, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SubTop from '../module/SubTop';
 
 import join from '../../css/page/join.scss';
+
+
 function Join({ gnb1, gnb2 }) {
+  // useNavigate 훅 사용
+  const Navigate = useNavigate();
   // 휴대폰 //
   const [phoneNum, setphoneNum] = useState('');
   const [phoneValid, setphoneValid] = useState(false); // 유효성 검사
@@ -29,6 +34,8 @@ function Join({ gnb1, gnb2 }) {
 
   //  회원가입 버튼 활성화
     const [notAllow, setNotAllow] = useState(true);
+
+
 
   // 핸드폰 번호 입력 시 자동 포맷
 const handlePhoneNumber = (e) => {
@@ -116,7 +123,10 @@ const handlePhoneNumber = (e) => {
         name,
         id: phoneNum,
         pw, // 보안상 비밀번호를 그대로 저장하는 것은 위험! 실제 서비스에서는 해싱 필요
-        bData:[]
+        bData:[
+        ],
+        iLoveIt:'',
+        borrowCount:''
       };
     
       // 기존 회원 데이터 가져오기
@@ -126,7 +136,7 @@ const handlePhoneNumber = (e) => {
       const updatedData = [...getData, newMember];
       localStorage.setItem('member_data', JSON.stringify(updatedData));
     
-      alert('회원가입이 완료되었습니다!');
+      alert('회원가입이 완료되었습니다.');
     
       // 입력 필드 초기화
       setphoneNum('');
@@ -135,6 +145,9 @@ const handlePhoneNumber = (e) => {
       setpwCheck('');
       setPasswordregex({ length: false, upper: false, noRepeat: false });
       setNotAllow(true);
+
+      // 로그인 페이지 이동
+      Navigate('/login');
     };
 
   // 비밀번호 보이기/숨기기 처리 함수 //
@@ -220,7 +233,7 @@ const handlePhoneNumber = (e) => {
           </div>
           <div className='errorMessageWrap'>
             {!pwCheckValid && pwCheck.length > 0 && (
-              <div>올바른 휴대폰번호를 입력해주세요.</div>
+              <div>비밀번호가 일치하지 않습니다.</div>
             )}
           </div>
           <button disabled={notAllow} className='join-btn' onClick={handleJoin}>
