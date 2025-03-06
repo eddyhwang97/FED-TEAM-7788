@@ -160,9 +160,9 @@ function Community({ gnb1, gnb2, data }) {
                       <a
                         href="#"
                         onClick={(e) => {
+                          e.preventDefault();
                           if (data === "freeboard" || data === "notice") {
-                            e.preventDefault();
-                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user,listIdx:v.idx} });
+                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx } });
                           }
                         }}
                       >

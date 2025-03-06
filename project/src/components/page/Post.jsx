@@ -28,13 +28,14 @@ function Post({ gnb1, gnb2 }) {
   };
   const setArticle = (title, content) => {
     if (localStorage.community_data) {
-      const communityData = JSON.parse(localStorage.getItem("community_data"))
+      const communityData = JSON.parse(localStorage.getItem("community_data"));
+      const freeboardData = communityData
         .filter((v) => v.type === "freeboard")
         .sort((a, b) => (a.idx == b.idx ? -1 : a.idx < b.idx ? -1 : 1));
       const today = new Date();
       const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1 < 10 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate() + 1 < 10 ? "0" + (today.getDate() + 1) : today.getDate() + 1}`;
       communityData.push({
-        idx: communityData[communityData.length - 1].idx + 1,
+        idx: freeboardData[freeboardData.length - 1].idx + 1,
         type: "freeboard",
         image: "",
         title: title,
