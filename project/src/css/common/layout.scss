@@ -58,7 +58,7 @@
     }
 
     .total-search-btn {
-      background-image: url("../img/common/icon-search.svg");
+      background-image: url("../../../public/img/common/icon-search.svg");
       z-index: 20;
       transition: all 0.4s;
       border-radius: 45px;
@@ -74,17 +74,17 @@
         transform: rotate(360deg);
         z-index: 201;
         background-size: 70%;
-        background-image: url("../img/common/icon-search-point.svg");
+        background-image: url("../../../public/img/common/icon-search-point.svg");
       }
     }
 
     .menu-btn {
-      background-image: url("../img/common/icon-menu.svg");
+      background-image: url("../../../public/img/common/icon-menu.svg");
       background-size: 28px;
     }
 
     .search-close-btn {
-      background-image: url("../img/common/icon-close.svg");
+      background-image: url("../../../public/img/common/icon-close.svg");
       visibility: hidden;
       &.on {
         visibility: visible;
@@ -212,7 +212,7 @@
         background-repeat: no-repeat;
       }
       .menu-close-btn {
-        background-image: url("../img/common/icon-close.svg");
+        background-image: url("../../../public/img/common/icon-close.svg");
         background-size: 28px;
       }
     }
@@ -359,13 +359,13 @@
     }
 
     .total-search-btn {
-      background: #f3f4f7 url("../img/common/icon-search.svg") center no-repeat;
+      background: #f3f4f7 url("../../../public/img/common/icon-search.svg") center no-repeat;
       &.on {
         display: none;
       }
     }
     .search-close-btn {
-      background: #f3f4f7 url("../img/common/icon-close.svg") center no-repeat;
+      background: #f3f4f7 url("../../../public/img/common/icon-close.svg") center no-repeat;
       display: none;
       &.on {
         display: block;
@@ -467,7 +467,7 @@
       height: 56px;
       position: absolute;
       right: 10px;
-      background: url('../img/common/icon-search-point.svg') center no-repeat;
+      background: url('../../../public/img/common/icon-search-point.svg') center no-repeat;
       background-size: 60%;
     }
   }
@@ -538,7 +538,7 @@
         width: 24px;
         height: 24px;
         display: inline-block;
-        background: url("../img/common/icon-down-gray.svg");
+        background: url("../../../public/img/common/icon-down-gray.svg");
       }
       &.active::after {
         transform: rotate(180deg);
