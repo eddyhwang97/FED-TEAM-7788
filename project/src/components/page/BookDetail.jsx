@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import booksData from "../../js/data/book_data.json";
 import { getCategory } from "../../js/function/sort-books";
@@ -7,89 +7,79 @@ import BookComment from "../module/BookComment";
 
 function BookDetail() {
   const { isbn } = useParams();
+  const navigate = useNavigate();
   const book = booksData.find((b) => b.ISBN === isbn);
   const [loanStatus, setLoanStatus] = useState("대출 가능");
-  const [reserved, setReserved] = useState(false);
-  const [loanDate, setLoanDate] = useState(null);
   const [stock, setStock] = useState(0);
-  const [showLoanPopup, setShowLoanPopup] = useState(false);
-  const [showReturnPopup, setShowReturnPopup] = useState(false);
-  const maxLoanLimit = 5;
+  const [returnDate, setReturnDate] = useState(null);
 
   useEffect(() => {
     if (book) {
       setStock(book.stock);
     }
-
-    const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
-    const reservedBooks = JSON.parse(localStorage.getItem("reservedBooks")) || {};
-
-    if (loanedBooks[isbn]) {
-      setLoanStatus("대출 중");
-      setLoanDate(new Date(loanedBooks[isbn]));
-    }
-    if (reservedBooks[isbn]) {
-      setReserved(true);
-    }
-  }, [isbn, book]);
-
-  const confirmLoan = () => {
-    if (stock === 0) {
-      alert("대출이 불가능합니다.");
-      return;
-    }
-    setShowLoanPopup(true);
-  };
-
-  const handleLoan = () => {
-    const currentUser = sessionStorage.getItem("loggedInUser");
-    if (!currentUser) {
-      alert("로그인 후 이용해주세요.");
-      return;
-    }
-
-    const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
-    if (Object.keys(loanedBooks).length >= maxLoanLimit) {
-      alert("최대 5권까지 대출할 수 있습니다.");
-      return;
-    }
-
-    if (!loanedBooks[isbn] && stock > 0) {
-      const loanTime = new Date().toISOString();
-      loanedBooks[isbn] = loanTime;
-      localStorage.setItem("loanedBooks", JSON.stringify(loanedBooks));
-      setLoanStatus("대출 중");
-      setLoanDate(new Date(loanTime));
-      setStock(stock - 1);
-    }
-    setShowLoanPopup(false);
-  };
-
-  const confirmReturn = () => {
-    setShowReturnPopup(true);
-  };
-
-  const handleReturn = () => {
-    const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
-    delete loanedBooks[isbn];
-    localStorage.setItem("loanedBooks", JSON.stringify(loanedBooks));
-    setLoanStatus("대출 가능");
-    setLoanDate(null);
-    setStock(stock + 1);
-    setShowReturnPopup(false);
-  };
-
-  const handleReserve = () => {
-    const reservedBooks = JSON.parse(localStorage.getItem("reservedBooks")) || {};
-    reservedBooks[isbn] = true;
-    localStorage.setItem("reservedBooks", JSON.stringify(reservedBooks));
-    setReserved(true);
-    alert("예약되었습니다.");
-  };
+  }, [book]);
 
   if (!book) {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
   }
+
+  const handleLoan = () => {
+    const members = JSON.parse(localStorage.getItem("member_data")) || [];
+    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+
+    if (!user) {
+      alert("로그인 후 이용 가능합니다.");
+      navigate("/login");
+      return;
+    }
+
+    if (user.bData.length >= 5) {
+      alert("최대 5권까지 대출 가능합니다.");
+      return;
+    }
+
+    if (window.confirm("이 책을 대출하시겠습니까?")) {
+      user.bData.push({ isbn: book.ISBN, returnDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split("T")[0] });
+      localStorage.setItem("member_data", JSON.stringify(members));
+      setStock(stock - 1);
+      setLoanStatus("대출 중");
+      setReturnDate(user.bData.find(b => b.isbn === book.ISBN).returnDate);
+    }
+  };
+
+  const handleReturn = () => {
+    const members = JSON.parse(localStorage.getItem("member_data")) || [];
+    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+
+    if (!user) return;
+
+    if (window.confirm("정말 반납하시겠습니까?")) {
+      user.bData = user.bData.filter(b => b.isbn !== book.ISBN);
+      localStorage.setItem("member_data", JSON.stringify(members));
+      setStock(stock + 1);
+      setLoanStatus("대출 가능");
+      setReturnDate(null);
+    }
+  };
+
+  const handleFavorite = () => {
+    const members = JSON.parse(localStorage.getItem("member_data")) || [];
+    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+
+    if (!user) {
+      alert("로그인 후 이용 가능합니다.");
+      navigate("/login");
+      return;
+    }
+
+    user.iLoveIt = user.iLoveIt ? [...user.iLoveIt, book.ISBN] : [book.ISBN];
+    localStorage.setItem("member_data", JSON.stringify(members));
+    alert("찜한 도서에 추가되었습니다.");
+  };
+
+  const handleReserve = () => {
+    alert("도서 재입고 시 문자로 안내해드립니다.");
+  };
 
   return (
     <div className="contents">
@@ -112,56 +102,29 @@ function BookDetail() {
               <li><em>페이지</em><span className="page">{book.pNum}</span></li>
               <li><em>카테고리</em><span className="genre">{getCategory(book.ISBN)}</span></li>
               <li><em>재고</em><span className="stock">{stock}권</span></li>
+              {returnDate && <li><em>반납 기한</em><span className="return-date">{returnDate}</span></li>}
             </ul>
             <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
             <div className="util-box">
               <div className="btn-wrap">
-                {stock > 0 ? (
-                  loanStatus === "대출 가능" ? (
-                    <button type="button" className="btn-state loan" onClick={confirmLoan}>
-                      대출하기
-                    </button>
-                  ) : (
-                    <>
-                      <button type="button" className="btn-state ing">대출 중</button>
-                      <button type="button" className="btn-state return" onClick={confirmReturn}>
-                        반납하기
-                      </button>
-                    </>
-                  )
-                ) : (
-                  <button type="button" className="btn-state reserve" onClick={handleReserve}>
-                    예약하기
+                {loanStatus === "대출 가능" ? (
+                  <button type="button" className="btn-state loan" onClick={handleLoan}>
+                    대출하기
                   </button>
+                ) : (
+                  <>
+                    <button type="button" className="btn-state ing">대출 중</button>
+                    <button type="button" className="btn-state return" onClick={handleReturn}>
+                      반납하기
+                    </button>
+                  </>
                 )}
               </div>
-              <button type="button" className="interest">♡</button>
+              <button type="button" className="interest" onClick={handleFavorite}>♡</button>
             </div>
           </div>
         </div>
       </div>
-      {showLoanPopup && (
-        <div className="popup-wrap on">
-          <div className="alert-popup">
-            <p className="ment">이 책을 대출하시겠습니까?</p>
-            <div className="popup-btn">
-              <button onClick={handleLoan}>확인</button>
-              <button onClick={() => setShowLoanPopup(false)}>취소</button>
-            </div>
-          </div>
-        </div>
-      )}
-      {showReturnPopup && (
-        <div className="popup-wrap on">
-          <div className="alert-popup">
-            <p className="ment">이 책을 반납하시겠습니까?</p>
-            <div className="popup-btn">
-              <button onClick={handleReturn}>확인</button>
-              <button onClick={() => setShowReturnPopup(false)}>취소</button>
-            </div>
-          </div>
-        </div>
-      )}
       <BookComment />
     </div>
   );
