@@ -22,7 +22,7 @@
     object-position: top;
   }
   
-  .book-swiper .swiper-slide-active+.swiper-slide {
+  .book-swiper .swiper-slide-active{
     scale: 1;
     opacity: 1;
   }
