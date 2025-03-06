@@ -12,10 +12,17 @@ function BookDetail() {
   const [loanStatus, setLoanStatus] = useState("대출 가능");
   const [stock, setStock] = useState(0);
   const [returnDate, setReturnDate] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     if (book) {
       setStock(book.stock);
+    }
+
+    const members = JSON.parse(localStorage.getItem("member_data")) || [];
+    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    if (user && Array.isArray(user.iLoveIt)) {
+      setIsFavorite(user.iLoveIt.includes(book.ISBN));
     }
   }, [book]);
 
@@ -23,7 +30,6 @@ function BookDetail() {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
   }
 
-  // 대출
   const handleLoan = () => {
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
@@ -34,29 +40,37 @@ function BookDetail() {
       return;
     }
 
-    if (user.bData.length >= 5) {
+    if (!user.currentData) {
+      user.currentData = [];
+    }
+
+    if (user.currentData.length >= 5) {
       alert("최대 5권까지 대출 가능합니다.");
       return;
     }
 
     if (window.confirm("이 책을 대출하시겠습니까?")) {
-      user.bData.push({ isbn: book.ISBN, returnDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split("T")[0] });
+      user.currentData.push({ isbn: book.ISBN, returnDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split("T")[0] });
       localStorage.setItem("member_data", JSON.stringify(members));
       setStock(stock - 1);
       setLoanStatus("대출 중");
-      setReturnDate(user.bData.find(b => b.isbn === book.ISBN).returnDate);
+      setReturnDate(user.currentData.find(b => b.isbn === book.ISBN).returnDate);
     }
   };
 
-  // 반납
   const handleReturn = () => {
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
 
     if (!user) return;
 
+    if (!user.bData) {
+      user.bData = [];
+    }
+
     if (window.confirm("정말 반납하시겠습니까?")) {
-      user.bData = user.bData.filter(b => b.isbn !== book.ISBN);
+      user.currentData = user.currentData.filter(b => b.isbn !== book.ISBN);
+      user.bData.push(book.ISBN);
       localStorage.setItem("member_data", JSON.stringify(members));
       setStock(stock + 1);
       setLoanStatus("대출 가능");
@@ -64,7 +78,6 @@ function BookDetail() {
     }
   };
 
-  // 마음에 들어요
   const handleFavorite = () => {
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
@@ -75,21 +88,26 @@ function BookDetail() {
       return;
     }
 
-    user.iLoveIt = user.iLoveIt ? [...user.iLoveIt, book.ISBN] : [book.ISBN];
-    localStorage.setItem("member_data", JSON.stringify(members));
-    alert("찜한 도서에 추가되었습니다.");
-  };
+    if (!Array.isArray(user.iLoveIt)) {
+      user.iLoveIt = [];
+    }
 
-  // 도서예약
-  const handleReserve = () => {
-    alert("도서 재입고 시 문자로 안내해드립니다.");
+    if (user.iLoveIt.includes(book.ISBN)) {
+      user.iLoveIt = user.iLoveIt.filter(isbn => isbn !== book.ISBN);
+      setIsFavorite(false);
+      alert("찜한 도서에서 제거되었습니다.");
+    } else {
+      user.iLoveIt.push(book.ISBN);
+      setIsFavorite(true);
+      alert("찜한 도서에 추가되었습니다.");
+    }
+
+    localStorage.setItem("member_data", JSON.stringify(members));
   };
 
   return (
     <>
-      {/* contents s */}
       <div className="contents">
-        {/* book-view-wrap s */}
         <div className="book-view-wrap">
           <div className="book-view">
             <div className="img-box">
@@ -127,17 +145,16 @@ function BookDetail() {
                     </>
                   )}
                 </div>
-                <button type="button" className="interest" onClick={handleFavorite}>♡</button>
+                <button type="button" className="interest" onClick={handleFavorite}>
+                  {isFavorite ? "❤️" : "♡"}
+                </button>
               </div>
             </div>
           </div>
         </div>
-        {/* book-view-wrap e */}
         <BookComment />
       </div>
-      {/* contents e */}
     </>
-    
   );
 }
 
