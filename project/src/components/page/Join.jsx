@@ -134,11 +134,9 @@ const handlePhoneNumber = (e) => {
         name,
         id: phoneNum,
         pw, // 보안상 비밀번호를 그대로 저장하는 것은 위험! 실제 서비스에서는 해싱 필요
-        bData:[
-        ],
+        bData:'',
         iLoveIt:'',
-        borrowCount:'',
-        currentData:''
+        currentData:[]
       };
     
       // 새로운 데이터 추가 후 로컬스토리지에 저장
