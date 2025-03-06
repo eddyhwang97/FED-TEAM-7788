@@ -23,6 +23,7 @@ function BookDetail() {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
   }
 
+  // 대출
   const handleLoan = () => {
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
@@ -47,6 +48,7 @@ function BookDetail() {
     }
   };
 
+  // 반납
   const handleReturn = () => {
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
@@ -62,6 +64,7 @@ function BookDetail() {
     }
   };
 
+  // 마음에 들어요
   const handleFavorite = () => {
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
@@ -77,56 +80,64 @@ function BookDetail() {
     alert("찜한 도서에 추가되었습니다.");
   };
 
+  // 도서예약
   const handleReserve = () => {
     alert("도서 재입고 시 문자로 안내해드립니다.");
   };
 
   return (
-    <div className="contents">
-      <div className="book-view-wrap">
-        <div className="book-view">
-          <div className="img-box">
-            <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
-          </div>
-          <div className="info-box">
-            <div className="book-tit">
-              <p>{book.title}</p>
-              <span>{book.subtitle || ""}</span>
+    <>
+      {/* contents s */}
+      <div className="contents">
+        {/* book-view-wrap s */}
+        <div className="book-view-wrap">
+          <div className="book-view">
+            <div className="img-box">
+              <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
             </div>
-            <ul className="book-info">
-              <li><em>제목</em><span className="title">{book.title}</span></li>
-              <li><em>작가</em><span className="author">{book.author}</span></li>
-              <li><em>출판사</em><span className="publisher">{book.publisher}</span></li>
-              <li><em>ISBN</em><span className="isbn">{book.ISBN}</span></li>
-              <li><em>발행일</em><span className="date">{book.pDate}</span></li>
-              <li><em>페이지</em><span className="page">{book.pNum}</span></li>
-              <li><em>카테고리</em><span className="genre">{getCategory(book.ISBN)}</span></li>
-              <li><em>재고</em><span className="stock">{stock}권</span></li>
-              {returnDate && <li><em>반납 기한</em><span className="return-date">{returnDate}</span></li>}
-            </ul>
-            <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
-            <div className="util-box">
-              <div className="btn-wrap">
-                {loanStatus === "대출 가능" ? (
-                  <button type="button" className="btn-state loan" onClick={handleLoan}>
-                    대출하기
-                  </button>
-                ) : (
-                  <>
-                    <button type="button" className="btn-state ing">대출 중</button>
-                    <button type="button" className="btn-state return" onClick={handleReturn}>
-                      반납하기
-                    </button>
-                  </>
-                )}
+            <div className="info-box">
+              <div className="book-tit">
+                <p>{book.title}</p>
+                <span>{book.subtitle || ""}</span>
               </div>
-              <button type="button" className="interest" onClick={handleFavorite}>♡</button>
+              <ul className="book-info">
+                <li><em>제목</em><span className="title">{book.title}</span></li>
+                <li><em>작가</em><span className="author">{book.author}</span></li>
+                <li><em>출판사</em><span className="publisher">{book.publisher}</span></li>
+                <li><em>ISBN</em><span className="isbn">{book.ISBN}</span></li>
+                <li><em>발행일</em><span className="date">{book.pDate}</span></li>
+                <li><em>페이지</em><span className="page">{book.pNum}</span></li>
+                <li><em>카테고리</em><span className="genre">{getCategory(book.ISBN)}</span></li>
+                <li><em>재고</em><span className="stock">{stock}권</span></li>
+                {returnDate && <li><em>반납 기한</em><span className="return-date">{returnDate}</span></li>}
+              </ul>
+              <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
+              <div className="util-box">
+                <div className="btn-wrap">
+                  {loanStatus === "대출 가능" ? (
+                    <button type="button" className="btn-state loan" onClick={handleLoan}>
+                      대출하기
+                    </button>
+                  ) : (
+                    <>
+                      <button type="button" className="btn-state ing">대출 중</button>
+                      <button type="button" className="btn-state return" onClick={handleReturn}>
+                        반납하기
+                      </button>
+                    </>
+                  )}
+                </div>
+                <button type="button" className="interest" onClick={handleFavorite}>♡</button>
+              </div>
             </div>
           </div>
         </div>
+        {/* book-view-wrap e */}
+        <BookComment />
       </div>
-      <BookComment />
-    </div>
+      {/* contents e */}
+    </>
+    
   );
 }
 

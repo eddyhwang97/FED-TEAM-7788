@@ -20,9 +20,12 @@ function BookList({ gnb1, gnb2 }) {
 
   return (
     <>
+      {/* sub-top s */}
       <SubTop gnb1={gnb1} gnb2={gnb2} />
+      {/* sub-top e */}
+      {/* contents s */}
       <div className="contents">
-        {/* 도서 리스트 */}
+        {/* book-list-wrap s */}
         <div className="book-list-wrap">
           <ul className="book-list">
             {filteredBooks.map((book) => (
@@ -59,7 +62,9 @@ function BookList({ gnb1, gnb2 }) {
             ))}
           </ul>
         </div>
+        {/* book-list-wrap e */}
       </div>
+      {/* contents e */}
     </>
   );
 }
