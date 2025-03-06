@@ -18,6 +18,7 @@ function Monthly({ gnb1, gnb2 }) {
     "9999627840",
   ];
 
+
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
