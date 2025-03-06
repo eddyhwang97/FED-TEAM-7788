@@ -25,7 +25,6 @@ function Search({ gnb1, gnb2 }) {
   const [searchInput, setSearchInput] = useState("");
   // 북데이터
   const [list, setList] = useState(booksList);
-  const [listState, setListState] = useState(true);
   // 무한스크롤
   const [page, setPage] = useState(1);
   // ref : 이것은 React의 ref 객체이다. 감지하고자 하는 DOM 요소에 이 ref를 할당해야 한다.
@@ -35,22 +34,31 @@ function Search({ gnb1, gnb2 }) {
 
   // Fn
   const handleSearchFn = (e) => {
-    // console.log("검색하기!",selectOption,searchInput,booksList)
-    if (e === "도서명") {
-      setList(booksList.filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase())));
-    } else if (e === "저자명") {
-      setList(booksList.filter((book) => book.author.toLowerCase().includes(searchInput.toLowerCase())));
-    } else if (e === "ISBN") {
-      setList(booksList.filter((book) => book.ISBN.toLowerCase().includes(searchInput.toLowerCase())));
-    } else if (e === "출판사") {
-      setList(booksList.filter((book) => book.publisher.toLowerCase().includes(searchInput.toLowerCase())));
-    } else if (e === "장르") {
-      setList(booksList.filter((book) => book.genre.toLowerCase().includes(searchInput.toLowerCase())));
+    if (searchInput !== "") {
+      if (e === "도서명") {
+        setList(booksList.filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase())));
+      } else if (e === "저자명") {
+        setList(booksList.filter((book) => book.author.toLowerCase().includes(searchInput.toLowerCase())));
+      } else if (e === "ISBN") {
+        setList(booksList.filter((book) => book.ISBN.toLowerCase().includes(searchInput.toLowerCase())));
+      } else if (e === "출판사") {
+        setList(booksList.filter((book) => book.publisher.toLowerCase().includes(searchInput.toLowerCase())));
+      } else if (e === "장르") {
+        setList(booksList.filter((book) => book.genre.toLowerCase().includes(searchInput.toLowerCase())));
+      }
     } else {
-      setList(booksList === null);
+      setList(booksList);
     }
     console.log(list);
+    searchNotice();
   };
+  const searchNotice = (() => {
+    if (list.length > 1) {
+      <span className="null-alert">{list.length}개의 검색결과가 있습니다.</span>;
+    } else {
+      <span className="null-alert">검색결과가 없습니다.</span>;
+    }
+  },[handleSearchFn]);
   const loadingFn = () => {
     if (inView) {
       // 화면에 보이는 경우 실행할 로직
@@ -73,6 +81,7 @@ function Search({ gnb1, gnb2 }) {
         {/* 도서 리스트 */}
         <SearchBox searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
         <div className="book-list-wrap">
+          <searchNotice/>
           <ul className="book-list">
             {list.map(
               (book, i) =>
@@ -110,8 +119,8 @@ function Search({ gnb1, gnb2 }) {
                 )
             )}
           </ul>
-          {list.length === 0 && <span className="null-alert">검색결과가 없습니다.</span>}
-          {list.length > 20 && (
+
+          {list.length > 10 && (
             <section ref={ref} className="loading-area">
               {inView === true && <FontAwesomeIcon className="icon-spinner" icon={faSpinner} size="2x" spinPulse />}
             </section>

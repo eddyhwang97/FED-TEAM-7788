@@ -2,12 +2,37 @@
 // css
 import "../../css/common/_core.scss";
 // data & Fn
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Gnb from "../module/Gnb";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
 
 export default function TopArea({ gnb, setGnb, setSubTop }) {
+  const navigate = useNavigate();
+  const loggedInUser = sessionStorage.getItem('loggedInUser');
+
+  // 로그아웃 처리 함수
+  const handleLogout = () => {
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      sessionStorage.removeItem("loggedInUser");
+      alert("로그아웃이 완료되었습니다.");
+      navigate("/");
+      console.clear();
+    }
+  };
+
+  // 로그인/로그아웃 클릭 처리
+  const handleLoginLogoutClick = (v) => {
+    if (v.txt === "로그아웃") {
+      handleLogout();
+    } else {
+      navigate(v.link);
+    }
+  };
+
+  // 로그인 시 "로그인" 버튼을 제외한 메뉴 필터링
+  const filteredMenu = menu2.filter((v) => !(loggedInUser && v.txt === "로그인"));
+
   return (
     <>
       <div className="dimm"></div>
@@ -16,14 +41,27 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
       <header className="header">
         <div className="header-top">
           <ul className="link-list">
-            {menu2.map((v, i) => (
+           {loggedInUser && (
+              <li>
+                <button type="button" onClick={handleLogout} className="icon-logout">
+                  로그아웃
+                </button>
+              </li>
+            )}
+
+            {/* 필터링된 메뉴 리스트 출력 */}
+            {filteredMenu.map((v, i) => (
               <li key={i}>
-                <Link to={v.link}>
-                  <span className={"icon" + v.class}>{v.txt}</span>
-                </Link>
+                <button
+                  type="button"
+                  onClick={() => handleLoginLogoutClick(v)}
+                  className={"icon" + v.class}
+                >
+                  {v.txt}
+                </button>
               </li>
             ))}
-          </ul>
+        </ul>
         </div>
         <div className="inner-header-wrap">
           <div className="inner-header">

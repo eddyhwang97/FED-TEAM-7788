@@ -58,7 +58,7 @@
     }
 
     .total-search-btn {
-      background-image: url("../img/common/icon-search.svg");
+      background-image: url("../../../public/img/common/icon-search.svg");
       z-index: 20;
       transition: all 0.4s;
       border-radius: 45px;
@@ -74,17 +74,17 @@
         transform: rotate(360deg);
         z-index: 201;
         background-size: 70%;
-        background-image: url("../img/common/icon-search-point.svg");
+        background-image: url("../../../public/img/common/icon-search-point.svg");
       }
     }
 
     .menu-btn {
-      background-image: url("../img/common/icon-menu.svg");
+      background-image: url("../../../public/img/common/icon-menu.svg");
       background-size: 28px;
     }
 
     .search-close-btn {
-      background-image: url("../img/common/icon-close.svg");
+      background-image: url("../../../public/img/common/icon-close.svg");
       visibility: hidden;
       &.on {
         visibility: visible;
@@ -212,8 +212,12 @@
         background-repeat: no-repeat;
       }
       .menu-close-btn {
-        background-image: url("../img/common/icon-close.svg");
+        background-image: url("../../../public/img/common/icon-close.svg");
         background-size: 28px;
+      }
+
+      .account-btn {
+        background-image: url("../../../public/img/common/icon-user.svg");
       }
     }
   }
@@ -254,7 +258,6 @@
 
       .dep2 {
         opacity: 0;
-        visibility: hidden;
         transition: opacity 0.3s;
         width: calc(100% - 140px);
         position: absolute;
@@ -262,6 +265,7 @@
         left: 140px;
         color: $darkgray;
         font-weight: 400;
+        visibility: hidden;
         a {
           height: 56px;
           display: flex;
@@ -325,7 +329,7 @@
         }
 
         .dep2 {
-          display: none;
+          visibility: hidden;
           width: 100%;
           top: 87px;
           left: 0;
@@ -359,13 +363,13 @@
     }
 
     .total-search-btn {
-      background: #f3f4f7 url("../img/common/icon-search.svg") center no-repeat;
+      background: #f3f4f7 url("../../../public/img/common/icon-search.svg") center no-repeat;
       &.on {
         display: none;
       }
     }
     .search-close-btn {
-      background: #f3f4f7 url("../img/common/icon-close.svg") center no-repeat;
+      background: #f3f4f7 url("../../../public/img/common/icon-close.svg") center no-repeat;
       display: none;
       &.on {
         display: block;
@@ -378,7 +382,7 @@
   }
 
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
-    display: block;
+    visibility: visible;
     opacity: 1;
   }
 }
@@ -467,7 +471,7 @@
       height: 56px;
       position: absolute;
       right: 10px;
-      background: url('../img/common/icon-search-point.svg') center no-repeat;
+      background: url('../../../public/img/common/icon-search-point.svg') center no-repeat;
       background-size: 60%;
     }
   }
@@ -538,7 +542,7 @@
         width: 24px;
         height: 24px;
         display: inline-block;
-        background: url("../img/common/icon-down-gray.svg");
+        background: url("../../../public/img/common/icon-down-gray.svg");
       }
       &.active::after {
         transform: rotate(180deg);

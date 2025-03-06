@@ -33,8 +33,8 @@ export default function MainComponent() {
           <Route path="community/notice/:id" element={<Article gnb1="열린공간" gnb2="공지사항" />} />
           <Route path="community/faq" element={<Community gnb1="열린공간" gnb2="FAQ" data="faq" />} />
           <Route path="community/freeboard" element={<Community gnb1="열린공간" gnb2="자유게시판" data="freeboard" />} />
+          <Route path="community/freeboard/:id" element={<Article gnb1="열린공간" gnb2="자유게시판" data="freeboard" />} />
           <Route path="community/freeboard/post" element={<Post gnb1="열린공간" gnb2="자유게시판 글쓰기" data="post" />} />
-          <Route path="community/freeboard/:id" element={<Article gnb1="열린공간" gnb2="자유게시판" />} />
           <Route path="join" element={<Join gnb1="회원가입" gnb2="" />} />
           <Route path="login" element={<Login gnb1="로그인" gnb2="" />} />
           <Route path="mypage" element={<Mypage gnb1="마이페이지" gnb2="" />} />

@@ -9,7 +9,7 @@ function Borrow({ gnb1, gnb2 }) {
       <div className="contents">
         <div className="sub-section">
           <p className="section-tit">도서 대출 안내</p>
-          <div className="inner-section">
+          <div className="inner">
             <ul className="bullet-list">
               <li>
                 <span className="bullet type1 step1">대출 자격</span>
@@ -38,7 +38,7 @@ function Borrow({ gnb1, gnb2 }) {
         </div>
         <div className="sub-section">
           <p className="section-tit">도서 반납 안내</p>
-          <div className="inner-section">
+          <div className="inner">
             <ul className="step-list">
                 
             </ul>
