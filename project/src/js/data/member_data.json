@@ -3,7 +3,7 @@
     "name": "심민수",
     "id": "010-1234-5678",
     "pw": "A1b!9xY2",
-    "bData": [
+    "currentData": [
       {
         "isbn": "996133762",
         "checkoutDate": "2025-03-05",
@@ -30,14 +30,14 @@
         "dueDate": "2025-03-16"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "권원우",
     "id": "010-2345-6789",
     "pw": "P@ssW0rD!",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9962367184",
         "checkoutDate": "2025-03-15",
@@ -64,14 +64,14 @@
         "dueDate": "2025-03-26"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "한상화",
     "id": "010-3456-7890",
     "pw": "xYz!23Qp",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9963360396",
         "checkoutDate": "2025-03-09",
@@ -84,14 +84,14 @@
       },
       { "isbn": "9988045077" }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "신기연",
     "id": "010-4567-8901",
     "pw": "T9m$2kLp",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9998207359",
         "checkoutDate": "2025-03-11",
@@ -118,14 +118,14 @@
         "dueDate": "2025-03-22"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "백영준",
     "id": "010-5678-9012",
     "pw": "L@xM8z!3",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9971700782",
         "checkoutDate": "2025-03-23",
@@ -152,14 +152,14 @@
         "dueDate": "2025-04-03"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "서채윤",
     "id": "010-6789-0123",
     "pw": "Qw3!T2#pX",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9985635169",
         "checkoutDate": "2025-03-17",
@@ -186,14 +186,14 @@
         "dueDate": "2025-03-28"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "사공미주",
     "id": "010-7890-1234",
     "pw": "P9$aB8kT",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9999747980",
         "checkoutDate": "2025-03-07",
@@ -220,14 +220,14 @@
         "dueDate": "2025-03-18"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "허병현",
     "id": "010-8901-2345",
     "pw": "R3m*X7@L",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9968911507",
         "checkoutDate": "2025-03-19",
@@ -254,14 +254,14 @@
         "dueDate": "2025-03-30"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "노기호",
     "id": "010-9012-3456",
     "pw": "1q!W@5Tp",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9991820928",
         "checkoutDate": "2025-03-05",
@@ -288,14 +288,14 @@
         "dueDate": "2025-03-16"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "오윤재",
     "id": "010-0123-4567",
     "pw": "9X*3Lp#W",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9976948945",
         "checkoutDate": "2025-03-15",
@@ -322,14 +322,14 @@
         "dueDate": "2025-03-26"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "추성희",
     "id": "010-5432-1098",
     "pw": "A!T9xY6k",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9971625478",
         "checkoutDate": "2025-03-10",
@@ -356,14 +356,14 @@
         "dueDate": "2025-03-21"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "설민선",
     "id": "010-6543-2109",
     "pw": "M8z!3#Xq",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9963063714",
         "checkoutDate": "2025-03-19",
@@ -390,14 +390,14 @@
         "dueDate": "2025-03-30"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "장진아",
     "id": "010-7654-3210",
     "pw": "L2@9Wp#X",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9963138454",
         "checkoutDate": "2025-03-25",
@@ -424,14 +424,14 @@
         "dueDate": "2025-03-13"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "양신영",
     "id": "010-8765-4321",
     "pw": "5TpX!3Lm",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9988914165",
         "checkoutDate": "2025-03-07",
@@ -453,14 +453,14 @@
         "dueDate": "2025-03-17"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "제갈해준",
     "id": "010-9876-5432",
     "pw": "Q!9m*2Lp",
-    "bData": [
+    "currentData": [
       {
         "isbn": "998995026",
         "checkoutDate": "2025-03-15",
@@ -473,14 +473,14 @@
       },
       { "isbn": "9992152704" }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "허승철",
     "id": "010-0987-6543",
     "pw": "R@7PqX9z",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9963077114",
         "checkoutDate": "2025-03-17",
@@ -507,14 +507,14 @@
         "dueDate": "2025-03-28"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "최대한",
     "id": "010-4321-9876",
     "pw": "X!3L2#W9",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9971396325",
         "checkoutDate": "2025-03-13",
@@ -541,14 +541,14 @@
         "dueDate": "2025-03-24"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "남궁용호",
     "id": "010-3210-8765",
     "pw": "B9xA!2pM",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9975281489",
         "checkoutDate": "2025-03-07",
@@ -575,14 +575,14 @@
         "dueDate": "2025-03-18"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "양철수",
     "id": "010-2109-7654",
     "pw": "T@7QxM3!",
-    "bData": [
+    "currentData": [
       {
         "isbn": "9975281489",
         "checkoutDate": "2025-03-21",
@@ -609,14 +609,14 @@
         "dueDate": "2025-04-01"
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   },
   {
     "name": "손민영",
     "id": "010-1098-6543",
     "pw": "8L2p#X!t",
-    "bData": [
+    "currentData"  : [
       {
         "isbn": "9966001562",
         "checkoutDate": "2025-03-17",
@@ -640,10 +640,10 @@
       {
         "isbn": "9965684442",
         "checkoutDate": "2025-03-21",
-        "dueDate": "2025-03-28"
+        "dueDate": "2025-03-28" 
       }
     ],
-    "borrowCount": "",
-    "currentData": ""
+    "bData": "",
+    "iLoveIt": ""
   }
 ]
