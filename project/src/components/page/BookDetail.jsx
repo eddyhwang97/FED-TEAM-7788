@@ -11,14 +11,14 @@ function BookDetail() {
   const [loanStatus, setLoanStatus] = useState("대출 가능");
   const [reserved, setReserved] = useState(false);
   const [loanDate, setLoanDate] = useState(null);
-  const [stock, setStock] = useState(0); // 도서 재고 상태
+  const [stock, setStock] = useState(0);
   const [showLoanPopup, setShowLoanPopup] = useState(false);
-  const [showReturnPopup, setShowReturnPopup] = useState(false); // 반납 팝업 상태
+  const [showReturnPopup, setShowReturnPopup] = useState(false);
   const maxLoanLimit = 5;
 
   useEffect(() => {
     if (book) {
-      setStock(book.stock); // 초기 stock 설정
+      setStock(book.stock);
     }
 
     const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
@@ -31,16 +31,6 @@ function BookDetail() {
     if (reservedBooks[isbn]) {
       setReserved(true);
     }
-
-    if (loanedBooks[isbn]) {
-      const loanTime = new Date(loanedBooks[isbn]);
-      const now = new Date();
-      const diffDays = Math.floor((now - loanTime) / (1000 * 60 * 60 * 24));
-
-      if (diffDays >= 7) {
-        handleReturn();
-      }
-    }
   }, [isbn, book]);
 
   const confirmLoan = () => {
@@ -52,8 +42,13 @@ function BookDetail() {
   };
 
   const handleLoan = () => {
-    const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
+    const currentUser = sessionStorage.getItem("loggedInUser");
+    if (!currentUser) {
+      alert("로그인 후 이용해주세요.");
+      return;
+    }
 
+    const loanedBooks = JSON.parse(localStorage.getItem("loanedBooks")) || {};
     if (Object.keys(loanedBooks).length >= maxLoanLimit) {
       alert("최대 5권까지 대출할 수 있습니다.");
       return;
@@ -65,15 +60,13 @@ function BookDetail() {
       localStorage.setItem("loanedBooks", JSON.stringify(loanedBooks));
       setLoanStatus("대출 중");
       setLoanDate(new Date(loanTime));
-
-      // stock 감소
       setStock(stock - 1);
     }
     setShowLoanPopup(false);
   };
 
   const confirmReturn = () => {
-    setShowReturnPopup(true); // 반납 팝업 활성화
+    setShowReturnPopup(true);
   };
 
   const handleReturn = () => {
@@ -82,11 +75,8 @@ function BookDetail() {
     localStorage.setItem("loanedBooks", JSON.stringify(loanedBooks));
     setLoanStatus("대출 가능");
     setLoanDate(null);
-
-    // stock 증가
     setStock(stock + 1);
-
-    setShowReturnPopup(false); // 팝업 닫기
+    setShowReturnPopup(false);
   };
 
   const handleReserve = () => {
@@ -94,7 +84,6 @@ function BookDetail() {
     reservedBooks[isbn] = true;
     localStorage.setItem("reservedBooks", JSON.stringify(reservedBooks));
     setReserved(true);
-
     alert("예약되었습니다.");
   };
 
@@ -125,9 +114,6 @@ function BookDetail() {
               <li><em>재고</em><span className="stock">{stock}권</span></li>
             </ul>
             <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
-            {loanDate && (
-              <p className="loan-date">반납 기한: {new Date(loanDate.getTime() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
-            )}
             <div className="util-box">
               <div className="btn-wrap">
                 {stock > 0 ? (
@@ -137,9 +123,7 @@ function BookDetail() {
                     </button>
                   ) : (
                     <>
-                      <button type="button" className="btn-state ing">
-                        대출 중
-                      </button>
+                      <button type="button" className="btn-state ing">대출 중</button>
                       <button type="button" className="btn-state return" onClick={confirmReturn}>
                         반납하기
                       </button>
@@ -156,7 +140,6 @@ function BookDetail() {
           </div>
         </div>
       </div>
-
       {showLoanPopup && (
         <div className="popup-wrap on">
           <div className="alert-popup">
@@ -168,7 +151,6 @@ function BookDetail() {
           </div>
         </div>
       )}
-
       {showReturnPopup && (
         <div className="popup-wrap on">
           <div className="alert-popup">
@@ -180,7 +162,6 @@ function BookDetail() {
           </div>
         </div>
       )}
-
       <BookComment />
     </div>
   );

@@ -20,7 +20,7 @@ function SubTop({ gnb1, gnb2 }) {
         <ul className="sub-link">
           <li className="link-copy">
             <button type="button">
-              <img src="../img/common/icon-link.svg" alt="링크 공유 버튼" />
+              <img src="/img/common/icon-link.svg" alt="링크 공유 버튼" />
             </button>
             <div className="url-copy">
               <input type="text" id="urlCopy" />
@@ -30,7 +30,7 @@ function SubTop({ gnb1, gnb2 }) {
           </li>
           <li className="link-print">
             <button type="button">
-              <img src="../img/common/icon-print.svg" alt="페이지 프린트 버튼" />
+              <img src="/img/common/icon-print.svg" alt="페이지 프린트 버튼" />
             </button>
           </li>
         </ul>

@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import $, { data } from "jquery";
 
 // data
-import commentData from "../../js/data/article_comment_data.json";
-import communityData from "../../js/data/community_data.json";
-
 // component
 import SubTop from "../module/SubTop";
 // css
 import "../../css/page/community.scss";
 import "../../css/page/article.scss";
 
-function Article({ gnb1, gnb2 }) {
-  const location = useLocation();
+function Article({ gnb1, gnb2, data }) {
+  const navigate = useNavigate();
+  const articleLocation = useLocation();
+  const user = articleLocation.state.user;
+  const listIdx = articleLocation.state.listIdx;
+  const listData = JSON.parse(localStorage.getItem("community_data"))
+    .filter((x) => x.type === data)
+    .sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
   const userName = JSON.parse(sessionStorage.getItem("user1")).user;
   const commentList = JSON.parse(localStorage.getItem("comment_data"));
-
   const { id } = useParams();
   const typeBranch = gnb2 === "공지사항" ? "notice" : "freeboard";
+  const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
 
+  console.log(listData)
   // 로그인 상태변수
   const [onUser, userStatus] = useState(false);
   const [comment, setComment] = useState(commentList);
@@ -63,6 +67,7 @@ function Article({ gnb1, gnb2 }) {
       commentList.push({
         idx: commentList[commentList.length - 1].idx + 1,
         user: userName,
+        image: "",
         date: formattedDate,
         comment: commentText,
       });
@@ -71,23 +76,23 @@ function Article({ gnb1, gnb2 }) {
       $("#text-comment").val("");
     }
   };
+  const deleteArticle = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      const updatedArticle =  listData.filter(v=>v.idx !==listIdx)
+     localStorage.setItem("community_data",JSON.stringify(updatedArticle))
+      navigate(`/community/${data}`);
+    }
+  };
   const deleteComment = (idx) => {
+    console.log("delete", idx);
     const updatedComments = commentList.filter((comment) => comment.idx !== idx);
     setComment(updatedComments);
     localStorage.setItem("comment_data", JSON.stringify(updatedComments));
   };
   // useEffect
   useEffect(() => {
-    if (!localStorage.comment_data) {
-      localStorage.setItem("comment_data", JSON.stringify(commentData));
-    }
-    //   test session storage
-    let user1 = { user: "John" };
-    if (!sessionStorage.user1) {
-      sessionStorage.setItem("user1", JSON.stringify(user1));
-    }
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [articleLocation]);
   // 로그인 상태 확인
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user1")).user;
@@ -109,10 +114,21 @@ function Article({ gnb1, gnb2 }) {
               <div className="writer-info">
                 <div className="profile">{articleData.user}</div>
                 <div className="date">{articleData.date}</div>
+                {user === userName && (
+                  <button
+                    type="button"
+                    className="delete-button"
+                    onClick={() => {
+                      deleteArticle()
+                    }}
+                  >
+                    삭제
+                  </button>
+                )}
               </div>
             </div>
             <div className="article-content">
-              {/* <img src="" alt="" /> */}
+              {data === "freeboard" && articleData.image !== "" && <img src={`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
               {String(articleData.content)
                 .split(".")
                 .map((v, i) => (
@@ -133,7 +149,16 @@ function Article({ gnb1, gnb2 }) {
                       <p>{v.comment}</p>
                     </div>
                     {v.user === userName && (
-                      <button type="button" className="delete-button" onClick={(e) => deleteComment(e, v.idx)}>
+                      <button
+                        type="button"
+                        className="delete-button"
+                        onClick={() => {
+                          if (window.confirm("삭제하시겠습니까?")) {
+                            deleteComment(v.idx);
+                            alert("삭제제되었습니다.");
+                          } else return;
+                        }}
+                      >
                         삭제
                       </button>
                     )}
