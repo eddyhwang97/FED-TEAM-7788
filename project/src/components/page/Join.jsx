@@ -1,3 +1,4 @@
+
 //  Join 컴포넌트 - Join.jsx
 import { useEffect, useLayoutEffect, useState, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -60,7 +61,7 @@ const handlePhoneNumber = (e) => {
     const newName = e.target.value;
     setName(newName); // 상태 업데이트 -> 비동기 처리 보완
     const regex = /^[A-Za-z가-힣]{2,20}$/;
-    if (regex.test(name)) {
+    if (regex.test(newName)) {
       setNameValid(true);
     } else {
       setNameValid(false);
@@ -118,6 +119,16 @@ const handlePhoneNumber = (e) => {
     const handleJoin = () => {
       if (notAllow) return; // 버튼이 비활성화 상태면 실행하지 않음
     
+      // 기존 회원 데이터 가져오기
+      const getData = JSON.parse(localStorage.getItem('member_data')) || [] ;
+
+      // 중복 확인
+      const isDuplicate = getData.some(member => member.id === phoneNum);
+      if (isDuplicate) {
+        alert('이미 사용되고 있는 휴대폰번호입니다.');
+        return; // 회원가입 중단
+      }
+
       // 새로운 회원 데이터
       const newMember = {
         name,
@@ -126,11 +137,9 @@ const handlePhoneNumber = (e) => {
         bData:[
         ],
         iLoveIt:'',
-        borrowCount:''
+        borrowCount:'',
+        currentData:''
       };
-    
-      // 기존 회원 데이터 가져오기
-      const getData = JSON.parse(localStorage.getItem('member_data')) || [];
     
       // 새로운 데이터 추가 후 로컬스토리지에 저장
       const updatedData = [...getData, newMember];

@@ -28,35 +28,10 @@
         "isbn": "9997134976",
         "checkoutDate": "2025-03-09",
         "dueDate": "2025-03-16"
-      },
-      {
-        "isbn": "9992589873",
-        "checkoutDate": "2025-03-10",
-        "dueDate": "2025-03-17"
-      },
-      {
-        "isbn": "9999558238",
-        "checkoutDate": "2025-03-11",
-        "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9993679523",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9999747980",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9991699061",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "권원우",
@@ -87,70 +62,10 @@
         "isbn": "9969774503",
         "checkoutDate": "2025-03-19",
         "dueDate": "2025-03-26"
-      },
-      {
-        "isbn": "9973219122",
-        "checkoutDate": "2025-03-20",
-        "dueDate": "2025-03-27"
-      },
-      {
-        "isbn": "9983111762",
-        "checkoutDate": "2025-03-21",
-        "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "9971396325",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
-      },
-      {
-        "isbn": "9965005203",
-        "checkoutDate": "2025-03-23",
-        "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "996133762",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
-      },
-      {
-        "isbn": "9999874507",
-        "checkoutDate": "2025-03-25",
-        "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9961234799",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9999671457",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9972097521",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9997754606",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
-      },
-      {
-        "isbn": "9996931785",
-        "checkoutDate": "2025-03-07",
-        "dueDate": "2025-03-14"
-      },
-      {
-        "isbn": "9968588662",
-        "checkoutDate": "2025-03-08",
-        "dueDate": "2025-03-15"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "한상화",
@@ -169,8 +84,8 @@
       },
       { "isbn": "9988045077" }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "신기연",
@@ -201,45 +116,10 @@
         "isbn": "9961850403",
         "checkoutDate": "2025-03-15",
         "dueDate": "2025-03-22"
-      },
-      {
-        "isbn": "9999627840",
-        "checkoutDate": "2025-03-16",
-        "dueDate": "2025-03-23"
-      },
-      {
-        "isbn": "9995012871",
-        "checkoutDate": "2025-03-17",
-        "dueDate": "2025-03-24"
-      },
-      {
-        "isbn": "9992139966",
-        "checkoutDate": "2025-03-18",
-        "dueDate": "2025-03-25"
-      },
-      {
-        "isbn": "9975357946",
-        "checkoutDate": "2025-03-19",
-        "dueDate": "2025-03-26"
-      },
-      {
-        "isbn": "9966990627",
-        "checkoutDate": "2025-03-20",
-        "dueDate": "2025-03-27"
-      },
-      {
-        "isbn": "9984652102",
-        "checkoutDate": "2025-03-21",
-        "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "9968674127",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "백영준",
@@ -270,70 +150,10 @@
         "isbn": "9968957386",
         "checkoutDate": "2025-03-27",
         "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9983111762",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9985815755",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
-      },
-      {
-        "isbn": "9988045077",
-        "checkoutDate": "2025-03-07",
-        "dueDate": "2025-03-14"
-      },
-      {
-        "isbn": "9996931785",
-        "checkoutDate": "2025-03-08",
-        "dueDate": "2025-03-15"
-      },
-      {
-        "isbn": "9987793705",
-        "checkoutDate": "2025-03-09",
-        "dueDate": "2025-03-16"
-      },
-      {
-        "isbn": "9963240388",
-        "checkoutDate": "2025-03-10",
-        "dueDate": "2025-03-17"
-      },
-      {
-        "isbn": "9996203081",
-        "checkoutDate": "2025-03-11",
-        "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9971548850",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9977517798",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9991490336",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
-      },
-      {
-        "isbn": "9972097521",
-        "checkoutDate": "2025-03-15",
-        "dueDate": "2025-03-22"
-      },
-      {
-        "isbn": "9991053478",
-        "checkoutDate": "2025-03-16",
-        "dueDate": "2025-03-23"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "서채윤",
@@ -364,50 +184,10 @@
         "isbn": "996515641",
         "checkoutDate": "2025-03-21",
         "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "9968068289",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
-      },
-      {
-        "isbn": "9969142805",
-        "checkoutDate": "2025-03-23",
-        "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "9995012871",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
-      },
-      {
-        "isbn": "998366957",
-        "checkoutDate": "2025-03-25",
-        "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9991490336",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9966001562",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9971625478",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9995386562",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "사공미주",
@@ -438,46 +218,10 @@
         "isbn": "9993679523",
         "checkoutDate": "2025-03-11",
         "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9965684442",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9963850853",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9992152704",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
-      },
-      {
-        "isbn": "9969847695",
-        "checkoutDate": "2025-03-15",
-        "dueDate": "2025-03-22"
-      },
-      {
-        "isbn": "9996913694",
-        "checkoutDate": "2025-03-16",
-        "dueDate": "2025-03-23"
-      },
-      {
-        "isbn": "9967320541",
-        "checkoutDate": "2025-03-17",
-        "dueDate": "2025-03-24"
-      },
-      {
-        "isbn": "9972663298",
-        "checkoutDate": "2025-03-18",
-        "dueDate": "2025-03-25"
-      },
-      { "isbn": "996133762" }
+      }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "허병현",
@@ -508,30 +252,10 @@
         "isbn": "9971700782",
         "checkoutDate": "2025-03-23",
         "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "9985643097",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
-      },
-      {
-        "isbn": "9996327290",
-        "checkoutDate": "2025-03-25",
-        "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9975664328",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9975281489",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "노기호",
@@ -562,35 +286,10 @@
         "isbn": "9983184089",
         "checkoutDate": "2025-03-09",
         "dueDate": "2025-03-16"
-      },
-      {
-        "isbn": "9963360396",
-        "checkoutDate": "2025-03-10",
-        "dueDate": "2025-03-17"
-      },
-      {
-        "isbn": "9964912327",
-        "checkoutDate": "2025-03-11",
-        "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "996515641",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9983094039",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9983931288",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "오윤재",
@@ -621,75 +320,10 @@
         "isbn": "9992897149",
         "checkoutDate": "2025-03-19",
         "dueDate": "2025-03-26"
-      },
-      {
-        "isbn": "9993679523",
-        "checkoutDate": "2025-03-20",
-        "dueDate": "2025-03-27"
-      },
-      {
-        "isbn": "998349075",
-        "checkoutDate": "2025-03-21",
-        "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "998278024",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
-      },
-      {
-        "isbn": "996918794",
-        "checkoutDate": "2025-03-23",
-        "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "9992257130",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
-      },
-      {
-        "isbn": "9977381086",
-        "checkoutDate": "2025-03-25",
-        "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9998561818",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9979984022",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9977725371",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9998207359",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
-      },
-      {
-        "isbn": "9981254808",
-        "checkoutDate": "2025-03-07",
-        "dueDate": "2025-03-14"
-      },
-      {
-        "isbn": "9966381536",
-        "checkoutDate": "2025-03-08",
-        "dueDate": "2025-03-15"
-      },
-      {
-        "isbn": "9982768187",
-        "checkoutDate": "2025-03-09",
-        "dueDate": "2025-03-16"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "추성희",
@@ -720,30 +354,10 @@
         "isbn": "9977245169",
         "checkoutDate": "2025-03-14",
         "dueDate": "2025-03-21"
-      },
-      {
-        "isbn": "9985643097",
-        "checkoutDate": "2025-03-15",
-        "dueDate": "2025-03-22"
-      },
-      {
-        "isbn": "9964912327",
-        "checkoutDate": "2025-03-16",
-        "dueDate": "2025-03-23"
-      },
-      {
-        "isbn": "9966098525",
-        "checkoutDate": "2025-03-17",
-        "dueDate": "2025-03-24"
-      },
-      {
-        "isbn": "9976725390",
-        "checkoutDate": "2025-03-18",
-        "dueDate": "2025-03-25"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "설민선",
@@ -774,15 +388,10 @@
         "isbn": "9965329428",
         "checkoutDate": "2025-03-23",
         "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "9971625478",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "장진아",
@@ -815,8 +424,8 @@
         "dueDate": "2025-03-13"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "양신영",
@@ -842,30 +451,10 @@
         "isbn": "9998561818",
         "checkoutDate": "2025-03-10",
         "dueDate": "2025-03-17"
-      },
-      {
-        "isbn": "9981374281",
-        "checkoutDate": "2025-03-11",
-        "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9979965122",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9995386562",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9974005579",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "제갈해준",
@@ -884,8 +473,8 @@
       },
       { "isbn": "9992152704" }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "허승철",
@@ -916,80 +505,10 @@
         "isbn": "9983748984",
         "checkoutDate": "2025-03-21",
         "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "9978329346",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
-      },
-      {
-        "isbn": "998637718",
-        "checkoutDate": "2025-03-23",
-        "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "9996477273",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
-      },
-      {
-        "isbn": "9977582909",
-        "checkoutDate": "2025-03-25",
-        "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9986484016",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9984918722",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9991171310",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9966990627",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
-      },
-      {
-        "isbn": "996133762",
-        "checkoutDate": "2025-03-07",
-        "dueDate": "2025-03-14"
-      },
-      {
-        "isbn": "9976554370",
-        "checkoutDate": "2025-03-08",
-        "dueDate": "2025-03-15"
-      },
-      {
-        "isbn": "9961995350",
-        "checkoutDate": "2025-03-09",
-        "dueDate": "2025-03-16"
-      },
-      {
-        "isbn": "996918794",
-        "checkoutDate": "2025-03-10",
-        "dueDate": "2025-03-17"
-      },
-      {
-        "isbn": "9991671254",
-        "checkoutDate": "2025-03-11",
-        "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9968674127",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "최대한",
@@ -1020,70 +539,10 @@
         "isbn": "9999300629",
         "checkoutDate": "2025-03-17",
         "dueDate": "2025-03-24"
-      },
-      {
-        "isbn": "9986484016",
-        "checkoutDate": "2025-03-18",
-        "dueDate": "2025-03-25"
-      },
-      {
-        "isbn": "9994241241",
-        "checkoutDate": "2025-03-19",
-        "dueDate": "2025-03-26"
-      },
-      {
-        "isbn": "9974299584",
-        "checkoutDate": "2025-03-20",
-        "dueDate": "2025-03-27"
-      },
-      {
-        "isbn": "9997590104",
-        "checkoutDate": "2025-03-21",
-        "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "9993679523",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
-      },
-      {
-        "isbn": "998349075",
-        "checkoutDate": "2025-03-23",
-        "dueDate": "2025-03-30"
-      },
-      {
-        "isbn": "9985213331",
-        "checkoutDate": "2025-03-24",
-        "dueDate": "2025-03-31"
-      },
-      {
-        "isbn": "9973549966",
-        "checkoutDate": "2025-03-25",
-        "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9999776653",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9996203081",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9976565576",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9986392291",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "남궁용호",
@@ -1114,55 +573,10 @@
         "isbn": "9997038653",
         "checkoutDate": "2025-03-11",
         "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9999338196",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9961234799",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9981283751",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
-      },
-      {
-        "isbn": "9995386562",
-        "checkoutDate": "2025-03-15",
-        "dueDate": "2025-03-22"
-      },
-      {
-        "isbn": "9984918722",
-        "checkoutDate": "2025-03-16",
-        "dueDate": "2025-03-23"
-      },
-      {
-        "isbn": "9983184089",
-        "checkoutDate": "2025-03-17",
-        "dueDate": "2025-03-24"
-      },
-      {
-        "isbn": "996133762",
-        "checkoutDate": "2025-03-18",
-        "dueDate": "2025-03-25"
-      },
-      {
-        "isbn": "998278024",
-        "checkoutDate": "2025-03-19",
-        "dueDate": "2025-03-26"
-      },
-      {
-        "isbn": "9975057766",
-        "checkoutDate": "2025-03-20",
-        "dueDate": "2025-03-27"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "양철수",
@@ -1193,80 +607,10 @@
         "isbn": "998349075",
         "checkoutDate": "2025-03-25",
         "dueDate": "2025-04-01"
-      },
-      {
-        "isbn": "9992589873",
-        "checkoutDate": "2025-03-26",
-        "dueDate": "2025-04-02"
-      },
-      {
-        "isbn": "9969608855",
-        "checkoutDate": "2025-03-27",
-        "dueDate": "2025-04-03"
-      },
-      {
-        "isbn": "9985815755",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "998637718",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
-      },
-      {
-        "isbn": "9983184089",
-        "checkoutDate": "2025-03-07",
-        "dueDate": "2025-03-14"
-      },
-      {
-        "isbn": "9994950099",
-        "checkoutDate": "2025-03-08",
-        "dueDate": "2025-03-15"
-      },
-      {
-        "isbn": "9972097521",
-        "checkoutDate": "2025-03-09",
-        "dueDate": "2025-03-16"
-      },
-      {
-        "isbn": "9968674127",
-        "checkoutDate": "2025-03-10",
-        "dueDate": "2025-03-17"
-      },
-      {
-        "isbn": "9975645437",
-        "checkoutDate": "2025-03-11",
-        "dueDate": "2025-03-18"
-      },
-      {
-        "isbn": "9998207359",
-        "checkoutDate": "2025-03-12",
-        "dueDate": "2025-03-19"
-      },
-      {
-        "isbn": "9992139966",
-        "checkoutDate": "2025-03-13",
-        "dueDate": "2025-03-20"
-      },
-      {
-        "isbn": "9968957386",
-        "checkoutDate": "2025-03-14",
-        "dueDate": "2025-03-21"
-      },
-      {
-        "isbn": "9961850403",
-        "checkoutDate": "2025-03-15",
-        "dueDate": "2025-03-22"
-      },
-      {
-        "isbn": "9992152704",
-        "checkoutDate": "2025-03-16",
-        "dueDate": "2025-03-23"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   },
   {
     "name": "손민영",
@@ -1297,14 +641,9 @@
         "isbn": "9965684442",
         "checkoutDate": "2025-03-21",
         "dueDate": "2025-03-28"
-      },
-      {
-        "isbn": "9962448513",
-        "checkoutDate": "2025-03-22",
-        "dueDate": "2025-03-29"
       }
     ],
-    "iLoveIt": "",
-    "borrowCount": ""
+    "borrowCount": "",
+    "currentData": ""
   }
 ]
