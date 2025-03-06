@@ -26,9 +26,12 @@ if (!sessionStorage.user) {
 }
 function Community({ gnb1, gnb2, data }) {
   const navigate = useNavigate();
-  // variables
 
+  // variables
   const searchOption = ["제목", "내용", "작성자"];
+  const listData = JSON.parse(localStorage.getItem("community_data"))
+    .filter((x) => x.type === data)
+    .sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
   // useState
   const [activeTab, setActiveTab] = useState(data);
   // 로그인 상태변수
@@ -37,7 +40,8 @@ function Community({ gnb1, gnb2, data }) {
   const [selectOption, setSelectOption] = useState("제목");
   // 검색어 입력값
   const [searchInput, setSearchInput] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(listData);
+  const [page, setPage] = useState(1);
 
   // function
   const toggleListFn = (e) => {
@@ -48,13 +52,15 @@ function Community({ gnb1, gnb2, data }) {
     e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
   };
   const handleSearchFn = (e) => {
-    if (e === "제목") {
-      setList(list.filter((v) => v.title.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-    } else if (e === "내용") {
-      setList(list.filter((v) => v.content.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-    } else if (e === "작성자") {
-      setList(list.filter((v) => v.user.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-    }
+    if (searchInput !== "") {
+      if (e === "제목") {
+        setList(list.filter((v) => v.title.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+      } else if (e === "내용") {
+        setList(list.filter((v) => v.content.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+      } else if (e === "작성자") {
+        setList(list.filter((v) => v.user.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+      }
+    } else setList(listData);
   };
 
   const setBoardListFn = (e) => {
@@ -71,10 +77,7 @@ function Community({ gnb1, gnb2, data }) {
   useEffect(() => {
     setActiveTab(data);
     window.scrollTo(0, 0);
-  }, [useLocation()]);
-  useEffect(() => {
     setBoardListFn(data);
-    console.log(data);
   }, [useLocation()]);
   // 로그인 상태 확인
   useEffect(() => {
@@ -159,7 +162,7 @@ function Community({ gnb1, gnb2, data }) {
                         onClick={(e) => {
                           if (data === "freeboard" || data === "notice") {
                             e.preventDefault();
-                            navigate(`/community/${data}/${v.idx}`);
+                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user,listIdx:v.idx} });
                           }
                         }}
                       >

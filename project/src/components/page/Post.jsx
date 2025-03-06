@@ -3,12 +3,14 @@ import SubTop from "../module/SubTop";
 import $ from "jquery";
 
 import "../../css/page/post.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Post({ gnb1, gnb2 }) {
-  const  navigate = useLocation();
-  const  user = navigate.state.user
-  
+  const navigate = useNavigate();
+  const postLocation = useLocation();
+  const user = postLocation.state.user;
+  console.log(user);
+
   // 로그인 상태변수
 
   const getContent = () => {
@@ -16,26 +18,31 @@ function Post({ gnb1, gnb2 }) {
     const content = $("#text-content").val();
     if (title === "" || content === "") {
       alert("제목과 내용을 모두 입력하세요.");
-    } else setArticle(title, content);
+    } else {
+      setArticle(title, content);
+      alert("등록되었습니다.");
+      navigate("/community/freeboard");
+    }
+
     console.log(title, content);
   };
   const setArticle = (title, content) => {
     if (localStorage.community_data) {
-      const communityData = JSON.parse(localStorage.getItem("community_data"));
+      const communityData = JSON.parse(localStorage.getItem("community_data"))
+        .filter((v) => v.type === "freeboard")
+        .sort((a, b) => (a.idx == b.idx ? -1 : a.idx < b.idx ? -1 : 1));
       const today = new Date();
       const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1 < 10 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate() + 1 < 10 ? "0" + (today.getDate() + 1) : today.getDate() + 1}`;
       communityData.push({
         idx: communityData[communityData.length - 1].idx + 1,
         type: "freeboard",
-        image:"",
+        image: "",
         title: title,
         user: user,
         content: content,
         date: formattedDate,
       });
       localStorage.setItem("community_data", JSON.stringify(communityData));
-
-      console.log(communityData);
     }
   };
 

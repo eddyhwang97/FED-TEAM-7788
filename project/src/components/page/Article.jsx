@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import $, { data } from "jquery";
 
 // data
@@ -10,7 +10,13 @@ import "../../css/page/community.scss";
 import "../../css/page/article.scss";
 
 function Article({ gnb1, gnb2, data }) {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const articleLocation = useLocation();
+  const user = articleLocation.state.user;
+  const listIdx = articleLocation.state.listIdx;
+  const listData = JSON.parse(localStorage.getItem("community_data"))
+    .filter((x) => x.type === data)
+    .sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
   const userName = JSON.parse(sessionStorage.getItem("user1")).user;
   const commentList = JSON.parse(localStorage.getItem("comment_data"));
   const { id } = useParams();
@@ -18,6 +24,7 @@ function Article({ gnb1, gnb2, data }) {
   const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
 
+  console.log(listData)
   // 로그인 상태변수
   const [onUser, userStatus] = useState(false);
   const [comment, setComment] = useState(commentList);
@@ -60,12 +67,20 @@ function Article({ gnb1, gnb2, data }) {
       commentList.push({
         idx: commentList[commentList.length - 1].idx + 1,
         user: userName,
+        image: "",
         date: formattedDate,
         comment: commentText,
       });
       localStorage.setItem("comment_data", JSON.stringify(commentList));
       setComment(commentList);
       $("#text-comment").val("");
+    }
+  };
+  const deleteArticle = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      const updatedArticle =  listData.filter(v=>v.idx !==listIdx)
+     localStorage.setItem("community_data",JSON.stringify(updatedArticle))
+      navigate(`/community/${data}`);
     }
   };
   const deleteComment = (idx) => {
@@ -76,13 +91,8 @@ function Article({ gnb1, gnb2, data }) {
   };
   // useEffect
   useEffect(() => {
-    //   test session storage
-    let user1 = { user: "John" };
-    if (!sessionStorage.user1) {
-      sessionStorage.setItem("user1", JSON.stringify(user1));
-    }
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [articleLocation]);
   // 로그인 상태 확인
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user1")).user;
@@ -104,10 +114,21 @@ function Article({ gnb1, gnb2, data }) {
               <div className="writer-info">
                 <div className="profile">{articleData.user}</div>
                 <div className="date">{articleData.date}</div>
+                {user === userName && (
+                  <button
+                    type="button"
+                    className="delete-button"
+                    onClick={() => {
+                      deleteArticle()
+                    }}
+                  >
+                    삭제
+                  </button>
+                )}
               </div>
             </div>
             <div className="article-content">
-              {data === "freeboard" && articleData.image !== undefined && <img src={`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
+              {data === "freeboard" && articleData.image !== "" && <img src={`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
               {String(articleData.content)
                 .split(".")
                 .map((v, i) => (
