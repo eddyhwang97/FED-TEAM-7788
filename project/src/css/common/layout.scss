@@ -215,6 +215,10 @@
         background-image: url("../../../public/img/common/icon-close.svg");
         background-size: 28px;
       }
+
+      .account-btn {
+        background-image: url("../../../public/img/common/icon-user.svg");
+      }
     }
   }
 
@@ -254,7 +258,6 @@
 
       .dep2 {
         opacity: 0;
-        visibility: hidden;
         transition: opacity 0.3s;
         width: calc(100% - 140px);
         position: absolute;
@@ -262,6 +265,7 @@
         left: 140px;
         color: $darkgray;
         font-weight: 400;
+        visibility: hidden;
         a {
           height: 56px;
           display: flex;
@@ -325,7 +329,7 @@
         }
 
         .dep2 {
-          display: none;
+          visibility: hidden;
           width: 100%;
           top: 87px;
           left: 0;
@@ -378,7 +382,7 @@
   }
 
   .inner-header-wrap.open .gnb-wrap .gnb .gnb-list .dep2 {
-    display: block;
+    visibility: visible;
     opacity: 1;
   }
 }
