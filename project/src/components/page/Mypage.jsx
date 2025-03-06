@@ -1,16 +1,13 @@
 //  Mypage 컴포넌트 - Mypage.jsx
-import { useEffect, useLayoutEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Sub Top //
 import SubTop from '../module/SubTop';
-// css //
 import hm from '../../css/page/hm.scss';
 
 function Mypage({ gnb1, gnb2 }) {
-  
-  // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   const navigate = useNavigate();
 
+  // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
     if(!loggedInUser){
