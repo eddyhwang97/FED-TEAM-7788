@@ -13,19 +13,25 @@ import SubTop from "../module/SubTop";
 import SearchBox from "../module/SearchBox";
 
 // 데이터 로컬스토리지 저장
-localStorage.setItem("community_data",JSON.stringify(communityData));
+if (!localStorage.community_data) {
+  localStorage.setItem("community_data", JSON.stringify(communityData));
+}
 if (!localStorage.comment_data) {
   localStorage.setItem("comment_data", JSON.stringify(commentData));
 }
 //   아이디 임시데이터 저장
-let user1 = { user: "John" };
-if (!sessionStorage.user1) {
-  sessionStorage.setItem("user1", JSON.stringify(user1));
+let user = { user: "Mike" };
+if (!sessionStorage.user) {
+  sessionStorage.setItem("user1", JSON.stringify(user));
 }
 function Community({ gnb1, gnb2, data }) {
   const navigate = useNavigate();
+
   // variables
   const searchOption = ["제목", "내용", "작성자"];
+  const listData = JSON.parse(localStorage.getItem("community_data"))
+    .filter((x) => x.type === data)
+    .sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
   // useState
   const [activeTab, setActiveTab] = useState(data);
   // 로그인 상태변수
@@ -34,7 +40,8 @@ function Community({ gnb1, gnb2, data }) {
   const [selectOption, setSelectOption] = useState("제목");
   // 검색어 입력값
   const [searchInput, setSearchInput] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(listData);
+  const [page, setPage] = useState(1);
 
   // function
   const toggleListFn = (e) => {
@@ -45,13 +52,15 @@ function Community({ gnb1, gnb2, data }) {
     e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
   };
   const handleSearchFn = (e) => {
-    if (e === "제목") {
-      setList(list.filter((v) => v.title.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-    } else if (e === "내용") {
-      setList(list.filter((v) => v.content.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-    } else if (e === "작성자") {
-      setList(list.filter((v) => v.user.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-    }
+    if (searchInput !== "") {
+      if (e === "제목") {
+        setList(list.filter((v) => v.title.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+      } else if (e === "내용") {
+        setList(list.filter((v) => v.content.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+      } else if (e === "작성자") {
+        setList(list.filter((v) => v.user.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+      }
+    } else setList(listData);
   };
 
   const setBoardListFn = (e) => {
@@ -68,19 +77,17 @@ function Community({ gnb1, gnb2, data }) {
   useEffect(() => {
     setActiveTab(data);
     window.scrollTo(0, 0);
-  }, [useLocation()]);
-  useEffect(() => {
     setBoardListFn(data);
-    console.log(data);
   }, [useLocation()]);
   // 로그인 상태 확인
   useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user1"));
     if (user) {
       userStatus(true);
     } else userStatus(false);
+    console.log(onUser, user);
   }, [onUser]);
-  return ( 
+  return (
     <>
       {/* <!-- sub-top s --> */}
       <SubTop gnb1={gnb1} gnb2={gnb2} />
@@ -89,7 +96,6 @@ function Community({ gnb1, gnb2, data }) {
       {/* <!-- contents s --> */}
       <div className="contents">
         <div className="content">
-
           {/* <!-- search-box s --> */}
           <SearchBox searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
           {/* <!-- search-box e --> */}
@@ -154,9 +160,9 @@ function Community({ gnb1, gnb2, data }) {
                       <a
                         href="#"
                         onClick={(e) => {
+                          e.preventDefault();
                           if (data === "freeboard" || data === "notice") {
-                            e.preventDefault();
-                            navigate(`/community/${data}/${v.idx}`);
+                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx } });
                           }
                         }}
                       >
@@ -192,8 +198,9 @@ function Community({ gnb1, gnb2, data }) {
                 type="button"
                 className="write-btn"
                 onClick={() => {
+                  const user = JSON.parse(sessionStorage.getItem("user1"));
                   if (!onUser) goLogin();
-                  else navigate(`/community/freeboard/post`);
+                  else navigate(`/community/freeboard/post`, { state: { user: user.user } });
                 }}
               >
                 글쓰기

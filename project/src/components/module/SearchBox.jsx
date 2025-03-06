@@ -7,19 +7,17 @@ function SearchBox({ searchOption, selectOption, setSelectOption, setSearchInput
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
 
-  // Fn
-  const changeSelectValue = (e) => {
-    setSelectOption(e.target.value);
-  };
-  const changeSearchValue = (e) => {
-    setSearchInput(e.target.value);
-  };
-
   return (
     <div className="search-box-wrap">
       <form action="" method="get"></form>
       <div className="search-box input-type">
-        <select name="option" id="search-option" onChange={changeSelectValue}>
+        <select
+          name="option"
+          id="search-option"
+          onChange={(e) => {
+            setSelectOption(e.target.value);
+          }}
+        >
           {searchOption.map((v, i) => (
             <option key={i} value={v}>
               {v}
@@ -35,7 +33,9 @@ function SearchBox({ searchOption, selectOption, setSelectOption, setSearchInput
           type="text"
           className="search-keywords"
           placeholder="검색어를 입력하세요."
-          onChange={changeSearchValue}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
         />
         <button
           className="search-button"
