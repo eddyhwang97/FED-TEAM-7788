@@ -49,6 +49,7 @@ function Login({ gnb1, gnb2 }) {
       // 로그인 성공 시 사용자 정보 로컬스토리지에 저장
       sessionStorage.setItem('loggedInUser', JSON.stringify(user));
       alert('로그인 성공🎉');
+      console.clear();
       navigate('/'); // 로그인 성공 후 메인페이지 이동
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
