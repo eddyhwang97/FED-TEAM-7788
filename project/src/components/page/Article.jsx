@@ -3,22 +3,19 @@ import { useLocation, useParams } from "react-router-dom";
 import $, { data } from "jquery";
 
 // data
-import commentData from "../../js/data/article_comment_data.json";
-import communityData from "../../js/data/community_data.json";
-
 // component
 import SubTop from "../module/SubTop";
 // css
 import "../../css/page/community.scss";
 import "../../css/page/article.scss";
 
-function Article({ gnb1, gnb2 }) {
+function Article({ gnb1, gnb2, data }) {
   const location = useLocation();
   const userName = JSON.parse(sessionStorage.getItem("user1")).user;
   const commentList = JSON.parse(localStorage.getItem("comment_data"));
-
   const { id } = useParams();
   const typeBranch = gnb2 === "공지사항" ? "notice" : "freeboard";
+  const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
 
   // 로그인 상태변수
@@ -72,15 +69,13 @@ function Article({ gnb1, gnb2 }) {
     }
   };
   const deleteComment = (idx) => {
+    console.log("delete", idx);
     const updatedComments = commentList.filter((comment) => comment.idx !== idx);
     setComment(updatedComments);
     localStorage.setItem("comment_data", JSON.stringify(updatedComments));
   };
   // useEffect
   useEffect(() => {
-    if (!localStorage.comment_data) {
-      localStorage.setItem("comment_data", JSON.stringify(commentData));
-    }
     //   test session storage
     let user1 = { user: "John" };
     if (!sessionStorage.user1) {
@@ -112,7 +107,7 @@ function Article({ gnb1, gnb2 }) {
               </div>
             </div>
             <div className="article-content">
-              {/* <img src="" alt="" /> */}
+              {data === "freeboard" && articleData.image !== undefined && <img src={`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
               {String(articleData.content)
                 .split(".")
                 .map((v, i) => (
@@ -133,7 +128,16 @@ function Article({ gnb1, gnb2 }) {
                       <p>{v.comment}</p>
                     </div>
                     {v.user === userName && (
-                      <button type="button" className="delete-button" onClick={(e) => deleteComment(e, v.idx)}>
+                      <button
+                        type="button"
+                        className="delete-button"
+                        onClick={() => {
+                          if (window.confirm("삭제하시겠습니까?")) {
+                            deleteComment(v.idx);
+                            alert("삭제제되었습니다.");
+                          } else return;
+                        }}
+                      >
                         삭제
                       </button>
                     )}
