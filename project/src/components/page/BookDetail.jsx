@@ -19,8 +19,7 @@ function BookDetail() {
       setStock(book.stock);
     }
 
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser")); // Retrieve user data from sessionStorage
     if (user) {
       if (Array.isArray(user.iLoveIt)) {
         setIsFavorite(user.iLoveIt.includes(book.ISBN));
@@ -40,8 +39,7 @@ function BookDetail() {
   }
 
   const handleLoan = () => {
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -62,7 +60,7 @@ function BookDetail() {
       const today = new Date();
       const dueDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split("T")[0];
       user.currentData.push({ isbn: book.ISBN, checkoutDate: new Date().toISOString().split("T")[0], dueDate });
-      localStorage.setItem("member_data", JSON.stringify(members));
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user data in sessionStorage
       setStock(stock - 1);
       setLoanStatus("대출 중");
       setReturnDate(dueDate);
@@ -70,8 +68,7 @@ function BookDetail() {
   };
 
   const handleReturn = () => {
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) return;
 
@@ -82,7 +79,7 @@ function BookDetail() {
     if (window.confirm("정말 반납하시겠습니까?")) {
       user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
       user.bData.push(book.ISBN);
-      localStorage.setItem("member_data", JSON.stringify(members));
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user data in sessionStorage
       setStock(stock + 1);
       setLoanStatus("대출 가능");
       setReturnDate(null);
@@ -90,8 +87,7 @@ function BookDetail() {
   };
 
   const handleFavorite = () => {
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -113,7 +109,7 @@ function BookDetail() {
       alert("찜한 도서에 추가되었습니다.");
     }
 
-    localStorage.setItem("member_data", JSON.stringify(members));
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user data in sessionStorage
   };
 
   return (
@@ -140,7 +136,6 @@ function BookDetail() {
                 <li><em>재고</em><span className="stock">{stock}권</span></li>
                 {returnDate && <li><em>반납 기한</em><span className="return-date">{returnDate}</span></li>}
               </ul>
-              <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
               <div className="util-box">
                 <div className="btn-wrap">
                   {loanStatus === "대출 가능" ? (
