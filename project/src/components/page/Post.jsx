@@ -1,17 +1,27 @@
-import React, { use, useState } from "react";
-import SubTop from "../module/SubTop";
+import React, { use, useContext, useState } from "react";
+import { GP } from "../module/Contexter";
 import $ from "jquery";
-
-import "../../css/page/post.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// css
+import "../../css/page/post.scss";
+// component
+import SubTop from "../module/SubTop";
+
 function Post({ gnb1, gnb2 }) {
+  // hook
+  const context = useContext(GP);
   const navigate = useNavigate();
   const postLocation = useLocation();
-  const user = postLocation.state.user;
-  console.log(user);
 
-  // 로그인 상태변수
+  // 로그인 정보
+  // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
+  const loginState = context.loginState.isLogin;
+  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
+  const user = loginState ? context.user : null;
+  // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
+  const userName = user !== null ? user.name : null;
+  console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
 
   const getContent = () => {
     const title = $("#title").val();
@@ -27,21 +37,21 @@ function Post({ gnb1, gnb2 }) {
     console.log(title, content);
   };
   const setArticle = (title, content) => {
+    const communityData = JSON.parse(localStorage.getItem("community_data"));
+    let temp = communityData.filter((v) => v.type === "freeboard");
     if (localStorage.community_data) {
       const communityData = JSON.parse(localStorage.getItem("community_data"));
-      const freeboardData = communityData
-        .filter((v) => v.type === "freeboard")
-        .sort((a, b) => (a.idx == b.idx ? -1 : a.idx < b.idx ? -1 : 1));
       const today = new Date();
       const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1 < 10 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate() + 1 < 10 ? "0" + (today.getDate() + 1) : today.getDate() + 1}`;
       communityData.push({
-        idx: freeboardData[freeboardData.length - 1].idx + 1,
+        idx: Math.max.apply(null,temp.map((v) => v.idx)) + 1,
         type: "freeboard",
         image: "",
         title: title,
-        user: user,
+        user: userName,
         content: content,
         date: formattedDate,
+        comment: [],
       });
       localStorage.setItem("community_data", JSON.stringify(communityData));
     }

@@ -55,7 +55,7 @@ const ScrollTop = () => {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-    console.log("라우터경로:", pathname);
+    // console.log("라우터경로:", pathname);
   }, [pathname]);
   return null;
 };

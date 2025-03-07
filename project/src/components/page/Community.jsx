@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { GP } from "../module/Contexter";
 
 // data
 import communityData from "../../js/data/community_data.json";
-import commentData from "../../js/data/article_comment_data.json";
 
 // css
 import "../../css/page/community.scss";
@@ -16,28 +16,34 @@ import SearchBox from "../module/SearchBox";
 if (!localStorage.community_data) {
   localStorage.setItem("community_data", JSON.stringify(communityData));
 }
-//   아이디 임시데이터 저장
-let user = { user: "Mike" };
-if (!sessionStorage.user) {
-  sessionStorage.setItem("user1", JSON.stringify(user));
-}
 function Community({ gnb1, gnb2, data }) {
+  // hook
+  const context = useContext(GP);
   const navigate = useNavigate();
+
+  // 로그인 정보
+  // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
+  const loginState = context.loginState.isLogin;
+  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
+  const user = loginState ? context.user : null;
+  // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
+  const userName = user !== null ? user.name : null;
+  console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
+
   // variables
   const searchOption = ["제목", "내용", "작성자"];
   const listData = JSON.parse(localStorage.getItem("community_data"))
     .filter((x) => x.type === data)
-    .sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
+    .sort((a, b) => (a.date == b.date ? 0 : a.date > b.date ? -1 : 1));
   // useState
   const [activeTab, setActiveTab] = useState(data);
-  // 로그인 상태변수
-  const [onUser, userStatus] = useState(false);
   // 검색 옵션
   const [selectOption, setSelectOption] = useState("제목");
   // 검색어 입력값
   const [searchInput, setSearchInput] = useState("");
   const [list, setList] = useState(listData);
   const [page, setPage] = useState(1);
+  console.log(list)
 
   // function
   const toggleListFn = (e) => {
@@ -64,25 +70,17 @@ function Community({ gnb1, gnb2, data }) {
     setList(listData.filter((x) => x.type === e).sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1)));
   };
   const goLogin = () => {
-    if (!onUser) {
-      alert("로그인이 필요합니다.");
-      window.location.href = "/login";
-    }
+    alert("로그인이 필요합니다.");
+    window.location.href = "/login";
   };
   // 레이아웃 렌더링
   useEffect(() => {
     setActiveTab(data);
-    window.scrollTo(0, 0);
     setBoardListFn(data);
+    window.scrollTo(0, 0);
   }, [useLocation()]);
   // 로그인 상태 확인
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("user1"));
-    if (user) {
-      userStatus(true);
-    } else userStatus(false);
-    console.log(onUser, user);
-  }, [onUser]);
+
   return (
     <>
       {/* <!-- sub-top s --> */}
@@ -158,7 +156,7 @@ function Community({ gnb1, gnb2, data }) {
                         onClick={(e) => {
                           e.preventDefault();
                           if (data === "freeboard" || data === "notice") {
-                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx,data:data } });
+                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx, data: data } });
                           }
                         }}
                       >
@@ -194,9 +192,8 @@ function Community({ gnb1, gnb2, data }) {
                 type="button"
                 className="write-btn"
                 onClick={() => {
-                  const user = JSON.parse(sessionStorage.getItem("user1"));
-                  if (!onUser) goLogin();
-                  else navigate(`/community/freeboard/post`, { state: { user: user.user } });
+                  if (!loginState) goLogin();
+                  else navigate(`/community/freeboard/post`);
                 }}
               >
                 글쓰기
