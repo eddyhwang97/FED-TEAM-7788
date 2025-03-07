@@ -19,7 +19,7 @@ function BookDetail() {
       setStock(book.stock);
     }
 
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser")); // Retrieve user data from sessionStorage
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser")); 
     if (user) {
       if (Array.isArray(user.iLoveIt)) {
         setIsFavorite(user.iLoveIt.includes(book.ISBN));
@@ -38,6 +38,7 @@ function BookDetail() {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
   }
 
+  // 도서 대출
   const handleLoan = () => {
     const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
@@ -60,13 +61,14 @@ function BookDetail() {
       const today = new Date();
       const dueDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split("T")[0];
       user.currentData.push({ isbn: book.ISBN, checkoutDate: new Date().toISOString().split("T")[0], dueDate });
-      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user data in sessionStorage
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); 
       setStock(stock - 1);
       setLoanStatus("대출 중");
       setReturnDate(dueDate);
     }
   };
 
+  // 도서 반납
   const handleReturn = () => {
     const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
@@ -79,13 +81,14 @@ function BookDetail() {
     if (window.confirm("정말 반납하시겠습니까?")) {
       user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
       user.bData.push(book.ISBN);
-      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user data in sessionStorage
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); 
       setStock(stock + 1);
       setLoanStatus("대출 가능");
       setReturnDate(null);
     }
   };
 
+  // 도서 찜
   const handleFavorite = () => {
     const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
@@ -109,12 +112,14 @@ function BookDetail() {
       alert("찜한 도서에 추가되었습니다.");
     }
 
-    sessionStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user data in sessionStorage
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
   };
 
   return (
     <>
+      {/* contents s */}
       <div className="contents">
+        {/* book-view-wrap s */}
         <div className="book-view-wrap">
           <div className="book-view">
             <div className="img-box">
@@ -158,8 +163,10 @@ function BookDetail() {
             </div>
           </div>
         </div>
+        {/* book-view-wrap e */}
         <BookComment />
       </div>
+      {/* contents e */}
     </>
   );
 }
