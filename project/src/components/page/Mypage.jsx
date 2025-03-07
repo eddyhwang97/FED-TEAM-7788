@@ -6,6 +6,11 @@ import hm from '../../css/page/hm.scss';
 
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [level, setLevel] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const [current, setCurrent] = useState(0);
+  const [total, setTotal] = useState(0);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -13,11 +18,44 @@ function Mypage({ gnb1, gnb2 }) {
     if(!loggedInUser){
       alert('로그인이 필요합니다.');
       navigate('/login');
+    } else {
+      const parsedUser = JSON.parse(loggedInUser);
+      setUser(parsedUser);
+      updateLevel(parsedUser.bData.length || 0)
     }
   },[navigate]);
 
+  // 레벨 계산 함수
+  const updateLevel = (booksRead) => {
+    let lvl = 1, needed = 0;
 
-  const [user, setUser] = useState(null);
+    if (booksRead >= 12){
+      lvl = 4;
+      needed = 0;
+    } else if (booksRead >= 6) {
+      lvl = 3;
+      needed = 6 - booksRead;
+    } else if (booksRead >= 3) {
+      lvl = 2;
+      needed = 3 - booksRead;
+    }
+    console.log(booksRead);
+
+    setLevel(lvl);
+    setCurrent(booksRead - getMinBooks(lvl) + 1);
+    setTotal(getMaxBooks(lvl) - getMinBooks(lvl) + 1);
+    setProgress(((booksRead - getMinBooks(lvl)) / (getMaxBooks(lvl) -getMinBooks(lvl)))*100);
+}
+  // 레벨 최소도서
+  const getMinBooks = (lvl) => {
+    return [0,3,6,12][lvl];
+  };
+
+  // 레벨 최대도서
+  const getMaxBooks = (lvl) => {
+    return [2,5,11,13][lvl];
+  }
+
 
   useEffect(() => {
     // 세션스토리지에서 사용자 정보 로딩
@@ -52,11 +90,11 @@ function Mypage({ gnb1, gnb2 }) {
                 <div className='next-level'>
                   <p>다음 레벨까지</p>
                   <div className='progress'>
-                    <span className='bar'></span>
+                    <span className='bar' style={{width:`${progress}%`}}></span>
                   </div>
                   <p className='left'>
-                    <span className='current'>1</span> /{' '}
-                    <span className='total'>3</span>
+                    <span className='current'>{current}</span> /{' '}
+                    <span className='total'>{total}</span>
                   </p>
                 </div>
               </div>
@@ -65,15 +103,15 @@ function Mypage({ gnb1, gnb2 }) {
               <div className='level-box'>
                 <div className='level'>
                   <img
-                    src='/img/sub/img-level1.svg'
-                    alt='레벨 1'
+                    src={`/img/sub/img-level${level}.svg`}
+                    alt={`레벨 ${level}`}
                     className='level-img'
                   />
                   <div className='level-txt'>
                     <p>
-                      LV.<span className='level-num'>1</span>
+                      LV.<span className='level-num'>{level}</span>
                     </p>
-                    <em>독서 뚜벅이</em>
+                    <em>{["독서 뚜벅이", "독서 러너", "독서 부릉이", "독서광 폭주열차"][level - 1]}</em>
                   </div>
                 </div>
                 <a href='#' className='more-btn'></a>

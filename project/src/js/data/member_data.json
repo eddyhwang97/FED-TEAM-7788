@@ -4,31 +4,6 @@
     "id": "010-1234-5678",
     "pw": "A1b!9xY2",
     "currentData": [
-      {
-        "isbn": "996133762",
-        "checkoutDate": "2025-03-05",
-        "dueDate": "2025-03-12"
-      },
-      {
-        "isbn": "9995046716",
-        "checkoutDate": "2025-03-06",
-        "dueDate": "2025-03-13"
-      },
-      {
-        "isbn": "9998561818",
-        "checkoutDate": "2025-03-07",
-        "dueDate": "2025-03-14"
-      },
-      {
-        "isbn": "9994241241",
-        "checkoutDate": "2025-03-08",
-        "dueDate": "2025-03-15"
-      },
-      {
-        "isbn": "9997134976",
-        "checkoutDate": "2025-03-09",
-        "dueDate": "2025-03-16"
-      }
     ],
     "bData": "",
     "iLoveIt": ""
