@@ -21,6 +21,7 @@ function Mypage({ gnb1, gnb2 }) {
   const [currentBook, setCurrentBook] = useState(0);
   const [finished, setFinished] = useState(0);
   const [pickedBooks, setPickedBooks] = useState([]);
+  const [profileImage, setProfileImage] = useState('');
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -36,7 +37,7 @@ function Mypage({ gnb1, gnb2 }) {
       // 찜 개수 업데이트
       if (parsedUser.iLoveIt) {
         setPicked(parsedUser.iLoveIt);
-        setCurrentBook(parsedUser.currentData);
+        setCurrentBook(parsedUser.currentData) ;
         setFinished(parsedUser.bData);
       }
     }
@@ -76,7 +77,8 @@ function Mypage({ gnb1, gnb2 }) {
     setCurrent(booksRead - getMinBooks(lvl));
     setTotal(getMaxBooks(lvl) - getMinBooks(lvl) + 1);
     setProgress(
-      ((booksRead - getMinBooks(lvl)) / (getMaxBooks(lvl) - getMinBooks(lvl))) *
+      ((booksRead - 1 - getMinBooks(lvl)) /
+        (getMaxBooks(lvl) - getMinBooks(lvl))) *
         100
     );
   };
@@ -90,6 +92,23 @@ function Mypage({ gnb1, gnb2 }) {
     return [0, 2, 5, 11, 30][lvl];
   };
 
+   // 프로필 이미지 선택 핸들러
+   const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+
+      // 로컬스토리지에 새로운 프로필 이미지 URL 저장
+      const loggedInUser = localStorage.getItem('member_data');
+      if (loggedInUser) {
+        const parsedUser = JSON.parse(loggedInUser);
+        parsedUser.profileImage = imageUrl; // 프로필 이미지 업데이트
+        localStorage.setItem('member_data', JSON.stringify(parsedUser)); // 세션스토리지 업데이트
+      }
+    }
+  };
+
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
@@ -99,8 +118,17 @@ function Mypage({ gnb1, gnb2 }) {
             <div className='profile-box'>
               <div className='profile-image'>
                 <img
-                  src='/img/sub/img-profile-temp.jpg'
-                  alt='임시 프로필 이미지'
+                  src={profileImage || '/img/sub/img-profile-temp.jpg'} // 선택한 이미지나 기본 이미지
+                  alt='프로필 이미지'
+                  onClick={() =>
+                    document.getElementById('profile-image-input').click()
+                  } // 이미지 클릭 시 파일 선택
+                />
+                <input
+                  type='file'
+                  id='profile-image-input'
+                  style={{ display: 'none' }}
+                  onChange={handleProfileImageChange}
                 />
               </div>
               <div className='user-info'>
@@ -181,7 +209,7 @@ function Mypage({ gnb1, gnb2 }) {
                       return foundBook ? (
                         <li key={book.isbn}>
                           <em className='book-name'>{foundBook.title}</em>
-                          <span className='date'>~{book.returnDate}</span>
+                          <span className='date'>~{book.dueDate}</span>
                         </li>
                       ) : null;
                     })
@@ -195,7 +223,7 @@ function Mypage({ gnb1, gnb2 }) {
                 <ul className='pick-list'>
                   {pickedBooks.length > 0 ? (
                     pickedBooks.map((book) => (
-                      <li key={book.isbn}>
+                      <li key={`${book.isbn}-${book.dueDate}`}>
                         <em className='book-name'>{book.title}</em>
                         <span className='label'>{book.genre}</span>
                       </li>
