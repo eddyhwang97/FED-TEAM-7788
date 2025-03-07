@@ -13,7 +13,7 @@ import "../../css/page/search.scss";
 import { useNavigate } from "react-router-dom";
 import { event } from "jquery";
 
-function Search({ gnb1, gnb2 }) {
+function BookSearch({ gnb1, gnb2 }) {
   const booksList = [...booksData];
   const searchOption = ["도서명", "저자명", "ISBN", "출판사", "장르"];
   const navigate = useNavigate();
@@ -131,4 +131,4 @@ function Search({ gnb1, gnb2 }) {
   );
 }
 
-export default Search;
+export default BookSearch;
