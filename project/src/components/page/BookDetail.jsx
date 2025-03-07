@@ -21,8 +21,17 @@ function BookDetail() {
 
     const members = JSON.parse(localStorage.getItem("member_data")) || [];
     const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
-    if (user && Array.isArray(user.iLoveIt)) {
-      setIsFavorite(user.iLoveIt.includes(book.ISBN));
+    if (user) {
+      if (Array.isArray(user.iLoveIt)) {
+        setIsFavorite(user.iLoveIt.includes(book.ISBN));
+      }
+      if (Array.isArray(user.currentData)) {
+        const loanedBook = user.currentData.find((b) => b.isbn === book.ISBN);
+        if (loanedBook) {
+          setLoanStatus("대출 중");
+          setReturnDate(loanedBook.dueDate);
+        }
+      }
     }
   }, [book]);
 
@@ -50,11 +59,13 @@ function BookDetail() {
     }
 
     if (window.confirm("이 책을 대출하시겠습니까?")) {
-      user.currentData.push({ isbn: book.ISBN, returnDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split("T")[0] });
+      const today = new Date();
+      const dueDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split("T")[0];
+      user.currentData.push({ isbn: book.ISBN, checkoutDate: new Date().toISOString().split("T")[0], dueDate });
       localStorage.setItem("member_data", JSON.stringify(members));
       setStock(stock - 1);
       setLoanStatus("대출 중");
-      setReturnDate(user.currentData.find(b => b.isbn === book.ISBN).returnDate);
+      setReturnDate(dueDate);
     }
   };
 
@@ -69,7 +80,7 @@ function BookDetail() {
     }
 
     if (window.confirm("정말 반납하시겠습니까?")) {
-      user.currentData = user.currentData.filter(b => b.isbn !== book.ISBN);
+      user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
       user.bData.push(book.ISBN);
       localStorage.setItem("member_data", JSON.stringify(members));
       setStock(stock + 1);
@@ -93,7 +104,7 @@ function BookDetail() {
     }
 
     if (user.iLoveIt.includes(book.ISBN)) {
-      user.iLoveIt = user.iLoveIt.filter(isbn => isbn !== book.ISBN);
+      user.iLoveIt = user.iLoveIt.filter((isbn) => isbn !== book.ISBN);
       setIsFavorite(false);
       alert("찜한 도서에서 제거되었습니다.");
     } else {
