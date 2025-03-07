@@ -9,22 +9,21 @@ import SubTop from "../module/SubTop";
 import "../../css/page/community.scss";
 import "../../css/page/article.scss";
 
-function Article({ gnb1, gnb2, data }) {
+function Article({ gnb1, gnb2 }) {
+  const { id } = useParams();
+
   const navigate = useNavigate();
   const articleLocation = useLocation();
   const user = articleLocation.state.user;
   const listIdx = articleLocation.state.listIdx;
-  const listData = JSON.parse(localStorage.getItem("community_data"))
-    .filter((x) => x.type === data)
-    .sort((a, b) => (a.date === b.date ? -1 : a.date > b.date ? -1 : 1));
-  const userName = JSON.parse(sessionStorage.getItem("user1")).user;
-  const commentList = JSON.parse(localStorage.getItem("comment_data"));
-  const { id } = useParams();
+  const data = articleLocation.state.data;
+  // 데이터
   const typeBranch = gnb2 === "공지사항" ? "notice" : "freeboard";
+  const userName = JSON.parse(sessionStorage.getItem("user1")).user;
   const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
+  const commentList = articleData.comment.sort((a, b) => (a.date == b.date ? -1 : a.date > b.date ? -1 : 1));
 
-  console.log(listData)
   // 로그인 상태변수
   const [onUser, userStatus] = useState(false);
   const [comment, setComment] = useState(commentList);
@@ -59,35 +58,45 @@ function Article({ gnb1, gnb2, data }) {
   const postData = (commentText, userName) => {
     let today = new Date();
     const formattedDate = `
-    ${today.getFullYear()}-${today.getMonth() + 1 < 10 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate() + 1 < 10 ? "0" + (today.getDate() + 1) : today.getDate() + 1}`;
+    ${today.getFullYear()}-${today.getMonth() + 1 < 10 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate() + 1 < 10 ? "0" + (today.getDate() + 1) : today.getDate() + 1}`.trim();
     postComment(userName, formattedDate, commentText);
   };
   const postComment = (userName, formattedDate, commentText) => {
-    if (localStorage.comment_data) {
+    if (commentList.length > 0) {
+      const sortComment = commentList.sort((a, b) => (a.cNum == b.cNum ? 0 : a.cNum < b.cNum ? -1 : 1));
       commentList.push({
-        idx: commentList[commentList.length - 1].idx + 1,
-        user: userName,
-        image: "",
+        cNum: sortComment[sortComment.length - 1].cNum + 1,
+        name: userName,
         date: formattedDate,
         comment: commentText,
       });
-      localStorage.setItem("comment_data", JSON.stringify(commentList));
-      setComment(commentList);
-      $("#text-comment").val("");
+    } else {
+      commentList.push({
+        cNum: 1,
+        name: userName,
+        date: formattedDate,
+        comment: commentText,
+      });
     }
+    setComment(commentList);
+    localStorage.setItem("community_data", JSON.stringify(communityData));
+    $("#text-comment").val("");
   };
   const deleteArticle = () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      const updatedArticle =  listData.filter(v=>v.idx !==listIdx)
-     localStorage.setItem("community_data",JSON.stringify(updatedArticle))
+      const updatedArticle = commentList.filter((v) => v.idx !== listIdx);
+      localStorage.setItem("community_data", JSON.stringify(updatedArticle));
       navigate(`/community/${data}`);
     }
   };
-  const deleteComment = (idx) => {
-    console.log("delete", idx);
-    const updatedComments = commentList.filter((comment) => comment.idx !== idx);
-    setComment(updatedComments);
-    localStorage.setItem("comment_data", JSON.stringify(updatedComments));
+  const deleteComment = (cNum, data) => {
+    let getCommentData = JSON.parse(localStorage.getItem("community_data"));
+    let filterCommentData = getCommentData.find((v) => v.type === data && v.idx === listIdx).comment;
+    let updateComment = filterCommentData.filter((v) => v.cNum !== cNum);
+    getCommentData.find((v) => v.type === data && v.idx === listIdx).comment = updateComment;
+    setComment(updateComment);
+    console.log(getCommentData);
+    localStorage.setItem("community_data", JSON.stringify(getCommentData));
   };
   // useEffect
   useEffect(() => {
@@ -119,7 +128,7 @@ function Article({ gnb1, gnb2, data }) {
                     type="button"
                     className="delete-button"
                     onClick={() => {
-                      deleteArticle()
+                      deleteArticle();
                     }}
                   >
                     삭제
@@ -140,21 +149,21 @@ function Article({ gnb1, gnb2, data }) {
               <h4>댓글</h4>
               <ul className="comment-list">
                 {comment.map((v) => (
-                  <li className="comment-item" key={v.idx}>
+                  <li className="comment-item" key={v.cNum}>
                     <div className="comment-top">
-                      <p className="comment-writer">{v.user}</p>
+                      <p className="comment-writer">{v.name}</p>
                       <span className="comment-date">{v.date}</span>
                     </div>
                     <div className="comment-content">
                       <p>{v.comment}</p>
                     </div>
-                    {v.user === userName && (
+                    {v.name === userName && (
                       <button
                         type="button"
                         className="delete-button"
                         onClick={() => {
                           if (window.confirm("삭제하시겠습니까?")) {
-                            deleteComment(v.idx);
+                            deleteComment(v.cNum, data);
                             alert("삭제제되었습니다.");
                           } else return;
                         }}

@@ -19,10 +19,18 @@ function BookDetail() {
       setStock(book.stock);
     }
 
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
-    if (user && Array.isArray(user.iLoveIt)) {
-      setIsFavorite(user.iLoveIt.includes(book.ISBN));
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser")); 
+    if (user) {
+      if (Array.isArray(user.iLoveIt)) {
+        setIsFavorite(user.iLoveIt.includes(book.ISBN));
+      }
+      if (Array.isArray(user.currentData)) {
+        const loanedBook = user.currentData.find((b) => b.isbn === book.ISBN);
+        if (loanedBook) {
+          setLoanStatus("대출 중");
+          setReturnDate(loanedBook.dueDate);
+        }
+      }
     }
   }, [book]);
 
@@ -30,9 +38,9 @@ function BookDetail() {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
   }
 
+  // 도서 대출
   const handleLoan = () => {
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -50,17 +58,19 @@ function BookDetail() {
     }
 
     if (window.confirm("이 책을 대출하시겠습니까?")) {
-      user.currentData.push({ isbn: book.ISBN, returnDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split("T")[0] });
-      localStorage.setItem("member_data", JSON.stringify(members));
+      const today = new Date();
+      const dueDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split("T")[0];
+      user.currentData.push({ isbn: book.ISBN, checkoutDate: new Date().toISOString().split("T")[0], dueDate });
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); 
       setStock(stock - 1);
       setLoanStatus("대출 중");
-      setReturnDate(user.currentData.find(b => b.isbn === book.ISBN).returnDate);
+      setReturnDate(dueDate);
     }
   };
 
+  // 도서 반납
   const handleReturn = () => {
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) return;
 
@@ -69,18 +79,18 @@ function BookDetail() {
     }
 
     if (window.confirm("정말 반납하시겠습니까?")) {
-      user.currentData = user.currentData.filter(b => b.isbn !== book.ISBN);
+      user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
       user.bData.push(book.ISBN);
-      localStorage.setItem("member_data", JSON.stringify(members));
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); 
       setStock(stock + 1);
       setLoanStatus("대출 가능");
       setReturnDate(null);
     }
   };
 
+  // 도서 찜
   const handleFavorite = () => {
-    const members = JSON.parse(localStorage.getItem("member_data")) || [];
-    const user = members.find((m) => m.id === JSON.parse(sessionStorage.getItem("loggedInUser"))?.id);
+    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -93,7 +103,7 @@ function BookDetail() {
     }
 
     if (user.iLoveIt.includes(book.ISBN)) {
-      user.iLoveIt = user.iLoveIt.filter(isbn => isbn !== book.ISBN);
+      user.iLoveIt = user.iLoveIt.filter((isbn) => isbn !== book.ISBN);
       setIsFavorite(false);
       alert("찜한 도서에서 제거되었습니다.");
     } else {
@@ -102,12 +112,14 @@ function BookDetail() {
       alert("찜한 도서에 추가되었습니다.");
     }
 
-    localStorage.setItem("member_data", JSON.stringify(members));
+    sessionStorage.setItem("loggedInUser", JSON.stringify(user));
   };
 
   return (
     <>
+      {/* contents s */}
       <div className="contents">
+        {/* book-view-wrap s */}
         <div className="book-view-wrap">
           <div className="book-view">
             <div className="img-box">
@@ -129,7 +141,6 @@ function BookDetail() {
                 <li><em>재고</em><span className="stock">{stock}권</span></li>
                 {returnDate && <li><em>반납 기한</em><span className="return-date">{returnDate}</span></li>}
               </ul>
-              <p className="book-text">{book.info || "책 설명이 없습니다."}</p>
               <div className="util-box">
                 <div className="btn-wrap">
                   {loanStatus === "대출 가능" ? (
@@ -152,8 +163,10 @@ function BookDetail() {
             </div>
           </div>
         </div>
+        {/* book-view-wrap e */}
         <BookComment />
       </div>
+      {/* contents e */}
     </>
   );
 }
