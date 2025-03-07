@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SubTop from '../module/SubTop';
 import hm from '../../css/page/hm.scss';
+import book_data from '../../js/data/book_data.json';
+
+// 로컬스토리지 회원 데이터 저장 (초기 1회)
+if (!localStorage.getItem('book_data')) {
+  localStorage.setItem('book_data', JSON.stringify(book_data));
+}
 
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
@@ -11,6 +17,9 @@ function Mypage({ gnb1, gnb2 }) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
+  const [picked, setPicked] = useState(0);
+  const [currentBook, setCurrentBook] = useState(0);
+  const [finished, setFinished] = useState(0);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -21,7 +30,14 @@ function Mypage({ gnb1, gnb2 }) {
     } else {
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser);
-      updateLevel(parsedUser.bData.length || 0)
+      updateLevel(parsedUser.bData.length || 0); // 유저 레벨 업데이트
+
+      // 찜 개수 업데이트
+      if(parsedUser.iLoveIt){
+        setPicked(parsedUser.iLoveIt);
+        setCurrentBook(parsedUser.currentData);
+        setFinished(parsedUser.bData);
+      }
     }
   },[navigate]);
 
@@ -39,33 +55,22 @@ function Mypage({ gnb1, gnb2 }) {
       lvl = 2;
       needed = 3 - booksRead;
     }
-    console.log(booksRead);
 
     setLevel(lvl);
-    setCurrent(booksRead - getMinBooks(lvl) + 1);
+    setCurrent(booksRead - getMinBooks(lvl) );
     setTotal(getMaxBooks(lvl) - getMinBooks(lvl) + 1);
     setProgress(((booksRead - getMinBooks(lvl)) / (getMaxBooks(lvl) -getMinBooks(lvl)))*100);
 }
   // 레벨 최소도서
   const getMinBooks = (lvl) => {
-    return [0,3,6,12][lvl];
+    return [0,0,3,6,12][lvl];
   };
 
   // 레벨 최대도서
   const getMaxBooks = (lvl) => {
-    return [2,5,11,13][lvl];
+    return [0,2,5,11,30][lvl];
   }
 
-
-  useEffect(() => {
-    // 세션스토리지에서 사용자 정보 로딩
-    const loggedInUser = sessionStorage.getItem('loggedInUser');
-
-    if (loggedInUser){
-      // 데이터가 있는 경우 JSON 파싱 후 user 상태로 설정
-      setUser(JSON.parse(loggedInUser));
-    }
-  },[]);
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
@@ -119,15 +124,15 @@ function Mypage({ gnb1, gnb2 }) {
               <div className='my-book'>
                 <div className='book-box borrow'>
                   <p>대출 중</p>
-                  <span className='borrow-num'>3</span>
+                  <span className='borrow-num'>{currentBook.length}</span>
                 </div>
                 <div className='book-box picked'>
                   <p>찜</p>
-                  <span className='picked-num'>20</span>
+                  <span className='picked-num'>{picked.length}</span>
                 </div>
                 <div className='book-box read'>
                   <p>다 읽었어요</p>
-                  <span className='read-num'>22</span>
+                  <span className='read-num'>{finished.length}</span>
                 </div>
               </div>
             </div>
