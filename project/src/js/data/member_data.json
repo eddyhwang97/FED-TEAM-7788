@@ -3,8 +3,7 @@
     "name": "심민수",
     "id": "010-1234-5678",
     "pw": "A1b!9xY2",
-    "currentData": [
-    ],
+    "currentData": [],
     "bData": "",
     "iLoveIt": ""
   },
@@ -57,7 +56,11 @@
         "checkoutDate": "2025-03-10",
         "dueDate": "2025-03-17"
       },
-      { "isbn": "9988045077" }
+      {
+        "isbn": "9988045077",
+        "checkoutDate": "2025-03-10",
+        "dueDate": "2025-03-17"
+      }
     ],
     "bData": "",
     "iLoveIt": ""
@@ -591,7 +594,7 @@
     "name": "손민영",
     "id": "010-1098-6543",
     "pw": "8L2p#X!t",
-    "currentData"   : [
+    "currentData": [
       {
         "isbn": "9966001562",
         "checkoutDate": "2025-03-17",
@@ -615,7 +618,7 @@
       {
         "isbn": "9965684442",
         "checkoutDate": "2025-03-21",
-        "dueDate": "2025-03-28" 
+        "dueDate": "2025-03-28"
       }
     ],
     "bData": "",

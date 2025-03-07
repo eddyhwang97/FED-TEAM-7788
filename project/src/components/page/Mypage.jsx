@@ -5,7 +5,7 @@ import SubTop from '../module/SubTop';
 import hm from '../../css/page/hm.scss';
 import book_data from '../../js/data/book_data.json';
 
-// 로컬스토리지 회원 데이터 저장 (초기 1회)
+// 로컬스토리지 도서 데이터 저장 (초기 1회)
 if (!localStorage.getItem('book_data')) {
   localStorage.setItem('book_data', JSON.stringify(book_data));
 }
@@ -20,6 +20,7 @@ function Mypage({ gnb1, gnb2 }) {
   const [picked, setPicked] = useState(0);
   const [currentBook, setCurrentBook] = useState(0);
   const [finished, setFinished] = useState(0);
+  const [pickedBooks, setPickedBooks] = useState([]);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -40,6 +41,16 @@ function Mypage({ gnb1, gnb2 }) {
       }
     }
   },[navigate]);
+
+  // picked의 isbn , book_data의 isbn 비교 후 책 정보 저장
+  useEffect(()=>{
+    if (picked.length > 0){
+      const books= picked
+      .map(isbn => book_data.find(book => book.ISBN.toLocaleLowerCase() == isbn.toLocaleLowerCase())) // 일치여부
+      .filter(book => book !== undefined); // 존재하는 책만 필터링
+      setPickedBooks(books); // 찾은 책 목록을 상태로 저장
+    }
+  },[picked]);
 
   // 레벨 계산 함수
   const updateLevel = (booksRead) => {
@@ -142,61 +153,34 @@ function Mypage({ gnb1, gnb2 }) {
               <li className='borrow'>
                 <p className='section-tit'>대출 중이에요</p>
                 <ul className='borrow-list'>
-                  <li>
-                    <em className='book-name'>거부기의 저주</em>
-                    <span className='date'>~2025.02.24</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>거부기의 저주</em>
-                    <span className='date'>~2025.02.24</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>
-                      거부기의 저주 거부기의 저주 거부기의 저주
-                    </em>
-                    <span className='date'>~2025.02.24</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>
-                      거부기의 저주 거부기의 저주 거부기의 저주
-                    </em>
-                    <span className='date'>~2025.02.24</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>
-                      거부기의 저주 거부기의 저주 거부기의 저주
-                    </em>
-                    <span className='date'>~2025.02.24</span>
-                  </li>
+                {currentBook.length > 0 ? (
+    currentBook.map((book) => {
+      const foundBook = book_data.find((b) => b.ISBN.toLowerCase() === book.isbn.toLowerCase());
+      return foundBook ? (
+        <li key={book.isbn}>
+          <em className='book-name'>{foundBook.title}</em>
+          <span className='date'>~{book.dueDate}</span>
+        </li>
+      ) : null;
+    })
+  ) : (
+    <li>대출한 책이 없습니다.</li>
+  )}
                 </ul>
               </li>
               <li className='pick'>
                 <p className='section-tit'>마음에 들어요</p>
                 <ul className='pick-list'>
-                  <li>
-                    <em className='book-name'>거부기의 저주</em>
-                    <span className='label'>인문사회</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>거부기의 저주</em>
-                    <span className='label'>문학</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>거부기의 저주</em>
-                    <span className='label'>문학</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>거부기의 저주</em>
-                    <span className='label'>문학</span>
-                  </li>
-                  <li>
-                    <em className='book-name'>
-                      거부기의 저주거부기의 저주거부기의 저주거부기의
-                      저주거부기의 저주거부기의 저주거부기의 저주거부기의
-                      저주거부기의 저주
-                    </em>
-                    <span className='label'>문학</span>
-                  </li>
+                  {pickedBooks.length>0?(
+                    pickedBooks.map(book =>(
+                      <li key={book.isbn}>
+                        <em className='book-name'>{book.title}</em>
+                        <span className='label'>{book.genre}</span>
+                      </li>
+                    ))
+                  ):(
+                    <li>찜한 책이 없습니다.</li>
+                  )}
                 </ul>
               </li>
             </ul>
