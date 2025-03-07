@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBox from "../module/SearchBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faChevronRight} from"@fortawesome/free-solid-svg-icons" 
+import { useLocation, useParams } from "react-router-dom";
 
 function TotalSearch() {
+    const location = useLocation();
+    const navigateSearchInput = location.state.navigateSearchInput;
+    const {results} = useParams();
+
+    const searchOption = ["통합검색"]
+    const [searchInput, setSearchInput] = useState(navigateSearchInput);
+
+    console.log(searchInput, results);
+    
   return (
     <>
       <div className="contents">
-        <SearchBox />
+        <SearchBox searchOption={searchOption} searchInput={searchInput} setSearchInput={setSearchInput}/>
         <div className="search-result">
           <section className="result-section">
             <h3 className="category-tit">도서</h3>
