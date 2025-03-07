@@ -2,12 +2,10 @@
 import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
 
-function SearchBox({ searchOption, selectOption,searchInput, setSelectOption,setSearchInput, handleSearchFn }) {
+function SearchBox({ searchOption, selectOption, searchInput, setSelectOption, setSearchInput, handleSearchFn }) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
-
-  
 
   return (
     <div className="search-box-wrap">
