@@ -1,11 +1,14 @@
 // SearchBox 컴포넌트 - SearchBox.jsx
 import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
+import { useNavigate } from "react-router-dom";
 
-function SearchBox({ searchOption, selectOption, searchInput, setSelectOption, setSearchInput, handleSearchFn }) {
+function SearchBox({ searchOption, selectOption,filterDataFn, searchInput, setSelectOption, setSearchInput, handleSearchFn,navigateSearchInput }) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
+
+  const navigate = useNavigate();
 
   return (
     <div className="search-box-wrap">
@@ -28,11 +31,13 @@ function SearchBox({ searchOption, selectOption, searchInput, setSelectOption, s
           onKeyUp={(e) => {
             if (e.key === "Enter") {
               handleSearchFn(selectOption);
+              filterDataFn(e.target.value);
+              navigate(`/totalsearch/:${e.target.value}`,{state:{navigateSearchInput:e.target.value}})
             }
           }}
           type="text"
           className="search-keywords"
-          placeholder={searchInput}
+          placeholder={navigateSearchInput}
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}
