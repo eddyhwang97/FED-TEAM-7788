@@ -72,7 +72,13 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
             </h1>
             <Gnb gnb={gnb} setGnb={setGnb} setSubTop={setSubTop} />
             <div className="header-util">
-              <button type="button" className="total-search-btn" onClick={() => {$('#mainSearchText').focus()}}>
+              <button
+                type="button"
+                className="total-search-btn"
+                onClick={() => {
+                  $("#mainSearchText").focus();
+                }}
+              >
                 <span className="blind">통합검색 버튼</span>
               </button>
               <button type="button" className="search-close-btn">
@@ -90,7 +96,7 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
         </div>
         <div className="search-wrap">
           <div className="search-form">
-            <form action={() => navigate("totalsearch/:results")}>
+            <form action={() => navigate(`totalsearch/:${searchInput}`, { state: { navigateSearchInput: searchInput } })}>
               <fieldset>
                 <legend className="blind">도서 통합검색 폼</legend>
                 <input
