@@ -1,15 +1,15 @@
 // SearchBox 컴포넌트 - SearchBox.jsx
 import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function SearchBox({ searchOption, selectOption,filterDataFn, searchInput, setSelectOption, setSearchInput, handleSearchFn,navigateSearchInput }) {
+function SearchBox({ searchOption, selectOption,filterDataFn, setSelectOption, setSearchInput, handleSearchFn,navigateSearchInput }) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
+  const location = useLocation();
 
   const navigate = useNavigate();
-
   return (
     <div className="search-box-wrap">
       <form action="" method="get"></form>

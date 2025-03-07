@@ -41,21 +41,22 @@ function TotalSearch() {
       setfreeboardList([]);
       setfaqList([]);
     } else {
-      setbookList(bookData.filter((book) => book.title.toLowerCase().includes(e.toLowerCase())));
-      setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().includes(e.toLowerCase())));
-      setfreeboardList(freeboardData.filter((freeboard) => freeboard.title.toLowerCase().includes(e.toLowerCase())));
-      setfaqList(faqData.filter((faq) => faq.title.toLowerCase().includes(e.toLowerCase())));
+      setbookList(bookData.filter((book) => book.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
+      setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
+      setfreeboardList(freeboardData.filter((freeboard) => freeboard.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
+      setfaqList(faqData.filter((faq) => faq.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
     }
   };
 
   useEffect(() => {
     filterDataFn(navigateSearchInput)
-  },[location])
+   
+  },[navigate])
 
   return (
     <>
       <div className="contents">
-        <SearchBox searchOption={searchOption} navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} filterDataFn={filterDataFn} />
+        <SearchBox searchOption={searchOption}  navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} filterDataFn={filterDataFn} />
         <div className="search-result">
           <section className="result-section">
             <h3 className="category-tit">도서</h3>
