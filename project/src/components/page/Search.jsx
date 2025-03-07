@@ -50,15 +50,15 @@ function Search({ gnb1, gnb2 }) {
       setList(booksList);
     }
     console.log(list);
-    searchNotice();
+    
   };
-  const searchNotice = (() => {
-    if (list.length > 1) {
-      <span className="null-alert">{list.length}개의 검색결과가 있습니다.</span>;
-    } else {
-      <span className="null-alert">검색결과가 없습니다.</span>;
-    }
-  },[handleSearchFn]);
+  // const SearchNotice = (() => {
+  //   if (list.length > 1) {
+  //     <span className="null-alert">{list.length}개의 검색결과가 있습니다.</span>;
+  //   } else {
+  //     <span className="null-alert">검색결과가 없습니다.</span>;
+  //   }
+  // },[handleSearchFn]);
   const loadingFn = () => {
     if (inView) {
       // 화면에 보이는 경우 실행할 로직
@@ -81,7 +81,7 @@ function Search({ gnb1, gnb2 }) {
         {/* 도서 리스트 */}
         <SearchBox searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
         <div className="book-list-wrap">
-          <searchNotice/>
+          {/* <SearchNotice/> */}
           <ul className="book-list">
             {list.map(
               (book, i) =>
