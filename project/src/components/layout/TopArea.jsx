@@ -6,10 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import Gnb from "../module/Gnb";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
+import { useState } from "react";
+import $ from "jquery";
 
 export default function TopArea({ gnb, setGnb, setSubTop }) {
   const navigate = useNavigate();
-  const loggedInUser = sessionStorage.getItem('loggedInUser');
+  const loggedInUser = sessionStorage.getItem("loggedInUser");
+
+  const [searchInput, setSearchInput] = useState("검색어를 입력해주세요!");
 
   // 로그아웃 처리 함수
   const handleLogout = () => {
@@ -41,7 +45,7 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
       <header className="header">
         <div className="header-top">
           <ul className="link-list">
-           {loggedInUser && (
+            {loggedInUser && (
               <li>
                 <button type="button" onClick={handleLogout} className="icon-logout">
                   로그아웃
@@ -52,16 +56,12 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
             {/* 필터링된 메뉴 리스트 출력 */}
             {filteredMenu.map((v, i) => (
               <li key={i}>
-                <button
-                  type="button"
-                  onClick={() => handleLoginLogoutClick(v)}
-                  className={"icon" + v.class}
-                >
+                <button type="button" onClick={() => handleLoginLogoutClick(v)} className={"icon" + v.class}>
                   {v.txt}
                 </button>
               </li>
             ))}
-        </ul>
+          </ul>
         </div>
         <div className="inner-header-wrap">
           <div className="inner-header">
@@ -70,9 +70,9 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
                 <img src="../img/common/logo-temp.svg" alt="로고" />
               </Link>
             </h1>
-            <Gnb gnb={gnb} setGnb={setGnb} setSubTop={setSubTop}/>
+            <Gnb gnb={gnb} setGnb={setGnb} setSubTop={setSubTop} />
             <div className="header-util">
-              <button type="button" className="total-search-btn">
+              <button type="button" className="total-search-btn" onClick={() => {$('#mainSearchText').focus()}}>
                 <span className="blind">통합검색 버튼</span>
               </button>
               <button type="button" className="search-close-btn">
@@ -90,10 +90,20 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
         </div>
         <div className="search-wrap">
           <div className="search-form">
-            <form action="search.php">
+            <form action={() => navigate("totalsearch/:results")}>
               <fieldset>
                 <legend className="blind">도서 통합검색 폼</legend>
-                <input type="text" id="mainSearchText" name="searchTxt" title="검색어" placeholder="찾으시는 도서가 있나요?" />
+                <input
+                  type="text"
+                  id="mainSearchText"
+                  name="searchTxt"
+                  title="검색어"
+                  placeholder={searchInput}
+                  onChange={(e) => {
+                    setSearchInput(e.target.value);
+                    console.log(searchInput);
+                  }}
+                />
                 <button type="button" className="total-search-btn"></button>
               </fieldset>
             </form>
