@@ -259,6 +259,15 @@ const getGenreByISBN = (isbn) => {
           const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
           return genreCount[genre] >= 3;
         });
+
+        if (bData.length >= 5){
+          unlockedBadges.push({
+            badgeTitle: "칙칙북북 킹",
+            badgeDescription: "누적 대출도서 5권 달성",
+            badgeSrc: "/img/sub/img-badge-king.png",
+            badgeAlt: "누적 대출도서 5권 달성 뱃지"
+          })
+        }
         setUnlockedBadges(unlockedBadges);  // 활성화된 뱃지 업데이트
       }
     }
@@ -396,7 +405,7 @@ const getGenreByISBN = (isbn) => {
       unlockedBadges.map((badge, index) => (
         <li key={index}>
           <div className='img-box'>
-            <img src={badge.badgeSrc || '/img/sub/default-badge.png'} alt='배지' />
+            <img src={badge.badgeSrc || '/img/sub/default-badge.png'} alt={badge.badgeAlt} />
           </div>
           <div className='text-box'>
             <p>{badge.badgeTitle}</p>
