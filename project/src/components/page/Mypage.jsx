@@ -173,6 +173,25 @@ function Mypage({ gnb1, gnb2 }) {
   // 뱃지 시스템 시작 // 
   const badges = badgeData;
 
+  // ISBN 장르추출 //
+
+const getGenreByISBN = (isbn) => {
+  const prefix = isbn.toString().slice(0, 3);  // ISBN 앞 3자리 추출
+
+  switch (prefix) {
+    case '996':
+      return '문학';
+    case '997':
+      return '인문사회과학';
+    case '998':
+      return '예술';
+    case '999':
+      return '매거진';
+    default:
+      return null;  // 장르를 찾을 수 없으면 null 반환
+  }
+};
+
   useEffect(() => {
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
     
@@ -192,11 +211,13 @@ function Mypage({ gnb1, gnb2 }) {
         // ISBN을 통해 카테고리 추출 후 카운트
         bData.forEach(book => {
           const genre = getGenreByISBN(book);  // ISBN을 통해 카테고리 추출
-          if (genre) {
+          if (genre && genreCount.hasOwnProperty(genre)) {
             genreCount[genre]++;
           }
         });
-  
+
+        console.log(genreCount);
+
         // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
         const unlockedBadges = badgeData.filter(badge => {
           const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
@@ -238,7 +259,6 @@ function Mypage({ gnb1, gnb2 }) {
           const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
           return genreCount[genre] >= 3;
         });
-  
         setUnlockedBadges(unlockedBadges);  // 활성화된 뱃지 업데이트
       }
     }
@@ -372,51 +392,21 @@ function Mypage({ gnb1, gnb2 }) {
           </div>
           <div className='inner-section badge-wrap'>
             <ul className='badge-list'>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-996-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-997-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-998-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-999-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-king.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
+            {unlockedBadges.length > 0 ? (
+      unlockedBadges.map((badge, index) => (
+        <li key={index}>
+          <div className='img-box'>
+            <img src={badge.badgeSrc || '/img/sub/default-badge.png'} alt='배지' />
+          </div>
+          <div className='text-box'>
+            <p>{badge.badgeTitle}</p>
+            <span>{badge.badgeDescription}</span>
+          </div>
+        </li>
+      ))
+    ) : (
+      <li>획득한 배지가 없습니다.</li>
+    )}
             </ul>
           </div>
         </div>
