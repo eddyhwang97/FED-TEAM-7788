@@ -27,8 +27,10 @@ function Monthly({ gnb1, gnb2 }) {
             <Swiper
               loop={true}
               spaceBetween={20}
+              slidesPerView={1.5}
+              centeredSlides={true}
               breakpoints={{
-                500: { slidesPerView: 1.5, centeredSlides: true },
+                500: { slidesPerView: 3, centeredSlides: true },
                 768: { slidesPerView: 3, centeredSlides: true },
                 1024: { slidesPerView: 5, centeredSlides: true },
               }}
@@ -51,16 +53,19 @@ function Monthly({ gnb1, gnb2 }) {
             </Swiper>
           </div>
         </div>
-        <div className="book-info">
+        <div className="book-wrap">
           <div className="tit">{selData.bName}</div>
-          <div className="author">{selData.bAuthor}</div>
-          <div className="sub-info">{selData.bDescription}</div>
-          <div className="borrow">
-            <ul>
-              <li>
-                <a href="#">{selData.bStatus}</a>
-              </li>
-            </ul>
+          <div className="info-wrap">
+            <div className="left">
+              <div className="sub-tit">도서 상세정보</div>
+              <div className="author">저자 : {selData.bAuthor}</div>
+              <div className="publ">출판사 : {selData.bPublisher}</div>
+              <div className="genre">장르 : {selData.bGenre}</div>
+            </div>
+            <div className="right">
+              <div className="sub-tit">책소개</div>
+              <div className="sub-info">{selData.bDescription}</div>
+            </div>
           </div>
         </div>
       </div>

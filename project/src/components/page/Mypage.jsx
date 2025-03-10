@@ -21,11 +21,12 @@ function Mypage({ gnb1, gnb2 }) {
   const [currentBook, setCurrentBook] = useState(0);
   const [finished, setFinished] = useState(0);
   const [pickedBooks, setPickedBooks] = useState([]);
+  const [profileImage, setProfileImage] = useState('');
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
-    if(!loggedInUser){
+    if (!loggedInUser) {
       alert('로그인이 필요합니다.');
       navigate('/login');
     } else {
@@ -34,29 +35,34 @@ function Mypage({ gnb1, gnb2 }) {
       updateLevel(parsedUser.bData.length || 0); // 유저 레벨 업데이트
 
       // 찜 개수 업데이트
-      if(parsedUser.iLoveIt){
+      if (parsedUser.iLoveIt) {
         setPicked(parsedUser.iLoveIt);
-        setCurrentBook(parsedUser.currentData);
+        setCurrentBook(parsedUser.currentData) ;
         setFinished(parsedUser.bData);
       }
     }
-  },[navigate]);
+  }, [navigate]);
 
   // picked의 isbn , book_data의 isbn 비교 후 책 정보 저장
-  useEffect(()=>{
-    if (picked.length > 0){
-      const books= picked
-      .map(isbn => book_data.find(book => book.ISBN.toLocaleLowerCase() == isbn.toLocaleLowerCase())) // 일치여부
-      .filter(book => book !== undefined); // 존재하는 책만 필터링
+  useEffect(() => {
+    if (picked.length > 0) {
+      const books = picked
+        .map((isbn) =>
+          book_data.find(
+            (book) => book.ISBN.toLocaleLowerCase() == isbn.toLocaleLowerCase()
+          )
+        ) // 일치여부
+        .filter((book) => book !== undefined); // 존재하는 책만 필터링
       setPickedBooks(books); // 찾은 책 목록을 상태로 저장
     }
-  },[picked]);
+  }, [picked]);
 
   // 레벨 계산 함수
   const updateLevel = (booksRead) => {
-    let lvl = 1, needed = 0;
+    let lvl = 1,
+      needed = 0;
 
-    if (booksRead >= 12){
+    if (booksRead >= 12) {
       lvl = 4;
       needed = 0;
     } else if (booksRead >= 6) {
@@ -68,19 +74,40 @@ function Mypage({ gnb1, gnb2 }) {
     }
 
     setLevel(lvl);
-    setCurrent(booksRead - getMinBooks(lvl) );
+    setCurrent(booksRead - getMinBooks(lvl));
     setTotal(getMaxBooks(lvl) - getMinBooks(lvl) + 1);
-    setProgress(((booksRead - getMinBooks(lvl)) / (getMaxBooks(lvl) -getMinBooks(lvl)))*100);
-}
+    setProgress(
+      ((booksRead - 1 - getMinBooks(lvl)) /
+        (getMaxBooks(lvl) - getMinBooks(lvl))) *
+        100
+    );
+  };
   // 레벨 최소도서
   const getMinBooks = (lvl) => {
-    return [0,0,3,6,12][lvl];
+    return [0, 0, 3, 6, 12][lvl];
   };
 
   // 레벨 최대도서
   const getMaxBooks = (lvl) => {
-    return [0,2,5,11,30][lvl];
-  }
+    return [0, 2, 5, 11, 30][lvl];
+  };
+
+   // 프로필 이미지 선택 핸들러
+   const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+
+      // 로컬스토리지에 새로운 프로필 이미지 URL 저장
+      const loggedInUser = localStorage.getItem('member_data');
+      if (loggedInUser) {
+        const parsedUser = JSON.parse(loggedInUser);
+        parsedUser.profileImage = imageUrl; // 프로필 이미지 업데이트
+        localStorage.setItem('member_data', JSON.stringify(parsedUser)); // 세션스토리지 업데이트
+      }
+    }
+  };
 
   return (
     <>
@@ -91,8 +118,17 @@ function Mypage({ gnb1, gnb2 }) {
             <div className='profile-box'>
               <div className='profile-image'>
                 <img
-                  src='/img/sub/img-profile-temp.jpg'
-                  alt='임시 프로필 이미지'
+                  src={profileImage || '/img/sub/img-profile-temp.jpg'} // 선택한 이미지나 기본 이미지
+                  alt='프로필 이미지'
+                  onClick={() =>
+                    document.getElementById('profile-image-input').click()
+                  } // 이미지 클릭 시 파일 선택
+                />
+                <input
+                  type='file'
+                  id='profile-image-input'
+                  style={{ display: 'none' }}
+                  onChange={handleProfileImageChange}
                 />
               </div>
               <div className='user-info'>
@@ -106,7 +142,10 @@ function Mypage({ gnb1, gnb2 }) {
                 <div className='next-level'>
                   <p>다음 레벨까지</p>
                   <div className='progress'>
-                    <span className='bar' style={{width:`${progress}%`}}></span>
+                    <span
+                      className='bar'
+                      style={{ width: `${progress}%` }}
+                    ></span>
                   </div>
                   <p className='left'>
                     <span className='current'>{current}</span> /{' '}
@@ -127,7 +166,16 @@ function Mypage({ gnb1, gnb2 }) {
                     <p>
                       LV.<span className='level-num'>{level}</span>
                     </p>
-                    <em>{["독서 뚜벅이", "독서 러너", "독서 부릉이", "독서광 폭주열차"][level - 1]}</em>
+                    <em>
+                      {
+                        [
+                          '독서 뚜벅이',
+                          '독서 러너',
+                          '독서 부릉이',
+                          '독서광 폭주열차',
+                        ][level - 1]
+                      }
+                    </em>
                   </div>
                 </div>
                 <a href='#' className='more-btn'></a>
@@ -153,32 +201,34 @@ function Mypage({ gnb1, gnb2 }) {
               <li className='borrow'>
                 <p className='section-tit'>대출 중이에요</p>
                 <ul className='borrow-list'>
-                {currentBook.length > 0 ? (
-    currentBook.map((book) => {
-      const foundBook = book_data.find((b) => b.ISBN.toLowerCase() === book.isbn.toLowerCase());
-      return foundBook ? (
-        <li key={book.isbn}>
-          <em className='book-name'>{foundBook.title}</em>
-          <span className='date'>~{book.dueDate}</span>
-        </li>
-      ) : null;
-    })
-  ) : (
-    <li>대출한 책이 없습니다.</li>
-  )}
+                  {currentBook.length > 0 ? (
+                    currentBook.map((book) => {
+                      const foundBook = book_data.find(
+                        (b) => b.ISBN.toLowerCase() === book.isbn.toLowerCase()
+                      );
+                      return foundBook ? (
+                        <li key={book.isbn}>
+                          <em className='book-name'>{foundBook.title}</em>
+                          <span className='date'>~{book.dueDate}</span>
+                        </li>
+                      ) : null;
+                    })
+                  ) : (
+                    <li>대출한 책이 없습니다.</li>
+                  )}
                 </ul>
               </li>
               <li className='pick'>
                 <p className='section-tit'>마음에 들어요</p>
                 <ul className='pick-list'>
-                  {pickedBooks.length>0?(
-                    pickedBooks.map(book =>(
-                      <li key={book.isbn}>
+                  {pickedBooks.length > 0 ? (
+                    pickedBooks.map((book) => (
+                      <li key={`${book.isbn}-${book.dueDate}`}>
                         <em className='book-name'>{book.title}</em>
                         <span className='label'>{book.genre}</span>
                       </li>
                     ))
-                  ):(
+                  ) : (
                     <li>찜한 책이 없습니다.</li>
                   )}
                 </ul>
@@ -189,7 +239,7 @@ function Mypage({ gnb1, gnb2 }) {
             <ul className='badge-list'>
               <li>
                 <div className='img-box'>
-                  <img src='/img/sub/img-badge-1.png' alt='배지' />
+                  <img src='/img/sub/img-badge-996-3.png' alt='배지' />
                 </div>
                 <div className='text-box'>
                   <p>인문학 입문학?</p>
@@ -198,7 +248,7 @@ function Mypage({ gnb1, gnb2 }) {
               </li>
               <li>
                 <div className='img-box'>
-                  <img src='/img/sub/img-badge-2.png' alt='배지' />
+                  <img src='/img/sub/img-badge-997-3.png' alt='배지' />
                 </div>
                 <div className='text-box'>
                   <p>인문학 입문학?</p>
@@ -207,7 +257,7 @@ function Mypage({ gnb1, gnb2 }) {
               </li>
               <li>
                 <div className='img-box'>
-                  <img src='/img/sub/img-badge-3.png' alt='배지' />
+                  <img src='/img/sub/img-badge-998-3.png' alt='배지' />
                 </div>
                 <div className='text-box'>
                   <p>인문학 입문학?</p>
@@ -216,7 +266,7 @@ function Mypage({ gnb1, gnb2 }) {
               </li>
               <li>
                 <div className='img-box'>
-                  <img src='/img/sub/img-badge-4.png' alt='배지' />
+                  <img src='/img/sub/img-badge-999-3.png' alt='배지' />
                 </div>
                 <div className='text-box'>
                   <p>인문학 입문학?</p>

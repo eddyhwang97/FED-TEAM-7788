@@ -12,7 +12,7 @@ import Error from "./components/page/Error";
 import Join from "./components/page/Join";
 import Mypage from "./components/page/Mypage";
 import Login from "./components/page/Login";
-import Search from "./components/page/Search";
+import BookSearch from "./components/page/BookSearch";
 import Monthly from "./components/page/Monthly";
 import BookList from "./components/page/BookList";
 import BookDetail from "./components/page/BookDetail";
@@ -39,7 +39,7 @@ export default function MainComponent() {
           <Route path="join" element={<Join gnb1="회원가입" gnb2="" />} />
           <Route path="login" element={<Login gnb1="로그인" gnb2="" />} />
           <Route path="mypage" element={<Mypage gnb1="마이페이지" gnb2="" />} />
-          <Route path="search/booksearch" element={<Search gnb1="자료검색" gnb2="도서검색" />} />
+          <Route path="search/booksearch" element={<BookSearch gnb1="자료검색" gnb2="도서검색" />} />
           <Route path="search/best" element={<BookList gnb1="자료검색" gnb2="베스트셀러" />} />
           <Route path="search/new" element={<BookList gnb1="자료검색" gnb2="신착도서" />} />
           <Route path="monthly/recommend" element={<Monthly gnb1="이달의도서" gnb2="편집장 추천 도서" />} />
@@ -55,7 +55,7 @@ const ScrollTop = () => {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-    console.log("라우터경로:", pathname);
+    // console.log("라우터경로:", pathname);
   }, [pathname]);
   return null;
 };

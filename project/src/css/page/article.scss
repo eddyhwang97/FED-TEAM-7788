@@ -86,7 +86,7 @@
 
   .write-comment {
     margin-top: 40px;
-    input {
+    textarea {
       width: 100%;
       border: 1px solid $lightgray;
       border-radius: 10px;
@@ -111,7 +111,7 @@
       display: flex;
       gap: 10px;
 
-      input {
+      textarea {
         width: calc(100% - 130px);
       }
 
