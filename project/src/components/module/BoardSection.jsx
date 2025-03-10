@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import boardData from "../../js/data/community_data.json";
 
 function BoardSection() {
   const [selectedTab, setSelectedTab] = useState("notice");
+  const navigate = useNavigate();
 
   // 선택된 탭에 맞는 데이터 필터링 후 상위 5개만 가져오기
   const filteredData = boardData
@@ -42,7 +44,13 @@ function BoardSection() {
               {filteredData.length > 0 ? (
                 filteredData.map((item) => (
                   <li key={item.idx}>
-                    <a href="#" className="item">
+                    <a 
+                    href="#"
+                    // onClick={(e) => {
+                    //   e.preventDefault(); // a태그 기본 동작 방지
+                    //   navigate(`/community/${selectedTab === "notice" ? "notice" : "freeboard"}/${item.idx}`); // 상세 페이지 이동
+                    // }} 
+                    className="item">
                       <div className="list-tit">
                         <span className={`label ${selectedTab === "notice" ? "pink" : "mint"}`}>
                           {selectedTab === "notice" ? "공지" : "자유"}
