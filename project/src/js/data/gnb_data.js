@@ -4,8 +4,8 @@ export const menu = [
     link: "/search",
     sub: [
       {
-        txt: "통합검색",
-        link: "/search/totalsearch",
+        txt: "도서검색",
+        link: "/search/booksearch",
       },
       {
         txt: "베스트셀러",

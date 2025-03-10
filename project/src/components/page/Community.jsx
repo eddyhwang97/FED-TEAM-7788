@@ -16,9 +16,6 @@ import SearchBox from "../module/SearchBox";
 if (!localStorage.community_data) {
   localStorage.setItem("community_data", JSON.stringify(communityData));
 }
-if (!localStorage.comment_data) {
-  localStorage.setItem("comment_data", JSON.stringify(commentData));
-}
 //   아이디 임시데이터 저장
 let user = { user: "Mike" };
 if (!sessionStorage.user) {
@@ -26,7 +23,6 @@ if (!sessionStorage.user) {
 }
 function Community({ gnb1, gnb2, data }) {
   const navigate = useNavigate();
-
   // variables
   const searchOption = ["제목", "내용", "작성자"];
   const listData = JSON.parse(localStorage.getItem("community_data"))
@@ -162,7 +158,7 @@ function Community({ gnb1, gnb2, data }) {
                         onClick={(e) => {
                           e.preventDefault();
                           if (data === "freeboard" || data === "notice") {
-                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx } });
+                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx,data:data } });
                           }
                         }}
                       >
