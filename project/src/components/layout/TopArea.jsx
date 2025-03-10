@@ -2,19 +2,37 @@
 // css
 import "../../css/common/_core.scss";
 // data & Fn
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Gnb from "../module/Gnb";
+import { GP } from "../module/Contexter";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import $ from "jquery";
 
 export default function TopArea({ gnb, setGnb, setSubTop }) {
+  // hook
+  const context = useContext(GP);
+  const location = useLocation();
   const navigate = useNavigate();
-  const loggedInUser = sessionStorage.getItem("loggedInUser");
 
+  // 로그인 정보
+  // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
+  const loginState = context.loginState.isLogin;
+  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
+  const user = loginState ? context.user : null;
+  // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
+  const userName = user !== null ? user.name : null;
+  // console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
+
+  // valiables
+  // 로그인 시 "로그인" 버튼을 제외한 메뉴 필터링
+  const filteredMenu = menu2.filter((v) => !(loginState && (v.txt === "로그인" || v.txt === "회원가입")));
+
+  // useState
   const [searchInput, setSearchInput] = useState("검색어를 입력해주세요!");
 
+  // Fn
   // 로그아웃 처리 함수
   const handleLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
@@ -34,9 +52,6 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
     }
   };
 
-  // 로그인 시 "로그인" 버튼을 제외한 메뉴 필터링
-  const filteredMenu = menu2.filter((v) => !(loggedInUser && v.txt === "로그인"));
-
   return (
     <>
       <div className="dimm"></div>
@@ -45,7 +60,7 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
       <header className="header">
         <div className="header-top">
           <ul className="link-list">
-            {loggedInUser && (
+            {loginState && (
               <li>
                 <button type="button" onClick={handleLogout} className="icon-logout">
                   로그아웃

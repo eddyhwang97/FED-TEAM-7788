@@ -22,10 +22,9 @@ function TotalSearch() {
   const navigate = useNavigate();
   const navigateSearchInput = location.state.navigateSearchInput;
 
-  const searchOption = ["통합검색"];
-  const [searchInput, setSearchInput] = useState(navigateSearchInput);
-
   // useState
+  const searchOption = ["통합검색"];
+  const [searchInput, setSearchInput] = useState("검색어를 입력하세요");
   const [bookList, setbookList] = useState([]);
   const [noticeList, setnoticeList] = useState([]);
   const [freeboardList, setfreeboardList] = useState([]);
@@ -39,7 +38,7 @@ function TotalSearch() {
       setbookList([]);
       setnoticeList([]);
       setfreeboardList([]);
-      setfaqList([]);
+      setfaqList([]) ;
     } else {
       setbookList(bookData.filter((book) => book.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
       setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
@@ -49,14 +48,13 @@ function TotalSearch() {
   };
 
   useEffect(() => {
-    filterDataFn(navigateSearchInput)
-   
-  },[navigate])
+    filterDataFn(navigateSearchInput);
+  }, [navigate]);
 
   return (
     <>
       <div className="contents">
-        <SearchBox searchOption={searchOption}  navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} filterDataFn={filterDataFn} />
+        <SearchBox searchOption={searchOption} navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} filterDataFn={filterDataFn} />
         <div className="search-result">
           <section className="result-section">
             <h3 className="category-tit">도서</h3>
@@ -119,7 +117,7 @@ function TotalSearch() {
             <h3 className="category-tit">자유게시판</h3>
             <div className="result-list freeboard-list">
               <ul>
-               {freeboardList.length > 0 ? (
+                {freeboardList.length > 0 ? (
                   freeboardList.map((v, i) => (
                     <li className="list" key={i}>
                       <a href="#">
