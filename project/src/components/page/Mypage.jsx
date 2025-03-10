@@ -17,12 +17,14 @@ const getGenreByISBN = (book) => {
     return null; // isbn이 없으면 null 반환
   }
 
-  const foundBook = book_data.find(b => b.ISBN && b.ISBN.toString().toLowerCase() === book.isbn.toLowerCase());
-  return foundBook ? foundBook.genre : null;  // 장르가 없다면 null 반환
+  const foundBook = book_data.find(
+    (b) => b.ISBN && b.ISBN.toString().toLowerCase() === book.isbn.toLowerCase()
+  );
+  return foundBook ? foundBook.genre : null; // 장르가 없다면 null 반환
 };
 
 // 뱃지 데이터
-const badgeData = badge_data
+const badgeData = badge_data;
 
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
@@ -42,19 +44,33 @@ function Mypage({ gnb1, gnb2 }) {
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
     if (!loggedInUser) {
-      alert('로그인이 필요합니다.');
       navigate('/login');
+      alert('로그인이 필요합니다.');
     } else {
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser);
-      updateLevel(parsedUser.bData.length || 0); // 유저 레벨 업데이트
 
-      // 찜 개수 업데이트
-      if (parsedUser.iLoveIt) {
+      // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
+      if (parsedUser.iLoveIt && Array.isArray(parsedUser.iLoveIt)) {
         setPicked(parsedUser.iLoveIt);
-        setCurrentBook(parsedUser.currentData) ;
-        setFinished(parsedUser.bData);
+      } else {
+        setPicked([]);
       }
+
+      if (parsedUser.currentData && Array.isArray(parsedUser.currentData)) {
+        setCurrentBook(parsedUser.currentData);
+      } else {
+        setCurrentBook([]);
+      }
+
+      if (parsedUser.bData && Array.isArray(parsedUser.bData)) {
+        setFinished(parsedUser.bData);
+      } else {
+        setFinished([]);
+      }
+
+      // 유저 레벨 업데이트
+      updateLevel(parsedUser.bData.length || 0); 
     }
   }, [navigate]);
 
@@ -107,7 +123,7 @@ function Mypage({ gnb1, gnb2 }) {
     return [0, 2, 5, 11, 30][lvl];
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     // 컴포넌트 처음 렌더링시 로컬스토리지에서 이미지 불러오기
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
     if (loggedInUserSession) {
@@ -120,7 +136,9 @@ function Mypage({ gnb1, gnb2 }) {
         const parsedMembers = JSON.parse(memberData);
 
         // 로그인 유저 프로필 이미지 찾기
-        const currentUser = parsedMembers.find(member => member.id === userId);
+        const currentUser = parsedMembers.find(
+          (member) => member.id === userId
+        );
         if (currentUser && currentUser.profileImage) {
           setProfileImage(currentUser.profileImage); // 프로필 이미지 상태 업데이트
         } else {
@@ -129,10 +147,10 @@ function Mypage({ gnb1, gnb2 }) {
         }
       }
     }
-  },[]);
+  }, []);
 
-   // 프로필 이미지 선택 핸들러
-   const handleProfileImageChange = (e) => {
+  // 프로필 이미지 선택 핸들러
+  const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -140,61 +158,65 @@ function Mypage({ gnb1, gnb2 }) {
         const base64Image = reader.result; // Base64로 이미지 데이터 변환
         setProfileImage(base64Image);
 
-      // 로컬스토리지에 Base64 이미지 URL 저장
-      const memberData = localStorage.getItem('member_data');
-      if (memberData) {
-        const parsedMembers = JSON.parse(memberData);
-  
-        // 세션스토리지 로그인 데이터
-        const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-        if (loggedInUserSession) {
-          const parsedUserSession = JSON.parse(loggedInUserSession);
-          const userId = parsedUserSession.id;
-  
-          // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
-          const updatedMembers = parsedMembers.map((member) =>
-            member.id === userId ? { ...member, profileImage: base64Image } : member
-          );
-  
-          // 로컬스토리지에 업데이트된 member_data 저장
-          localStorage.setItem('member_data', JSON.stringify(updatedMembers));
-  
-          // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
-          parsedUserSession.profileImage = base64Image;
-          sessionStorage.setItem('loggedInUser', JSON.stringify(parsedUserSession));
+        // 로컬스토리지에 Base64 이미지 URL 저장
+        const memberData = localStorage.getItem('member_data');
+        if (memberData) {
+          const parsedMembers = JSON.parse(memberData);
+
+          // 세션스토리지 로그인 데이터
+          const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+          if (loggedInUserSession) {
+            const parsedUserSession = JSON.parse(loggedInUserSession);
+            const userId = parsedUserSession.id;
+
+            // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
+            const updatedMembers = parsedMembers.map((member) =>
+              member.id === userId
+                ? { ...member, profileImage: base64Image }
+                : member
+            );
+
+            // 로컬스토리지에 업데이트된 member_data 저장
+            localStorage.setItem('member_data', JSON.stringify(updatedMembers));
+
+            // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
+            parsedUserSession.profileImage = base64Image;
+            sessionStorage.setItem(
+              'loggedInUser',
+              JSON.stringify(parsedUserSession)
+            );
+          }
         }
-      }
-    };
-    reader.readAsDataURL(file); // Base64로 변환
+      };
+      reader.readAsDataURL(file); // Base64로 변환
     }
   };
 
-
-  // 뱃지 시스템 시작 // 
+  // 뱃지 시스템 시작 //
   const badges = badgeData;
 
   // ISBN 장르추출 //
 
-const getGenreByISBN = (isbn) => {
-  const prefix = isbn.toString().slice(0, 3);  // ISBN 앞 3자리 추출
+  const getGenreByISBN = (isbn) => {
+    const prefix = isbn.toString().slice(0, 3); // ISBN 앞 3자리 추출
 
-  switch (prefix) {
-    case '996':
-      return '문학';
-    case '997':
-      return '인문사회과학';
-    case '998':
-      return '예술';
-    case '999':
-      return '매거진';
-    default:
-      return null;  // 장르를 찾을 수 없으면 null 반환
-  }
-};
+    switch (prefix) {
+      case '996':
+        return '문학';
+      case '997':
+        return '인문사회과학';
+      case '998':
+        return '예술';
+      case '999':
+        return '매거진';
+      default:
+        return null; // 장르를 찾을 수 없으면 null 반환
+    }
+  };
 
   useEffect(() => {
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-    
+
     if (loggedInUserSession) {
       const parsedUserSession = JSON.parse(loggedInUserSession);
       const bData = parsedUserSession.bData;
@@ -202,15 +224,15 @@ const getGenreByISBN = (isbn) => {
       if (Array.isArray(bData) && bData.length > 0) {
         // 카테고리별로 대출된 책의 수를 카운트
         const genreCount = {
-          "문학": 0,
-          "인문사회과학": 0,
-          "예술": 0,
-          "매거진": 0
+          문학: 0,
+          인문사회과학: 0,
+          예술: 0,
+          매거진: 0,
         };
-  
+
         // ISBN을 통해 카테고리 추출 후 카운트
-        bData.forEach(book => {
-          const genre = getGenreByISBN(book);  // ISBN을 통해 카테고리 추출
+        bData.forEach((book) => {
+          const genre = getGenreByISBN(book); // ISBN을 통해 카테고리 추출
           if (genre && genreCount.hasOwnProperty(genre)) {
             genreCount[genre]++;
           }
@@ -219,20 +241,19 @@ const getGenreByISBN = (isbn) => {
         console.log(genreCount);
 
         // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
-        const unlockedBadges = badgeData.filter(badge => {
+        const unlockedBadges = badgeData.filter((badge) => {
           const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
           return genreCount[genre] >= 3;
         });
-  
-        setUnlockedBadges(unlockedBadges);  // 활성화된 뱃지 업데이트
+
+        setUnlockedBadges(unlockedBadges); // 활성화된 뱃지 업데이트
       }
     }
   }, []);
 
-
   useEffect(() => {
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-    
+
     if (loggedInUserSession) {
       const parsedUserSession = JSON.parse(loggedInUserSession);
       const bData = parsedUserSession.bData;
@@ -240,35 +261,35 @@ const getGenreByISBN = (isbn) => {
       if (Array.isArray(bData) && bData.length > 0) {
         // 카테고리별로 대출된 책의 수를 카운트
         const genreCount = {
-          "문학": 0,
-          "인문사회과학": 0,
-          "예술": 0,
-          "매거진": 0
+          문학: 0,
+          인문사회과학: 0,
+          예술: 0,
+          매거진: 0,
         };
-  
+
         // ISBN을 통해 카테고리 추출 후 카운트
-        bData.forEach(book => {
-          const genre = getGenreByISBN(book);  // ISBN을 통해 카테고리 추출
+        bData.forEach((book) => {
+          const genre = getGenreByISBN(book); // ISBN을 통해 카테고리 추출
           if (genre) {
             genreCount[genre]++;
           }
         });
-  
+
         // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
-        const unlockedBadges = badgeData.filter(badge => {
+        const unlockedBadges = badgeData.filter((badge) => {
           const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
           return genreCount[genre] >= 3;
         });
 
-        if (bData.length >= 5){
+        if (bData.length >= 5) {
           unlockedBadges.push({
-            badgeTitle: "칙칙북북 킹",
-            badgeDescription: "누적 대출도서 5권 달성",
-            badgeSrc: "/img/sub/img-badge-king.png",
-            badgeAlt: "누적 대출도서 5권 달성 뱃지"
-          })
+            badgeTitle: '칙칙북북 킹',
+            badgeDescription: '누적 대출도서 5권 달성',
+            badgeSrc: '/img/sub/img-badge-king.png',
+            badgeAlt: '누적 대출도서 5권 달성 뱃지',
+          });
         }
-        setUnlockedBadges(unlockedBadges);  // 활성화된 뱃지 업데이트
+        setUnlockedBadges(unlockedBadges); // 활성화된 뱃지 업데이트
       }
     }
   }, []);
@@ -347,15 +368,21 @@ const getGenreByISBN = (isbn) => {
               <div className='my-book'>
                 <div className='book-box borrow'>
                   <p>대출 중</p>
-                  <span className='borrow-num'>{currentBook?.length? currentBook.length : 0}</span>
+                  <span className='borrow-num'>
+                    {currentBook?.length ? currentBook.length : 0}
+                  </span>
                 </div>
                 <div className='book-box picked'>
                   <p>찜</p>
-                  <span className='picked-num'>{picked?.length? picked.length : 0}</span>
+                  <span className='picked-num'>
+                    {picked?.length ? picked.length : 0}
+                  </span>
                 </div>
                 <div className='book-box read'>
                   <p>다 읽었어요</p>
-                  <span className='read-num'>{finished?.length? finished.length : 0 }</span>
+                  <span className='read-num'>
+                    {finished?.length ? finished.length : 0}
+                  </span>
                 </div>
               </div>
             </div>
@@ -387,9 +414,15 @@ const getGenreByISBN = (isbn) => {
                 <ul className='pick-list'>
                   {pickedBooks.length > 0 ? (
                     pickedBooks.map((book, index) => (
-                      <li key={`${book.isbn ?? `index-${index}`}-${book.dueDate ?? "nodate"}`}>
+                      <li
+                        key={`${book.isbn ?? `index-${index}`}-${
+                          book.dueDate ?? 'nodate'
+                        }`}
+                      >
                         <em className='book-name'>{book.title}</em>
-                        <span className='label'>{book.genre.replace("인문사회과학","인문사회")}</span>
+                        <span className='label'>
+                          {book.genre.replace('인문사회과학', '인문사회')}
+                        </span>
                       </li>
                     ))
                   ) : (
@@ -401,21 +434,24 @@ const getGenreByISBN = (isbn) => {
           </div>
           <div className='inner-section badge-wrap'>
             <ul className='badge-list'>
-            {unlockedBadges.length > 0 ? (
-      unlockedBadges.map((badge, index) => (
-        <li key={index}>
-          <div className='img-box'>
-            <img src={badge.badgeSrc || '/img/sub/default-badge.png'} alt={badge.badgeAlt} />
-          </div>
-          <div className='text-box'>
-            <p>{badge.badgeTitle}</p>
-            <span>{badge.badgeDescription}</span>
-          </div>
-        </li>
-      ))
-    ) : (
-      <li>획득한 배지가 없습니다.</li>
-    )}
+              {unlockedBadges.length > 0 ? (
+                unlockedBadges.map((badge, index) => (
+                  <li key={index}>
+                    <div className='img-box'>
+                      <img
+                        src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                        alt={badge.badgeAlt}
+                      />
+                    </div>
+                    <div className='text-box'>
+                      <p>{badge.badgeTitle}</p>
+                      <span>{badge.badgeDescription}</span>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <li>획득한 배지가 없습니다.</li>
+              )}
             </ul>
           </div>
         </div>
