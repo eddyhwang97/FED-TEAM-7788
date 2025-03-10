@@ -24,7 +24,7 @@ function Article({ gnb1, gnb2 }) {
   const user = loginState ? context.user : null;
   // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
   const userName = user !== null ? user.name : null;
-  console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
+  // console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
 
   // 데이터
   const { id } = useParams();
