@@ -92,14 +92,40 @@ function Mypage({ gnb1, gnb2 }) {
     return [0, 2, 5, 11, 30][lvl];
   };
 
+  useEffect(()=>{
+    // 컴포넌트 처음 렌더링시 로컬스토리지에서 이미지 불러오기
+    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+    if (loggedInUserSession) {
+      const parsedUserSession = JSON.parse(loggedInUserSession);
+      const userId = parsedUserSession.id;
+
+      // 로컬스토리지에서 member_data 가져오기
+      const memberData = localStorage.getItem('member_data');
+      if (memberData) {
+        const parsedMembers = JSON.parse(memberData);
+
+        // 로그인 유저 프로필 이미지 찾기
+        const currentUser = parsedMembers.find(member => member.id === userId);
+        if (currentUser && currentUser.profileImage) {
+          setProfileImage(currentUser.profileImage); // 프로필 이미지 상태 업데이트
+        } else {
+          // 프로필 이미지가 없으면 기본 이미지 설정
+          setProfileImage('/img/sub/img-profile-temp.jpg');
+        }
+      }
+    }
+  },[]);
+
    // 프로필 이미지 선택 핸들러
    const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
-  
-      // 로컬스토리지에 새로운 프로필 이미지 URL 저장
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image = reader.result; // Base64로 이미지 데이터 변환
+        setProfileImage(base64Image);
+
+      // 로컬스토리지에 Base64 이미지 URL 저장
       const memberData = localStorage.getItem('member_data');
       if (memberData) {
         const parsedMembers = JSON.parse(memberData);
@@ -112,17 +138,19 @@ function Mypage({ gnb1, gnb2 }) {
   
           // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
           const updatedMembers = parsedMembers.map((member) =>
-            member.id === userId ? { ...member, profileImage: imageUrl } : member
+            member.id === userId ? { ...member, profileImage: base64Image } : member
           );
   
           // 로컬스토리지에 업데이트된 member_data 저장
           localStorage.setItem('member_data', JSON.stringify(updatedMembers));
   
           // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
-          parsedUserSession.profileImage = imageUrl;
+          parsedUserSession.profileImage = base64Image;
           sessionStorage.setItem('loggedInUser', JSON.stringify(parsedUserSession));
         }
       }
+    };
+    reader.readAsDataURL(file); // Base64로 변환
     }
   };
 
