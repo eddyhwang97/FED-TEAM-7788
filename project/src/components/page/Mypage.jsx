@@ -1,6 +1,7 @@
 //  Mypage 컴포넌트 - Mypage.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import confetti from 'canvas-confetti'; // 폭죽 라이브러리
 import SubTop from '../module/SubTop';
 import hm from '../../css/page/hm.scss';
 import book_data from '../../js/data/book_data.json';
@@ -39,6 +40,10 @@ function Mypage({ gnb1, gnb2 }) {
   const [pickedBooks, setPickedBooks] = useState([]);
   const [profileImage, setProfileImage] = useState('');
   const [unlockedBadges, setUnlockedBadges] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);  // 모달 창 상태
+  const [modalContent, setModalContent] = useState('');  // 모달에 표시할 내용
+  const [completedBadges, setCompletedBadges] = useState([]);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -247,6 +252,7 @@ function Mypage({ gnb1, gnb2 }) {
         });
 
         setUnlockedBadges(unlockedBadges); // 활성화된 뱃지 업데이트
+
       }
     }
   }, []);
@@ -289,13 +295,56 @@ function Mypage({ gnb1, gnb2 }) {
             badgeAlt: '누적 대출도서 5권 달성 뱃지',
           });
         }
-        setUnlockedBadges(unlockedBadges); // 활성화된 뱃지 업데이트
+
+        const badgesWithAnimation = unlockedBadges.map(badge => ({
+          ...badge,
+          isActive: true, // 애니메이션 상태 추가
+        }));
+        setUnlockedBadges(badgesWithAnimation); // 활성화된 뱃지 업데이트
+
+         // 뱃지가 활성화되었을 때 모달과 폭죽 애니메이션을 한 번만 실행
+         unlockedBadges.forEach((badge) => {
+          if (!completedBadges.includes(badge.badgeTitle)) {
+            setCompletedBadges((prevBadges) => [...prevBadges, badge.badgeTitle]);
+            setShowModal(true);  // 모달을 띄운다.
+            setModalContent(`축하합니다! 새로운 뱃지를 획득하셨습니다: ${badge.badgeTitle}`);
+            triggerConfetti();  // 폭죽 애니메이션을 실행한다.
+          }
+        });
       }
     }
-  }, []);
+  }, [completedBadges]);  // completedBadges가 변경될 때마다 실행
+
+  const triggerConfetti = () => {
+    const end = Date.now() + 3 * 1000;  // 폭죽을 3초 동안 터뜨리기
+    const interval = setInterval(() => {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: Math.random(), y: Math.random() - 0.2 },
+      });
+      if (Date.now() > end) {
+        clearInterval(interval);  // 폭죽을 끝낸다.
+      }
+    }, 100);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <>
+  {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>{modalContent}</h2>
+            <button onClick={closeModal}>확인</button>
+          </div>
+        </div>
+      )}
+
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       <div className='contents'>
         <div className='mypage-wrap'>
@@ -436,7 +485,7 @@ function Mypage({ gnb1, gnb2 }) {
             <ul className='badge-list'>
               {unlockedBadges.length > 0 ? (
                 unlockedBadges.map((badge, index) => (
-                  <li key={index}>
+                  <li key={index} className={`badge-item ${badge.isActive ? 'active' :''}`}>
                     <div className='img-box'>
                       <img
                         src={badge.badgeSrc || '/img/sub/default-badge.png'}
