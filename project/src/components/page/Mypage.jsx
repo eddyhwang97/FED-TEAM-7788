@@ -98,13 +98,30 @@ function Mypage({ gnb1, gnb2 }) {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
-
+  
       // 로컬스토리지에 새로운 프로필 이미지 URL 저장
-      const loggedInUser = localStorage.getItem('member_data');
-      if (loggedInUser) {
-        const parsedUser = JSON.parse(loggedInUser);
-        parsedUser.profileImage = imageUrl; // 프로필 이미지 업데이트
-        localStorage.setItem('member_data', JSON.stringify(parsedUser)); // 세션스토리지 업데이트
+      const memberData = localStorage.getItem('member_data');
+      if (memberData) {
+        const parsedMembers = JSON.parse(memberData);
+  
+        // 세션스토리지 로그인 데이터
+        const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+        if (loggedInUserSession) {
+          const parsedUserSession = JSON.parse(loggedInUserSession);
+          const userId = parsedUserSession.id;
+  
+          // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
+          const updatedMembers = parsedMembers.map((member) =>
+            member.id === userId ? { ...member, profileImage: imageUrl } : member
+          );
+  
+          // 로컬스토리지에 업데이트된 member_data 저장
+          localStorage.setItem('member_data', JSON.stringify(updatedMembers));
+  
+          // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
+          parsedUserSession.profileImage = imageUrl;
+          sessionStorage.setItem('loggedInUser', JSON.stringify(parsedUserSession));
+        }
       }
     }
   };
@@ -183,15 +200,15 @@ function Mypage({ gnb1, gnb2 }) {
               <div className='my-book'>
                 <div className='book-box borrow'>
                   <p>대출 중</p>
-                  <span className='borrow-num'>{currentBook.length}</span>
+                  <span className='borrow-num'>{currentBook?.length? currentBook.length : 0}</span>
                 </div>
                 <div className='book-box picked'>
                   <p>찜</p>
-                  <span className='picked-num'>{picked.length}</span>
+                  <span className='picked-num'>{picked?.length? picked.length : 0}</span>
                 </div>
                 <div className='book-box read'>
                   <p>다 읽었어요</p>
-                  <span className='read-num'>{finished.length}</span>
+                  <span className='read-num'>{finished?.length? finished.length : 0 }</span>
                 </div>
               </div>
             </div>
@@ -222,10 +239,10 @@ function Mypage({ gnb1, gnb2 }) {
                 <p className='section-tit'>마음에 들어요</p>
                 <ul className='pick-list'>
                   {pickedBooks.length > 0 ? (
-                    pickedBooks.map((book) => (
-                      <li key={`${book.isbn}-${book.dueDate}`}>
+                    pickedBooks.map((book, index) => (
+                      <li key={`${book.isbn ?? `index-${index}`}-${book.dueDate ?? "nodate"}`}>
                         <em className='book-name'>{book.title}</em>
-                        <span className='label'>{book.genre}</span>
+                        <span className='label'>{book.genre.replace("인문사회과학","인문사회")}</span>
                       </li>
                     ))
                   ) : (
