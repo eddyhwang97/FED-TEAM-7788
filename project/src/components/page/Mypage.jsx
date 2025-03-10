@@ -4,11 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import SubTop from '../module/SubTop';
 import hm from '../../css/page/hm.scss';
 import book_data from '../../js/data/book_data.json';
+import badge_data from '../../js/data/badge_data.json';
 
 // 로컬스토리지 도서 데이터 저장 (초기 1회)
 if (!localStorage.getItem('book_data')) {
   localStorage.setItem('book_data', JSON.stringify(book_data));
 }
+
+// ISBN을 통해 책의 장르를 찾는 함수
+const getGenreByISBN = (book) => {
+  if (!book || !book.isbn) {
+    return null; // isbn이 없으면 null 반환
+  }
+
+  const foundBook = book_data.find(b => b.ISBN && b.ISBN.toString().toLowerCase() === book.isbn.toLowerCase());
+  return foundBook ? foundBook.genre : null;  // 장르가 없다면 null 반환
+};
+
+// 뱃지 데이터
+const badgeData = badge_data
 
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
@@ -22,6 +36,7 @@ function Mypage({ gnb1, gnb2 }) {
   const [finished, setFinished] = useState(0);
   const [pickedBooks, setPickedBooks] = useState([]);
   const [profileImage, setProfileImage] = useState('');
+  const [unlockedBadges, setUnlockedBadges] = useState([]);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -154,6 +169,81 @@ function Mypage({ gnb1, gnb2 }) {
     }
   };
 
+
+  // 뱃지 시스템 시작 // 
+  const badges = badgeData;
+
+  useEffect(() => {
+    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+    
+    if (loggedInUserSession) {
+      const parsedUserSession = JSON.parse(loggedInUserSession);
+      const bData = parsedUserSession.bData;
+
+      if (Array.isArray(bData) && bData.length > 0) {
+        // 카테고리별로 대출된 책의 수를 카운트
+        const genreCount = {
+          "문학": 0,
+          "인문사회과학": 0,
+          "예술": 0,
+          "매거진": 0
+        };
+  
+        // ISBN을 통해 카테고리 추출 후 카운트
+        bData.forEach(book => {
+          const genre = getGenreByISBN(book);  // ISBN을 통해 카테고리 추출
+          if (genre) {
+            genreCount[genre]++;
+          }
+        });
+  
+        // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
+        const unlockedBadges = badgeData.filter(badge => {
+          const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
+          return genreCount[genre] >= 3;
+        });
+  
+        setUnlockedBadges(unlockedBadges);  // 활성화된 뱃지 업데이트
+      }
+    }
+  }, []);
+
+
+  useEffect(() => {
+    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+    
+    if (loggedInUserSession) {
+      const parsedUserSession = JSON.parse(loggedInUserSession);
+      const bData = parsedUserSession.bData;
+
+      if (Array.isArray(bData) && bData.length > 0) {
+        // 카테고리별로 대출된 책의 수를 카운트
+        const genreCount = {
+          "문학": 0,
+          "인문사회과학": 0,
+          "예술": 0,
+          "매거진": 0
+        };
+  
+        // ISBN을 통해 카테고리 추출 후 카운트
+        bData.forEach(book => {
+          const genre = getGenreByISBN(book);  // ISBN을 통해 카테고리 추출
+          if (genre) {
+            genreCount[genre]++;
+          }
+        });
+  
+        // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
+        const unlockedBadges = badgeData.filter(badge => {
+          const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
+          return genreCount[genre] >= 3;
+        });
+  
+        setUnlockedBadges(unlockedBadges);  // 활성화된 뱃지 업데이트
+      }
+    }
+  }, []);
+
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
@@ -163,7 +253,7 @@ function Mypage({ gnb1, gnb2 }) {
             <div className='profile-box'>
               <div className='profile-image'>
                 <img
-                  src={profileImage || '/img/sub/img-profile-temp.jpg'} // 선택한 이미지나 기본 이미지
+                  src={profileImage || '/img/sub/img-profile-temp.png'} // 선택한 이미지나 기본 이미지
                   alt='프로필 이미지'
                   onClick={() =>
                     document.getElementById('profile-image-input').click()
