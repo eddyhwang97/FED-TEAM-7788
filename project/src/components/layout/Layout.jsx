@@ -14,6 +14,7 @@ export default function Layout() {
   const user = sessionStorage.getItem("loggedInUser") ? JSON.parse(sessionStorage.getItem("loggedInUser")) : null;
   const [isLogin, setLogin] = useState(user ? true : false);
   const loginState = { isLogin, setLogin };
+  console.log(user.name)
   // hook
   const location = useLocation(); // 현재 경로 가져오기
 
