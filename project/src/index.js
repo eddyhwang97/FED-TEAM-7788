@@ -16,10 +16,13 @@ import BookSearch from "./components/page/BookSearch";
 import Monthly from "./components/page/Monthly";
 import BookList from "./components/page/BookList";
 import BookDetail from "./components/page/BookDetail";
-import Borrow from "./components/page/Borrow";
+import Culture from "./components/page/Culture";
 import Article from "./components/page/Article";
 import Post from "./components/page/Post";
 import TotalSearch from "./components/page/TotalSearch";
+
+// 공통 css
+import "./css/common/_core.scss"
 
 export default function MainComponent() {
   return (
@@ -28,8 +31,8 @@ export default function MainComponent() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path="book/borrow" element={<Borrow gnb1="예약/대출" gnb2="도서대출" />} />
-          <Route path="book/reserve" element={<Book gnb1="예약/대출" gnb2="도서예약" />} />
+          <Route path="/apply/book" element={<Book gnb1="신청공간" gnb2="도서신청" />} />
+          <Route path="/apply/culture" element={<Culture gnb1="신청공간" gnb2="강연신청" />} />
           <Route path="community/notice" element={<Community gnb1="열린공간" gnb2="공지사항" data="notice" />} />
           <Route path="community/notice/:id" element={<Article gnb1="열린공간" gnb2="공지사항" />} />
           <Route path="community/faq" element={<Community gnb1="열린공간" gnb2="FAQ" data="faq" />} />

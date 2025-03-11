@@ -1,6 +1,4 @@
 // TopArea 컴포넌트 - TopArea.jsx
-// css
-import "../../css/common/_core.scss";
 // data & Fn
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Gnb from "../module/Gnb";

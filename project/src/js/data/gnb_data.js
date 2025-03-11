@@ -18,16 +18,16 @@ export const menu = [
     ],
   },
   {
-    txt: "예약/대출",
-    link: "/book",
+    txt: "신청공간",
+    link: "/apply",
     sub: [
       {
-        txt: "도서대출",
-        link: "/book/borrow",
+        txt: "도서신청",
+        link: "/apply/book",
       },
       {
-        txt: "도서예약",
-        link: "/book/reserve",
+        txt: "강연신청",
+        link: "/apply/culture",
       },
     ],
   },
@@ -36,7 +36,7 @@ export const menu = [
     link: "/monthly",
     sub: [
       {
-        txt: "편집장 추천 도서",
+        txt: "사서 추천 도서",
         link: "/monthly/recommend",
       },
     ],

@@ -2,13 +2,13 @@
 import { useEffect, useLayoutEffect, useState, createContext } from "react";
 import SubTop from "../module/SubTop";
 
-function Borrow({ gnb1, gnb2 }) {
+function Culture({ gnb1, gnb2 }) {
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       <div className="contents">
         <div className="sub-section">
-          <p className="section-tit">도서 대출 안내</p>
+          <p className="section-tit">강연신청</p>
           <div className="inner">
             <ul className="bullet-list">
               <li>
@@ -49,4 +49,4 @@ function Borrow({ gnb1, gnb2 }) {
   );
 }
 
-export default Borrow;
+export default Culture;
