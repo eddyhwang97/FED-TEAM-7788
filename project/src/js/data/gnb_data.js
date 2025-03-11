@@ -36,7 +36,7 @@ export const menu = [
     link: "/monthly",
     sub: [
       {
-        txt: "편집장 추천 도서",
+        txt: "사서 추천 도서",
         link: "/monthly/recommend",
       },
     ],

@@ -6,6 +6,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import bookData from "../../js/data/book_data.json"; // 도서 데이터 임포트
+import { monthlyData } from "../../js/data/monthly_data"; // 이달의도서 데이터 임포트
 import { sortByNewest, sortByBest } from "../../js/function/sort-books"; // 정렬 함수
 
 function BookSection() {
@@ -34,31 +35,31 @@ function BookSection() {
               <div className="book-info-wrap">
                 <div className="book-info">
                   <div className="book-title">
-                    <p>괴담에 떨어져도 출근을 해야 하는구나</p>
-                    <a href="#" className="more-btn">
+                    <p>{monthlyData[0].bName}</p>
+                    <a href="/monthly/recommend" className="more-btn">
                       <span className="blind">추천도서 더보기</span>
                     </a>
                   </div>
                   <ul className="book-info-list">
                     <li>
                       <em>작가</em>
-                      <span>백덕수</span>
+                      <span>{monthlyData[0].bAuthor}</span>
                     </li>
                     <li>
                       <em>출판사</em>
-                      <span>카카오페이지</span>
+                      <span>{monthlyData[0].bPublisher}</span>
                     </li>
                     <li>
                       <em>카테고리</em>
-                      <span>인문사회과학</span>
+                      <span>{monthlyData[0].bGenre}</span>
                     </li>
                     <li>
-                      <em>발행일</em>
-                      <span>2025-02-19</span>
+                      <em>ISBN</em>
+                      <span>{monthlyData[0].bNum}</span>
                     </li>
                     <li>
-                      <em>페이지</em>
-                      <span>666p</span>
+                      <em>상태</em>
+                      <span>{monthlyData[0].bStatus}</span>
                     </li>
                   </ul>
                 </div>
@@ -98,9 +99,9 @@ function BookSection() {
                     }
                   }}
                 >
-                  {[...Array(5)].map((_, index) => (
+                  {[...monthlyData].map((book, index) => (
                     <SwiperSlide key={index} className="item">
-                      <img src="../img/main/img-test.jpg" alt="도서 이미지" />
+                      <img src={`../img/monthly/img-${book.bImg}.jpg`} alt={book.bName} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
