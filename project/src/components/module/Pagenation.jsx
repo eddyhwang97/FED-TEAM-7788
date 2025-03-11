@@ -1,41 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Pagenation({ props }) {
-  const navigate = useNavigate();
-  const data = props.data;
-  const goLogin = props.goLogin;
-  const loginState = props.loginState;
-  const currentPage = props.currentPage;
-  const totalPage = props.totalPage;
-  const currentList = props.currentList;
-  const setcurrentPage = props.setcurrentPage;
-
-  // Fn
-  const handlePageChange = (currentPage) => {
-    navigate(`/community/${data}?page=${currentPage}`);
-  };
-  const handleWrite = () => {
-    if (!loginState) goLogin();
-    else navigate(`/community/${data}/post`);
-  };
-
-  console.log("currentPage", currentPage, "totalPage", totalPage, "currentList", currentList);
-
+function Pagenation({ data }) {
   return (
     <div className="pagenate-section">
       <button type="button" className="btn-prev"></button>
       <ul>
-        {Array.from({ length: totalPage }, (_, index) => index + 1).map((page) => (
-          <li
-            key={page}
-            onClick={() => {
-              handlePageChange();
-              setcurrentPage(page);
-              console.log("page", page)
-            }}
-            className={currentPage === page ? "active" : ""}
-          >
+        {[1, 2, 3].map((page) => (
+          <li key={page}  className="">
             {page}
           </li>
         ))}
@@ -43,7 +15,7 @@ function Pagenation({ props }) {
       <button type="button" className="btn-next"></button>
 
       {data === "freeboard" && (
-        <button type="button" className="write-btn" onClick={handleWrite}>
+        <button type="button" className="write-btn">
           글쓰기
         </button>
       )}

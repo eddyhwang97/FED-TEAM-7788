@@ -81,28 +81,7 @@ function Community({ gnb1, gnb2, data }) {
     setBoardListFn(data);
     window.scrollTo(0, 0);
   }, [useLocation()]);
-  // 로그인 상태 확인
 
-  // 페이지네이션 변수 할당
-  const [currentPage, setcurrentPage] = useState(1);
-  const perPage = 10;
-  const totalPage = Math.ceil(list.length / perPage);
-  const startIndex = (currentPage - 1) * perPage;
-  const endIndex = startIndex + perPage;
-  const currentList = list.slice(startIndex, endIndex);
-  // console.log(currentPage);
-
-  // pagenation props
-  const pagenationProps = {
-    data: data,
-    loginState: loginState,
-    totalPage,
-    currentList,
-    currentPage,
-    setcurrentPage,
-    goLogin: goLogin,
-    setBoardListFn,
-  };
 
   // return
   return (
@@ -165,7 +144,7 @@ function Community({ gnb1, gnb2, data }) {
                   </ul>
                 </div>
                 <ul>
-                  {currentList.map((v, i) => (
+                  {listData.map((v, i) => (
                     <li
                       key={v.idx}
                       className="list"
@@ -180,7 +159,7 @@ function Community({ gnb1, gnb2, data }) {
                         onClick={(e) => {
                           e.preventDefault();
                           if (data === "freeboard" || data === "notice") {
-                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx, data: data } });
+                            navigate(`/community/${data}/:${v.idx}`, { state: { user: v.user, listIdx: v.idx, data: data } });
                           }
                         }}
                       >
@@ -205,7 +184,7 @@ function Community({ gnb1, gnb2, data }) {
           {/* <!-- board-section e --> */}
 
           {/* <!-- pagenate-section s --> */}
-          <Pagenation props={pagenationProps} />
+          <Pagenation data={data} />
           {/* <!-- pagnat-section e --> */}
         </div>
       </div>
