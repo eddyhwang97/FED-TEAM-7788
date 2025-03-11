@@ -22,8 +22,8 @@ function BookSearch({ gnb1, gnb2 }) {
   const searchOption = ["도서명", "저자명", "ISBN", "출판사", "장르"];
   const navigate = useNavigate();
   const location = useLocation();
-  const navigateSearchInput = location.state.navigateSearchInput;
-
+  const navigateSearchInput = location.state ? location.state.navigateSearchInput :null;
+console.log(navigateSearchInput)
   // useState
   // 검색 옵션
   const [selectOption, setSelectOption] = useState("도서명");
@@ -39,23 +39,22 @@ function BookSearch({ gnb1, gnb2 }) {
   const [ref, inView] = useInView({ threshold: 0 });
 
   // Fn
-  const handleSearchFn = (selectOption,value) => {
-    if (value !== "") {
+  const handleSearchFn = (selectOption,navigateSearchInput) => {
+    if (navigateSearchInput !== null) {
       if (selectOption === "도서명") {
-        setList(booksList.filter((book) => book.title.toLowerCase().includes(value.toLowerCase())));
+        setList(booksList.filter((book) => book.title.toLowerCase().includes(navigateSearchInput.toLowerCase())));
       } else if (selectOption === "저자명") {
-        setList(booksList.filter((book) => book.author.toLowerCase().includes(value.toLowerCase())));
+        setList(booksList.filter((book) => book.author.toLowerCase().includes(navigateSearchInput.toLowerCase())));
       } else if (selectOption === "ISBN") {
-        setList(booksList.filter((book) => book.ISBN.toLowerCase().includes(value.toLowerCase())));
+        setList(booksList.filter((book) => book.ISBN.toLowerCase().includes(navigateSearchInput.toLowerCase())));
       } else if (selectOption === "출판사") {
-        setList(booksList.filter((book) => book.publisher.toLowerCase().includes(value.toLowerCase())));
+        setList(booksList.filter((book) => book.publisher.toLowerCase().includes(navigateSearchInput.toLowerCase())));
       } else if (selectOption === "장르") {
-        setList(booksList.filter((book) => book.genre.toLowerCase().includes(value.toLowerCase())));
+        setList(booksList.filter((book) => book.genre.toLowerCase().includes(navigateSearchInput.toLowerCase())));
       }
     } else {
       setList(booksList);
     }
-    console.log(list);
   };
   const loadingFn = () => {
     if (inView) {
@@ -74,6 +73,9 @@ function BookSearch({ gnb1, gnb2 }) {
   useEffect(()=>{
 handleSearchFn(selectOption,navigateSearchInput)
   },[navigateSearchInput])
+  useEffect(()=>{
+    console.log(list)
+  },[handleSearchFn])
 
   return (
     <>
@@ -97,7 +99,7 @@ handleSearchFn(selectOption,navigateSearchInput)
                       }}
                     >
                       <div className="img-box">
-                        <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+                        <img src={`/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                       </div>
                       <div className="text-box">
                         <div className="book-tit">
