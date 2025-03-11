@@ -5,7 +5,7 @@ import Gnb from "../module/Gnb";
 import { GP } from "../module/Contexter";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import $ from "jquery";
 
 export default function TopArea({ gnb, setGnb, setSubTop }) {
@@ -48,6 +48,10 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
       navigate(v.link);
     }
   };
+
+  useEffect(()=>{
+    layoutFn.initLayout();
+  },[]);
 
   return (
     <>
@@ -120,12 +124,19 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
                   onChange={(e) => {
                     setSearchInput(e.target.value);
                   }}
+                  onKeyUp={e=>{
+                    if(e.key === 'Enter'){
+                      console.log('엔터유~~!');
+                      layoutFn.searchClose();
+                    }
+                  }}
                 />
                 <button
                   type="button"
                   className="total-search-btn"
                   onClick={() => {
                     navigate(`totalsearch/:${searchInput}`, { state: { navigateSearchInput: searchInput } });
+                    layoutFn.searchClose();
                   }}
                 ></button>
               </fieldset>
