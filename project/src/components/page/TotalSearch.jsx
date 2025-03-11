@@ -19,42 +19,43 @@ function TotalSearch() {
 
   // hook
   const location = useLocation();
-  const navigate = useNavigate();
   const navigateSearchInput = location.state.navigateSearchInput;
+  console.log(navigateSearchInput);
 
   // useState
   const searchOption = ["통합검색"];
-  const [searchInput, setSearchInput] = useState("검색어를 입력하세요");
+  const [searchInput, setSearchInput] = useState(navigateSearchInput);
   const [bookList, setbookList] = useState([]);
   const [noticeList, setnoticeList] = useState([]);
   const [freeboardList, setfreeboardList] = useState([]);
   const [faqList, setfaqList] = useState([]);
+  console.log(searchInput);
   // Fn
-  const handleSearchFn = (e) => {
-    return;
-  };
-  const filterDataFn = (e) => {
-    if (e.length === 0) {
+  const handleSearchFn = (selectOption, value) => {
+    console.log(value);
+    if (value === "") {
       setbookList([]);
       setnoticeList([]);
       setfreeboardList([]);
-      setfaqList([]) ;
+      setfaqList([]);
     } else {
-      setbookList(bookData.filter((book) => book.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
-      setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
-      setfreeboardList(freeboardData.filter((freeboard) => freeboard.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
-      setfaqList(faqData.filter((faq) => faq.title.toLowerCase().trim().includes(e.toLowerCase().trim())));
+      setbookList(bookData.filter((book) => book.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
+      setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
+      setfreeboardList(freeboardData.filter((freeboard) => freeboard.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
+      setfaqList(faqData.filter((faq) => faq.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
     }
   };
-
   useEffect(() => {
-    filterDataFn(navigateSearchInput);
-  }, [navigate]);
+    setSearchInput(searchInput);
+  }, [searchInput]);
+  useEffect(() => {
+    handleSearchFn(null, navigateSearchInput);
+  }, [navigateSearchInput]);
 
   return (
     <>
       <div className="contents">
-        <SearchBox searchOption={searchOption} navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} filterDataFn={filterDataFn} />
+        <SearchBox location={"/" + location.pathname.split("/")[1]} searchOption={searchOption} navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
         <div className="search-result">
           <section className="result-section">
             <h3 className="category-tit">도서</h3>

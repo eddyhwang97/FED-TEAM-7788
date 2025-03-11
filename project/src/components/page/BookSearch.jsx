@@ -1,23 +1,29 @@
 //  Search 컴포넌트 - Search.jsx
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import booksData from "../../js/data/book_data.json";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCategory } from "../../js/function/sort-books";
-import SubTop from "../module/SubTop";
-import SearchBox from "../module/SearchBox";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// data
+import booksData from "../../js/data/book_data.json";
+
+// compnents
+import SubTop from "../module/SubTop";
+import SearchBox from "../module/SearchBox";
+
 // css
 import "../../css/page/book-list.scss";
 import "../../css/page/search.scss";
-import { useNavigate } from "react-router-dom";
-import { event } from "jquery";
 
 function BookSearch({ gnb1, gnb2 }) {
   const booksList = [...booksData];
   const searchOption = ["도서명", "저자명", "ISBN", "출판사", "장르"];
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const navigateSearchInput = location.state ? location.state.navigateSearchInput :null;
+console.log(navigateSearchInput)
   // useState
   // 검색 옵션
   const [selectOption, setSelectOption] = useState("도서명");
@@ -33,32 +39,23 @@ function BookSearch({ gnb1, gnb2 }) {
   const [ref, inView] = useInView({ threshold: 0 });
 
   // Fn
-  const handleSearchFn = (e) => {
-    if (searchInput !== "") {
-      if (e === "도서명") {
-        setList(booksList.filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase())));
-      } else if (e === "저자명") {
-        setList(booksList.filter((book) => book.author.toLowerCase().includes(searchInput.toLowerCase())));
-      } else if (e === "ISBN") {
-        setList(booksList.filter((book) => book.ISBN.toLowerCase().includes(searchInput.toLowerCase())));
-      } else if (e === "출판사") {
-        setList(booksList.filter((book) => book.publisher.toLowerCase().includes(searchInput.toLowerCase())));
-      } else if (e === "장르") {
-        setList(booksList.filter((book) => book.genre.toLowerCase().includes(searchInput.toLowerCase())));
+  const handleSearchFn = (selectOption,navigateSearchInput) => {
+    if (navigateSearchInput !== null) {
+      if (selectOption === "도서명") {
+        setList(booksList.filter((book) => book.title.toLowerCase().includes(navigateSearchInput.toLowerCase())));
+      } else if (selectOption === "저자명") {
+        setList(booksList.filter((book) => book.author.toLowerCase().includes(navigateSearchInput.toLowerCase())));
+      } else if (selectOption === "ISBN") {
+        setList(booksList.filter((book) => book.ISBN.toLowerCase().includes(navigateSearchInput.toLowerCase())));
+      } else if (selectOption === "출판사") {
+        setList(booksList.filter((book) => book.publisher.toLowerCase().includes(navigateSearchInput.toLowerCase())));
+      } else if (selectOption === "장르") {
+        setList(booksList.filter((book) => book.genre.toLowerCase().includes(navigateSearchInput.toLowerCase())));
       }
     } else {
       setList(booksList);
     }
-    console.log(list);
-    
   };
-  // const SearchNotice = (() => {
-  //   if (list.length > 1) {
-  //     <span className="null-alert">{list.length}개의 검색결과가 있습니다.</span>;
-  //   } else {
-  //     <span className="null-alert">검색결과가 없습니다.</span>;
-  //   }
-  // },[handleSearchFn]);
   const loadingFn = () => {
     if (inView) {
       // 화면에 보이는 경우 실행할 로직
@@ -73,13 +70,19 @@ function BookSearch({ gnb1, gnb2 }) {
   useEffect(() => {
     loadingFn();
   }, [inView]);
+  useEffect(()=>{
+handleSearchFn(selectOption,navigateSearchInput)
+  },[navigateSearchInput])
+  useEffect(()=>{
+    console.log(list)
+  },[handleSearchFn])
 
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       <div className="contents">
         {/* 도서 리스트 */}
-        <SearchBox searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
+        <SearchBox location={`/search/booksearch`} searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
         <div className="book-list-wrap">
           {/* <SearchNotice/> */}
           <ul className="book-list">
@@ -96,7 +99,7 @@ function BookSearch({ gnb1, gnb2 }) {
                       }}
                     >
                       <div className="img-box">
-                        <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+                        <img src={`/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                       </div>
                       <div className="text-box">
                         <div className="book-tit">

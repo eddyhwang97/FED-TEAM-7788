@@ -3,13 +3,12 @@ import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function SearchBox({ searchOption, selectOption,filterDataFn, setSelectOption, setSearchInput, handleSearchFn,navigateSearchInput }) {
+function SearchBox({location, searchOption, setSelectOption,searchInput,setSearchInput,navigateSearchInput }) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
-  const location = useLocation();
-
   const navigate = useNavigate();
+
   return (
     <div className="search-box-wrap">
       <form action="" method="get"></form>
@@ -30,9 +29,8 @@ function SearchBox({ searchOption, selectOption,filterDataFn, setSelectOption, s
         <input
           onKeyUp={(e) => {
             if (e.key === "Enter") {
-              handleSearchFn(selectOption);
-              filterDataFn(e.target.value);
-              navigate(`/totalsearch/:${e.target.value}`,{state:{navigateSearchInput:e.target.value}})
+              console.log(e.target.value);
+              navigate(`${location}/:${e.target.value}`,{state:{ navigateSearchInput : e.target.value}})
             }
           }}
           type="text"
@@ -45,7 +43,8 @@ function SearchBox({ searchOption, selectOption,filterDataFn, setSelectOption, s
         <button
           className="search-button"
           onClick={() => {
-            handleSearchFn(selectOption);
+            const inputValue = searchInput
+            navigate(`${location}/:${inputValue}`,{state:{ navigateSearchInput : inputValue}})
           }}
         ></button>
       </div>
