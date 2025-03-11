@@ -121,7 +121,13 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
                     setSearchInput(e.target.value);
                   }}
                 />
-                <button type="button" className="total-search-btn"></button>
+                <button
+                  type="button"
+                  className="total-search-btn"
+                  onClick={() => {
+                    navigate(`totalsearch/:${searchInput}`, { state: { navigateSearchInput: searchInput } });
+                  }}
+                ></button>
               </fieldset>
             </form>
           </div>

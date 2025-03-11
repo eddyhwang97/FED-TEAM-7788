@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import communityData from "../../js/data/community_data.json";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function SearchBox({location, searchOption, selectOption, setSelectOption,setSearchInput, handleSearchFn,navigateSearchInput }) {
+function SearchBox({location, searchOption, setSelectOption,searchInput,setSearchInput,navigateSearchInput }) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
   const navigate = useNavigate();
-  console.log(location)
 
   return (
     <div className="search-box-wrap">
@@ -44,7 +43,8 @@ function SearchBox({location, searchOption, selectOption, setSelectOption,setSea
         <button
           className="search-button"
           onClick={() => {
-            handleSearchFn(selectOption);
+            const inputValue = searchInput
+            navigate(`${location}/:${inputValue}`,{state:{ navigateSearchInput : inputValue}})
           }}
         ></button>
       </div>
