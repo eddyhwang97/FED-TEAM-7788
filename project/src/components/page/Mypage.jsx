@@ -1,14 +1,31 @@
 //  Mypage 컴포넌트 - Mypage.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import confetti from 'canvas-confetti'; // 폭죽 라이브러리
 import SubTop from '../module/SubTop';
 import hm from '../../css/page/hm.scss';
 import book_data from '../../js/data/book_data.json';
+import badge_data from '../../js/data/badge_data.json';
 
 // 로컬스토리지 도서 데이터 저장 (초기 1회)
 if (!localStorage.getItem('book_data')) {
   localStorage.setItem('book_data', JSON.stringify(book_data));
 }
+
+// ISBN을 통해 책의 장르를 찾는 함수
+const getGenreByISBN = (book) => {
+  if (!book || !book.isbn) {
+    return null; // isbn이 없으면 null 반환
+  }
+
+  const foundBook = book_data.find(
+    (b) => b.ISBN && b.ISBN.toString().toLowerCase() === book.isbn.toLowerCase()
+  );
+  return foundBook ? foundBook.genre : null; // 장르가 없다면 null 반환
+};
+
+// 뱃지 데이터
+const badgeData = badge_data;
 
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
@@ -22,24 +39,43 @@ function Mypage({ gnb1, gnb2 }) {
   const [finished, setFinished] = useState(0);
   const [pickedBooks, setPickedBooks] = useState([]);
   const [profileImage, setProfileImage] = useState('');
+  const [unlockedBadges, setUnlockedBadges] = useState([]);
+
+  const [showModal, setShowModal] = useState(false);  // 모달 창 상태
+  const [modalContent, setModalContent] = useState('');  // 모달에 표시할 내용
+  const [completedBadges, setCompletedBadges] = useState([]);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
     if (!loggedInUser) {
-      alert('로그인이 필요합니다.');
       navigate('/login');
+      alert('로그인이 필요합니다.');
     } else {
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser);
-      updateLevel(parsedUser.bData.length || 0); // 유저 레벨 업데이트
 
-      // 찜 개수 업데이트
-      if (parsedUser.iLoveIt) {
+      // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
+      if (parsedUser.iLoveIt && Array.isArray(parsedUser.iLoveIt)) {
         setPicked(parsedUser.iLoveIt);
-        setCurrentBook(parsedUser.currentData) ;
-        setFinished(parsedUser.bData);
+      } else {
+        setPicked([]);
       }
+
+      if (parsedUser.currentData && Array.isArray(parsedUser.currentData)) {
+        setCurrentBook(parsedUser.currentData);
+      } else {
+        setCurrentBook([]);
+      }
+
+      if (parsedUser.bData && Array.isArray(parsedUser.bData)) {
+        setFinished(parsedUser.bData);
+      } else {
+        setFinished([]);
+      }
+
+      // 유저 레벨 업데이트
+      updateLevel(parsedUser.bData.length || 0); 
     }
   }, [navigate]);
 
@@ -92,25 +128,223 @@ function Mypage({ gnb1, gnb2 }) {
     return [0, 2, 5, 11, 30][lvl];
   };
 
-   // 프로필 이미지 선택 핸들러
-   const handleProfileImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+  useEffect(() => {
+    // 컴포넌트 처음 렌더링시 로컬스토리지에서 이미지 불러오기
+    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+    if (loggedInUserSession) {
+      const parsedUserSession = JSON.parse(loggedInUserSession);
+      const userId = parsedUserSession.id;
 
-      // 로컬스토리지에 새로운 프로필 이미지 URL 저장
-      const loggedInUser = localStorage.getItem('member_data');
-      if (loggedInUser) {
-        const parsedUser = JSON.parse(loggedInUser);
-        parsedUser.profileImage = imageUrl; // 프로필 이미지 업데이트
-        localStorage.setItem('member_data', JSON.stringify(parsedUser)); // 세션스토리지 업데이트
+      // 로컬스토리지에서 member_data 가져오기
+      const memberData = localStorage.getItem('member_data');
+      if (memberData) {
+        const parsedMembers = JSON.parse(memberData);
+
+        // 로그인 유저 프로필 이미지 찾기
+        const currentUser = parsedMembers.find(
+          (member) => member.id === userId
+        );
+        if (currentUser && currentUser.profileImage) {
+          setProfileImage(currentUser.profileImage); // 프로필 이미지 상태 업데이트
+        } else {
+          // 프로필 이미지가 없으면 기본 이미지 설정
+          setProfileImage('/img/sub/img-profile-temp.jpg');
+        }
       }
     }
+  }, []);
+
+  // 프로필 이미지 선택 핸들러
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image = reader.result; // Base64로 이미지 데이터 변환
+        setProfileImage(base64Image);
+
+        // 로컬스토리지에 Base64 이미지 URL 저장
+        const memberData = localStorage.getItem('member_data');
+        if (memberData) {
+          const parsedMembers = JSON.parse(memberData);
+
+          // 세션스토리지 로그인 데이터
+          const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+          if (loggedInUserSession) {
+            const parsedUserSession = JSON.parse(loggedInUserSession);
+            const userId = parsedUserSession.id;
+
+            // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
+            const updatedMembers = parsedMembers.map((member) =>
+              member.id === userId
+                ? { ...member, profileImage: base64Image }
+                : member
+            );
+
+            // 로컬스토리지에 업데이트된 member_data 저장
+            localStorage.setItem('member_data', JSON.stringify(updatedMembers));
+
+            // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
+            parsedUserSession.profileImage = base64Image;
+            sessionStorage.setItem(
+              'loggedInUser',
+              JSON.stringify(parsedUserSession)
+            );
+          }
+        }
+      };
+      reader.readAsDataURL(file); // Base64로 변환
+    }
+  };
+
+  // 뱃지 시스템 시작 //
+  const badges = badgeData;
+
+  // ISBN 장르추출 //
+
+  const getGenreByISBN = (isbn) => {
+    const prefix = isbn.toString().slice(0, 3); // ISBN 앞 3자리 추출
+
+    switch (prefix) {
+      case '996':
+        return '문학';
+      case '997':
+        return '인문사회과학';
+      case '998':
+        return '예술';
+      case '999':
+        return '매거진';
+      default:
+        return null; // 장르를 찾을 수 없으면 null 반환
+    }
+  };
+
+  useEffect(() => {
+    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+
+    if (loggedInUserSession) {
+      const parsedUserSession = JSON.parse(loggedInUserSession);
+      const bData = parsedUserSession.bData;
+
+      if (Array.isArray(bData) && bData.length > 0) {
+        // 카테고리별로 대출된 책의 수를 카운트
+        const genreCount = {
+          문학: 0,
+          인문사회과학: 0,
+          예술: 0,
+          매거진: 0,
+        };
+
+        // ISBN을 통해 카테고리 추출 후 카운트
+        bData.forEach((book) => {
+          const genre = getGenreByISBN(book); // ISBN을 통해 카테고리 추출
+          if (genre && genreCount.hasOwnProperty(genre)) {
+            genreCount[genre]++;
+          }
+        });
+
+        console.log(genreCount);
+
+        // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
+        const unlockedBadges = badgeData.filter((badge) => {
+          const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
+          return genreCount[genre] >= 3;
+        });
+
+        setUnlockedBadges(unlockedBadges); // 활성화된 뱃지 업데이트
+
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
+
+    if (loggedInUserSession) {
+      const parsedUserSession = JSON.parse(loggedInUserSession);
+      const bData = parsedUserSession.bData;
+
+      if (Array.isArray(bData) && bData.length > 0) {
+        // 카테고리별로 대출된 책의 수를 카운트
+        const genreCount = {
+          문학: 0,
+          인문사회과학: 0,
+          예술: 0,
+          매거진: 0,
+        };
+
+        // ISBN을 통해 카테고리 추출 후 카운트
+        bData.forEach((book) => {
+          const genre = getGenreByISBN(book); // ISBN을 통해 카테고리 추출
+          if (genre) {
+            genreCount[genre]++;
+          }
+        });
+
+        // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
+        const unlockedBadges = badgeData.filter((badge) => {
+          const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
+          return genreCount[genre] >= 3;
+        });
+
+        if (bData.length >= 5) {
+          unlockedBadges.push({
+            badgeTitle: '칙칙북북 킹',
+            badgeDescription: '누적 대출도서 5권 달성',
+            badgeSrc: '/img/sub/img-badge-king.png',
+            badgeAlt: '누적 대출도서 5권 달성 뱃지',
+          });
+        }
+
+        const badgesWithAnimation = unlockedBadges.map(badge => ({
+          ...badge,
+          isActive: true, // 애니메이션 상태 추가
+        }));
+        setUnlockedBadges(badgesWithAnimation); // 활성화된 뱃지 업데이트
+
+         // 뱃지가 활성화되었을 때 모달과 폭죽 애니메이션을 한 번만 실행
+         unlockedBadges.forEach((badge) => {
+          if (!completedBadges.includes(badge.badgeTitle)) {
+            setCompletedBadges((prevBadges) => [...prevBadges, badge.badgeTitle]);
+            setShowModal(true);  // 모달을 띄운다.
+            setModalContent(`축하합니다! 새로운 뱃지를 획득하셨습니다: ${badge.badgeTitle}`);
+            triggerConfetti();  // 폭죽 애니메이션을 실행한다.
+          }
+        });
+      }
+    }
+  }, [completedBadges]);  // completedBadges가 변경될 때마다 실행
+
+  const triggerConfetti = () => {
+    const end = Date.now() + 3 * 1000;  // 폭죽을 3초 동안 터뜨리기
+    const interval = setInterval(() => {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: Math.random(), y: Math.random() - 0.2 },
+      });
+      if (Date.now() > end) {
+        clearInterval(interval);  // 폭죽을 끝낸다.
+      }
+    }, 100);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
     <>
+  {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>{modalContent}</h2>
+            <button onClick={closeModal}>확인</button>
+          </div>
+        </div>
+      )}
+
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       <div className='contents'>
         <div className='mypage-wrap'>
@@ -118,7 +352,7 @@ function Mypage({ gnb1, gnb2 }) {
             <div className='profile-box'>
               <div className='profile-image'>
                 <img
-                  src={profileImage || '/img/sub/img-profile-temp.jpg'} // 선택한 이미지나 기본 이미지
+                  src={profileImage || '/img/sub/img-profile-temp.png'} // 선택한 이미지나 기본 이미지
                   alt='프로필 이미지'
                   onClick={() =>
                     document.getElementById('profile-image-input').click()
@@ -183,15 +417,21 @@ function Mypage({ gnb1, gnb2 }) {
               <div className='my-book'>
                 <div className='book-box borrow'>
                   <p>대출 중</p>
-                  <span className='borrow-num'>{currentBook.length}</span>
+                  <span className='borrow-num'>
+                    {currentBook?.length ? currentBook.length : 0}
+                  </span>
                 </div>
                 <div className='book-box picked'>
                   <p>찜</p>
-                  <span className='picked-num'>{picked.length}</span>
+                  <span className='picked-num'>
+                    {picked?.length ? picked.length : 0}
+                  </span>
                 </div>
                 <div className='book-box read'>
                   <p>다 읽었어요</p>
-                  <span className='read-num'>{finished.length}</span>
+                  <span className='read-num'>
+                    {finished?.length ? finished.length : 0}
+                  </span>
                 </div>
               </div>
             </div>
@@ -222,10 +462,16 @@ function Mypage({ gnb1, gnb2 }) {
                 <p className='section-tit'>마음에 들어요</p>
                 <ul className='pick-list'>
                   {pickedBooks.length > 0 ? (
-                    pickedBooks.map((book) => (
-                      <li key={`${book.isbn}-${book.dueDate}`}>
+                    pickedBooks.map((book, index) => (
+                      <li
+                        key={`${book.isbn ?? `index-${index}`}-${
+                          book.dueDate ?? 'nodate'
+                        }`}
+                      >
                         <em className='book-name'>{book.title}</em>
-                        <span className='label'>{book.genre}</span>
+                        <span className='label'>
+                          {book.genre.replace('인문사회과학', '인문사회')}
+                        </span>
                       </li>
                     ))
                   ) : (
@@ -237,51 +483,24 @@ function Mypage({ gnb1, gnb2 }) {
           </div>
           <div className='inner-section badge-wrap'>
             <ul className='badge-list'>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-996-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-997-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-998-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-999-3.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
-              <li>
-                <div className='img-box'>
-                  <img src='/img/sub/img-badge-king.png' alt='배지' />
-                </div>
-                <div className='text-box'>
-                  <p>인문학 입문학?</p>
-                  <span>인문사회과학 카테고리 도서 5권 대출하기</span>
-                </div>
-              </li>
+              {unlockedBadges.length > 0 ? (
+                unlockedBadges.map((badge, index) => (
+                  <li key={index} className={`badge-item ${badge.isActive ? 'active' :''}`}>
+                    <div className='img-box'>
+                      <img
+                        src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                        alt={badge.badgeAlt}
+                      />
+                    </div>
+                    <div className='text-box'>
+                      <p>{badge.badgeTitle}</p>
+                      <span>{badge.badgeDescription}</span>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <li>획득한 배지가 없습니다.</li>
+              )}
             </ul>
           </div>
         </div>
