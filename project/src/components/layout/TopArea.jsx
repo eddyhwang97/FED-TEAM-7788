@@ -37,6 +37,7 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
       alert("로그아웃이 완료되었습니다.");
       navigate("/");
       console.clear();
+      context.setLogin(false);
     }
   };
 
