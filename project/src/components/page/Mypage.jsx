@@ -152,7 +152,7 @@ function Mypage({ gnb1, gnb2 }) {
           setProfileImage(currentUser.profileImage); // 프로필 이미지 상태 업데이트
         } else {
           // 프로필 이미지가 없으면 기본 이미지 설정
-          setProfileImage('/img/sub/img-profile-temp.jpg');
+          setProfileImage('/img/sub/img-profile-temp.png');
         }
       }
     }

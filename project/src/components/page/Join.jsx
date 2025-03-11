@@ -36,8 +36,6 @@ function Join({ gnb1, gnb2 }) {
   //  회원가입 버튼 활성화
     const [notAllow, setNotAllow] = useState(true);
 
-
-
   // 핸드폰 번호 입력 시 자동 포맷
 const handlePhoneNumber = (e) => {
   let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 남기기
