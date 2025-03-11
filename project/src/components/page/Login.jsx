@@ -72,6 +72,7 @@ function Login({ gnb1, gnb2 }) {
     if (phoneValid && pwValid) {
       setNotAllow(false);
       return;
+      console.log(loginState)
     } // if //
     setNotAllow(true);
   }, [phoneValid, pwValid]);
