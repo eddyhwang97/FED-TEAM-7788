@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { GP } from "../module/Contexter";
@@ -9,8 +9,11 @@ import communityData from "../../js/data/community_data.json";
 
 // css
 import "../../css/page/community.scss";
+
+// components
 import SubTop from "../module/SubTop";
 import SearchBox from "../module/SearchBox";
+import Pagenation from "../module/Pagenation";
 
 // 데이터 로컬스토리지 저장
 if (!localStorage.community_data) {
@@ -20,6 +23,7 @@ function Community({ gnb1, gnb2, data }) {
   // hook
   const context = useContext(GP);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 로그인 정보
   // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
@@ -28,7 +32,7 @@ function Community({ gnb1, gnb2, data }) {
   const user = loginState ? context.user : null;
   // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
   const userName = user !== null ? user.name : null;
-  console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
+  // console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
 
   // variables
   const searchOption = ["제목", "내용", "작성자"];
@@ -42,8 +46,6 @@ function Community({ gnb1, gnb2, data }) {
   // 검색어 입력값
   const [searchInput, setSearchInput] = useState("");
   const [list, setList] = useState(listData);
-  const [page, setPage] = useState(1);
-  console.log(list)
 
   // function
   const toggleListFn = (e) => {
@@ -81,6 +83,28 @@ function Community({ gnb1, gnb2, data }) {
   }, [useLocation()]);
   // 로그인 상태 확인
 
+  // 페이지네이션 변수 할당
+  const [currentPage, setcurrentPage] = useState(1);
+  const perPage = 10;
+  const totalPage = Math.ceil(list.length / perPage);
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const currentList = list.slice(startIndex, endIndex);
+  console.log(currentPage);
+
+  // pagenation props
+  const pagenationProps = {
+    data: data,
+    loginState: loginState,
+    totalPage,
+    currentList,
+    currentPage,
+    setcurrentPage,
+    goLogin: goLogin,
+    setBoardListFn,
+  };
+
+  // return
   return (
     <>
       {/* <!-- sub-top s --> */}
@@ -141,7 +165,7 @@ function Community({ gnb1, gnb2, data }) {
                   </ul>
                 </div>
                 <ul>
-                  {list.map((v, i) => (
+                  {currentList.map((v, i) => (
                     <li
                       key={v.idx}
                       className="list"
@@ -181,25 +205,7 @@ function Community({ gnb1, gnb2, data }) {
           {/* <!-- board-section e --> */}
 
           {/* <!-- pagenate-section s --> */}
-          <div className="pagenate-section">
-            <button type="button" className="btn-prev"></button>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <button type="button" className="btn-next"></button>
-            {data === "freeboard" && (
-              <button
-                type="button"
-                className="write-btn"
-                onClick={() => {
-                  if (!loginState) goLogin();
-                  else navigate(`/community/freeboard/post`);
-                }}
-              >
-                글쓰기
-              </button>
-            )}
-          </div>
+          <Pagenation props={pagenationProps} />
           {/* <!-- pagnat-section e --> */}
         </div>
       </div>

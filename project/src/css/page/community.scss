@@ -194,15 +194,26 @@
   align-items: center;
   gap: 4px;
   margin-top: 1rem;
+  ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 5px;
+  }
   button,
-  a {
+  li {
     width: 24px;
     height: 24px;
     display: block;
     text-align: center;
     line-height: 24px;
   }
-
+.active{
+  background-color: $point-color;
+  border-radius: 5px;
+  color: $white;
+}
   button {
     background: url("../../../public/img/common/icon-arrow.svg") center no-repeat;
     &.btn-prev {
