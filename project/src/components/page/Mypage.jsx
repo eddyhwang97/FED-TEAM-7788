@@ -1,9 +1,10 @@
 //  Mypage 컴포넌트 - Mypage.jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState , useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GP } from '../module/Contexter';
 import confetti from 'canvas-confetti'; // 폭죽 라이브러리
 import SubTop from '../module/SubTop';
-import hm from '../../css/page/hm.scss';
+import mypage from '../../css/page/mypage.scss';
 import book_data from '../../js/data/book_data.json';
 import badge_data from '../../js/data/badge_data.json';
 
@@ -29,7 +30,8 @@ const badgeData = badge_data;
 
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const context = useContext(GP);
+  const [userTemp, setUser] = useState(null);
   const [level, setLevel] = useState(1);
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
@@ -44,6 +46,10 @@ function Mypage({ gnb1, gnb2 }) {
   const [showModal, setShowModal] = useState(false);  // 모달 창 상태
   const [modalContent, setModalContent] = useState('');  // 모달에 표시할 내용
   const [completedBadges, setCompletedBadges] = useState([]);
+
+  const loginState = context.loginState.isLogin;
+  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
+  const user = loginState ? context.user : null;
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
