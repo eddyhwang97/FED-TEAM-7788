@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import booksData from "../../js/data/book_data.json";
 import { getCategory } from "../../js/function/sort-books";
 import "../../css/page/book-view.scss";
 import BookComment from "../module/BookComment";
+import { GP } from "../module/Contexter";
 
 function BookDetail() {
   const { isbn } = useParams();
@@ -13,13 +14,17 @@ function BookDetail() {
   const [stock, setStock] = useState(0);
   const [returnDate, setReturnDate] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const context = useContext(GP);
+
+  const loginState = context.loginState.isLogin;
+  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
+  const user = loginState ? context.user : null;
 
   useEffect(() => {
     if (book) {
       setStock(book.stock);
     }
 
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser")); 
     if (user) {
       if (Array.isArray(user.iLoveIt)) {
         setIsFavorite(user.iLoveIt.includes(book.ISBN));
@@ -40,7 +45,6 @@ function BookDetail() {
 
   // 도서 대출
   const handleLoan = () => {
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -70,7 +74,6 @@ function BookDetail() {
 
   // 도서 반납
   const handleReturn = () => {
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) return;
 
@@ -90,7 +93,6 @@ function BookDetail() {
 
   // 도서 찜
   const handleFavorite = () => {
-    const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
 
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -139,8 +141,9 @@ function BookDetail() {
                 <li><em>페이지</em><span className="page">{book.pNum}</span></li>
                 <li><em>카테고리</em><span className="genre">{getCategory(book.ISBN)}</span></li>
                 <li><em>재고</em><span className="stock">{stock}권</span></li>
-                {returnDate && <li><em>반납 기한</em><span className="return-date">{returnDate}</span></li>}
               </ul>
+              <p className="book-text">{book.info}</p>
+              {returnDate && <p><em>반납 기한 </em><span className="return-date">{returnDate}</span></p>}
               <div className="util-box">
                 <div className="btn-wrap">
                   {loanStatus === "대출 가능" ? (
