@@ -61,7 +61,8 @@ function Login({ gnb1, gnb2 }) {
       alert('로그인 성공🎉');
       console.clear();
       navigate('/'); // 로그인 성공 후 메인페이지 이동
-      window.location.reload(); // 페이지 새로고침 -> 다른 방법은 없을까?
+      context.setLogin(true);
+      // window.location.reload(); // 페이지 새로고침 -> 다른 방법은 없을까?
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
     }
@@ -103,6 +104,12 @@ function Login({ gnb1, gnb2 }) {
                   placeholder='비밀번호'
                   value={pw}
                   onChange={handlePw}
+                  onKeyUp={(e)=>{
+                    if(e.key === 'Enter'){
+                      console.log('엔터했슈~~!',document.querySelector('.login-btn'));
+                      document.querySelector('.login-btn').click();
+                    }
+                  }}
                 />{' '}
                 <span
                   className='toggle-password'

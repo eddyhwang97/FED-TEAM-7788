@@ -21,7 +21,7 @@ export default function Layout() {
   const isMainPage = location.pathname === "/" || location.pathname === "/home";
 
   return (
-    <GP.Provider value={{ user, loginState }}>
+    <GP.Provider value={{ user, loginState, setLogin }}>
       <TopArea />
       {isMainPage ? <MainArea /> : <SubArea />}
       <FooterArea />
