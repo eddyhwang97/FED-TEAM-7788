@@ -1,4 +1,5 @@
-@import "../common/core"; // mixin.scss
+@import "../common/mixins"; // mixin.scss
+@import "../common/variables"; // variables.scss
 
 .inner-section {
   margin-top: 40px;

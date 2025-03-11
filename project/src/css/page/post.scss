@@ -1,5 +1,6 @@
 // post
-@import "../common/core";
+@import "../common/mixins"; // mixin.scss
+@import "../common/variables"; // variables.scss
 
 
 .write-board {

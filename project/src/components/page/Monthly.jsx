@@ -53,7 +53,7 @@ function Monthly({ gnb1, gnb2 }) {
             </Swiper>
           </div>
         </div>
-        <div className="book-wrap">
+        <div className="book-info-box">
           <div className="tit">{selData.bName}</div>
           <div className="info-wrap">
             <div className="left">

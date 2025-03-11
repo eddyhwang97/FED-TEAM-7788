@@ -21,6 +21,9 @@ import Article from "./components/page/Article";
 import Post from "./components/page/Post";
 import TotalSearch from "./components/page/TotalSearch";
 
+// 공통 css
+import "./css/common/_core.scss"
+
 export default function MainComponent() {
   return (
     <BrowserRouter>

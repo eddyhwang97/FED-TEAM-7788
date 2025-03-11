@@ -1,5 +1,6 @@
 // main.scss
-@import "../common/core";
+@import "../common/mixins"; // mixin.scss
+@import "../common/variables"; // variables.scss
 
 /** 메인 컨텐츠 css **/
 
