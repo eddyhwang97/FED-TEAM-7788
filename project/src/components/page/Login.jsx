@@ -1,5 +1,6 @@
 //  Login 컴포넌트 - Login.jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { GP } from '../module/Contexter';
 import { useNavigate } from 'react-router-dom';
 import SubTop from '../module/SubTop';
 import login from '../../css/page/login.scss';
@@ -15,6 +16,7 @@ const PW_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#+\^])[A-Za-z\d@$!%*?&#+\^]{8,16}$/;
 
 function Login({ gnb1, gnb2 }) {
+  const context = useContext(GP);
   const navigate = useNavigate();
   const [phoneNum, setPhoneNum] = useState('');
   const [phoneValid, setphoneValid] = useState(false);
@@ -22,6 +24,14 @@ function Login({ gnb1, gnb2 }) {
   const [pwValid, setpwValid] = useState(false);
   const [showPw, setShowPw] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
+
+   // 로그인 정보
+  // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
+  const loginState = context.loginState.isLogin;
+  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
+  const user = loginState ? context.user : null;
+  // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
+  const userName = user !== null ? user.name : null;
 
   // 핸드폰 번호 입력 핸들러
   const handlePhoneNumber = (e) => {
@@ -46,11 +56,12 @@ function Login({ gnb1, gnb2 }) {
     );
 
     if (user) {
-      // 로그인 성공 시 사용자 정보 로컬스토리지에 저장
+      // 로그인 성공 시 사용자 정보 세션스토리지에 저장
       sessionStorage.setItem('loggedInUser', JSON.stringify(user));
       alert('로그인 성공🎉');
       console.clear();
       navigate('/'); // 로그인 성공 후 메인페이지 이동
+      window.location.reload(); // 페이지 새로고침 -> 다른 방법은 없을까?
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
     }

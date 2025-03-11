@@ -31,7 +31,6 @@ const badgeData = badge_data;
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
   const context = useContext(GP);
-  const [userTemp, setUser] = useState(null);
   const [level, setLevel] = useState(1);
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
@@ -55,14 +54,11 @@ function Mypage({ gnb1, gnb2 }) {
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
-    const loggedInUser = sessionStorage.getItem('loggedInUser');
-    if (!loggedInUser) {
+    if (!context.user) {
       navigate('/login');
       alert('로그인이 필요합니다.');
     } else {
-      const user = JSON.parse(loggedInUser);
-      setUser(user);
-
+      
       // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
       if (user.iLoveIt && Array.isArray(user.iLoveIt)) {
         setPicked(user.iLoveIt);
@@ -138,10 +134,6 @@ function Mypage({ gnb1, gnb2 }) {
 
   useEffect(() => {
     // 컴포넌트 처음 렌더링시 로컬스토리지에서 이미지 불러오기
-    const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-    if (loggedInUserSession) {
-      const userSession = JSON.parse(loggedInUserSession);
-      const userId = userSession.id;
 
       // 로컬스토리지에서 member_data 가져오기
       const memberData = localStorage.getItem('member_data');
@@ -150,7 +142,7 @@ function Mypage({ gnb1, gnb2 }) {
 
         // 로그인 유저 프로필 이미지 찾기
         const currentUser = parsedMembers.find(
-          (member) => member.id === userId
+          (member) => member.id === user.id
         );
         if (currentUser && currentUser.profileImage) {
           setProfileImage(currentUser.profileImage); // 프로필 이미지 상태 업데이트
@@ -159,7 +151,6 @@ function Mypage({ gnb1, gnb2 }) {
           setProfileImage('/img/sub/img-profile-temp.jpg');
         }
       }
-    }
   }, []);
 
   // 프로필 이미지 선택 핸들러
@@ -176,15 +167,10 @@ function Mypage({ gnb1, gnb2 }) {
         if (memberData) {
           const parsedMembers = JSON.parse(memberData);
 
-          // 세션스토리지 로그인 데이터
-          const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-          if (loggedInUserSession) {
-            const userSession = JSON.parse(loggedInUserSession);
-            const userId = userSession.id;
 
             // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
             const updatedMembers = parsedMembers.map((member) =>
-              member.id === userId
+              member.id === user.id
                 ? { ...member, profileImage: base64Image }
                 : member
             );
@@ -193,12 +179,11 @@ function Mypage({ gnb1, gnb2 }) {
             localStorage.setItem('member_data', JSON.stringify(updatedMembers));
 
             // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
-            userSession.profileImage = base64Image;
+            user.profileImage = base64Image;
             sessionStorage.setItem(
               'loggedInUser',
-              JSON.stringify(userSession)
+              JSON.stringify(user)
             );
-          }
         }
       };
       reader.readAsDataURL(file); // Base64로 변환
