@@ -459,10 +459,18 @@ function Mypage({ gnb1, gnb2 }) {
                         (b) => b.ISBN.toLowerCase() === book.isbn.toLowerCase()
                       );
                       return foundBook ? (
-                        <li key={book.isbn}>
-                          <em className='book-name'>{foundBook.title}</em>
-                          <span className='date'>~{book.dueDate}</span>
-                        </li>
+                        <a
+                          href={
+                            book?.isbn
+                              ? `/book/${book.isbn.toLowerCase()}`
+                              : '#'
+                          }
+                        >
+                          <li key={book.isbn}>
+                            <em className='book-name'>{foundBook.title}</em>
+                            <span className='date'>~{book.dueDate}</span>
+                          </li>
+                        </a>
                       ) : null;
                     })
                   ) : (
@@ -475,16 +483,17 @@ function Mypage({ gnb1, gnb2 }) {
                 <ul className='pick-list'>
                   {pickedBooks.length > 0 ? (
                     pickedBooks.map((book, index) => (
-                      <li
-                        key={`${book.isbn ?? `index-${index}`}-${
-                          book.dueDate ?? 'nodate'
-                        }`}
+                      <a
+                        href={`/book/${book.ISBN ?? ''}`}
+                        key={`${book.isbn ?? `index-${index}`}`}
                       >
-                        <em className='book-name'>{book.title}</em>
-                        <span className='label'>
-                          {book.genre.replace('인문사회과학', '인문사회')}
-                        </span>
-                      </li>
+                        <li>
+                          <em className='book-name'>{book.title}</em>
+                          <span className='label'>
+                            {book.genre.replace('인문사회과학', '인문사회')}
+                          </span>
+                        </li>
+                      </a>
                     ))
                   ) : (
                     <li>찜한 책이 없습니다.</li>
