@@ -31,7 +31,7 @@ function Community({ gnb1, gnb2, data }) {
   // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
   const user = loginState ? context.user : null;
   // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
-  const userName = user !== null ? user.name : null;
+  // const userName = user !== null ? user.name : null;
   // console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
 
   // variables
@@ -55,14 +55,14 @@ function Community({ gnb1, gnb2, data }) {
     });
     e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
   };
-  const handleSearchFn = (e) => {
-    if (searchInput !== "") {
-      if (e === "제목") {
-        setList(list.filter((v) => v.title.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-      } else if (e === "내용") {
-        setList(list.filter((v) => v.content.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
-      } else if (e === "작성자") {
-        setList(list.filter((v) => v.user.toLowerCase().trim().includes(searchInput.toLowerCase().trim())));
+  const handleSearchFn = (selectOption,value) => {
+    if (value !== "") {
+      if (selectOption === "제목") {
+        setList(list.filter((v) => v.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
+      } else if (selectOption=== "내용") {
+        setList(list.filter((v) => v.content.toLowerCase().trim().includes(value.toLowerCase().trim())));
+      } else if (selectOption=== "작성자") {
+        setList(list.filter((v) => v.user.toLowerCase().trim().includes(value.toLowerCase().trim())));
       }
     } else setList(listData);
   };
@@ -90,7 +90,7 @@ function Community({ gnb1, gnb2, data }) {
   const startIndex = (currentPage - 1) * perPage;
   const endIndex = startIndex + perPage;
   const currentList = list.slice(startIndex, endIndex);
-  console.log(currentPage);
+  // console.log(currentPage);
 
   // pagenation props
   const pagenationProps = {

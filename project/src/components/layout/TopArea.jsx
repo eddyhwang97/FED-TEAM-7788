@@ -11,7 +11,6 @@ import $ from "jquery";
 export default function TopArea({ gnb, setGnb, setSubTop }) {
   // hook
   const context = useContext(GP);
-  const location = useLocation();
   const navigate = useNavigate();
 
   // 로그인 정보
@@ -120,7 +119,6 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
                   placeholder={searchInput}
                   onChange={(e) => {
                     setSearchInput(e.target.value);
-                    console.log(searchInput);
                   }}
                 />
                 <button type="button" className="total-search-btn"></button>
