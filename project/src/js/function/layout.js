@@ -1,6 +1,7 @@
 import $ from "jquery";
-window.$ = $;
-$(() => {
+
+function initLayout() {
+  window.$ = $;
   // variables
   const $body = $("body"),
     $dimm = $(".dimm"),
@@ -45,7 +46,7 @@ $(() => {
     $menuClose.on("click", reset);
 
     $dep1.on("click", function () {
-      if(window.innerWidth < 1024) {
+      if (window.innerWidth < 1024) {
         if (!$(this).parent().hasClass("on")) {
           $(this).parent().addClass("on").siblings().removeClass("on");
           $dep2.removeClass("show");
@@ -89,7 +90,7 @@ $(() => {
     });
 
     $dep1.on("click", function (e) {
-      if(window.innerWidth >= 1024){
+      if (window.innerWidth >= 1024) {
         e.preventDefault();
       }
     });
@@ -181,4 +182,20 @@ $(() => {
       $btnSite.removeClass("active").find("span").text("닫힘");
     }
   });
-});
+}
+
+function searchClose() {
+  window.$ = $;
+  const $searchDimm = $(".search-dimm"),
+    $totalSearchBtn = $(".total-search-btn"),
+    $searchCloseBtn = $(".search-close-btn"),
+    $searchWrap = $(".search-wrap");
+
+  $searchDimm.removeClass("on");
+  $searchWrap.removeClass("on");
+  $searchWrap.stop().slideUp();
+  $totalSearchBtn.removeClass("on");
+  $searchCloseBtn.removeClass("on");
+}
+
+export { initLayout, searchClose };

@@ -46,10 +46,11 @@ function BoardSection() {
                   <li key={item.idx}>
                     <a 
                     href="#"
-                    // onClick={(e) => {
-                    //   e.preventDefault(); // a태그 기본 동작 방지
-                    //   navigate(`/community/${selectedTab === "notice" ? "notice" : "freeboard"}/${item.idx}`); // 상세 페이지 이동
-                    // }} 
+                    onClick={(e) => {
+                      e.preventDefault(); // a태그 기본 동작 방지
+                      navigate(`/community/${selectedTab === "notice" ? "notice" : "freeboard"}/${item.idx}`, 
+                        { state: { user: item.user, listIdx: item.idx, data: selectedTab }}); // 상세 페이지 이동
+                    }} 
                     className="item">
                       <div className="list-tit">
                         <span className={`label ${selectedTab === "notice" ? "pink" : "mint"}`}>
