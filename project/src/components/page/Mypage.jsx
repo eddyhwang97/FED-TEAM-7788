@@ -50,6 +50,8 @@ function Mypage({ gnb1, gnb2 }) {
   const loginState = context.loginState.isLogin;
   // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
   const user = loginState ? context.user : null;
+  console.log("로그인 상태:", context.loginState.isLogin);
+  console.log("유저 정보:", context.user);
 
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
@@ -58,30 +60,30 @@ function Mypage({ gnb1, gnb2 }) {
       navigate('/login');
       alert('로그인이 필요합니다.');
     } else {
-      const parsedUser = JSON.parse(loggedInUser);
-      setUser(parsedUser);
+      const user = JSON.parse(loggedInUser);
+      setUser(user);
 
       // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
-      if (parsedUser.iLoveIt && Array.isArray(parsedUser.iLoveIt)) {
-        setPicked(parsedUser.iLoveIt);
+      if (user.iLoveIt && Array.isArray(user.iLoveIt)) {
+        setPicked(user.iLoveIt);
       } else {
         setPicked([]);
       }
 
-      if (parsedUser.currentData && Array.isArray(parsedUser.currentData)) {
-        setCurrentBook(parsedUser.currentData);
+      if (user.currentData && Array.isArray(user.currentData)) {
+        setCurrentBook(user.currentData);
       } else {
         setCurrentBook([]);
       }
 
-      if (parsedUser.bData && Array.isArray(parsedUser.bData)) {
-        setFinished(parsedUser.bData);
+      if (user.bData && Array.isArray(user.bData)) {
+        setFinished(user.bData);
       } else {
         setFinished([]);
       }
 
       // 유저 레벨 업데이트
-      updateLevel(parsedUser.bData.length || 0); 
+      updateLevel(user.bData.length || 0); 
     }
   }, [navigate]);
 
@@ -138,8 +140,8 @@ function Mypage({ gnb1, gnb2 }) {
     // 컴포넌트 처음 렌더링시 로컬스토리지에서 이미지 불러오기
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
     if (loggedInUserSession) {
-      const parsedUserSession = JSON.parse(loggedInUserSession);
-      const userId = parsedUserSession.id;
+      const userSession = JSON.parse(loggedInUserSession);
+      const userId = userSession.id;
 
       // 로컬스토리지에서 member_data 가져오기
       const memberData = localStorage.getItem('member_data');
@@ -177,8 +179,8 @@ function Mypage({ gnb1, gnb2 }) {
           // 세션스토리지 로그인 데이터
           const loggedInUserSession = sessionStorage.getItem('loggedInUser');
           if (loggedInUserSession) {
-            const parsedUserSession = JSON.parse(loggedInUserSession);
-            const userId = parsedUserSession.id;
+            const userSession = JSON.parse(loggedInUserSession);
+            const userId = userSession.id;
 
             // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
             const updatedMembers = parsedMembers.map((member) =>
@@ -191,10 +193,10 @@ function Mypage({ gnb1, gnb2 }) {
             localStorage.setItem('member_data', JSON.stringify(updatedMembers));
 
             // 세션스토리지에서 로그인한 유저의 프로필 이미지 업데이트
-            parsedUserSession.profileImage = base64Image;
+            userSession.profileImage = base64Image;
             sessionStorage.setItem(
               'loggedInUser',
-              JSON.stringify(parsedUserSession)
+              JSON.stringify(userSession)
             );
           }
         }
@@ -229,8 +231,8 @@ function Mypage({ gnb1, gnb2 }) {
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
 
     if (loggedInUserSession) {
-      const parsedUserSession = JSON.parse(loggedInUserSession);
-      const bData = parsedUserSession.bData;
+      const userSession = JSON.parse(loggedInUserSession);
+      const bData = userSession.bData;
 
       if (Array.isArray(bData) && bData.length > 0) {
         // 카테고리별로 대출된 책의 수를 카운트
@@ -267,8 +269,8 @@ function Mypage({ gnb1, gnb2 }) {
     const loggedInUserSession = sessionStorage.getItem('loggedInUser');
 
     if (loggedInUserSession) {
-      const parsedUserSession = JSON.parse(loggedInUserSession);
-      const bData = parsedUserSession.bData;
+      const userSession = JSON.parse(loggedInUserSession);
+      const bData = userSession.bData;
 
       if (Array.isArray(bData) && bData.length > 0) {
         // 카테고리별로 대출된 책의 수를 카운트
