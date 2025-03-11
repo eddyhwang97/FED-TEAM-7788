@@ -51,7 +51,6 @@ function Mypage({ gnb1, gnb2 }) {
   // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
   const user = loginState ? context.user : null;
 
-
   // 세션스토리지 데이터가 없는 경우 알림창 호출 및 메인페이지 강제이동
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
@@ -59,30 +58,28 @@ function Mypage({ gnb1, gnb2 }) {
       navigate('/login');
       alert('로그인이 필요합니다.');
     } else {
-    // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
-    if (user.iLoveIt && Array.isArray(user.iLoveIt)) {
-      setPicked(user.iLoveIt);
-    } else {
-      setPicked([]);
-    }
+      // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
+      if (user.iLoveIt && Array.isArray(user.iLoveIt)) {
+        setPicked(user.iLoveIt);
+      } else {
+        setPicked([]);
+      }
 
-    if (user.currentData && Array.isArray(user.currentData)) {
-      setCurrentBook(user.currentData);
-    } else {
-      setCurrentBook([]);
-    }
+      if (user.currentData && Array.isArray(user.currentData)) {
+        setCurrentBook(user.currentData);
+      } else {
+        setCurrentBook([]);
+      }
 
-    if (user.bData && Array.isArray(user.bData)) {
-      setFinished(user.bData);
-    } else {
-      setFinished([]);
-    }
+      if (user.bData && Array.isArray(user.bData)) {
+        setFinished(user.bData);
+      } else {
+        setFinished([]);
+      }
 
-    // 유저 레벨 업데이트
-    updateLevel(user.bData.length || 0);
-    console.log('로그인 상태:', context.loginState.isLogin);
-    console.log('유저 정보:', context.user);
-  }
+      // 유저 레벨 업데이트
+      updateLevel(user.bData.length || 0);
+    }
   }, [navigate]);
 
   // picked의 isbn , book_data의 isbn 비교 후 책 정보 저장
@@ -141,8 +138,9 @@ function Mypage({ gnb1, gnb2 }) {
     //   const userSession = JSON.parse(loggedInUserSession);
     //   const userId = userSession.id;
 
-      // 로컬스토리지에서 member_data 가져오기
-      if(user){const memberData = localStorage.getItem('member_data');
+    // 로컬스토리지에서 member_data 가져오기
+    if (user) {
+      const memberData = localStorage.getItem('member_data');
       if (memberData) {
         const parsedMembers = JSON.parse(memberData);
 
@@ -223,12 +221,7 @@ function Mypage({ gnb1, gnb2 }) {
   };
 
   useEffect(() => {
-    // const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-
     if (user) {
-      // const userSession = JSON.parse(loggedInUserSession);
-      // const bData = userSession.bData;
-
       if (Array.isArray(user.bData) && user.bData.length > 0) {
         // 카테고리별로 대출된 책의 수를 카운트
         const genreCount = {
@@ -241,12 +234,10 @@ function Mypage({ gnb1, gnb2 }) {
         // ISBN을 통해 카테고리 추출 후 카운트
         user.bData.forEach((book) => {
           const genre = getGenreByISBN(book); // ISBN을 통해 카테고리 추출
-          if (genre && genreCount.hasOwnProperty(genre)) {
+          if (genre && genre in genreCount) {
             genreCount[genre]++;
           }
         });
-
-        console.log(genreCount);
 
         // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
         const unlockedBadges = badgeData.filter((badge) => {
@@ -257,15 +248,10 @@ function Mypage({ gnb1, gnb2 }) {
         setUnlockedBadges(unlockedBadges); // 활성화된 뱃지 업데이트
       }
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
-    // const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-
     if (user) {
-      // const userSession = JSON.parse(loggedInUserSession);
-      // const bData = userSession.bData;
-
       if (Array.isArray(user.bData) && user.bData.length > 0) {
         // 카테고리별로 대출된 책의 수를 카운트
         const genreCount = {
@@ -277,7 +263,7 @@ function Mypage({ gnb1, gnb2 }) {
 
         // ISBN을 통해 카테고리 추출 후 카운트
         user.bData.forEach((book) => {
-          const genre = getGenreByISBN(book); // ISBN을 통해 카테고리 추출
+          const genre = getGenreByISBN(book); // 카테고리 추출
           if (genre) {
             genreCount[genre]++;
           }
@@ -304,29 +290,44 @@ function Mypage({ gnb1, gnb2 }) {
         }));
         setUnlockedBadges(badgesWithAnimation); // 활성화된 뱃지 업데이트
 
-        // 뱃지가 활성화되었을 때 모달과 폭죽 애니메이션을 한 번만 실행
-        unlockedBadges.forEach((badge) => {
-          if (!completedBadges.includes(badge.badgeTitle)) {
-            //  뱃지 첫 활성화
-            setCompletedBadges((prevBadges) => {
-              const updatedBadges = [...prevBadges, badge.badgeTitle];
-              localStorage.setItem('completedBadges', JSON.stringify(updatedBadges)); // 로컬스토리지에 업데이트
-              return updatedBadges;
-            });
-            
-            setShowModal(true); // 모달을 띄운다.
-            setModalContent(`축하합니다! 새로운 뱃지를 획득하셨습니다!`);
-            triggerConfetti(badge.badgeTitle); // 해당 뱃지 폭죽 실행
-          }
-        });
+        //  폭죽 실행된 뱃지 정보
+        const celebratedBadges = user.celebratedBadges || [];
+
+        // 이번에 새롭게 활성화된 뱃지만 필터링
+        const newBadges = unlockedBadges.filter(
+          (badge) =>
+            !completedBadges.includes(badge.badgeTitle) &&
+            !celebratedBadges.includes(badge.badgeTitle)
+        );
+
+        if (newBadges.length > 0) {
+          // 새로운 뱃지가 하나라도 있으면 한 번만 실행
+          setCompletedBadges((prevBadges) => [
+            ...prevBadges,
+            ...newBadges.map((badge) => badge.badgeTitle),
+          ]);
+
+          setShowModal(true); // 모달을 띄운다.
+          setModalContent(`축하합니다! 새로운 뱃지를 획득하셨습니다!`);
+          triggerConfetti(); // 폭죽 애니메이션 실행
+
+          // 실행된 뱃지를 user 데이터에 저장
+          const updatedUser = {
+            ...user,
+            celebratedBadges: [
+              ...celebratedBadges,
+              ...newBadges.map((badge) => badge.badgeTitle),
+            ],
+          };
+
+          setUser(updatedUser);
+          sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+        }
       }
     }
   }, [completedBadges]); // completedBadges가 변경될 때마다 실행
 
-  const triggerConfetti = (badgeTitle) => {
-    // 이미 실행한 경우 리턴
-    if (completedBadges.includes(badgeTitle))return;
-
+  const triggerConfetti = () => {
     const end = Date.now() + 3 * 1000; // 폭죽을 3초 동안 터뜨리기
     const interval = setInterval(() => {
       confetti({
