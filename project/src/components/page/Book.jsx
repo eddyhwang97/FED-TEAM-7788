@@ -6,7 +6,7 @@ function Book({gnb1,gnb2}) {
   return (
     <>
     <SubTop gnb1={gnb1} gnb2={gnb2}/>
-      <h1>열린공간</h1>
+      <h1>도서신청</h1>
     </>
   );
 }
