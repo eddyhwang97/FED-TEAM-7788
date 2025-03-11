@@ -25,7 +25,7 @@ function Login({ gnb1, gnb2 }) {
   const [showPw, setShowPw] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
 
-   // 로그인 정보
+  // 로그인 정보
   // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
   const loginState = context.loginState.isLogin;
   // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
@@ -37,7 +37,12 @@ function Login({ gnb1, gnb2 }) {
   const handlePhoneNumber = (e) => {
     const value = e.target.value;
     setPhoneNum(value);
-    setNotAllow(!(PHONE_REGEX.test(value) && PW_REGEX.test(pw)));
+    // 'admin' 입력 시 바로 로그인 버튼 활성화
+    if (value === 'admin') {
+      setNotAllow(false);
+    } else {
+      setNotAllow(!(PHONE_REGEX.test(value) && PW_REGEX.test(pw)));
+    }
   };
 
   // 비밀번호 입력 핸들러
@@ -51,6 +56,26 @@ function Login({ gnb1, gnb2 }) {
   const onClickConfirmButton = () => {
     const cleanPhoneNum = phoneNum.replace(/\D/g, ''); // 숫자만 남기기
     const member_data = JSON.parse(localStorage.getItem('member_data')) || []; // 로컬스토리지 데이터 가져오기
+
+    if (phoneNum === 'admin') {
+      // admin이면 유효성 검사 없이 바로 로그인 처리
+      const adminUser = {
+        name: 1,
+        id: 1,
+        pw, // 보안상 비밀번호를 그대로 저장하는 것은 위험! 실제 서비스에서는 해싱 필요
+        bData: '',
+        iLoveIt: '',
+        profileImage: '/img/sub/img-profile-temp.png',
+        currentData: [],
+      }; // admin 사용자 정보
+
+      sessionStorage.setItem('loggedInUser', JSON.stringify(adminUser));
+      alert('관리자 로그인 성공🎉');
+      navigate('/'); // 로그인 성공 후 메인페이지 이동
+      context.setLogin(true);
+      return;
+    }
+
     const user = member_data.find(
       (m) => m.id.replace(/\D/g, '') === cleanPhoneNum && m.pw === pw
     );
@@ -62,7 +87,6 @@ function Login({ gnb1, gnb2 }) {
       console.clear();
       navigate('/'); // 로그인 성공 후 메인페이지 이동
       context.setLogin(true);
-      // window.location.reload(); // 페이지 새로고침 -> 다른 방법은 없을까?
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
     }
@@ -73,7 +97,6 @@ function Login({ gnb1, gnb2 }) {
     if (phoneValid && pwValid) {
       setNotAllow(false);
       return;
-      console.log(loginState)
     } // if //
     setNotAllow(true);
   }, [phoneValid, pwValid]);
@@ -91,6 +114,11 @@ function Login({ gnb1, gnb2 }) {
                 placeholder='휴대폰 번호'
                 value={phoneNum}
                 onChange={handlePhoneNumber}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter') {
+                    document.querySelector('.login-btn').click();
+                  }
+                }}
               />
               <div className='errorMessageWrap'>
                 {!PHONE_REGEX.test(phoneNum) && phoneNum.length > 0 && (
@@ -104,9 +132,8 @@ function Login({ gnb1, gnb2 }) {
                   placeholder='비밀번호'
                   value={pw}
                   onChange={handlePw}
-                  onKeyUp={(e)=>{
-                    if(e.key === 'Enter'){
-                      console.log('엔터했슈~~!',document.querySelector('.login-btn'));
+                  onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
                       document.querySelector('.login-btn').click();
                     }
                   }}

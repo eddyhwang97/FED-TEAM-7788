@@ -13,6 +13,7 @@ import "../../css/page/article.scss";
 function Article({ gnb1, gnb2 }) {
   // hook
   const context = useContext(GP);
+  const location = useLocation();
   const navigate = useNavigate();
   const articleLocation = useLocation();
 
