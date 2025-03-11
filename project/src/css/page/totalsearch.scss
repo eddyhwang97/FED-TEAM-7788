@@ -2,49 +2,34 @@
 @import "../common/variables"; // variables.scss
 
 .search-result {
-  width: 100%;
-  display: flex;
-  gap: 10px 0;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  border-top: 2px solid $black;
+
   .result-section {
-    width: 49%;
-    height: 300px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #d9d9d9;
-    .category-tit {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 10px;
+    border-bottom: 2px solid $lightgray;
+    padding: 2em 0;
+    &:last-child {
+      border-bottom: none;
     }
-    .result-list {
-      .list {
-        a {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          p {
-            font-size: 1.1rem;
-          }
+  }
+
+  .category-tit {
+    font-weight: 700;
+    font-size: 1.4em;
+    padding-bottom: 1.1em;
+  }
+
+  .result-list {
+    .list {
+      a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em 0;
+        transition: .3s;
+        &:hover, &:focus {
+          color: $point-color;
         }
       }
     }
-    // &:nth-of-type(1){
-    //     background-color: $mint
-
-    // }
-    // &:nth-of-type(2){
-    //     background-color: $pink
-
-    // }
-    // &:nth-of-type(3){
-    //     background-color: $lightblue
-
-    // }
-    // &:nth-of-type(4){
-    //     background-color: $blueviolet
-
-    // }
   }
 }
