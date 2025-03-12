@@ -50,6 +50,10 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
     }
   };
 
+  useEffect(()=>{
+    layoutFn.initLayout();
+  },[]);
+
   return (
     <>
       <div className="dimm"></div>
@@ -121,12 +125,19 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
                   onChange={(e) => {
                     setSearchInput(e.target.value);
                   }}
+                  onKeyUp={e=>{
+                    if(e.key === 'Enter'){
+                      console.log('엔터유~~!');
+                      layoutFn.searchClose();
+                    }
+                  }}
                 />
                 <button
                   type="button"
                   className="total-search-btn"
                   onClick={() => {
                     navigate(`totalsearch/:${searchInput}`, { state: { navigateSearchInput: searchInput } });
+                    layoutFn.searchClose();
                   }}
                 ></button>
               </fieldset>
