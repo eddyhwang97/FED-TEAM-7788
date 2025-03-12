@@ -156,24 +156,22 @@
   .borrow-list {
     padding-left: 0;
     font-size: 16px;
-    a{
-      text-decoration: none;
-      &:hover{
-        text-decoration: underline;
-      }
-    li {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding-bottom: 10px;
-      em {
+      li {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 10px;
+      a {
         width: calc(100% - 100px);
+        &:hover {
+          text-decoration: underline;
+        }  
       }
+      
       .date {
         color: $darkgray;
-        max-width: 90px;
+        max-width: 120px;
       }
-    }
     }
   }
 
@@ -184,8 +182,11 @@
       display: flex;
       gap: 10px;
       padding-bottom: 10px;
-      em {
+      a {
         width: calc(100% - 70px);
+        &:hover {
+          text-decoration: underline;
+        }  
       }
       .label {
         width: 60px;
