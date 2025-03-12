@@ -47,6 +47,18 @@ function Mypage({ gnb1, gnb2 }) {
   const [modalContent, setModalContent] = useState(''); // 모달에 표시할 내용
   const [completedBadges, setCompletedBadges] = useState([]);
 
+  const [showMoreModal, setShowMoreModal] = useState(false);
+
+  // 레벨 버튼 클릭 핸들러
+  const handleMoreClick = () => {
+    setShowMoreModal(true);
+  };
+
+  // 모달 닫기 함수
+  const closeMoreModal = () => {
+    setShowMoreModal(false);
+  };
+
   const loginState = context.loginState.isLogin;
   // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
   const user = loginState ? context.user : null;
@@ -468,7 +480,15 @@ function Mypage({ gnb1, gnb2 }) {
                     </em>
                   </div>
                 </div>
-                <a href='#' className='more-btn'></a>
+                <a href='#' className='more-btn' onClick={handleMoreClick}></a>
+                {showMoreModal && (
+                  <div className='more-modal'>
+                    <div className='modal-content'>
+                      <img src={`/img/sub/img-level${level}.png`}/>
+                      <button onClick={closeMoreModal}>닫기</button>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className='my-book'>
                 <div className='book-box borrow'>
@@ -503,7 +523,7 @@ function Mypage({ gnb1, gnb2 }) {
                         (b) => b.ISBN.toLowerCase() === book.isbn.toLowerCase()
                       );
                       return foundBook ? (
-                        <li>
+                        <li key={`{borrow-${book.isbn}`}>
                           <a
                             className='book-name'
                             href={
@@ -511,7 +531,6 @@ function Mypage({ gnb1, gnb2 }) {
                                 ? `/book/${book.isbn.toLowerCase()}`
                                 : '#'
                             }
-                            key={`{borrow-${book.isbn}`}
                           >
                             {foundBook.title}
                           </a>
@@ -529,11 +548,10 @@ function Mypage({ gnb1, gnb2 }) {
                 <ul className='pick-list'>
                   {pickedBooks.length > 0 ? (
                     pickedBooks.map((book, index) => (
-                      <li>
+                      <li key={`pick-${book.ISBN ?? `index-${index}`}`}>
                         <a
                           className='book-name'
                           href={`/book/${book.ISBN ?? ''}`}
-                          key={`${book.ISBN ?? `index-${index}`}`}
                         >
                           {book.title}
                         </a>
