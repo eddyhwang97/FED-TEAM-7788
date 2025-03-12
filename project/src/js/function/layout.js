@@ -61,6 +61,8 @@ function initLayout() {
     $dep2.find("a").on("click", function () {
       reset();
     });
+
+    $(".account-btn").on("click", reset);
   }
 
   // web gnb
