@@ -15,7 +15,6 @@ function Article({ gnb1, gnb2 }) {
   const context = useContext(GP);
   const location = useLocation();
   const navigate = useNavigate();
-  const articleLocation = useLocation();
 
   // 로그인 정보
   // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
@@ -28,8 +27,8 @@ function Article({ gnb1, gnb2 }) {
 
   // 데이터
   const { id } = useParams();
-  const listIdx = articleLocation.state.listIdx;
-  const data = articleLocation.state.data;
+  const listIdx = location.state.listIdx;
+  const data = location.state.data;
   const typeBranch = gnb2 === "공지사항" ? "notice" : "freeboard";
   const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
@@ -126,7 +125,7 @@ function Article({ gnb1, gnb2 }) {
   // useEffect
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [articleLocation]);
+  }, [location]);
  
   // 로그인 상태 확인
   return (

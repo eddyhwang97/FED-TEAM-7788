@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SearchBox from "../module/SearchBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import $ from "jquery";
 
@@ -50,11 +50,21 @@ function TotalSearch() {
   useEffect(() => {
     handleSearchFn(null, navigateSearchInput);
   }, [navigateSearchInput]);
+  console.log(bookList)
+
+  const seachBoxProps = {
+    location: `/ + ${location.pathname.split("/")[1]}`,
+    searchOption: searchOption,
+    selectOption: null,
+    setSelectOption: null,
+    setSearchInput: setSearchInput,
+    navigateSearchInput: navigateSearchInput,
+  };
 
   return (
     <>
       <div className="contents">
-        <SearchBox location={"/" + location.pathname.split("/")[1]} searchOption={searchOption} navigateSearchInput={navigateSearchInput} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
+        <SearchBox props={seachBoxProps} />
         <div className="search-result">
           <section className="result-section">
             <h3 className="category-tit">도서</h3>
@@ -63,10 +73,10 @@ function TotalSearch() {
                 {bookList.length > 0 ? (
                   bookList.map((v, i) => (
                     <li className="list" key={i}>
-                      <a href="#">
+                        <Link to={`/book/${v.ISBN}`}>
                         <p>{v.title}</p>
                         <FontAwesomeIcon icon={faChevronRight} />
-                      </a>
+                        </Link>
                     </li>
                   ))
                 ) : (
