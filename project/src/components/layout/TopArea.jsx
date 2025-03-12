@@ -5,7 +5,7 @@ import Gnb from "../module/Gnb";
 import { GP } from "../module/Contexter";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
-import { memo, useContext, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import $ from "jquery";
 
 export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
