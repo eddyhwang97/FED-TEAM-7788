@@ -32,7 +32,6 @@ function TotalSearch() {
   console.log(searchInput);
   // Fn
   const handleSearchFn = (selectOption, value) => {
-    console.log(value);
     if (value === "") {
       setbookList([]);
       setnoticeList([]);

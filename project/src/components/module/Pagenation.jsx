@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Pagenation({ props }) {
+export const  Pagenation=memo(({ props })=> {
   const navigate = useNavigate();
   const data = props.data;
   const goLogin = props.goLogin;
@@ -20,7 +20,7 @@ function Pagenation({ props }) {
     else navigate(`/community/${data}/post`);
   };
 
-  console.log("currentPage", currentPage, "totalPage", totalPage, "currentList", currentList);
+  // console.log("currentPage", currentPage, "totalPage", totalPage, "currentList", currentList);
 
   return (
     <div className="pagenate-section">
@@ -49,6 +49,5 @@ function Pagenation({ props }) {
       )}
     </div>
   );
-}
+})
 
-export default Pagenation;
