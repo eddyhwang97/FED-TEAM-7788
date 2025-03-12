@@ -260,7 +260,7 @@ function Mypage({ gnb1, gnb2 }) {
           예술: 0,
           매거진: 0,
         };
-
+  
         // ISBN을 통해 카테고리 추출 후 카운트
         user.bData.forEach((book) => {
           const genre = getGenreByISBN(book); // 카테고리 추출
@@ -268,13 +268,13 @@ function Mypage({ gnb1, gnb2 }) {
             genreCount[genre]++;
           }
         });
-
+  
         // 각 카테고리에서 3권 이상 대출한 경우 활성화된 뱃지 필터링
         const unlockedBadges = badgeData.filter((badge) => {
           const genre = badge.badgeDescription.split(' ')[0]; // 뱃지 설명에서 카테고리 추출
           return genreCount[genre] >= 3;
         });
-
+  
         if (user.bData.length >= 5) {
           unlockedBadges.push({
             badgeTitle: '칙칙북북 킹',
@@ -283,34 +283,34 @@ function Mypage({ gnb1, gnb2 }) {
             badgeAlt: '누적 대출도서 5권 달성 뱃지',
           });
         }
-
+  
         const badgesWithAnimation = unlockedBadges.map((badge) => ({
           ...badge,
           isActive: true, // 애니메이션 상태 추가
         }));
         setUnlockedBadges(badgesWithAnimation); // 활성화된 뱃지 업데이트
-
+  
         //  폭죽 실행된 뱃지 정보
         const celebratedBadges = user.celebratedBadges || [];
-
+  
         // 이번에 새롭게 활성화된 뱃지만 필터링
         const newBadges = unlockedBadges.filter(
           (badge) =>
             !completedBadges.includes(badge.badgeTitle) &&
             !celebratedBadges.includes(badge.badgeTitle)
         );
-
+  
         if (newBadges.length > 0) {
           // 새로운 뱃지가 하나라도 있으면 한 번만 실행
           setCompletedBadges((prevBadges) => [
             ...prevBadges,
             ...newBadges.map((badge) => badge.badgeTitle),
           ]);
-
+  
           setShowModal(true); // 모달을 띄운다.
           setModalContent(`축하합니다! 새로운 뱃지를 획득하셨습니다!`);
           triggerConfetti(); // 폭죽 애니메이션 실행
-
+  
           // 실행된 뱃지를 user 데이터에 저장
           const updatedUser = {
             ...user,
@@ -319,13 +319,13 @@ function Mypage({ gnb1, gnb2 }) {
               ...newBadges.map((badge) => badge.badgeTitle),
             ],
           };
-
+  
           setUser(updatedUser);
           sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
         }
       }
     }
-  }, [completedBadges]); // completedBadges가 변경될 때마다 실행
+  }, [user, completedBadges]); // 의존성 배열에 `user`와 `completedBadges`만 포함;; // completedBadges가 변경될 때마다 실행
 
   const triggerConfetti = () => {
     const end = Date.now() + 3 * 1000; // 폭죽을 3초 동안 터뜨리기
@@ -345,6 +345,42 @@ function Mypage({ gnb1, gnb2 }) {
   const closeModal = () => {
     setShowModal(false);
   };
+
+  // 유저 데이터 변경이 있을 때 데이터 저장
+
+  useEffect(() => {
+    if (user) {
+      // 세션스토리지에서 유저 데이터 가져오기
+      const sessionUserData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  
+      if (sessionUserData) {
+        // 로컬스토리지에서 기존 member_data 가져오기
+        const localStorageMemberData = JSON.parse(localStorage.getItem('member_data')) || [];
+  
+        // 로컬스토리지의 member_data와 세션스토리지의 유저 데이터를 비교
+        const existingMember = localStorageMemberData.find(
+          (member) => member.id === sessionUserData.id
+        );
+  
+        // 유저 데이터가 다르거나, 새로운 데이터가 있을 경우 업데이트
+        if (!existingMember) {
+          // 새 유저 데이터를 로컬스토리지에 추가
+          localStorage.setItem(
+            'member_data',
+            JSON.stringify([...localStorageMemberData, sessionUserData])
+          );
+        } else {
+          // 유저 데이터가 변경된 경우 (예: 뱃지 추가 등)
+          const updatedMemberData = localStorageMemberData.map((member) =>
+            member.id === sessionUserData.id ? { ...member, ...sessionUserData } : member
+          );
+  
+          // 변경된 유저 데이터를 로컬스토리지에 저장
+          localStorage.setItem('member_data', JSON.stringify(updatedMemberData));
+        }
+      }
+    }
+  }, [user]); // user 상태가 변경될 때마다 실행
 
   return (
     <>
@@ -465,8 +501,9 @@ function Mypage({ gnb1, gnb2 }) {
                               ? `/book/${book.isbn.toLowerCase()}`
                               : '#'
                           }
+                          key={`{borrow-${book.isbn}`}
                         >
-                          <li key={book.isbn}>
+                          <li >
                             <em className='book-name'>{foundBook.title}</em>
                             <span className='date'>~{book.dueDate}</span>
                           </li>
@@ -485,7 +522,7 @@ function Mypage({ gnb1, gnb2 }) {
                     pickedBooks.map((book, index) => (
                       <a
                         href={`/book/${book.ISBN ?? ''}`}
-                        key={`${book.isbn ?? `index-${index}`}`}
+                        key={`${book.ISBN ?? `index-${index}`}`}
                       >
                         <li>
                           <em className='book-name'>{book.title}</em>
