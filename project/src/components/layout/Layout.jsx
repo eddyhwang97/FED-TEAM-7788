@@ -4,10 +4,10 @@ import React from "react";
 import { useLocation } from "react-router-dom"; // 현재 경로 확인
 import { GP } from "../module/Contexter";
 import { useState } from "react";
-import FooterArea from "./FooterArea";
+import {FooterArea} from "./FooterArea";
 import MainArea from "./MainArea";
 import SubArea from "./SubArea";
-import TopArea from "./TopArea";
+import {TopArea} from "./TopArea";
 
 export default function Layout() {
   // 로그인 데이터
