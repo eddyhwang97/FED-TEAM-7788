@@ -34,9 +34,12 @@ export default function MainComponent() {
           <Route path="/apply/book" element={<Book gnb1="신청공간" gnb2="도서신청" />} />
           <Route path="/apply/culture" element={<Culture gnb1="신청공간" gnb2="강연신청" />} />
           <Route path="community/notice" element={<Community gnb1="열린공간" gnb2="공지사항" data="notice" />} />
+          <Route path="community/notice/search/:results" element={<Community gnb1="열린공간" gnb2="공지사항" data="notice" />} />
           <Route path="community/notice/:id" element={<Article gnb1="열린공간" gnb2="공지사항" />} />
           <Route path="community/faq" element={<Community gnb1="열린공간" gnb2="FAQ" data="faq" />} />
+          <Route path="community/faq/:results" element={<Community gnb1="열린공간" gnb2="FAQ" data="faq" />} />
           <Route path="community/freeboard" element={<Community gnb1="열린공간" gnb2="자유게시판" data="freeboard" />} />
+          <Route path="community/freeboard/search/:results" element={<Community gnb1="열린공간" gnb2="자유게시판" data="freeboard" />} />
           <Route path="community/freeboard/:id" element={<Article gnb1="열린공간" gnb2="자유게시판" data="freeboard" />} />
           <Route path="community/freeboard/post" element={<Post gnb1="열린공간" gnb2="글쓰기" data="post" />} />
           <Route path="join" element={<Join gnb1="회원가입" gnb2="" />} />

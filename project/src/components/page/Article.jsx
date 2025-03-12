@@ -34,7 +34,6 @@ function Article({ gnb1, gnb2 }) {
   const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
   const commentList = articleData.comment.sort((a, b) => (a.date == b.date ? 0 : a.date < b.date ? -1 : 1));
-console.log()
   // useState
   const [comment, setComment] = useState(commentList);
 

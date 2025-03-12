@@ -1,8 +1,8 @@
 // FooterArea 컴포넌트 - FooterArea.jsx
 
-import React from "react";
+import React, { memo } from "react";
 
-export default function FooterArea(props) {
+export const FooterArea=memo((props)=> {
   return (
     <footer className="footer">
       <div className="inner">
@@ -67,4 +67,4 @@ export default function FooterArea(props) {
       </div>
     </footer>
   );
-}
+})

@@ -1,7 +1,7 @@
 // SearchBox 컴포넌트 - SearchBox.jsx
-import React, { useEffect, useState } from "react";
-import communityData from "../../js/data/community_data.json";
+import React  from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import $ from "jquery"
 
 function SearchBox({location, searchOption, setSelectOption,searchInput,setSearchInput,navigateSearchInput }) {
   // searchOption : select 아래 option
@@ -43,7 +43,8 @@ function SearchBox({location, searchOption, setSelectOption,searchInput,setSearc
         <button
           className="search-button"
           onClick={() => {
-            const inputValue = searchInput
+            
+            const inputValue = $('input').val();
             navigate(`${location}/:${inputValue}`,{state:{ navigateSearchInput : inputValue}})
           }}
         ></button>

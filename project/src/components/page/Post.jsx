@@ -38,19 +38,21 @@ function Post({ gnb1, gnb2 }) {
   };
   const setArticle = (title, content) => {
     const communityData = JSON.parse(localStorage.getItem("community_data"));
-    let temp = communityData.filter((v) => v.type === "freeboard");
+    let freeboardList = communityData.filter((v) => v.type === "freeboard");
+    let filterIdx = freeboardList.map((v) => v.idx);
+    let maxIdx = Math.max(...filterIdx);
     if (localStorage.community_data) {
       const communityData = JSON.parse(localStorage.getItem("community_data"));
-      const today = new Date();
-      const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1 < 10 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate() + 1 < 10 ? "0" + (today.getDate() + 1) : today.getDate() + 1}`;
+      const today = new Date().toJSON().substr(0, 10);
       communityData.push({
-        idx: Math.max.apply(null,temp.map((v) => v.idx)) + 1,
+        idx: Number(maxIdx) + 1,
         type: "freeboard",
         image: "",
         title: title,
         user: userName,
+        id: user.id,
         content: content,
-        date: formattedDate,
+        date: today,
         comment: [],
       });
       localStorage.setItem("community_data", JSON.stringify(communityData));
