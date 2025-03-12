@@ -14,11 +14,11 @@ function BookDetail() {
   const [stock, setStock] = useState(0);
   const [returnDate, setReturnDate] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isAutoReturn, setIsAutoReturn] = useState(false);
   const context = useContext(GP);
+  const { testToday } = useContext(GP);
 
-  const loginState = context.loginState.isLogin;
-  // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
-  const user = loginState ? context.user : null;
+  const { user } = context;
 
   useEffect(() => {
     if (book) {
@@ -29,23 +29,28 @@ function BookDetail() {
       if (Array.isArray(user.iLoveIt)) {
         setIsFavorite(user.iLoveIt.includes(book.ISBN));
       }
+
       if (Array.isArray(user.currentData)) {
         const loanedBook = user.currentData.find((b) => b.isbn === book.ISBN);
         if (loanedBook) {
           setLoanStatus("대출 중");
           setReturnDate(loanedBook.dueDate);
+
+          // testToday가 반납 기한을 지나면 자동 반납
+          if (testToday > new Date(loanedBook.dueDate)) {
+            setIsAutoReturn(true); // 자동 반납 플래그 설정
+            handleReturn();
+          }
         }
       }
     }
-  }, [book]);
+  }, [book, testToday]);
 
   if (!book) {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
   }
 
-  // 도서 대출
   const handleLoan = () => {
-
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
       navigate("/login");
@@ -62,38 +67,50 @@ function BookDetail() {
     }
 
     if (window.confirm("이 책을 대출하시겠습니까?")) {
-      const today = new Date();
-      const dueDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split("T")[0];
-      user.currentData.push({ isbn: book.ISBN, checkoutDate: new Date().toISOString().split("T")[0], dueDate });
-      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); 
+      const dueDate = new Date(testToday);
+      dueDate.setDate(dueDate.getDate() + 7);
+      const formattedDueDate = dueDate.toISOString().split("T")[0];
+
+      user.currentData.push({
+        isbn: book.ISBN,
+        checkoutDate: testToday.toISOString().split("T")[0],
+        dueDate: formattedDueDate,
+      });
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
       setStock(stock - 1);
       setLoanStatus("대출 중");
-      setReturnDate(dueDate);
+      setReturnDate(formattedDueDate);
     }
   };
 
-  // 도서 반납
   const handleReturn = () => {
-
     if (!user) return;
-
-    if (!user.bData) {
-      user.bData = [];
-    }
-
-    if (window.confirm("정말 반납하시겠습니까?")) {
+    if (!user.bData) user.bData = [];
+  
+    // 자동 반납이면 alert 없이 실행
+    if (isAutoReturn) {
       user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
       user.bData.push(book.ISBN);
-      sessionStorage.setItem("loggedInUser", JSON.stringify(user)); 
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+      setStock(stock + 1);
+      setLoanStatus("대출 가능");
+      setReturnDate(null);
+      setIsAutoReturn(false); // 상태 초기화
+      return;
+    }
+  
+    // 수동 반납이면 confirm 창을 띄움
+    if (window.confirm("반납 예약을 도와드릴까요?")) {
+      user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
+      user.bData.push(book.ISBN);
+      sessionStorage.setItem("loggedInUser", JSON.stringify(user));
       setStock(stock + 1);
       setLoanStatus("대출 가능");
       setReturnDate(null);
     }
   };
 
-  // 도서 찜
   const handleFavorite = () => {
-
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
       navigate("/login");
@@ -119,9 +136,7 @@ function BookDetail() {
 
   return (
     <>
-      {/* contents s */}
       <div className="contents">
-        {/* book-view-wrap s */}
         <div className="book-view-wrap">
           <div className="book-view">
             <div className="img-box">
@@ -133,43 +148,84 @@ function BookDetail() {
                 <span>{book.subtitle || ""}</span>
               </div>
               <ul className="book-info">
-                <li><em>제목</em><span className="title">{book.title}</span></li>
-                <li><em>작가</em><span className="author">{book.author}</span></li>
-                <li><em>출판사</em><span className="publisher">{book.publisher}</span></li>
-                <li><em>ISBN</em><span className="isbn">{book.ISBN}</span></li>
-                <li><em>발행일</em><span className="date">{book.pDate}</span></li>
-                <li><em>페이지</em><span className="page">{book.pNum}</span></li>
-                <li><em>카테고리</em><span className="genre">{getCategory(book.ISBN)}</span></li>
-                <li><em>재고</em><span className="stock">{stock}권</span></li>
+                <li>
+                  <em>제목</em>
+                  <span className="title">{book.title}</span>
+                </li>
+                <li>
+                  <em>작가</em>
+                  <span className="author">{book.author}</span>
+                </li>
+                <li>
+                  <em>출판사</em>
+                  <span className="publisher">{book.publisher}</span>
+                </li>
+                <li>
+                  <em>ISBN</em>
+                  <span className="isbn">{book.ISBN}</span>
+                </li>
+                <li>
+                  <em>발행일</em>
+                  <span className="date">{book.pDate}</span>
+                </li>
+                <li>
+                  <em>페이지</em>
+                  <span className="page">{book.pNum}</span>
+                </li>
+                <li>
+                  <em>카테고리</em>
+                  <span className="genre">{getCategory(book.ISBN)}</span>
+                </li>
+                <li>
+                  <em>재고</em>
+                  <span className="stock">{stock}권</span>
+                </li>
               </ul>
               <p className="book-text">{book.info}</p>
-              {returnDate && <p><em>반납 기한 </em><span className="return-date">{returnDate}</span></p>}
+              {returnDate && (
+                <p>
+                  <em>반납 기한 </em>
+                  <span className="return-date">{returnDate}</span>
+                </p>
+              )}
               <div className="util-box">
                 <div className="btn-wrap">
                   {loanStatus === "대출 가능" ? (
-                    <button type="button" className="btn-state loan" onClick={handleLoan}>
+                    <button
+                      type="button"
+                      className="btn-state loan"
+                      onClick={handleLoan}
+                    >
                       대출하기
                     </button>
                   ) : (
                     <>
-                      <button type="button" className="btn-state ing">대출 중</button>
-                      <button type="button" className="btn-state return" onClick={handleReturn}>
+                      <button type="button" className="btn-state ing">
+                        대출 중
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-state return"
+                        onClick={handleReturn}
+                      >
                         반납하기
                       </button>
                     </>
                   )}
                 </div>
-                <button type="button" className="interest" onClick={handleFavorite}>
+                <button
+                  type="button"
+                  className="interest"
+                  onClick={handleFavorite}
+                >
                   {isFavorite ? "❤️" : "♡"}
                 </button>
               </div>
             </div>
           </div>
         </div>
-        {/* book-view-wrap e */}
         <BookComment />
       </div>
-      {/* contents e */}
     </>
   );
 }
