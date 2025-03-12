@@ -567,6 +567,8 @@ function Mypage({ gnb1, gnb2 }) {
               </li>
             </ul>
           </div>
+              <div className="earned-badge">
+                <h3>획득한 뱃지</h3>
           <div className='inner-section badge-wrap'>
             <ul className='badge-list'>
               {unlockedBadges.length > 0 ? (
@@ -590,8 +592,37 @@ function Mypage({ gnb1, gnb2 }) {
               ) : (
                 <li>획득한 배지가 없습니다.</li>
               )}
+             
             </ul>
           </div>
+            </div>
+              <div className="remaining-badge">
+                <h3>남아있는 뱃지</h3>
+          <div className='inner-section badge-wrap'>
+            <ul className='badge-list-remain'>
+              {unlockedBadges.length > 0 ? (
+                unlockedBadges.map((badge, index) => (
+                  <li
+                    key={index}
+                    className={`badge-item ${badge.isActive ? 'active' : ''}`}
+                  >
+                    <div className='img-box'>
+                      <img
+                        src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                        alt={badge.badgeAlt}
+                      />
+                    </div>
+                    <div className='text-box'>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <li>획득한 배지가 없습니다.</li>
+              )}
+             
+            </ul>
+          </div>
+            </div>
         </div>
       </div>
     </>
