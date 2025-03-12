@@ -8,7 +8,6 @@ function SearchBox({location, searchOption, setSelectOption,searchInput,setSearc
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
   const navigate = useNavigate();
-  console.log(location)
 
   return (
     <div className="search-box-wrap">

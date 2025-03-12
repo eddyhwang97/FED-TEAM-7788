@@ -5,10 +5,10 @@ import Gnb from "../module/Gnb";
 import { GP } from "../module/Contexter";
 import { menu2 } from "../../js/data/gnb_data";
 import * as layoutFn from "../../js/function/layout.js";
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import $ from "jquery";
 
-export default function TopArea({ gnb, setGnb, setSubTop }) {
+export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
   // hook
   const context = useContext(GP);
   const navigate = useNavigate();
@@ -136,4 +136,4 @@ export default function TopArea({ gnb, setGnb, setSubTop }) {
       </header>
     </>
   );
-}
+});

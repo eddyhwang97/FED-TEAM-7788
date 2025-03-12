@@ -1,9 +1,10 @@
 import React, { memo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const  Pagenation=memo(({ props })=> {
+export const Pagenation = memo(({ props }) => {
   const navigate = useNavigate();
   const data = props.data;
+  const user = props.user;
   const goLogin = props.goLogin;
   const loginState = props.loginState;
   const currentPage = props.currentPage;
@@ -32,7 +33,7 @@ export const  Pagenation=memo(({ props })=> {
             onClick={() => {
               handlePageChange();
               setcurrentPage(page);
-              console.log("page", page)
+              console.log("page", page);
             }}
             className={currentPage === page ? "active" : ""}
           >
@@ -42,12 +43,16 @@ export const  Pagenation=memo(({ props })=> {
       </ul>
       <button type="button" className="btn-next"></button>
 
-      {data === "freeboard" && (
+      {(data === "freeboard" && (
         <button type="button" className="write-btn" onClick={handleWrite}>
           글쓰기
         </button>
-      )}
+      )) ||
+        ((data === "notice" || data ==="faq" )&& user.id === "010-0000-0000" && (
+          <button type="button" className="write-btn" onClick={handleWrite}>
+            관리자
+          </button>
+        ))}
     </div>
   );
-})
-
+});
