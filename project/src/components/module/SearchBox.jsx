@@ -3,11 +3,19 @@ import React  from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import $ from "jquery"
 
-function SearchBox({location, searchOption, setSelectOption,searchInput,setSearchInput,navigateSearchInput }) {
+function SearchBox({props}) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
   const navigate = useNavigate();
+
+  // props
+  const location = props.location;
+  const searchOption = props.searchOption;
+  const selectOption = props.selectOption;
+  const setSelectOption = props.setSelectOption;
+  const setSearchInput = props.setSearchInput;
+  const navigateSearchInput = props.navigateSearchInput;
 
   return (
     <div className="search-box-wrap">

@@ -13,7 +13,9 @@ import "../../css/page/community.scss";
 // components
 import SubTop from "../module/SubTop";
 import SearchBox from "../module/SearchBox";
-import { Pagenation } from "../module/Pagenation";
+import { Pagenation } from "../module/community/Pagenation";
+import { TabSection } from "../module/community/TabSection";
+import { CommunityBoardSection } from "../module/community/CommunityBoardSection";
 
 // 데이터 로컬스토리지 저장
 if (!localStorage.community_data) {
@@ -49,13 +51,6 @@ function Community({ gnb1, gnb2, data }) {
   const [list, setList] = useState(listData);
 
   // function
-  const toggleListFn = (e) => {
-    const list = document.querySelectorAll("#faq-tab .list");
-    list.forEach((e) => {
-      e.classList.remove("active");
-    });
-    e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
-  };
   const handleSearchFn = (selectOption, value) => {
     if (value !== null) {
       if (selectOption === "제목") {
@@ -112,6 +107,25 @@ function Community({ gnb1, gnb2, data }) {
   };
   useEffect(() => {}, [setcurrentPage]);
 
+  // props
+  const seachBoxProps = {
+    location: `/community/${data}/search`,
+    searchOption: searchOption,
+    selectOption: selectOption,
+    setSelectOption: setSelectOption,
+    setSearchInput: setSearchInput,
+    navigateSearchInput: navigateSearchInput,
+  };
+  const TabSectionProps = {
+    data: data,
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+  };
+  const CommunityBoardSectionProps = {
+    data: data,
+    currentList: currentList,
+  };
+
   // return
   return (
     <>
@@ -121,101 +135,10 @@ function Community({ gnb1, gnb2, data }) {
 
       {/* <!-- contents s --> */}
       <div className="contents">
-        <div className="content">
-          {/* <!-- search-box s --> */}
-          <SearchBox location={`/community/${data}/search`} searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} setSearchInput={setSearchInput} navigateSearchInput={navigateSearchInput} />
-          {/* <!-- search-box e --> */}
-
-          {/* <!-- tab-section s --> */}
-          <div className="tab-section">
-            <div className="tabs">
-              <div
-                id="notice-tab"
-                className={activeTab === "notice" ? "tab notice-tab-button active" : "tab notice-tab-button"}
-                onClick={() => {
-                  setActiveTab("notice");
-                }}
-              >
-                <Link to={"/community/notice"}>공지사항</Link>
-              </div>
-              <div
-                id="faq-tab"
-                className={activeTab === "faq" ? "tab faq-tab-button active" : "tab faq-tab-button"}
-                onClick={() => {
-                  setActiveTab("faq");
-                }}
-              >
-                <Link to={"/community/faq"}>FAQ</Link>
-              </div>
-              <div
-                id="freeboard-tab"
-                className={activeTab === "freeboard" ? "tab freeboard-tab-button active" : "tab freeboard-tab-button"}
-                onClick={() => {
-                  setActiveTab("freeboard");
-                }}
-              >
-                <Link to={"/community/freeboard"}>자유게시판</Link>
-              </div>
-            </div>
-          </div>
-          {/* <!-- tab-section e --> */}
-
-          {/* <!-- board-section s --> */}
-          <div className="board-section">
-            <div className="tab-content">
-              <div id={`${data}-list`} className="table active">
-                <div className="table-top">
-                  <ul>
-                    <li className="list-num">번호</li>
-                    <li className="list-title">제목</li>
-                    <li className="list-date">날짜</li>
-                    <li className="list-user">작성자</li>
-                  </ul>
-                </div>
-                <ul>
-                  {currentList.map((v, i) => (
-                    <li
-                      key={v.idx}
-                      className="list"
-                      data-type={v.type}
-                      data-key={v.idx}
-                      onClick={(e) => {
-                        toggleListFn(e.currentTarget);
-                      }}
-                    >
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (data === "freeboard" || data === "notice") {
-                            navigate(`/community/${data}/${v.idx}`, { state: { user: v.user, listIdx: v.idx, data: data } });
-                          }
-                        }}
-                      >
-                        <div className="list-header">
-                          <p className="list-num">{i + 1}</p>
-                          <p className="list-title">{v.title}</p>
-                          <p className="list-date">{v.date}</p>
-                          <p className="list-user">{v.user}</p>
-                        </div>
-                        {data === "faq" && (
-                          <div className="list-info">
-                            <strong>{v.content}</strong>
-                          </div>
-                        )}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          {/* <!-- board-section e --> */}
-
-          {/* <!-- pagenate-section s --> */}
-          <Pagenation props={pagenationProps} />
-          {/* <!-- pagnat-section e --> */}
-        </div>
+        <SearchBox props={seachBoxProps} />
+        <TabSection props={TabSectionProps} />
+        <CommunityBoardSection props={CommunityBoardSectionProps} />
+        <Pagenation props={pagenationProps} />
       </div>
       {/* <!-- contents e --> */}
     </>

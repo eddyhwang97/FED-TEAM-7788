@@ -77,12 +77,21 @@ handleSearchFn(selectOption,navigateSearchInput)
     console.log(list)
   },[handleSearchFn])
 
+  const seachBoxProps = {
+    location: `/search/booksearch`,
+    searchOption: searchOption,
+    selectOption: selectOption,
+    setSelectOption: setSelectOption,
+    setSearchInput: setSearchInput,
+    navigateSearchInput: navigateSearchInput,
+  };
+
   return (
     <>
       <SubTop gnb1={gnb1} gnb2={gnb2} />
       <div className="contents">
         {/* 도서 리스트 */}
-        <SearchBox location={`/search/booksearch`} searchOption={searchOption} selectOption={selectOption} setSelectOption={setSelectOption} searchInput={searchInput} setSearchInput={setSearchInput} handleSearchFn={handleSearchFn} />
+        <SearchBox props={seachBoxProps}/>
         <div className="book-list-wrap">
           {/* <SearchNotice/> */}
           <ul className="book-list">
