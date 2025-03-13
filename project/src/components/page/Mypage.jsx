@@ -1,5 +1,6 @@
 //  Mypage 컴포넌트 - Mypage.jsx
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
+import { initCardEffect } from '../module/mypage/levelCardFn';
 import { useNavigate } from 'react-router-dom';
 import { GP } from '../module/Contexter';
 import confetti from 'canvas-confetti'; // 폭죽 라이브러리
@@ -42,14 +43,13 @@ function Mypage({ gnb1, gnb2 }) {
   const [pickedBooks, setPickedBooks] = useState([]);
   const [profileImage, setProfileImage] = useState('');
   const [unlockedBadges, setUnlockedBadges] = useState([]);
-  const [remainingBadges, setRemainingBadges] = useState([]);
-  const [celebratedBadges, setcelebratedBadges] = useState([]);
 
   const [showModal, setShowModal] = useState(false); // 모달 창 상태
   const [modalContent, setModalContent] = useState(''); // 모달에 표시할 내용
   const [completedBadges, setCompletedBadges] = useState([]);
 
   const [showMoreModal, setShowMoreModal] = useState(false);
+  const cardRef = useRef(null);
 
   // 레벨 버튼 클릭 핸들러
   const handleMoreClick = () => {
@@ -61,6 +61,7 @@ function Mypage({ gnb1, gnb2 }) {
     setShowMoreModal(false);
   };
 
+  // 로그인 useContext 관리
   const loginState = context.loginState.isLogin;
   // 로그인 상태면 유저정보 뜨고 없으면 null값으로 처리
   const user = loginState ? context.user : null;
@@ -294,10 +295,6 @@ function Mypage({ gnb1, gnb2 }) {
         //  폭죽 실행된 뱃지 정보
         const setCelebratedBadges = user.setCelebratedBadges || [];
 
-        // const remainingBadges = badgeData.filter(
-        //   (badge) => !setCelebratedBadges.includes(badge.badgeTitle)
-        // );
-        // console.log('남은 뱃지?', remainingBadges);
 
         // 이번에 새롭게 활성화된 뱃지만 필터링
         const newBadges = unlockedBadges.filter(
@@ -395,20 +392,16 @@ function Mypage({ gnb1, gnb2 }) {
     }
   }, [user]); // user 상태가 변경될 때마다 실행
 
-  // useEffect(() => {
-  //   if (badgeData.length > 0) {
-  //     setRemainingBadges(
-  //       badgeData.filter((badge) => !unlockedBadges)
-  //     );
-  //   }
-  // }, [badgeData, celebratedBadges]);
-
-  // console.log("뱃지",badgeData)
-  // console.log("언록",unlockedBadges)
-  // console.log("결과",setRemainingBadges)
+  // 남은 뱃지 계산 //
   const unlockedSet = new Set(unlockedBadges.map(badge => badge.badgeTitle));
   const lockedBadges = badgeData.filter(badge => !unlockedSet.has(badge.badgeTitle));
-  console.log(lockedBadges);
+
+  // 레벨 카드 //
+  useEffect(() => {
+    if (cardRef.current) {
+      initCardEffect(cardRef.current);
+    }
+  },[showMoreModal]);
 
   return (
     <>
@@ -465,7 +458,7 @@ function Mypage({ gnb1, gnb2 }) {
               </div>
             </div>
             <div className='right'>
-              <div className='level-box'>
+              <div className='level-box' onClick={handleMoreClick}>
                 <div className='level'>
                   <img
                     src={`/img/sub/img-level${level}.svg`}
@@ -488,16 +481,20 @@ function Mypage({ gnb1, gnb2 }) {
                     </em>
                   </div>
                 </div>
-                <a href='#' className='more-btn' onClick={handleMoreClick}></a>
-                {showMoreModal && (
+                <a href='#' className='more-btn' ></a>
+              </div>
+              {showMoreModal && (
                   <div className='more-modal'>
                     <div className='modal-content'>
-                      <img src={`/img/sub/img-level${level}.png`} />
+                      <div ref={cardRef} className="card">
+                        <img
+                        className='img'
+                        src={`/img/sub/img-level${level}.png`} />
+                      </div>
                       <button onClick={closeMoreModal}>닫기</button>
                     </div>
                   </div>
                 )}
-              </div>
               <div className='my-book'>
                 <div className='book-box borrow'>
                   <p>대출 중</p>
