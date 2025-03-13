@@ -19,7 +19,9 @@ function BookDetail() {
   const { testToday } = useContext(GP);
 
   const { user } = context;
+  const [simulatedDate, setSimulatedDate] = useState(testToday);
 
+  // 대출
   useEffect(() => {
     if (book) {
       setStock(book.stock);
@@ -36,15 +38,14 @@ function BookDetail() {
           setLoanStatus("대출 중");
           setReturnDate(loanedBook.dueDate);
 
-          // testToday가 반납 기한을 지나면 자동 반납
-          if (testToday > new Date(loanedBook.dueDate)) {
-            setIsAutoReturn(true); // 자동 반납 플래그 설정
+          if (simulatedDate > new Date(loanedBook.dueDate)) {
+            setIsAutoReturn(true);
             handleReturn();
           }
         }
       }
     }
-  }, [book, testToday]);
+  }, [book, simulatedDate]);
 
   if (!book) {
     return <div className="error">해당 도서를 찾을 수 없습니다.</div>;
@@ -83,10 +84,11 @@ function BookDetail() {
     }
   };
 
+  // 반납
   const handleReturn = () => {
     if (!user) return;
     if (!user.bData) user.bData = [];
-  
+
     // 자동 반납이면 alert 없이 실행
     if (isAutoReturn) {
       user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
@@ -98,7 +100,7 @@ function BookDetail() {
       setIsAutoReturn(false); // 상태 초기화
       return;
     }
-  
+
     // 수동 반납이면 confirm 창을 띄움
     if (window.confirm("반납 예약을 도와드릴까요?")) {
       user.currentData = user.currentData.filter((b) => b.isbn !== book.ISBN);
@@ -110,6 +112,7 @@ function BookDetail() {
     }
   };
 
+  // 찜한도서
   const handleFavorite = () => {
     if (!user) {
       alert("로그인 후 이용 가능합니다.");
@@ -132,6 +135,19 @@ function BookDetail() {
     }
 
     sessionStorage.setItem("loggedInUser", JSON.stringify(user));
+  };
+
+  // 테스트 날짜 변경 버튼
+  const toggleDate = () => {
+    setSimulatedDate((prevDate) => {
+      const currentDate = new Date(testToday);
+      const futureDate = new Date(testToday);
+      futureDate.setDate(futureDate.getDate() + 8);
+
+      return prevDate.getTime() === currentDate.getTime()
+        ? futureDate
+        : currentDate;
+    });
   };
 
   return (
@@ -223,6 +239,17 @@ function BookDetail() {
               </div>
             </div>
           </div>
+          {user?.id === 1 && (
+              <button
+                type="button"
+                className="toggle-date"
+                onClick={toggleDate}
+              >
+                {simulatedDate.getTime() === new Date(testToday).getTime()
+                  ? "8일 뒤로 이동"
+                  : "오늘 날짜로 돌아가기"}
+              </button>
+            )}
         </div>
         <BookComment />
       </div>
