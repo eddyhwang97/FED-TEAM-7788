@@ -43,16 +43,19 @@ export const Pagenation = memo(({ props }) => {
       </ul>
       <button type="button" className="btn-next"></button>
 
-      {(data === "freeboard" && (
+      {data === "freeboard" && (
         <button type="button" className="write-btn" onClick={handleWrite}>
           글쓰기
         </button>
-      )) ||
-        ((data === "notice" || data ==="faq" )&& user.id === "010-0000-0000" && (
-          <button type="button" className="write-btn" onClick={handleWrite}>
-            관리자
-          </button>
-        ))}
+      )}
+      {user !== null
+        ? (data === "notice" || data === "faq") &&
+          user.id === 1 && (
+            <button type="button" className="write-btn" onClick={handleWrite}>
+              관리자
+            </button>
+          )
+        : null}
     </div>
   );
 });
