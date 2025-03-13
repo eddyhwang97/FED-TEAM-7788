@@ -72,19 +72,19 @@ function Mypage({ gnb1, gnb2 }) {
     } else {
       // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
       if (user.iLoveIt && Array.isArray(user.iLoveIt)) {
-        setPicked(user.iLoveIt);
+        setPicked(user?.iLoveIt?? []);
       } else {
         setPicked([]);
       }
 
       if (user.currentData && Array.isArray(user.currentData)) {
-        setCurrentBook(user.currentData);
+        setCurrentBook(user?.currentData ?? []);
       } else {
         setCurrentBook([]);
       }
 
       if (user.bData && Array.isArray(user.bData)) {
-        setFinished(user.bData);
+        setFinished(user?.bData ?? []);
       } else {
         setFinished([]);
       }
@@ -92,7 +92,7 @@ function Mypage({ gnb1, gnb2 }) {
       // 유저 레벨 업데이트
       updateLevel(user.bData.length || 0);
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   // picked의 isbn , book_data의 isbn 비교 후 책 정보 저장
   useEffect(() => {
@@ -125,11 +125,14 @@ function Mypage({ gnb1, gnb2 }) {
     }
 
     setLevel(lvl);
-    setCurrent(booksRead - getMinBooks(lvl));
-    setTotal(getMaxBooks(lvl) - getMinBooks(lvl) + 1);
+
+    const minBooks = getMinBooks(lvl);
+    const maxBooks = getMaxBooks(lvl);
+    setCurrent(booksRead - minBooks);
+    setTotal(maxBooks - minBooks + 1);
     setProgress(
-      ((booksRead - 1 - getMinBooks(lvl)) /
-        (getMaxBooks(lvl) - getMinBooks(lvl))) *
+      ((booksRead - 1 -minBooks) /
+        (maxBooks - minBooks)) *
         100
     );
   };
@@ -339,14 +342,14 @@ function Mypage({ gnb1, gnb2 }) {
     }
   }, [user, completedBadges]); // 의존성 배열에 `user`와 `completedBadges`만 포함;; // completedBadges가 변경될 때마다 실행
 
+
   const triggerConfetti = () => {
     const end = Date.now() + 3 * 1000; // 폭죽을 3초 동안 터뜨리기
     const interval = setInterval(() => {
       confetti({
-        particleCount: 5,
-        angle: 60,
-        spread: 55,
-        origin: { x: Math.random(), y: Math.random() - 0.2 },
+        particleCount: 7,
+        spread: 70,
+        origin: { x: Math.random(), y: Math.random() * 0.6 },
       });
       if (Date.now() > end) {
         clearInterval(interval); // 폭죽을 끝낸다.
