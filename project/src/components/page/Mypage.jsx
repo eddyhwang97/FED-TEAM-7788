@@ -42,6 +42,8 @@ function Mypage({ gnb1, gnb2 }) {
   const [pickedBooks, setPickedBooks] = useState([]);
   const [profileImage, setProfileImage] = useState('');
   const [unlockedBadges, setUnlockedBadges] = useState([]);
+  const [remainingBadges, setRemainingBadges] = useState([]);
+  const [celebratedBadges, setcelebratedBadges] = useState([]);
 
   const [showModal, setShowModal] = useState(false); // 모달 창 상태
   const [modalContent, setModalContent] = useState(''); // 모달에 표시할 내용
@@ -72,7 +74,7 @@ function Mypage({ gnb1, gnb2 }) {
     } else {
       // 대출, 찜, 완독 데이터가 있는지 확인 후 업데이트
       if (user.iLoveIt && Array.isArray(user.iLoveIt)) {
-        setPicked(user?.iLoveIt?? []);
+        setPicked(user?.iLoveIt ?? []);
       } else {
         setPicked([]);
       }
@@ -130,11 +132,7 @@ function Mypage({ gnb1, gnb2 }) {
     const maxBooks = getMaxBooks(lvl);
     setCurrent(booksRead - minBooks);
     setTotal(maxBooks - minBooks + 1);
-    setProgress(
-      ((booksRead - 1 -minBooks) /
-        (maxBooks - minBooks)) *
-        100
-    );
+    setProgress(((booksRead - 1 - minBooks) / (maxBooks - minBooks)) * 100);
   };
   // 레벨 최소도서
   const getMinBooks = (lvl) => {
@@ -147,12 +145,6 @@ function Mypage({ gnb1, gnb2 }) {
   };
 
   useEffect(() => {
-    // 컴포넌트 처음 렌더링시 로컬스토리지에서 이미지 불러오기
-    // const loggedInUserSession = sessionStorage.getItem('loggedInUser');
-    // if (loggedInUserSession) {
-    //   const userSession = JSON.parse(loggedInUserSession);
-    //   const userId = userSession.id;
-
     // 로컬스토리지에서 member_data 가져오기
     if (user) {
       const memberData = localStorage.getItem('member_data');
@@ -187,12 +179,7 @@ function Mypage({ gnb1, gnb2 }) {
         if (memberData) {
           const parsedMembers = JSON.parse(memberData);
 
-          // 세션스토리지 로그인 데이터
-          // const loggedInUserSession = sessionStorage.getItem('loggedInUser');
           if (user) {
-            // const userSession = JSON.parse(loggedInUserSession);
-            // const userId = userSession.id;
-
             // memberData 배열에서 로그인 데이터 찾아서 프로필 이미지 업데이트
             const updatedMembers = parsedMembers.map((member) =>
               member.id === user.id
@@ -217,7 +204,6 @@ function Mypage({ gnb1, gnb2 }) {
   const badges = badgeData;
 
   // ISBN 장르추출 //
-
   const getGenreByISBN = (isbn) => {
     const prefix = isbn.toString().slice(0, 3); // ISBN 앞 3자리 추출
 
@@ -306,13 +292,18 @@ function Mypage({ gnb1, gnb2 }) {
         setUnlockedBadges(badgesWithAnimation); // 활성화된 뱃지 업데이트
 
         //  폭죽 실행된 뱃지 정보
-        const celebratedBadges = user.celebratedBadges || [];
+        const setCelebratedBadges = user.setCelebratedBadges || [];
+
+        // const remainingBadges = badgeData.filter(
+        //   (badge) => !setCelebratedBadges.includes(badge.badgeTitle)
+        // );
+        // console.log('남은 뱃지?', remainingBadges);
 
         // 이번에 새롭게 활성화된 뱃지만 필터링
         const newBadges = unlockedBadges.filter(
           (badge) =>
             !completedBadges.includes(badge.badgeTitle) &&
-            !celebratedBadges.includes(badge.badgeTitle)
+            !setCelebratedBadges.includes(badge.badgeTitle)
         );
 
         if (newBadges.length > 0) {
@@ -329,8 +320,8 @@ function Mypage({ gnb1, gnb2 }) {
           // 실행된 뱃지를 user 데이터에 저장
           const updatedUser = {
             ...user,
-            celebratedBadges: [
-              ...celebratedBadges,
+            setCelebratedBadges: [
+              ...setCelebratedBadges,
               ...newBadges.map((badge) => badge.badgeTitle),
             ],
           };
@@ -341,7 +332,6 @@ function Mypage({ gnb1, gnb2 }) {
       }
     }
   }, [user, completedBadges]); // 의존성 배열에 `user`와 `completedBadges`만 포함;; // completedBadges가 변경될 때마다 실행
-
 
   const triggerConfetti = () => {
     const end = Date.now() + 3 * 1000; // 폭죽을 3초 동안 터뜨리기
@@ -404,6 +394,21 @@ function Mypage({ gnb1, gnb2 }) {
       }
     }
   }, [user]); // user 상태가 변경될 때마다 실행
+
+  // useEffect(() => {
+  //   if (badgeData.length > 0) {
+  //     setRemainingBadges(
+  //       badgeData.filter((badge) => !unlockedBadges)
+  //     );
+  //   }
+  // }, [badgeData, celebratedBadges]);
+
+  // console.log("뱃지",badgeData)
+  // console.log("언록",unlockedBadges)
+  // console.log("결과",setRemainingBadges)
+  const unlockedSet = new Set(unlockedBadges.map(badge => badge.badgeTitle));
+  const lockedBadges = badgeData.filter(badge => !unlockedSet.has(badge.badgeTitle));
+  console.log(lockedBadges);
 
   return (
     <>
@@ -487,7 +492,7 @@ function Mypage({ gnb1, gnb2 }) {
                 {showMoreModal && (
                   <div className='more-modal'>
                     <div className='modal-content'>
-                      <img src={`/img/sub/img-level${level}.png`}/>
+                      <img src={`/img/sub/img-level${level}.png`} />
                       <button onClick={closeMoreModal}>닫기</button>
                     </div>
                   </div>
@@ -570,62 +575,59 @@ function Mypage({ gnb1, gnb2 }) {
               </li>
             </ul>
           </div>
-              <div className="earned-badge">
-                <h3>획득한 뱃지</h3>
-          <div className='inner-section badge-wrap'>
-            <ul className='badge-list'>
-              {unlockedBadges.length > 0 ? (
-                unlockedBadges.map((badge, index) => (
-                  <li
-                    key={index}
-                    className={`badge-item ${badge.isActive ? 'active' : ''}`}
-                  >
-                    <div className='img-box'>
-                      <img
-                        src={badge.badgeSrc || '/img/sub/default-badge.png'}
-                        alt={badge.badgeAlt}
-                      />
-                    </div>
-                    <div className='text-box'>
-                      <p>{badge.badgeTitle}</p>
-                      <span>{badge.badgeDescription}</span>
-                    </div>
-                  </li>
-                ))
-              ) : (
-                <li>획득한 배지가 없습니다.</li>
-              )}
-             
-            </ul>
-          </div>
+          <div className='earned-badge'>
+            <h3>획득한 뱃지</h3>
+            <div className='inner-section badge-wrap'>
+              <ul className='badge-list'>
+                {unlockedBadges.length > 0 ? (
+                  unlockedBadges.map((badge, index) => (
+                    <li
+                      key={index}
+                      className={`badge-item ${badge.isActive ? 'active' : ''}`}
+                    >
+                      <div className='img-box'>
+                        <img
+                          src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                          alt={badge.badgeAlt}
+                        />
+                      </div>
+                      <div className='text-box'>
+                        <p>{badge.badgeTitle}</p>
+                        <span>{badge.badgeDescription}</span>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <li>획득한 배지가 없습니다.</li>
+                )}
+              </ul>
             </div>
-              <div className="remaining-badge">
-                <h3>남아있는 뱃지</h3>
-          <div className='inner-section badge-wrap'>
-            <ul className='badge-list-remain'>
-              {unlockedBadges.length > 0 ? (
-                unlockedBadges.map((badge, index) => (
-                  <li
-                    key={index}
-                    className={`badge-item ${badge.isActive ? 'active' : ''}`}
-                  >
-                    <div className='img-box'>
-                      <img
-                        src={badge.badgeSrc || '/img/sub/default-badge.png'}
-                        alt={badge.badgeAlt}
-                      />
-                    </div>
-                    <div className='text-box'>
-                    </div>
-                  </li>
-                ))
-              ) : (
-                <li>획득한 배지가 없습니다.</li>
-              )}
-             
-            </ul>
           </div>
+          <div className='remaining-badge'>
+            <h3>남아있는 뱃지</h3>
+            <div className='inner-section badge-wrap'>
+              <ul className='badge-list-remain'>
+                {lockedBadges.length > 0 ? (
+                  lockedBadges.map((badge, index) => (
+                    <li
+                      key={index}
+                      className={`badge-item ${badge.isActive ? 'active' : ''}`}
+                    >
+                      <div className='img-box'>
+                        <img
+                          src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                          alt={badge.badgeAlt}
+                        />
+                      </div>
+                      <div className='text-box'></div>
+                    </li>
+                  ))
+                ) : (
+                  <li>획득한 배지가 없습니다.</li>
+                )}
+              </ul>
             </div>
+          </div>
         </div>
       </div>
     </>
