@@ -39,6 +39,7 @@ export const Pagenation = memo(({ props }) => {
           >
             {page}
           </li>
+          
         ))}
       </ul>
       <button type="button" className="btn-next"></button>
