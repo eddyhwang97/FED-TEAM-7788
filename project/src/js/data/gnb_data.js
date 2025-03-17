@@ -27,7 +27,7 @@ export const menu = [
       },
       {
         txt: "강연신청",
-        link: "/apply/culture",
+        link: "/error",
       },
     ],
   },

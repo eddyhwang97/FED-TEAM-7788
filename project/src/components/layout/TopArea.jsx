@@ -133,7 +133,6 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
                   }}
                   onKeyUp={e=>{
                     if(e.key === 'Enter'){
-                      console.log('엔터유~~!');
                       layoutFn.searchClose();
                     }
                   }}
