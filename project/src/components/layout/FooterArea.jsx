@@ -10,13 +10,13 @@ export const FooterArea=memo((props)=> {
           <div className="left">
             <ul className="footer-link">
               <li>
-                <a href="#">개인정보처리방침</a>
+                <a href="/error">개인정보처리방침</a>
               </li>
               <li>
-                <a href="#">저작권보호정책</a>
+                <a href="/error">저작권보호정책</a>
               </li>
               <li>
-                <a href="#">이메일무단수집거부</a>
+                <a href="/error">이메일무단수집거부</a>
               </li>
               <li>
                 <a href="/community/faq">자주묻는질문</a>
