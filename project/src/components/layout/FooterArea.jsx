@@ -30,28 +30,23 @@ export const FooterArea=memo((props)=> {
               </button>
               <ul className="site-list">
                 <li>
-                  <a href="#" target="_blank" title="새창열림">
-                    아무사이트나넣기
+                  <a href="https://github.com/minji73" target="_blank" title="새창열림">
+                    김민지 Github
                   </a>
                 </li>
                 <li>
-                  <a href="#" target="_blank" title="새창열림">
-                    아무사이트나넣기
+                  <a href="https://github.com/kimeming " target="_blank" title="새창열림">
+                    김혜민 Github
                   </a>
                 </li>
                 <li>
-                  <a href="#" target="_blank" title="새창열림">
-                    아무사이트나넣기
+                  <a href="https://github.com/Hyeonseok0529" target="_blank" title="새창열림">
+                    양현석 Github
                   </a>
                 </li>
                 <li>
-                  <a href="#" target="_blank" title="새창열림">
-                    아무사이트나넣기
-                  </a>
-                </li>
-                <li>
-                  <a href="#" target="_blank" title="새창열림">
-                    아무사이트나넣기
+                  <a href="https://github.com/eddyhwang97" target="_blank" title="새창열림">
+                    황대웅 Github
                   </a>
                 </li>
               </ul>
