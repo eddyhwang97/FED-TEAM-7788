@@ -149,3 +149,10 @@ select {
   background: $white url("../../../public/img/common/icon-down-gray.svg")  right 8px center/16px no-repeat;
 }
 
+.toggle-date {
+  margin: 1em 0;
+  padding: 4px 16px;
+  border: 1px solid $lightgray;
+  border-radius: 5px;
+}
+
