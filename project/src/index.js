@@ -22,12 +22,12 @@ import Post from "./components/page/Post";
 import TotalSearch from "./components/page/TotalSearch";
 
 // 공통 css
-import "./css/common/_core.scss"
+import "./css/common/_core.scss";
 
 export default function MainComponent() {
   return (
     <BrowserRouter>
-    <ScrollTop/>
+      <ScrollTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
@@ -51,7 +51,9 @@ export default function MainComponent() {
           <Route path="search/new" element={<BookList gnb1="자료검색" gnb2="신착도서" />} />
           <Route path="monthly/recommend" element={<Monthly gnb1="이달의도서" gnb2="편집장 추천 도서" />} />
           <Route path="book/:isbn" element={<BookDetail />} /> {/* 책 상세 페이지 */}
-          <Route path="totalsearch/:results" element={<TotalSearch />} />
+          <Route path="totalsearch" element={<TotalSearch />}>
+            <Route path="totalsearch/:results" element={<TotalSearch />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

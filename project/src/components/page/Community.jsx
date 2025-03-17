@@ -136,6 +136,20 @@ function Community({ gnb1, gnb2, data }) {
       {/* <!-- contents s --> */}
       <div className="contents">
         <SearchBox props={seachBoxProps} />
+        {navigateSearchInput && (
+          <div className="notice-search-results">
+            <span>
+              {list.length > 0 ? (
+                <>
+                  <strong>"{navigateSearchInput}"</strong>
+                  {` 에대한색결과 ${list.length}건이 있습니다.`}
+                </>
+              ) : (
+                "검색결과가 없습니다."
+              )}
+            </span>
+          </div>
+        )}
         <TabSection props={TabSectionProps} />
         <CommunityBoardSection props={CommunityBoardSectionProps} />
         <Pagenation props={pagenationProps} />
