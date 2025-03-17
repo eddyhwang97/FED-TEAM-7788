@@ -19,7 +19,7 @@ export const FooterArea=memo((props)=> {
                 <a href="#">이메일무단수집거부</a>
               </li>
               <li>
-                <a href="#">자주묻는질문</a>
+                <a href="/community/faq">자주묻는질문</a>
               </li>
             </ul>
           </div>
