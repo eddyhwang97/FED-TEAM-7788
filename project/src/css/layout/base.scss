@@ -5,6 +5,7 @@
 // sub-layout
 #main {
   margin-top: 60px;
+  flex: 1 0 auto;
 }
 
 @include responsive(1024px) {
@@ -126,6 +127,7 @@
 // sub-contents
 .contents {
   max-width: 1380px;
+  height: 100%;
   margin: 0 auto;
   padding: 36px 20px 60px;
   overflow: hidden;
