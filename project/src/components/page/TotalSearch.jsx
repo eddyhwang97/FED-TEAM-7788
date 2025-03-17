@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import $ from "jquery";
 
 // css
@@ -19,7 +20,7 @@ function TotalSearch() {
 
   // hook
   const location = useLocation();
-  const navigateSearchInput = location.state.navigateSearchInput;
+  const navigateSearchInput = location.state === null ? null : location.state.navigateSearchInput;
   console.log(navigateSearchInput);
 
   // useState
@@ -32,16 +33,17 @@ function TotalSearch() {
   console.log(searchInput);
   // Fn
   const handleSearchFn = (selectOption, value) => {
-    if (value === "") {
-      setbookList([]);
-      setnoticeList([]);
-      setfreeboardList([]);
-      setfaqList([]);
-    } else {
+    if (value !== null) {
+      
       setbookList(bookData.filter((book) => book.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
       setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
       setfreeboardList(freeboardData.filter((freeboard) => freeboard.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
       setfaqList(faqData.filter((faq) => faq.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
+    } else {
+      setbookList([]);
+      setnoticeList([]);
+      setfreeboardList([]);
+      setfaqList([]);
     }
   };
   useEffect(() => {
@@ -50,10 +52,10 @@ function TotalSearch() {
   useEffect(() => {
     handleSearchFn(null, navigateSearchInput);
   }, [navigateSearchInput]);
-  console.log(bookList)
+  console.log(bookList);
 
   const seachBoxProps = {
-    location: `/ + ${location.pathname.split("/")[1]}`,
+    location: `/${location.pathname.split("/")[1]}`,
     searchOption: searchOption,
     selectOption: null,
     setSelectOption: null,
@@ -64,7 +66,22 @@ function TotalSearch() {
   return (
     <>
       <div className="contents">
+        <Outlet/>
         <SearchBox props={seachBoxProps} />
+          {navigateSearchInput && (
+        <div className="notice-search-results">
+            <span>
+              {bookList.length + noticeList.length + freeboardList.length + faqList.length > 0 ? (
+                <>
+                  <strong>"{navigateSearchInput}"</strong>
+                  {` 에대한색결과 ${bookList.length + noticeList.length + freeboardList.length + faqList.length}건이 있습니다.`}
+                </>
+              ) : (
+                "검색결과가 없습니다."
+              )}
+            </span>
+        </div>
+          )}
         <div className="search-result">
           <section className="result-section">
             <h3 className="category-tit">도서</h3>
@@ -73,10 +90,10 @@ function TotalSearch() {
                 {bookList.length > 0 ? (
                   bookList.map((v, i) => (
                     <li className="list" key={i}>
-                        <Link to={`/book/${v.ISBN}`}>
+                      <Link to={`/book/${v.ISBN}`}>
                         <p>{v.title}</p>
                         <FontAwesomeIcon icon={faChevronRight} />
-                        </Link>
+                      </Link>
                     </li>
                   ))
                 ) : (

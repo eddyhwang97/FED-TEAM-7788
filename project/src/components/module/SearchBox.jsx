@@ -38,7 +38,9 @@ function SearchBox({props}) {
           onKeyUp={(e) => {
             if (e.key === "Enter") {
               console.log(e.target.value);
+              if(e.target.value!==null)
               navigate(`${location}/:${e.target.value}`,{state:{ navigateSearchInput : e.target.value}})
+            else navigate(`${location}`)
             }
           }}
           type="text"
