@@ -142,7 +142,7 @@ function Article({ gnb1, gnb2 }) {
               <div className="writer-info">
                 <div className="profile">{articleData.user}</div>
                 <div className="date">{articleData.date}</div>
-                {articleData.id === user.id && (
+                {user!==null? articleData.id === user.id && (
                   <button
                     type="button"
                     className="delete-button"
@@ -152,7 +152,7 @@ function Article({ gnb1, gnb2 }) {
                   >
                     삭제
                   </button>
-                )}
+                ):""}
               </div>
             </div>
             <div className="article-content">
@@ -176,7 +176,7 @@ function Article({ gnb1, gnb2 }) {
                     <div className="comment-content">
                       <p>{v.comment}</p>
                     </div>
-                    {v.id === user.id&& (
+                    {user!==null? v.id === user.id&& (
                       <button
                         type="button"
                         className="delete-button"
@@ -189,7 +189,7 @@ function Article({ gnb1, gnb2 }) {
                       >
                         삭제
                       </button>
-                    )}
+                    ):""}
                   </li>
                 ))}
               </ul>
