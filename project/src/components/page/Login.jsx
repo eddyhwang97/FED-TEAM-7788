@@ -60,7 +60,7 @@ function Login({ gnb1, gnb2 }) {
     if (phoneNum === 'admin') {
       // admin이면 유효성 검사 없이 바로 로그인 처리
       const adminUser = {
-        name: 1,
+        name: "관리자",
         id: 1,
         pw, // 보안상 비밀번호를 그대로 저장하는 것은 위험! 실제 서비스에서는 해싱 필요
         bData: '',
