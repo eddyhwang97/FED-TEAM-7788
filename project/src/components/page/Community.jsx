@@ -58,7 +58,7 @@ function Community({ gnb1, gnb2, data }) {
       } else if (selectOption === "내용") {
         setList(listData.filter((v) => v.content.toLowerCase().trim().includes(value.toLowerCase().trim())));
       } else if (selectOption === "작성자") {
-        setList(listData.filter((v) => v.user.toLowerCase().trim().includes(value.toLowerCase().trim())));
+        setList(listData.filter((v) => v.name.toLowerCase().trim().includes(value.toLowerCase().trim())));
       }
       // 초기 검색값없을때 전체셋팅
     } else setBoardListFn(data);
