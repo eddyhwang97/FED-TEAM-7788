@@ -185,7 +185,7 @@ function Article({ gnb1, gnb2 }) {
                         onClick={() => {
                           if (window.confirm("삭제하시겠습니까?")) {
                             deleteComment(v.cNum, data);
-                            alert("삭제제되었습니다.");
+                            alert("삭제되었습니다.");
                           } else return;
                         }}
                       >
