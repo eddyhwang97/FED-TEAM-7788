@@ -32,24 +32,25 @@ const badgeData = badge_data;
 function Mypage({ gnb1, gnb2 }) {
   const navigate = useNavigate();
   const context = useContext(GP);
+  
   const [userTemp, setUser] = useState(null);
-  const [level, setLevel] = useState(1);
-  const [progress, setProgress] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [picked, setPicked] = useState(0);
-  const [currentBook, setCurrentBook] = useState(0);
-  const [finished, setFinished] = useState(0);
-  const [pickedBooks, setPickedBooks] = useState([]);
-  const [profileImage, setProfileImage] = useState('');
-  const [unlockedBadges, setUnlockedBadges] = useState([]);
+  const [level, setLevel] = useState(1); // 레벨
+  const [progress, setProgress] = useState(0); // 프로그래스 바
+  const [current, setCurrent] = useState(0); // 현재 반납권수
+  const [total, setTotal] = useState(0); // 레벨 목표권수
+  const [pickedBooks, setPickedBooks] = useState([]); // 좋아요 클릭 도서
+  const [picked, setPicked] = useState(0); // 좋아요 클릭한 도서권수
+  const [currentBook, setCurrentBook] = useState(0); // 대출중인 도서
+  const [finished, setFinished] = useState(0); // 반납도서
+  const [profileImage, setProfileImage] = useState(''); // 프로필 이미지
+  const [unlockedBadges, setUnlockedBadges] = useState([]); // 뱃지
 
   const [showModal, setShowModal] = useState(false); // 모달 창 상태
   const [modalContent, setModalContent] = useState(''); // 모달에 표시할 내용
-  const [completedBadges, setCompletedBadges] = useState([]);
+  const [completedBadges, setCompletedBadges] = useState([]); // 뱃지 획득 축하 이벤트
 
-  const [showMoreModal, setShowMoreModal] = useState(false);
-  const cardRef = useRef(null);
+  const [showMoreModal, setShowMoreModal] = useState(false); // 레벨 카드 
+  const cardRef = useRef(null); // 카드 회전 
 
   // 레벨 버튼 클릭 핸들러
   const handleMoreClick = () => {
@@ -112,6 +113,7 @@ function Mypage({ gnb1, gnb2 }) {
   }, [picked]);
 
   // 레벨 계산 함수
+  // 반납완료 도서권수 / 다음레벨 목표 권수
   const updateLevel = (booksRead) => {
     let lvl = 1,
       needed = 0;
@@ -133,8 +135,9 @@ function Mypage({ gnb1, gnb2 }) {
     const maxBooks = getMaxBooks(lvl);
     setCurrent(booksRead - minBooks);
     setTotal(maxBooks - minBooks + 1);
-    setProgress(((booksRead - 1 - minBooks) / (maxBooks - minBooks)) * 100);
-  };
+    setProgress(((booksRead - 1 - minBooks) / (maxBooks - minBooks)) * 100); // 프로그레스 바 현황 반영
+  }; // updateLevel //
+
   // 레벨 최소도서
   const getMinBooks = (lvl) => {
     return [0, 0, 3, 6, 12][lvl];
@@ -145,6 +148,7 @@ function Mypage({ gnb1, gnb2 }) {
     return [0, 2, 5, 11, 30][lvl];
   };
 
+  // 프로필 이미지 상태 업데이트
   useEffect(() => {
     // 로컬스토리지에서 member_data 가져오기
     if (user) {
@@ -167,6 +171,7 @@ function Mypage({ gnb1, gnb2 }) {
   }, []);
 
   // 프로필 이미지 선택 핸들러
+  // Base64 인코딩 후 저장
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -201,6 +206,7 @@ function Mypage({ gnb1, gnb2 }) {
     }
   };
 
+
   // 뱃지 시스템 시작 //
   const badges = badgeData;
 
@@ -222,6 +228,7 @@ function Mypage({ gnb1, gnb2 }) {
     }
   };
 
+  // 각 장르 3권 이상 반납시 뱃지 활성화
   useEffect(() => {
     if (user) {
       if (Array.isArray(user.bData) && user.bData.length > 0) {
@@ -252,6 +259,8 @@ function Mypage({ gnb1, gnb2 }) {
     }
   }, [user]);
 
+  // 5권 반납시 부여하는 뱃지 따로 추가
+  // 뱃지 처음 획득시 축하 메시지, 폭죽 효과
   useEffect(() => {
     if (user) {
       if (Array.isArray(user.bData) && user.bData.length > 0) {
@@ -349,7 +358,6 @@ function Mypage({ gnb1, gnb2 }) {
   };
 
   // 유저 데이터 변경이 있을 때 데이터 저장
-
   useEffect(() => {
     if (user) {
       // 세션스토리지에서 유저 데이터 가져오기
