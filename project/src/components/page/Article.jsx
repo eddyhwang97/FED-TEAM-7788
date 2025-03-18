@@ -84,6 +84,7 @@ function Article({ gnb1, gnb2 }) {
       let temp = Math.max.apply(null,commentList.map((v) => v.cNum));
       commentList.push({
         cNum: temp + 1,
+        id: user.id,
         name: userName,
         date: formattedDate,
         comment: commentText,
@@ -91,6 +92,7 @@ function Article({ gnb1, gnb2 }) {
     } else {
       commentList.push({
         cNum: 1,
+        id: user.id,
         name: userName,
         date: formattedDate,
         comment: commentText,
