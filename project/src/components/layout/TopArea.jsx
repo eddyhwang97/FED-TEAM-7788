@@ -12,6 +12,7 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
   // hook
   const context = useContext(GP);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 로그인 정보
   // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
@@ -52,6 +53,9 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
       navigate(v.link);
     }
   };
+  useEffect(()=>{
+    setSearchInput("")
+  },[location])
 
   useEffect(() => {
     layoutFn.initLayout();
@@ -86,7 +90,7 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
         <div className="inner-header-wrap">
           <div className="inner-header">
             <h1 className="logo">
-              <Link to="/">
+              <Link to="/" onClick={()=>{window.scrollTo(0,0)}}>
                 <img src={process.env.PUBLIC_URL + `/img/common/logo-temp.svg`} alt="로고" />
               </Link>
             </h1>
@@ -95,12 +99,8 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
               <button
                 type="button"
                 className="total-search-btn"
-                onClick={(e) => {
-                  seachFocus.current.focus();
-                  if (e.target.classList.contains("on")) {
-                    navigate(`totalsearch/:${searchInput}`, { state: { navigateSearchInput: searchInput } });
-                    layoutFn.searchClose();
-                  }
+                onClick={() => {
+                    seachFocus.current.focus();
                 }}
               >
                 <span className="blind">통합검색 버튼</span>

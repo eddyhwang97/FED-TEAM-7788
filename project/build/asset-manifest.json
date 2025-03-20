@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/FED-TEAM-7788/project/build/static/css/main.11d62010.css",
-    "main.js": "/FED-TEAM-7788/project/build/static/js/main.209204c2.js",
+    "main.js": "/FED-TEAM-7788/project/build/static/js/main.89e4af9a.js",
     "static/media/Pretendard-Bold.woff": "/FED-TEAM-7788/project/build/static/media/Pretendard-Bold.1f1dbbbf311ffffcc770.woff",
     "static/media/Pretendard-Medium.woff": "/FED-TEAM-7788/project/build/static/media/Pretendard-Medium.edd5e28caa1cc4a9e0b7.woff",
     "static/media/Pretendard-Regular.woff": "/FED-TEAM-7788/project/build/static/media/Pretendard-Regular.303253288b0ba99db532.woff",
@@ -21,10 +21,10 @@
     "static/media/icon-down-gray.svg": "/FED-TEAM-7788/project/build/static/media/icon-down-gray.e1a56a9b8d64497c9309.svg",
     "static/media/icon-arrow-white.svg": "/FED-TEAM-7788/project/build/static/media/icon-arrow-white.e684cb98f4103b0520a1.svg",
     "main.11d62010.css.map": "/FED-TEAM-7788/project/build/static/css/main.11d62010.css.map",
-    "main.209204c2.js.map": "/FED-TEAM-7788/project/build/static/js/main.209204c2.js.map"
+    "main.89e4af9a.js.map": "/FED-TEAM-7788/project/build/static/js/main.89e4af9a.js.map"
   },
   "entrypoints": [
     "static/css/main.11d62010.css",
-    "static/js/main.209204c2.js"
+    "static/js/main.89e4af9a.js"
   ]
 }
