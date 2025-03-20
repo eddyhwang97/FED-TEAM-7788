@@ -35,10 +35,24 @@ function Login({ gnb1, gnb2 }) {
 
   // 핸드폰 번호 입력 핸들러
   const handlePhoneNumber = (e) => {
-    const value = e.target.value;
+    let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 입력
+  
+    // 자동으로 하이픈 추가 (000-0000-0000 형식)
+    if (value.length >= 11) {
+      value = value.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    } else if (value.length >= 7) {
+      value = value.replace(/(\d{3})(\d{3,4})/, "$1-$2");
+    }
+
+    // 하이픈 포함 13자까지만 입력 허용
+    if (value.length > 13) {
+      return;
+    }
+  
     setPhoneNum(value);
+  
     // 'admin' 입력 시 바로 로그인 버튼 활성화
-    if (value === 'admin') {
+    if (value === "admin") {
       setNotAllow(false);
     } else {
       setNotAllow(!(PHONE_REGEX.test(value) && PW_REGEX.test(pw)));
