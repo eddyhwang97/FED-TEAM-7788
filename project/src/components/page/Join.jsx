@@ -46,6 +46,11 @@ const handlePhoneNumber = (e) => {
     value = value.replace(/(\d{3})(\d{3,4})/, "$1-$2");
   }
 
+  // 하이픈 포함 13자까지만 입력 허용
+  if (value.length > 13) {
+    return;
+  }
+
   setphoneNum(value);
 
   // 유효성 검사
@@ -105,7 +110,13 @@ const handlePhoneNumber = (e) => {
 
     // 모든 유효성을 통과할 때만 회원가입 버튼 활성화
     useEffect(() => {
-      if (phoneValid && nameValid && passwordregex && pwCheckValid
+      if (
+        phoneValid &&
+        nameValid && 
+        passwordregex.length && 
+        passwordregex.upper && 
+        passwordregex.noRepeat && 
+        pwCheckValid
         ) {
         setNotAllow(false);
         return;
