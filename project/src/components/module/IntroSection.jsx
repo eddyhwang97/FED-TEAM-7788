@@ -1,6 +1,9 @@
 // 메인페이지 소개 섹션
 import React from "react";
+import { Link } from "react-router-dom";
 function IntroSection() {
+  const tabMenu = ["대출하기", "예약하기", "추천도서", "열린공간"];
+  const tabLink = ["/search/booksearch", "/error", "/monthly/recommend", "/community/notice"];
   return (
     <>
       {/* section-intro s */}
@@ -10,22 +13,12 @@ function IntroSection() {
             당신의 취향을 발견하는 공간, <strong>칙칙북북</strong>입니다.
           </h2>
           <div className="link-box-wrap">
-            <a href="/search/booksearch" className="link-box">
-              <p>대출하기</p>
-              <span className="link-box-bg bg01"></span>
-            </a>
-            <a href="/error" className="link-box">
-              <p>예약하기</p>
-              <span className="link-box-bg bg02"></span>
-            </a>
-            <a href="/monthly/recommend" className="link-box">
-              <p>추천도서</p>
-              <span className="link-box-bg bg03"></span>
-            </a>
-            <a href="/community/notice" className="link-box">
-              <p>열린공간</p>
-              <span className="link-box-bg bg04"></span>
-            </a>
+            {tabLink.map((v, i) => (
+              <Link className="link-box" key={i} to={v}>
+                <p>{tabMenu[i]}</p>
+                <span className={`link-box-bg bg0${i + 1}`}></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

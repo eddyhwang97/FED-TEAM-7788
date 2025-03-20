@@ -53,8 +53,7 @@ function SearchBox({props}) {
         <button
           className="search-button"
           onClick={() => {
-            
-            const inputValue = $('input').val();
+            const inputValue = $('.search-box input').val();
             navigate(`${location}/:${inputValue}`,{state:{ navigateSearchInput : inputValue}})
           }}
         ></button>

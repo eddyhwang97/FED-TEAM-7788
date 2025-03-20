@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useState, createContext } from "react";
 
 // css
 import "../../css/page/error.scss";
+import { Link } from "react-router-dom";
 
 function Error() {
   return (
@@ -18,7 +19,7 @@ function Error() {
           </p>
           <p>불편을 드려 죄송합니다.</p>
         </div>
-        <a href="/" className="homepage">홈페이지로 돌아가기</a>
+        <Link className="homepage" to={'/'}>홈페이지로 돌아가기</Link>
       </div>
     </div>
   );

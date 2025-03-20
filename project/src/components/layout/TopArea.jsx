@@ -53,9 +53,9 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     layoutFn.initLayout();
-  },[]);
+  }, []);
 
   return (
     <>
@@ -87,7 +87,7 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
           <div className="inner-header">
             <h1 className="logo">
               <Link to="/">
-                <img src={process.env.PUBLIC_URL+`/img/common/logo-temp.svg`} alt="로고" />
+                <img src={process.env.PUBLIC_URL + `/img/common/logo-temp.svg`} alt="로고" />
               </Link>
             </h1>
             <Gnb gnb={gnb} setGnb={setGnb} setSubTop={setSubTop} />
@@ -95,8 +95,12 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
               <button
                 type="button"
                 className="total-search-btn"
-                onClick={() => {
+                onClick={(e) => {
                   seachFocus.current.focus();
+                  if (e.target.classList.contains("on")) {
+                    navigate(`totalsearch/:${searchInput}`, { state: { navigateSearchInput: searchInput } });
+                    layoutFn.searchClose();
+                  }
                 }}
               >
                 <span className="blind">통합검색 버튼</span>
@@ -109,9 +113,13 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
               </button>
             </div>
             <div className="pc-header-util">
-              <button type="button" className="total-search-btn"  onClick={() => {
+              <button
+                type="button"
+                className="total-search-btn"
+                onClick={() => {
                   seachFocus.current.focus();
-                }}></button>
+                }}
+              ></button>
               <button type="button" className="search-close-btn"></button>
             </div>
           </div>
@@ -131,8 +139,8 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
                   onChange={(e) => {
                     setSearchInput(e.target.value);
                   }}
-                  onKeyUp={e=>{
-                    if(e.key === 'Enter'){
+                  onKeyUp={(e) => {
+                    if (e.key === "Enter") {
                       layoutFn.searchClose();
                     }
                   }}
