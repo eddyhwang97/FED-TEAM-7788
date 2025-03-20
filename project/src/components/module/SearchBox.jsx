@@ -58,7 +58,7 @@ function SearchBox({ props }) {
             if (inputValue.length > 0) navigate(`${location}/:${inputValue}`, { state: { navigateSearchInput: inputValue } });
             else {
               alert("검색어를 입력하세요.");
-              navigate(`${location}`);
+            navigate(`${location}`); 
             }
           }}
         ></button>
