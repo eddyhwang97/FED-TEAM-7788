@@ -25,7 +25,7 @@ import "./css/common/_core.scss";
 
 export default function MainComponent() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <ScrollTop />
       <Routes>
         <Route path="/" element={<Layout />}>
