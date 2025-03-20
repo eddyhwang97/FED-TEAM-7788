@@ -103,7 +103,7 @@ function Article({ gnb1, gnb2 }) {
     }
     localStorage.setItem("community_data", JSON.stringify(communityData));
     setComment(commentList);
-    window.location.reload();
+    navigate(`/community/${data}`)
     $("#text-comment").val("");
   };
 
