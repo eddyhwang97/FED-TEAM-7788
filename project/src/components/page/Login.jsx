@@ -18,12 +18,12 @@ const PW_REGEX =
 function Login({ gnb1, gnb2 }) {
   const context = useContext(GP);
   const navigate = useNavigate();
-  const [phoneNum, setPhoneNum] = useState('');
-  const [phoneValid, setphoneValid] = useState(false);
-  const [pw, setPw] = useState('');
-  const [pwValid, setpwValid] = useState(false);
-  const [showPw, setShowPw] = useState(false);
-  const [notAllow, setNotAllow] = useState(true);
+  const [phoneNum, setPhoneNum] = useState(''); // 휴대폰 번호
+  const [phoneValid, setphoneValid] = useState(false); // 휴대폰 유효성
+  const [pw, setPw] = useState(''); // 비밀번호
+  const [pwValid, setpwValid] = useState(false); // 비밀번호 유효성
+  const [showPw, setShowPw] = useState(false); // 비밀번호 보이기 토글
+  const [notAllow, setNotAllow] = useState(true); // 로그인 버튼
 
   // 로그인 정보
   // loginState는 boolean값으로 로그인상태에따라 사용해야할때 쓰시면됩니다
@@ -57,14 +57,14 @@ function Login({ gnb1, gnb2 }) {
     } else {
       setNotAllow(!(PHONE_REGEX.test(value) && PW_REGEX.test(pw)));
     }
-  };
+  }; // handlePhoneNumber //
 
   // 비밀번호 입력 핸들러
   const handlePw = (e) => {
     const value = e.target.value;
     setPw(value);
     setNotAllow(!(PHONE_REGEX.test(phoneNum) && PW_REGEX.test(value)));
-  };
+  }; // handlePw //
 
   // 로그인 처리 함수
   const onClickConfirmButton = () => {
@@ -88,8 +88,9 @@ function Login({ gnb1, gnb2 }) {
       navigate('/'); // 로그인 성공 후 메인페이지 이동
       context.setLogin(true);
       return;
-    }
+    } // if //
 
+    // 데이터 타입 확인, 숫자가 아닌 모든 문자 제거, 
     const user = member_data.find(
       (m) => String(m.id).replace(/\D/g, '') == cleanPhoneNum && m.pw === pw
     );
@@ -103,8 +104,8 @@ function Login({ gnb1, gnb2 }) {
       context.setLogin(true);
     } else {
       alert('휴대폰번호 혹은 비밀번호를 확인해주세요.');
-    }
-  };
+    } // if //
+  }; // onClickConfirmButton //
   
   // 휴대폰 번호, 비밀번호 유효성을 통과할 때만 로그인 버튼 활성화
   useEffect(() => {

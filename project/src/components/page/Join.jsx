@@ -10,29 +10,28 @@ import join from '../../css/page/join.scss';
 function Join({ gnb1, gnb2 }) {
   // useNavigate 훅 사용
   const Navigate = useNavigate();
-  // 휴대폰 //
+
+  // 회원정보 상태변수 //
   const [phoneNum, setphoneNum] = useState('');
-  const [phoneValid, setphoneValid] = useState(false); // 유효성 검사
-
-  // 이름 //
   const [name, setName] = useState('');
-  const [nameValid, setNameValid] = useState(false); // 유효성 검사
-
-  // 비밀번호 //
   const [pw, setpw] = useState('');
+  const [showPw, setshowPw] = useState(false); // 비밀번호 보이기 토글
+
+  // 유효성 검사 상태변수 //
+  const [phoneValid, setphoneValid] = useState(false); 
+  const [nameValid, setNameValid] = useState(false); 
   const [passwordregex, setPasswordregex] = useState({
-    // 유효성 검사 초기값
+    // 초기값
     length: false,
     upper: false,
     noRepeat: false,
   });
-  const [showPw, setshowPw] = useState(false); // 비밀번호 보이기 토글
-
+  
   // 비밀번호 확인 //
   const [pwCheck, setpwCheck] = useState('');
   const [pwCheckValid, setpwCheckValid] = useState(false); // 유효성 검사
   const [showCheckPw, setshowCheckPw] = useState(false); // 비밀번호 보이기 토글
-
+  
   //  회원가입 버튼 활성화
     const [notAllow, setNotAllow] = useState(true);
 
@@ -57,7 +56,7 @@ const handlePhoneNumber = (e) => {
   // 유효성 검사
   const regex = /^01[016789]-\d{3,4}-\d{4}$/;
   setphoneValid(regex.test(value));
-};
+}; // handlePhoneNumber //
 
   // 이름 유효성 검사 //
   const handleName = (e) => {
@@ -69,7 +68,7 @@ const handlePhoneNumber = (e) => {
     } else {
       setNameValid(false);
     }
-  };
+  }; // handleName //
 
   // 비밀번호 유효성 검사 //
   const handlePw = (e) => {
@@ -92,8 +91,8 @@ const handlePhoneNumber = (e) => {
       length: isValidregex,
       upper: isValidUpper,
       noRepeat: isValidNoRepeat,
-    });
-  };
+    }); // setPasswordregex //
+  }; // handlePw //
 
   // 비밀번호 , 비밀번호 확인 대조//
   const handlePwCheck = (e) => {
@@ -107,7 +106,7 @@ const handlePhoneNumber = (e) => {
     } else {
       setpwCheckValid(false);
     }
-  };
+  }; // handlePwCheck //
 
     // 모든 유효성을 통과할 때만 회원가입 버튼 활성화
     useEffect(() => {
@@ -125,6 +124,7 @@ const handlePhoneNumber = (e) => {
       setNotAllow(true);
     }, [phoneValid, nameValid, passwordregex, pwCheckValid]);
 
+    // 회원가입 버튼 클릭시 중복 확인 후 통과시 로컬스토리지에 저장 // 
     const handleJoin = () => {
       if (notAllow) return; // 버튼이 비활성화 상태면 실행하지 않음
     
@@ -151,7 +151,6 @@ const handlePhoneNumber = (e) => {
       // 새로운 데이터 추가 후 로컬스토리지에 저장
       const updatedData = [...getData, newMember];
       localStorage.setItem('member_data', JSON.stringify(updatedData));
-    
       alert('회원가입이 완료되었습니다.');
     
       // 입력 필드 초기화
@@ -164,16 +163,17 @@ const handlePhoneNumber = (e) => {
 
       // 로그인 페이지 이동
       Navigate('/login');
-    };
+    }; // handleJoin //
 
-  // 비밀번호 보이기/숨기기 처리 함수 //
+  // 비밀번호 input 보이기/숨기기 처리 함수 //
   const togglePw = () => {
     setshowPw(!showPw); // showPassword 상태를 반전시킴
-  };
-  // 비밀번호 보이기/숨기기 처리 함수 //
+  }; // togglePw //
+
+  // 비밀번호 확인 input 보이기/숨기기 처리 함수 //
   const togglecheckPw = () => {
     setshowCheckPw(!showCheckPw); // showPassword 상태를 반전시킴
-  };
+  }; // togglecheckPw //
 
   return (
     <>

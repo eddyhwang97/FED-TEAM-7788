@@ -46,7 +46,7 @@ function Article({ gnb1, gnb2 }) {
   const goLogin = () => {
     if (!loginState) {
       alert("로그인이 필요합니다.");
-      window.location.href = "/login";
+      navigate("/login");
     }
   };
   // ================ enterKey
@@ -81,7 +81,10 @@ function Article({ gnb1, gnb2 }) {
   // ================ postComment
   const postComment = (userName, formattedDate, commentText) => {
     if (commentList.length > 0) {
-      let temp = Math.max.apply(null,commentList.map((v) => v.cNum));
+      let temp = Math.max.apply(
+        null,
+        commentList.map((v) => v.cNum)
+      );
       commentList.push({
         cNum: temp + 1,
         id: user.id,
@@ -107,7 +110,7 @@ function Article({ gnb1, gnb2 }) {
   // ================ deleteArticle
   const deleteArticle = () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      const updatedArticle = communityData.filter((v) => v!==articleData);
+      const updatedArticle = communityData.filter((v) => v !== articleData);
       localStorage.setItem("community_data", JSON.stringify(updatedArticle));
       navigate(`/community/${data}`);
     }
@@ -128,8 +131,8 @@ function Article({ gnb1, gnb2 }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  console.log("아티클 정보",articleData)
- 
+  console.log("아티클 정보", articleData);
+
   // 로그인 상태 확인
   return (
     <>
@@ -144,21 +147,23 @@ function Article({ gnb1, gnb2 }) {
               <div className="writer-info">
                 <div className="profile">{articleData.user}</div>
                 <div className="date">{articleData.date}</div>
-                {user!==null? articleData.id === user.id && (
-                  <button
-                    type="button"
-                    className="delete-button"
-                    onClick={() => {
-                      deleteArticle();
-                    }}
-                  >
-                    삭제
-                  </button>
-                ):""}
+                {user !== null
+                  ? articleData.id === user.id && (
+                      <button
+                        type="button"
+                        className="delete-button"
+                        onClick={() => {
+                          deleteArticle();
+                        }}
+                      >
+                        삭제
+                      </button>
+                    )
+                  : ""}
               </div>
             </div>
             <div className="article-content">
-              {data === "freeboard" && articleData.image !== "" && <img src={process.env.PUBLIC_URL+`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
+              {data === "freeboard" && articleData.image !== "" && <img src={process.env.PUBLIC_URL + `/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
               {String(articleData.content)
                 .split(".")
                 .map((v, i) => (
@@ -178,20 +183,22 @@ function Article({ gnb1, gnb2 }) {
                     <div className="comment-content">
                       <p>{v.comment}</p>
                     </div>
-                    {user!==null? v.id === user.id&& (
-                      <button
-                        type="button"
-                        className="delete-button"
-                        onClick={() => {
-                          if (window.confirm("삭제하시겠습니까?")) {
-                            deleteComment(v.cNum, data);
-                            alert("삭제되었습니다.");
-                          } else return;
-                        }}
-                      >
-                        삭제
-                      </button>
-                    ):""}
+                    {user !== null
+                      ? v.id === user.id && (
+                          <button
+                            type="button"
+                            className="delete-button"
+                            onClick={() => {
+                              if (window.confirm("삭제하시겠습니까?")) {
+                                deleteComment(v.cNum, data);
+                                alert("삭제되었습니다.");
+                              } else return;
+                            }}
+                          >
+                            삭제
+                          </button>
+                        )
+                      : ""}
                   </li>
                 ))}
               </ul>
