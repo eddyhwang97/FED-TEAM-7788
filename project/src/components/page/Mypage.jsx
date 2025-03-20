@@ -429,7 +429,7 @@ function Mypage({ gnb1, gnb2 }) {
             <div className='profile-box'>
               <div className='profile-image'>
                 <img
-                  src={process.env.PUBLIC_URL+profileImage || process.env.PUBLIC_URL+'/img/sub/img-profile-temp.png'} // 선택한 이미지나 기본 이미지
+                  src={profileImage ? profileImage : process.env.PUBLIC_URL + '/img/sub/img-profile-temp.png'} // 선택한 이미지나 기본 이미지
                   alt='프로필 이미지'
                   onClick={() =>
                     document.getElementById('profile-image-input').click()
