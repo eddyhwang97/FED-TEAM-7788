@@ -34,12 +34,11 @@ function TotalSearch() {
   // Fn
   const handleSearchFn = (selectOption, value) => {
     if (value !== null) {
-      
       setbookList(bookData.filter((book) => book.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
       setnoticeList(noticeData.filter((notice) => notice.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
       setfreeboardList(freeboardData.filter((freeboard) => freeboard.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
       setfaqList(faqData.filter((faq) => faq.title.toLowerCase().trim().includes(value.toLowerCase().trim())));
-    } else {
+    } if(value === "") {
       setbookList([]);
       setnoticeList([]);
       setfreeboardList([]);
@@ -52,7 +51,6 @@ function TotalSearch() {
   useEffect(() => {
     handleSearchFn(null, navigateSearchInput);
   }, [navigateSearchInput]);
-  console.log(bookList);
 
   const seachBoxProps = {
     location: `/${location.pathname.split("/")[1]}`,

@@ -1,8 +1,9 @@
 // FooterArea 컴포넌트 - FooterArea.jsx
 
 import React, { memo } from "react";
+import { Link } from "react-router-dom";
 
-export const FooterArea=memo((props)=> {
+export const FooterArea = memo((props) => {
   return (
     <footer className="footer">
       <div className="inner">
@@ -10,16 +11,16 @@ export const FooterArea=memo((props)=> {
           <div className="left">
             <ul className="footer-link">
               <li>
-                <a href="/error">개인정보처리방침</a>
+                <Link to={`/error`}>개인정보처리방침</Link>
               </li>
               <li>
-                <a href="/error">저작권보호정책</a>
+                <Link to={`/error`}>저작권보호정책</Link>
               </li>
               <li>
-                <a href="/error">이메일무단수집거부</a>
+                <Link to={`/error`}>이메일무단수집거부</Link>
               </li>
               <li>
-                <a href="/community/faq">자주묻는질문</a>
+                <Link to={`/community/faq`}>자주묻는질문</Link>
               </li>
             </ul>
           </div>
@@ -55,11 +56,11 @@ export const FooterArea=memo((props)=> {
         </div>
         <div className="footer-btm">
           <div className="footer-logo">
-            <img src={process.env.PUBLIC_URL+`/img/common/logo-temp.svg`} alt="하단 로고" />
+            <img src={process.env.PUBLIC_URL + `/img/common/logo-temp.svg`} alt="하단 로고" />
           </div>
           <p className="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
         </div>
       </div>
     </footer>
   );
-})
+});
