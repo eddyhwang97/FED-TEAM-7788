@@ -71,12 +71,12 @@ function Login({ gnb1, gnb2 }) {
     const cleanPhoneNum = phoneNum.replace(/\D/g, ''); // 숫자만 남기기
     const member_data = JSON.parse(localStorage.getItem('member_data')) || []; // 로컬스토리지 데이터 가져오기
 
-    if (phoneNum === 'admin') {
+    if (phoneNum === '010-0000-0000') {
       // admin이면 유효성 검사 없이 바로 로그인 처리
       const adminUser = {
         name: "관리자",
         id: 1,
-        pw, // 보안상 비밀번호를 그대로 저장하는 것은 위험! 실제 서비스에서는 해싱 필요
+        pw: 'aa11!!AA', // 보안상 비밀번호를 그대로 저장하는 것은 위험! 실제 서비스에서는 해싱 필요
         bData: '',
         iLoveIt: '',
         profileImage: '/img/sub/img-profile-temp.png',

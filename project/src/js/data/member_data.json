@@ -1,5 +1,4 @@
 [
-  
   {
     "name": "심민수",
     "id": "010-1234-5678",
@@ -7,8 +6,7 @@
     "currentData": [],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
-    
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "권원우",
@@ -43,7 +41,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "한상화",
@@ -68,7 +66,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "신기연",
@@ -103,7 +101,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "백영준",
@@ -138,7 +136,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "서채윤",
@@ -173,7 +171,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "사공미주",
@@ -208,7 +206,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "허병현",
@@ -243,7 +241,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "노기호",
@@ -278,7 +276,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "오윤재",
@@ -313,7 +311,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "추성희",
@@ -348,7 +346,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "설민선",
@@ -383,7 +381,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "장진아",
@@ -418,7 +416,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "양신영",
@@ -448,7 +446,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "제갈해준",
@@ -469,7 +467,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "허승철",
@@ -504,7 +502,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "최대한",
@@ -539,7 +537,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "남궁용호",
@@ -574,7 +572,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "양철수",
@@ -609,7 +607,7 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
   },
   {
     "name": "손민영",
@@ -644,6 +642,15 @@
     ],
     "bData": "",
     "iLoveIt": "",
-    "profileImage":"/img/sub/img-profile-temp.png"
+    "profileImage": "/img/sub/img-profile-temp.png"
+  },
+  {
+    "name": "관리자",
+    "id": "010-0000-0000",
+    "pw": "aa11!!AA",
+    "currentData": [],
+    "bData": "",
+    "iLoveIt": "",
+    "profileImage": "/img/sub/img-profile-temp.png"
   }
 ]
