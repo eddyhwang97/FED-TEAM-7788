@@ -90,7 +90,7 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
         <div className="inner-header-wrap">
           <div className="inner-header">
             <h1 className="logo">
-              <Link to="/">
+              <Link to="/" onClick={()=>{window.scrollTo(0,0)}}>
                 <img src={process.env.PUBLIC_URL + `/img/common/logo-temp.svg`} alt="로고" />
               </Link>
             </h1>

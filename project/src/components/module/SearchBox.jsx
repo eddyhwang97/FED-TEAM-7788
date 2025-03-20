@@ -1,9 +1,9 @@
 // SearchBox 컴포넌트 - SearchBox.jsx
-import React  from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import $ from "jquery"
+import $ from "jquery";
 
-function SearchBox({props}) {
+function SearchBox({ props }) {
   // searchOption : select 아래 option
   // selectOption : 선택된 option
   // handleSearchFn : 검색기능
@@ -37,10 +37,11 @@ function SearchBox({props}) {
         <input
           onKeyUp={(e) => {
             if (e.key === "Enter") {
-              console.log(e.target.value);
-              if(e.target.value!==null)
-              navigate(`${location}/:${e.target.value}`,{state:{ navigateSearchInput : e.target.value}})
-            else navigate(`${location}`)
+              if (e.target.value.length > 0) navigate(`${location}/:${e.target.value}`, { state: { navigateSearchInput: e.target.value } });
+              else {
+                alert("검색어를 입력하세요.");
+                navigate(`${location}`);
+              }
             }
           }}
           type="text"
@@ -53,8 +54,12 @@ function SearchBox({props}) {
         <button
           className="search-button"
           onClick={() => {
-            const inputValue = $('.search-box input').val();
-            navigate(`${location}/:${inputValue}`,{state:{ navigateSearchInput : inputValue}})
+            const inputValue = $(".search-box input").val();
+            if (inputValue.length > 0) navigate(`${location}/:${inputValue}`, { state: { navigateSearchInput: inputValue } });
+            else {
+              alert("검색어를 입력하세요.");
+              navigate(`${location}`);
+            }
           }}
         ></button>
       </div>
