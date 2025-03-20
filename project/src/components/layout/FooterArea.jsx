@@ -55,7 +55,7 @@ export const FooterArea=memo((props)=> {
         </div>
         <div className="footer-btm">
           <div className="footer-logo">
-            <img src="../img/common/logo-temp.svg" alt="하단 로고" />
+            <img src={process.env.PUBLIC_URL+`/img/common/logo-temp.svg`} alt="하단 로고" />
           </div>
           <p className="copyright">ⓒ 2025. ChkChkBookBook All rights reserved.</p>
         </div>

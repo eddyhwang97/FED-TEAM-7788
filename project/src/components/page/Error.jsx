@@ -8,7 +8,7 @@ function Error() {
   return (
     <div className="contents">
       <div className="error-wrap">
-        <img src="../img/main/error.png" alt="error" />
+        <img src={process.env.PUBLIC_URL+`/img/main/error.png`} alt="error" />
         <div className="text-wrap">
           <h2>서비스 이용 불가</h2>
           <p>

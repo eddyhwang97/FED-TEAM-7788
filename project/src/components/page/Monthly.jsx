@@ -45,7 +45,7 @@ function Monthly({ gnb1, gnb2 }) {
               {monthlyData.map((v, i) => (
                 <SwiperSlide key={i}>
                   <img
-                    src={"../img/monthly/img-" + v.bImg + ".jpg"}
+                    src={process.env.PUBLIC_URL+"/img/monthly/img-" + v.bImg + ".jpg"}
                     alt="도서 이미지"
                   />
                 </SwiperSlide>

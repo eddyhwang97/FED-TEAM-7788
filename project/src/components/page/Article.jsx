@@ -158,7 +158,7 @@ function Article({ gnb1, gnb2 }) {
               </div>
             </div>
             <div className="article-content">
-              {data === "freeboard" && articleData.image !== "" && <img src={`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
+              {data === "freeboard" && articleData.image !== "" && <img src={process.env.PUBLIC_URL+`/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
               {String(articleData.content)
                 .split(".")
                 .map((v, i) => (

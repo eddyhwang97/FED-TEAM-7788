@@ -87,7 +87,7 @@ export const TopArea = memo(({ gnb, setGnb, setSubTop }) => {
           <div className="inner-header">
             <h1 className="logo">
               <Link to="/">
-                <img src="/img/common/logo-temp.svg" alt="로고" />
+                <img src={process.env.PUBLIC_URL+`/img/common/logo-temp.svg`} alt="로고" />
               </Link>
             </h1>
             <Gnb gnb={gnb} setGnb={setGnb} setSubTop={setSubTop} />

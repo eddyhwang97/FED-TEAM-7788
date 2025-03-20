@@ -101,7 +101,7 @@ function BookSection() {
                 >
                   {[...monthlyData].map((book, index) => (
                     <SwiperSlide key={index} className="item">
-                      <img src={`../img/monthly/img-${book.bImg}.jpg`} alt={book.bName} />
+                      <img src={process.env.PUBLIC_URL+`/img/monthly/img-${book.bImg}.jpg`} alt={book.bName} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -147,7 +147,7 @@ function BookSection() {
                               navigate(`/book/${book.ISBN}`); // 상세 페이지 이동
                             }}
                           >
-                          <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+                          <img src={process.env.PUBLIC_URL+`/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                         </a>
                       </SwiperSlide>
                     ))}
@@ -159,10 +159,10 @@ function BookSection() {
         {/* 스크롤 텍스트 */}
         <div className="scroll-text">
           <span>
-            <img src="../img/main/bg-scroll-text.svg" alt="스크롤텍스트" />
-            <img src="../img/main/bg-scroll-text.svg" alt="스크롤텍스트" />
-            <img src="../img/main/bg-scroll-text.svg" alt="스크롤텍스트" />
-            <img src="../img/main/bg-scroll-text.svg" alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
           </span>
         </div>
       </section>

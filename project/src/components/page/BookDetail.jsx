@@ -156,7 +156,7 @@ function BookDetail() {
         <div className="book-view-wrap">
           <div className="book-view">
             <div className="img-box">
-              <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+              <img src={process.env.PUBLIC_URL+`/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
             </div>
             <div className="info-box">
               <div className="book-tit">

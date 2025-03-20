@@ -164,7 +164,7 @@ function Mypage({ gnb1, gnb2 }) {
           setProfileImage(currentUser.profileImage); // 프로필 이미지 상태 업데이트
         } else {
           // 프로필 이미지가 없으면 기본 이미지 설정
-          setProfileImage('/img/sub/img-profile-temp.png');
+          setProfileImage(process.env.PUBLIC_URL+'/img/sub/img-profile-temp.png');
         }
       }
     }
@@ -429,7 +429,7 @@ function Mypage({ gnb1, gnb2 }) {
             <div className='profile-box'>
               <div className='profile-image'>
                 <img
-                  src={profileImage || '/img/sub/img-profile-temp.png'} // 선택한 이미지나 기본 이미지
+                  src={process.env.PUBLIC_URL+profileImage || process.env.PUBLIC_URL+'/img/sub/img-profile-temp.png'} // 선택한 이미지나 기본 이미지
                   alt='프로필 이미지'
                   onClick={() =>
                     document.getElementById('profile-image-input').click()
@@ -469,7 +469,7 @@ function Mypage({ gnb1, gnb2 }) {
               <div className='level-box' onClick={handleMoreClick}>
                 <div className='level'>
                   <img
-                    src={`/img/sub/img-level${level}.svg`}
+                    src={process.env.PUBLIC_URL+`/img/sub/img-level${level}.svg`}
                     alt={`레벨 ${level}`}
                     className='level-img'
                   />
@@ -497,7 +497,7 @@ function Mypage({ gnb1, gnb2 }) {
                       <div ref={cardRef} className="card">
                         <img
                         className='img'
-                        src={`/img/sub/img-level${level}.png`} />
+                        src={process.env.PUBLIC_URL+`/img/sub/img-level${level}.png`} />
                       </div>
                       <button onClick={closeMoreModal}>닫기</button>
                     </div>
@@ -592,7 +592,7 @@ function Mypage({ gnb1, gnb2 }) {
                     >
                       <div className='img-box'>
                         <img
-                          src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                          src={process.env.PUBLIC_URL+badge.badgeSrc || process.env.PUBLIC_URL+'/img/sub/default-badge.png'}
                           alt={badge.badgeAlt}
                         />
                       </div>
@@ -620,7 +620,7 @@ function Mypage({ gnb1, gnb2 }) {
                     >
                       <div className='img-box'>
                         <img
-                          src={badge.badgeSrc || '/img/sub/default-badge.png'}
+                          src={process.env.PUBLIC_URL+badge.badgeSrc || process.env.PUBLIC_URL+'/img/sub/default-badge.png'}
                           alt={badge.badgeAlt}
                         />
                       </div>

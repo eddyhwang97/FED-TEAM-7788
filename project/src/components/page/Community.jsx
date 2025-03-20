@@ -70,7 +70,7 @@ function Community({ gnb1, gnb2, data }) {
   };
   const goLogin = () => {
     alert("로그인이 필요합니다.");
-    window.location.href = "/login";
+    navigate('/login');
   };
   // 레이아웃 렌더링
   useEffect(() => {

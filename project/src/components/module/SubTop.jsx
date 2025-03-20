@@ -46,7 +46,7 @@ function SubTop({ gnb1, gnb2 }) {
               className={isCopyActive ? "active" : ""}
               onClick={() => setIsCopyActive(!isCopyActive)}
             >
-              <img src="/img/common/icon-link.svg" alt="링크 공유 버튼" />
+              <img src={process.env.PUBLIC_URL+`/img/common/icon-link.svg`} alt="링크 공유 버튼" />
             </button>
             {isCopyActive && (
               <div className="url-copy on">
@@ -58,7 +58,7 @@ function SubTop({ gnb1, gnb2 }) {
           </li>
           <li className="link-print">
             <button type="button" onClick={handlePrint}>
-              <img src="/img/common/icon-print.svg" alt="페이지 프린트 버튼" />
+              <img src={process.env.PUBLIC_URL+`/img/common/icon-print.svg`} alt="페이지 프린트 버튼" />
             </button>
           </li>
         </ul>

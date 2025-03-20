@@ -39,7 +39,7 @@ function BookList({ gnb1, gnb2 }) {
                   }}
                 >
                   <div className="img-box">
-                    <img src={`../img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+                    <img src={process.env.PUBLIC_URL+`/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
                   </div>
                   <div className="text-box">
                     <div className="book-tit">
