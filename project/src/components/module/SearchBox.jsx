@@ -46,7 +46,7 @@ function SearchBox({ props }) {
           }}
           type="text"
           className="search-keywords"
-          placeholder={navigateSearchInput}
+          placeholder=""
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}

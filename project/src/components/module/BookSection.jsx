@@ -1,6 +1,6 @@
 // 메인페이지 게시판 섹션
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -36,9 +36,9 @@ function BookSection() {
                 <div className="book-info">
                   <div className="book-title">
                     <p>{monthlyData[0].bName}</p>
-                    <a href="/monthly/recommend" className="more-btn">
+                    <Link to={"/monthly/recommend"} className="more-btn">
                       <span className="blind">추천도서 더보기</span>
-                    </a>
+                    </Link>
                   </div>
                   <ul className="book-info-list">
                     <li>
@@ -66,8 +66,7 @@ function BookSection() {
                 <div className="slide-control">
                   <div className="btn-prev"></div>
                   <div ref={paginationRef} className="swiper-pagination">
-                    <span className="swiper-pagination-current"></span> /{" "}
-                    <span className="swiper-pagination-total"></span>
+                    <span className="swiper-pagination-current"></span> / <span className="swiper-pagination-total"></span>
                   </div>
                   <div className="btn-next"></div>
                 </div>
@@ -101,7 +100,7 @@ function BookSection() {
                 >
                   {[...monthlyData].map((book, index) => (
                     <SwiperSlide key={index} className="item">
-                      <img src={process.env.PUBLIC_URL+`/img/monthly/img-${book.bImg}.jpg`} alt={book.bName} />
+                      <img src={process.env.PUBLIC_URL + `/img/monthly/img-${book.bImg}.jpg`} alt={book.bName} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -115,43 +114,47 @@ function BookSection() {
             {/* 탭 버튼 */}
             <ul className="book-tab">
               <li className={selectedTab === "newest" ? "on" : ""}>
-                <button type="button" onClick={() => setSelectedTab("newest")}>신착도서</button>
+                <button type="button" onClick={() => setSelectedTab("newest")}>
+                  신착도서
+                </button>
               </li>
               <li className={selectedTab === "best" ? "on" : ""}>
-                <button type="button" onClick={() => setSelectedTab("best")}>베스트도서</button>
+                <button type="button" onClick={() => setSelectedTab("best")}>
+                  베스트도서
+                </button>
               </li>
             </ul>
 
             {/* 도서 목록 */}
             <div className="book-contents">
               <div className="book-tab-cont">
-                  <Swiper
-                    key={selectedTab} // 탭 변경 시 Swiper 리렌더링
-                    loop={true}
-                    slidesPerView={2.2}
-                    spaceBetween={10}
-                    navigation={{ nextEl: ".btn-next", prevEl: ".btn-prev" }}
-                    breakpoints={{
-                      500: { slidesPerView: 2.5 },
-                      768: { slidesPerView: 3, spaceBetween: 15 },
-                      1024: { slidesPerView: 4, spaceBetween: 25 },
-                    }}
-                    className="book-slide"
-                  >
-                    {books.map((book) => (
-                      <SwiperSlide key={book.ISBN} className="item">
-                         <a 
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault(); // a태그 기본 동작 방지
-                              navigate(`/book/${book.ISBN}`); // 상세 페이지 이동
-                            }}
-                          >
-                          <img src={process.env.PUBLIC_URL+`/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
-                        </a>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                <Swiper
+                  key={selectedTab} // 탭 변경 시 Swiper 리렌더링
+                  loop={true}
+                  slidesPerView={2.2}
+                  spaceBetween={10}
+                  navigation={{ nextEl: ".btn-next", prevEl: ".btn-prev" }}
+                  breakpoints={{
+                    500: { slidesPerView: 2.5 },
+                    768: { slidesPerView: 3, spaceBetween: 15 },
+                    1024: { slidesPerView: 4, spaceBetween: 25 },
+                  }}
+                  className="book-slide"
+                >
+                  {books.map((book) => (
+                    <SwiperSlide key={book.ISBN} className="item">
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault(); // a태그 기본 동작 방지
+                          navigate(`/book/${book.ISBN}`); // 상세 페이지 이동
+                        }}
+                      >
+                        <img src={process.env.PUBLIC_URL + `/img/book/img-${book.ISBN}.jpg`} alt={book.title} />
+                      </a>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             </div>
           </div>
@@ -159,10 +162,10 @@ function BookSection() {
         {/* 스크롤 텍스트 */}
         <div className="scroll-text">
           <span>
-            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
-            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
-            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
-            <img src={process.env.PUBLIC_URL+`/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL + `/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL + `/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL + `/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
+            <img src={process.env.PUBLIC_URL + `/img/main/bg-scroll-text.svg`} alt="스크롤텍스트" />
           </span>
         </div>
       </section>

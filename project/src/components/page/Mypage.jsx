@@ -1,7 +1,7 @@
 //  Mypage 컴포넌트 - Mypage.jsx
 import { useEffect, useState, useContext, useRef } from "react";
 import { initCardEffect } from "../module/mypage/levelCardFn";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GP } from "../module/Contexter";
 import confetti from "canvas-confetti"; // 폭죽 라이브러리
 import SubTop from "../module/SubTop";
@@ -464,9 +464,10 @@ function Mypage({ gnb1, gnb2 }) {
                       const foundBook = book_data.find((b) => b.ISBN.toLowerCase() === book.isbn.toLowerCase());
                       return foundBook ? (
                         <li key={`{borrow-${book.isbn}`}>
-                          <a className="book-name" href={book?.isbn ? `/book/${book.isbn.toLowerCase()}` : "#"}>
+                          <Link className="book-name" to={book?.isbn ? `/book/${book.isbn.toLowerCase()}` : "#"}>
+                            {" "}
                             {foundBook.title}
-                          </a>
+                          </Link>
                           <span className="date">~{book.dueDate}</span>
                         </li>
                       ) : null;
@@ -482,9 +483,7 @@ function Mypage({ gnb1, gnb2 }) {
                   {pickedBooks.length > 0 ? (
                     pickedBooks.map((book, index) => (
                       <li key={`pick-${book.ISBN ?? `index-${index}`}`}>
-                        <a className="book-name" href={`/book/${book.ISBN ?? ""}`}>
-                          {book.title}
-                        </a>
+                        <Link className="book-name" to={`/book/${book.ISBN ?? ""}`}>{book.title}</Link>
                         <span className="label">{book.genre.replace("인문사회과학", "인문사회")}</span>
                       </li>
                     ))
