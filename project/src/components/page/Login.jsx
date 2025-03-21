@@ -71,7 +71,7 @@ function Login({ gnb1, gnb2 }) {
     const cleanPhoneNum = phoneNum.replace(/\D/g, ''); // 숫자만 남기기
     const member_data = JSON.parse(localStorage.getItem('member_data')) || []; // 로컬스토리지 데이터 가져오기
 
-    if (phoneNum === '1') {
+    if (phoneNum === 1) {
       // admin이면 유효성 검사 없이 바로 로그인 처리
       const adminUser = {
         name: "관리자",
