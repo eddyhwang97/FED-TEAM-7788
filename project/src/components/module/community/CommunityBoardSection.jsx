@@ -17,7 +17,6 @@ export const CommunityBoardSection = ({ props }) => {
     });
     e.classList.contains("active") ? e.classList.remove("active") : e.classList.add("active");
   };
-  console.log(currentList)
 
   return (
     <div className="board-section">

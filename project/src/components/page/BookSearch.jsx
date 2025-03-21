@@ -23,7 +23,7 @@ function BookSearch({ gnb1, gnb2 }) {
   const navigate = useNavigate();
   const location = useLocation();
   const navigateSearchInput = location.state ? location.state.navigateSearchInput : null;
-  console.log(navigateSearchInput);
+  // console.log(navigateSearchInput);
   // useState
   // 검색 옵션
   const [selectOption, setSelectOption] = useState("도서명");
@@ -37,7 +37,7 @@ function BookSearch({ gnb1, gnb2 }) {
   const visibleLIstCount = 10;
   // 페이지개수 리미트
   const limitPage = Math.ceil(list.length / visibleLIstCount);
-  console.log(visibleLIstCount, limitPage);
+  // console.log(visibleLIstCount, limitPage);
   // ref : 이것은 React의 ref 객체이다. 감지하고자 하는 DOM 요소에 이 ref를 할당해야 한다.
   // inView : 이것은 불리언(boolean) 값이다. 감시하고 있는 요소가 화면에 보일 때 true가 되고, 화면에서 벗어날 때 false가 된다.
   // threshold : 요소의 어느부분이 뷰포트에 들어와야 inView가 true가 될지 결정 - 0~1의값
@@ -66,7 +66,7 @@ function BookSearch({ gnb1, gnb2 }) {
       // 화면에 보이는 경우 실행할 로직
       setTimeout(() => {
         setPage(page + 1);
-        console.log("로딩중~~", page);
+        // console.log("로딩중~~", page);
       }, 900);
     }
   };
@@ -79,7 +79,7 @@ function BookSearch({ gnb1, gnb2 }) {
     handleSearchFn(selectOption, navigateSearchInput);
   }, [navigateSearchInput]);
   useEffect(() => {
-    console.log(list);
+    // console.log(list);
   }, [handleSearchFn]);
 
   const seachBoxProps = {

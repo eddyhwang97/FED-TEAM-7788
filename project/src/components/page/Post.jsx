@@ -23,7 +23,7 @@ function Post({ gnb1, gnb2 }) {
   const user = loginState ? context.user : null;
   // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
   const userName = user !== null ? user.name : null;
-  console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
+  // console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
 
   const getContent = () => {
     const title = $("#title").val();
@@ -36,7 +36,7 @@ function Post({ gnb1, gnb2 }) {
       navigate(`/community/${category}`);
     }
 
-    console.log(title, content);
+    // console.log(title, content);
   };
   const setArticle = (title, content, category) => {
     const communityData = JSON.parse(localStorage.getItem("community_data"));

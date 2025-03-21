@@ -1,5 +1,6 @@
 // 메인페이지 게시판 섹션
 import React, { useState, useEffect, useRef } from "react";
+import $ from "jquery"
 import { Link, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -13,6 +14,7 @@ function BookSection() {
   const paginationRef = useRef(null); // paginationRef 생성
   const [selectedTab, setSelectedTab] = useState("newest");
   const [books, setBooks] = useState([]);
+  const [itemIndex, setItemIndex] = useState(0)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ function BookSection() {
               <div className="book-info-wrap">
                 <div className="book-info">
                   <div className="book-title">
-                    <p>{monthlyData[0].bName}</p>
+                    <p>{monthlyData[itemIndex].bName}</p>
                     <Link to={"/monthly/recommend"} className="more-btn">
                       <span className="blind">추천도서 더보기</span>
                     </Link>
@@ -43,23 +45,23 @@ function BookSection() {
                   <ul className="book-info-list">
                     <li>
                       <em>작가</em>
-                      <span>{monthlyData[0].bAuthor}</span>
+                      <span>{monthlyData[itemIndex].bAuthor}</span>
                     </li>
                     <li>
                       <em>출판사</em>
-                      <span>{monthlyData[0].bPublisher}</span>
+                      <span>{monthlyData[itemIndex].bPublisher}</span>
                     </li>
                     <li>
                       <em>카테고리</em>
-                      <span>{monthlyData[0].bGenre}</span>
+                      <span>{monthlyData[itemIndex].bGenre}</span>
                     </li>
                     <li>
                       <em>ISBN</em>
-                      <span>{monthlyData[0].bNum}</span>
+                      <span>{monthlyData[itemIndex].bNum}</span>
                     </li>
                     <li>
                       <em>상태</em>
-                      <span>{monthlyData[0].bStatus}</span>
+                      <span>{monthlyData[itemIndex].bStatus}</span>
                     </li>
                   </ul>
                 </div>
@@ -96,6 +98,12 @@ function BookSection() {
                       swiper.pagination.init();
                       swiper.pagination.update();
                     }
+                  }}
+                  onSlideChange={(me) => {
+                    // console.log("Slide change!!!", me.realIndex);
+                    // 슬라이드 변경시 실제 순번을
+                    // 데이터 순번 상태변수에 업데이트하기
+                    setItemIndex(me.realIndex)
                   }}
                 >
                   {[...monthlyData].map((book, index) => (

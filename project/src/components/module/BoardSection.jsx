@@ -33,9 +33,7 @@ function BoardSection() {
               </li>
             </ul>
             {/* 더보기 버튼 */}
-            <a href={moreLink} className="more-btn">
-              <span className="blind">게시글 더보기</span>
-            </a>
+            <Link to={moreLink} className="more-btn"><span className="blind">게시글 더보기</span></Link>
           </div>
 
           {/* 게시판 내용 */}
@@ -44,13 +42,14 @@ function BoardSection() {
               {filteredData.length > 0 ? (
                 filteredData.map((item) => (
                   <li key={item.idx}>
-                    <a 
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault(); // a태그 기본 동작 방지
-                      navigate(`/community/${selectedTab === "notice" ? "notice" : "freeboard"}/${item.idx}`, 
-                        { state: { user: item.user, listIdx: item.idx, data: selectedTab }}); // 상세 페이지 이동
-                    }} 
+                    <Link 
+                    to={`community/${selectedTab === "notice" ? "notice" : "freeboard"}/${item.idx}`}
+                    state={{ user: item.user, listIdx: item.idx, data: selectedTab }}
+                    // onClick={(e) => {
+                    //   e.preventDefault(); // a태그 기본 동작 방지
+                    //   navigate(`/community/${selectedTab === "notice" ? "notice" : "freeboard"}/${item.idx}`, 
+                    //     { state: { user: item.user, listIdx: item.idx, data: selectedTab }}); // 상세 페이지 이동
+                    // }} 
                     className="item">
                       <div className="list-tit">
                         <span className={`label ${selectedTab === "notice" ? "pink" : "mint"}`}>
@@ -59,7 +58,7 @@ function BoardSection() {
                         <p>{item.title}</p>
                       </div>
                       <span className="date">{item.date}</span>
-                    </a>
+                    </Link>
                   </li>
                 ))
               ) : (

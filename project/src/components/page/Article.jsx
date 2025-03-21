@@ -23,7 +23,7 @@ function Article({ gnb1, gnb2 }) {
   const user = loginState ? context.user : null;
   // 로그인 상태면 유저이름 뜨고 없으면 null값으로 처리
   const userName = user !== null ? user.name : null;
-  console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
+  // console.log("유저", user, "유저이름", userName, "로그인 상황", loginState);
 
   // 데이터
   const { id } = useParams();
@@ -63,7 +63,7 @@ function Article({ gnb1, gnb2 }) {
   // ================ getTxt
   const getTxt = () => {
     let commentText = $("#text-comment").val();
-    console.log(commentText);
+    // console.log(commentText);
     if (commentText !== "") postData(commentText, userName);
     else {
       alert("한글자 이상 입력해주세요.");
@@ -123,7 +123,7 @@ function Article({ gnb1, gnb2 }) {
     let updateComment = filterCommentData.filter((v) => v.cNum !== cNum);
     getCommentData.find((v) => v.type === data && v.idx === listIdx).comment = updateComment;
     setComment(updateComment);
-    console.log(getCommentData);
+    // console.log(getCommentData);
     localStorage.setItem("community_data", JSON.stringify(getCommentData));
   };
 
@@ -131,7 +131,7 @@ function Article({ gnb1, gnb2 }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  console.log("아티클 정보", articleData);
+  // console.log("아티클 정보", articleData);
 
   // 로그인 상태 확인
   return (

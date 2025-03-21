@@ -33,7 +33,6 @@ export const Pagenation = memo(({ props }) => {
             onClick={() => {
               handlePageChange();
               setcurrentPage(page);
-              console.log("page", page);
             }}
             className={currentPage === page ? "active" : ""}
           >
