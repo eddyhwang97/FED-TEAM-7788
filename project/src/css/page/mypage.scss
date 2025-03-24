@@ -1,5 +1,5 @@
-@import '../common/mixins'; // mixin.scss
-@import '../common/variables'; // variables.scss
+@import "../common/mixins"; // mixin.scss
+@import "../common/variables"; // variables.scss
 
 .inner-section {
   margin-top: 40px;
@@ -74,15 +74,12 @@
   .left {
     color: $darkgray;
     text-align: center;
-
   }
-  @include responsive(1100px){
-    .next-level{
-  
-      .left{
-        flex-direction: row;
-      }
-    }
+}
+@include responsive(1100px) {
+  .left {
+    color: $darkgray;
+    flex-direction: row;
   }
 }
 
@@ -124,8 +121,7 @@
   .more-btn {
     width: 24px;
     height: 24px;
-    background: url('../../../public/img/common/icon-arrow-gray.svg') center
-      no-repeat;
+    background: url("../../../public/img/common/icon-arrow-gray.svg") center no-repeat;
     opacity: 0.7;
   }
 }
@@ -286,7 +282,6 @@
   gap: 20px;
   margin-top: -2rem;
 
-
   .img-box {
     max-width: 200px;
     margin: 0 auto;
@@ -400,19 +395,19 @@
     .card {
       width: 100%;
       height: 100%;
-      scale: .7;
+      scale: 0.7;
       perspective: 1500px;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease, box-shadow 0.3s ease; 
-      transform-style: preserve-3d;
-      border-radius: 10px;
-      &:hover {
-        transform: rotateY(10deg) rotateX(10deg); 
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transform-style: preserve-3d;
+        border-radius: 10px;
+        &:hover {
+          transform: rotateY(10deg) rotateX(10deg);
+        }
       }
-    }
     }
     button {
       padding: 5px 10px;
@@ -425,19 +420,19 @@
   }
 }
 
-.earned-badge>h3{
+.earned-badge > h3 {
   color: #111;
   font-size: 24px;
   font-weight: bold;
   margin-top: 5rem;
-  margin-bottom: 4rem
+  margin-bottom: 4rem;
 }
 
 @include responsive(768px) {
   .earned-badge {
     margin-bottom: 3rem;
-    >h3{
-     margin-bottom: 6rem; 
+    > h3 {
+      margin-bottom: 6rem;
     }
   }
 }
@@ -445,11 +440,10 @@
 @include responsive(1024px) {
   .earned-badge {
     margin-bottom: 5rem;
-    
   }
 }
 
-.remaining-badge>h3{
+.remaining-badge > h3 {
   color: #111;
   font-size: 24px;
   font-weight: bold;
