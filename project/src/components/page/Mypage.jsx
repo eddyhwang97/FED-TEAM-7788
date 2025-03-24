@@ -398,7 +398,7 @@ function Mypage({ gnb1, gnb2 }) {
             <div className="profile-box">
               <div className="profile-image">
                 <img
-                  src={profileImage ? profileImage : process.env.PUBLIC_URL + "/img/sub/img-profile-temp.png"} // 선택한 이미지나 기본 이미지
+                  src={profileImage ? process.env.PUBLIC_URL + profileImage : process.env.PUBLIC_URL + "/img/sub/img-profile-temp.png"} // 선택한 이미지나 기본 이미지
                   alt="프로필 이미지"
                   onClick={() => document.getElementById("profile-image-input").click()} // 이미지 클릭 시 파일 선택
                 />
@@ -416,10 +416,10 @@ function Mypage({ gnb1, gnb2 }) {
                   <p>다음 레벨까지</p>
                   <div className="progress">
                     <span className="bar" style={{ width: `${progress}%` }}></span>
-                  </div>
                   <p className="left">
                     <span className="current">{current}</span> / <span className="total">{total}</span>
                   </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -491,7 +491,9 @@ function Mypage({ gnb1, gnb2 }) {
                   {pickedBooks.length > 0 ? (
                     pickedBooks.map((book, index) => (
                       <li key={`pick-${book.ISBN ?? `index-${index}`}`}>
-                        <Link className="book-name" to={`/book/${book.ISBN ?? ""}`}>{book.title}</Link>
+                        <Link className="book-name" to={`/book/${book.ISBN ?? ""}`}>
+                          {book.title}
+                        </Link>
                         <span className="label">{book.genre.replace("인문사회과학", "인문사회")}</span>
                       </li>
                     ))
