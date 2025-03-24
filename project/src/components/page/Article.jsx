@@ -104,7 +104,7 @@ function Article({ gnb1, gnb2 }) {
     }
     localStorage.setItem("community_data", JSON.stringify(communityData));
     setComment(commentList);
-    navigate(`/community/${data}`)
+    navigate(`/community/${data}/${id}`)
     $("#text-comment").val("");
   };
 
@@ -113,6 +113,7 @@ function Article({ gnb1, gnb2 }) {
     if (window.confirm("삭제하시겠습니까?")) {
       const updatedArticle = communityData.filter((v) => v !== articleData);
       localStorage.setItem("community_data", JSON.stringify(updatedArticle));
+      alert('삭제되었습니다.')
       navigate(`/community/${data}`);
     }
   };
