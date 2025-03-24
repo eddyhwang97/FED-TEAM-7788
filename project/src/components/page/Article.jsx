@@ -102,9 +102,9 @@ function Article({ gnb1, gnb2 }) {
         comment: commentText,
       });
     }
-    setComment(commentList);  
     localStorage.setItem("community_data", JSON.stringify(communityData));
-    window.location.reload();
+    setComment(commentList);  
+   
     $("#text-comment").val("");
   };
 
@@ -124,10 +124,9 @@ function Article({ gnb1, gnb2 }) {
     let filterCommentData = getCommentData.find((v) => v.type === data && v.idx === listIdx).comment;
     let updateComment = filterCommentData.filter((v) => v.cNum !== cNum);
     getCommentData.find((v) => v.type === data && v.idx === listIdx).comment = updateComment;
+    localStorage.setItem("community_data", JSON.stringify(getCommentData));
     setComment(updateComment);
     // console.log(getCommentData);
-    window.location.reload();
-    localStorage.setItem("community_data", JSON.stringify(getCommentData));
   };
 
   // useEffect
@@ -135,7 +134,9 @@ function Article({ gnb1, gnb2 }) {
     window.scrollTo(0, 0);
   }, [location]);
   // console.log("아티클 정보", articleData);
-
+useEffect(()=>{
+  navigate(`/community/${data}/${id}`);
+},[setComment])
 
   // 로그인 상태 확인
   return (
