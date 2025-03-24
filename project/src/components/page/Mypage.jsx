@@ -408,10 +408,10 @@ function Mypage({ gnb1, gnb2 }) {
                   <p>다음 레벨까지</p>
                   <div className="progress">
                     <span className="bar" style={{ width: `${progress}%` }}></span>
-                  </div>
                   <p className="left">
                     <span className="current">{current}</span> / <span className="total">{total}</span>
                   </p>
+                  </div>
                 </div>
               </div>
             </div>
