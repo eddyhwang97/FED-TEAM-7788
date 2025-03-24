@@ -27,11 +27,10 @@ function Article({ gnb1, gnb2 }) {
 
   // 데이터
   const { id } = useParams();
-  const listIdx = location.state? location.state.listIdx:null;
   const data =  location.state? location.state.data:null;
   const typeBranch = gnb2 === "공지사항" ? "notice" : "freeboard";
   const communityData = JSON.parse(localStorage.getItem("community_data"));
-  const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
+  const articleData = communityData.find((v) => v.type === typeBranch && Number(v.idx) === Number(id));
   console.log(articleData)
   const commentList = articleData.comment.sort((a, b) => (a.date == b.date ? 0 : a.date < b.date ? -1 : 1));
   // useState
@@ -114,19 +113,20 @@ function Article({ gnb1, gnb2 }) {
       const updatedArticle = communityData.filter((v) => v !== articleData);
       localStorage.setItem("community_data", JSON.stringify(updatedArticle));
       alert('삭제되었습니다.')
-      navigate(`/community/${data}`);
+      navigate(`/community/${typeBranch}`);
     }
   };
 
   // ================ deleteComment
-  const deleteComment = (cNum, data) => {
+  const deleteComment = (cNum, typeBranch) => {
     let getCommentData = JSON.parse(localStorage.getItem("community_data"));
-    let filterCommentData = getCommentData.find((v) => v.type === data && v.idx === listIdx).comment;
+    let filterCommentData = getCommentData.find((v) => v.type === typeBranch && Number(v.idx) === Number(id)).comment;
+    console.log(filterCommentData)
     let updateComment = filterCommentData.filter((v) => v.cNum !== cNum);
-    getCommentData.find((v) => v.type === data && v.idx === listIdx).comment = updateComment;
+    getCommentData.find((v) => v.type === typeBranch && Number(v.idx) === Number(id)).comment = updateComment;
     localStorage.setItem("community_data", JSON.stringify(getCommentData));
     setComment(updateComment);
-    // console.log(getCommentData);
+    console.log(getCommentData);
   };
 
   // useEffect
@@ -135,7 +135,7 @@ function Article({ gnb1, gnb2 }) {
   }, [location]);
   // console.log("아티클 정보", articleData);
 useEffect(()=>{
-  navigate(`/community/${data}/${id}`);
+  navigate(`/community/${typeBranch}/${id}`);
 },[setComment])
 
   // 로그인 상태 확인
@@ -168,7 +168,7 @@ useEffect(()=>{
               </div>
             </div>
             <div className="article-content">
-              {data === "freeboard" && articleData.image !== "" && <img src={process.env.PUBLIC_URL + `/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
+              {typeBranch === "freeboard" && articleData.image !== "" && <img src={process.env.PUBLIC_URL + `/img/freeboard/${articleData.image}.jpg`} alt="사용자 이미지" />}
               {String(articleData.content)
                 .split(".")
                 .map((v, i) => (
@@ -195,7 +195,7 @@ useEffect(()=>{
                             className="delete-button"
                             onClick={() => {
                               if (window.confirm("삭제하시겠습니까?")) {
-                                deleteComment(v.cNum, data);
+                                deleteComment(v.cNum, typeBranch);
                                 alert("삭제되었습니다.");
                               } else return;
                             }}
