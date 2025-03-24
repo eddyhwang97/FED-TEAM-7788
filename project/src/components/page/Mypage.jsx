@@ -129,7 +129,7 @@ function Mypage({ gnb1, gnb2 }) {
     const maxBooks = getMaxBooks(lvl);
       // current 값 계산 및 한계값 설정
       let current = booksRead - minBooks;
-      current = Math.min(current, 20); // current 값을 20 이하로 제한
+      current = Math.min(current, 19); // current 값을 20 이하로 제한
       setCurrent(current);
   
       setTotal(maxBooks - minBooks + 1);
