@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { GP } from "../module/Contexter";
 import $ from "jquery";
@@ -88,23 +88,23 @@ function Article({ gnb1, gnb2 }) {
       );
       commentList.push({
         cNum: temp + 1,
-        id: user.id,
         name: userName,
+        id: user.id,
         date: formattedDate,
         comment: commentText,
       });
     } else {
       commentList.push({
         cNum: 1,
-        id: user.id,
         name: userName,
+        id: user.id,
         date: formattedDate,
         comment: commentText,
       });
     }
+    setComment(commentList);  
     localStorage.setItem("community_data", JSON.stringify(communityData));
-    setComment(commentList);
-    navigate(`/community/${data}/${id}`)
+    window.location.reload();
     $("#text-comment").val("");
   };
 
@@ -126,6 +126,7 @@ function Article({ gnb1, gnb2 }) {
     getCommentData.find((v) => v.type === data && v.idx === listIdx).comment = updateComment;
     setComment(updateComment);
     // console.log(getCommentData);
+    window.location.reload();
     localStorage.setItem("community_data", JSON.stringify(getCommentData));
   };
 
@@ -134,6 +135,7 @@ function Article({ gnb1, gnb2 }) {
     window.scrollTo(0, 0);
   }, [location]);
   // console.log("아티클 정보", articleData);
+
 
   // 로그인 상태 확인
   return (
