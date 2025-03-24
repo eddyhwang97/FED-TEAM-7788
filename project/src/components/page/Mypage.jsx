@@ -127,9 +127,17 @@ function Mypage({ gnb1, gnb2 }) {
 
     const minBooks = getMinBooks(lvl);
     const maxBooks = getMaxBooks(lvl);
-    setCurrent(booksRead - minBooks);
-    setTotal(maxBooks - minBooks + 1);
-    setProgress(((booksRead - 1 - minBooks) / (maxBooks - minBooks)) * 100); // 프로그레스 바 현황 반영
+      // current 값 계산 및 한계값 설정
+      let current = booksRead - minBooks;
+      current = Math.min(current, 20); // current 값을 20 이하로 제한
+      setCurrent(current);
+  
+      setTotal(maxBooks - minBooks + 1);
+  
+      // progress 값 계산 및 한계값 설정
+      let progress = ((booksRead - 1 - minBooks) / (maxBooks - minBooks)) * 100;
+      progress = Math.min(Math.max(progress, 0), 100); // progress 값을 0 ~ 100 사이로 제한
+      setProgress(progress);
   }; // updateLevel //
 
   // 레벨 최소도서
