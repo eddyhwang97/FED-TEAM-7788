@@ -61,7 +61,7 @@ function Community({ gnb1, gnb2, data }) {
         setList(listData.filter((v) => v.name.toLowerCase().trim().includes(value.toLowerCase().trim())));
       }
       // 초기 검색값없을때 전체셋팅
-    } else setBoardListFn(data);
+    } else if(value ==="")setList(listData);
   };
 
   const setBoardListFn = (e) => {
@@ -83,7 +83,7 @@ function Community({ gnb1, gnb2, data }) {
       handleSearchFn(selectOption, navigateSearchInput);
     }
   }, [navigateSearchInput]);
-  // 로그인 상태 확인
+
 
   // 페이지네이션 변수 할당
   const [currentPage, setcurrentPage] = useState(1);

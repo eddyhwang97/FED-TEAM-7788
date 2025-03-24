@@ -37,10 +37,9 @@ function SearchBox({ props }) {
         <input
           onKeyUp={(e) => {
             if (e.key === "Enter") {
-              if (e.target.value.length > 0) navigate(`${location}/:${e.target.value}`, { state: { navigateSearchInput: e.target.value } });
-              else {
+              if (e.target.value.length > 0) navigate(`${location}/${e.target.value}`, { state: { navigateSearchInput: e.target.value } });
+              else if(e.target.value===""){
                 alert("검색어를 입력하세요.");
-                navigate(`${location}`);
               }
             }
           }}

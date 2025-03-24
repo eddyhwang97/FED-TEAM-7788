@@ -11,6 +11,7 @@ import "../../css/page/monthly.scss";
 // 데이터 불러오기 /////
 import { monthlyData } from "../../js/data/monthly_data";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Monthly({ gnb1, gnb2 }) {
   // 후크 상태변수 셋팅!
@@ -44,10 +45,12 @@ function Monthly({ gnb1, gnb2 }) {
             >
               {monthlyData.map((v, i) => (
                 <SwiperSlide key={i}>
+                  <Link to={`/book/${ v.bImg}`}>
                   <img
                     src={process.env.PUBLIC_URL+"/img/monthly/img-" + v.bImg + ".jpg"}
                     alt="도서 이미지"
-                  />
+                    />
+                    </Link>
                 </SwiperSlide>
               ))}
             </Swiper>

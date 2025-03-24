@@ -27,11 +27,12 @@ function Article({ gnb1, gnb2 }) {
 
   // 데이터
   const { id } = useParams();
-  const listIdx = location.state.listIdx;
-  const data = location.state.data;
+  const listIdx = location.state? location.state.listIdx:null;
+  const data =  location.state? location.state.data:null;
   const typeBranch = gnb2 === "공지사항" ? "notice" : "freeboard";
   const communityData = JSON.parse(localStorage.getItem("community_data"));
   const articleData = communityData.find((v) => v.type === typeBranch && v.idx === Number(id));
+  console.log(articleData)
   const commentList = articleData.comment.sort((a, b) => (a.date == b.date ? 0 : a.date < b.date ? -1 : 1));
   // useState
   const [comment, setComment] = useState(commentList);
