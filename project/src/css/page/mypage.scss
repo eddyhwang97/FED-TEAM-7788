@@ -54,10 +54,11 @@
   gap: 10px;
   align-items: center;
   padding-top: 10px;
+  flex-direction: column;
   .progress {
     margin: 5px 0;
     width: 200px;
-    height: 20px;
+    height: 100%;
     border-radius: 10px;
     background-color: $lightgray;
     position: relative;
@@ -66,20 +67,29 @@
       left: 0;
       top: 0;
       width: 33.33%; /* 임시 - 진행률 따라서 수정 */
-      height: 8px;
+      height: 100%;
       background-color: $point-color;
       border-radius: 10px;
     }
   }
   .left {
-    color: $darkgray;
+    color: #111;
     text-align: center;
+    z-index: 9;
+    position: relative;
+    font-weight: 500;
+  }
+
+}
+@include responsive(1100px){
+  .next-level{
+    align-items: center;
+    flex-direction: row;
   }
 }
-@include responsive(1100px) {
-  .left {
-    color: $darkgray;
-    flex-direction: row;
+@include responsive(850px){
+  .next-level{
+    align-items: flex-start;
   }
 }
 
@@ -213,7 +223,7 @@
   }
 }
 
-@include responsive(768px) {
+@include responsive(850px) {
   .profile-wrap {
     flex-direction: row;
     justify-content: space-between;
