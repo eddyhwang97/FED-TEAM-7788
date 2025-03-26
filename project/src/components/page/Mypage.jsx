@@ -135,9 +135,10 @@ function Mypage({ gnb1, gnb2 }) {
       setTotal(maxBooks - minBooks + 1);
   
       // progress 값 계산 및 한계값 설정
-      let progress = ((booksRead - 1 - minBooks) / (maxBooks - minBooks)) * 100;
-      progress = Math.min(Math.max(progress, 0), 100); // progress 값을 0 ~ 100 사이로 제한
+      let progress = ((booksRead -  minBooks) / (maxBooks - minBooks + 1)) * 100;
+      // progress = Math.min(Math.max(progress, 0), 100); // progress 값을 0 ~ 100 사이로 제한
       setProgress(progress);
+      console.log(progress)
   }; // updateLevel //
 
   // 레벨 최소도서
@@ -415,7 +416,7 @@ function Mypage({ gnb1, gnb2 }) {
                 <div className="next-level">
                   <p>다음 레벨까지</p>
                   <div className="progress">
-                    <span className="bar" style={{ width: `${progress}%` }}></span>
+                    <span className="bar" style={{ width: `${(progress)}%` }}></span>
                   <p className="left">
                     <span className="current">{current}</span> / <span className="total">{total}</span>
                   </p>
